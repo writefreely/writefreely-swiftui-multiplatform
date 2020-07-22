@@ -51,6 +51,11 @@
 		17DF32A324C87D3500BCE2E3 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DF32A724C87D3500BCE2E3 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		17DF32A924C87D3500BCE2E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17DF32C624C884FF00BCE2E3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		17DF32C724C8853700BCE2E3 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
+		17DF32C824C8854B00BCE2E3 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		17DF32C924C8855E00BCE2E3 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		17DF32CA24C8856C00BCE2E3 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +95,11 @@
 		17DF327B24C87D3300BCE2E3 = {
 			isa = PBXGroup;
 			children = (
+				17DF32C624C884FF00BCE2E3 /* README.md */,
+				17DF32C924C8855E00BCE2E3 /* LICENSE.md */,
+				17DF32CA24C8856C00BCE2E3 /* CHANGELOG.md */,
+				17DF32C724C8853700BCE2E3 /* CODE_OF_CONDUCT.md */,
+				17DF32C824C8854B00BCE2E3 /* CONTRIBUTING.md */,
 				17DF328024C87D3300BCE2E3 /* Shared */,
 				17DF328A24C87D3500BCE2E3 /* iOS */,
 				17DF329124C87D3500BCE2E3 /* macOS */,
