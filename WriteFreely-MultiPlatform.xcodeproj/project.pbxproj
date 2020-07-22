@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF328224C87D3300BCE2E3 /* ContentView.swift */; };
 		17DF32AE24C87D3500BCE2E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DF328324C87D3500BCE2E3 /* Assets.xcassets */; };
 		17DF32AF24C87D3500BCE2E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DF328324C87D3500BCE2E3 /* Assets.xcassets */; };
+		17DF32C024C87D7B00BCE2E3 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 17DF32BF24C87D7B00BCE2E3 /* WriteFreely */; };
+		17DF32C324C87D8D00BCE2E3 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 17DF32C224C87D8D00BCE2E3 /* WriteFreely */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17DF32C024C87D7B00BCE2E3 /* WriteFreely in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17DF32C324C87D8D00BCE2E3 /* WriteFreely in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +96,7 @@
 				17DF329B24C87D3500BCE2E3 /* Tests iOS */,
 				17DF32A624C87D3500BCE2E3 /* Tests macOS */,
 				17DF328924C87D3500BCE2E3 /* Products */,
+				17DF32C124C87D8D00BCE2E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +156,13 @@
 			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
+		17DF32C124C87D8D00BCE2E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,12 +173,16 @@
 				17DF328424C87D3500BCE2E3 /* Sources */,
 				17DF328524C87D3500BCE2E3 /* Frameworks */,
 				17DF328624C87D3500BCE2E3 /* Resources */,
+				17DF32C424C87E6700BCE2E3 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "WriteFreely-MultiPlatform (iOS)";
+			packageProductDependencies = (
+				17DF32BF24C87D7B00BCE2E3 /* WriteFreely */,
+			);
 			productName = "WriteFreely-MultiPlatform (iOS)";
 			productReference = 17DF328824C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */;
 			productType = "com.apple.product-type.application";
@@ -184,6 +200,9 @@
 			dependencies = (
 			);
 			name = "WriteFreely-MultiPlatform (macOS)";
+			packageProductDependencies = (
+				17DF32C224C87D8D00BCE2E3 /* WriteFreely */,
+			);
 			productName = "WriteFreely-MultiPlatform (macOS)";
 			productReference = 17DF329024C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */;
 			productType = "com.apple.product-type.application";
@@ -258,6 +277,9 @@
 				Base,
 			);
 			mainGroup = 17DF327B24C87D3300BCE2E3;
+			packageReferences = (
+				17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */,
+			);
 			productRefGroup = 17DF328924C87D3500BCE2E3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -302,6 +324,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17DF32C424C87E6700BCE2E3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		17DF328424C87D3500BCE2E3 /* Sources */ = {
@@ -696,6 +738,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:writeas/writefreely-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17DF32BF24C87D7B00BCE2E3 /* WriteFreely */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			productName = WriteFreely;
+		};
+		17DF32C224C87D8D00BCE2E3 /* WriteFreely */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			productName = WriteFreely;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 17DF327C24C87D3300BCE2E3 /* Project object */;
 }

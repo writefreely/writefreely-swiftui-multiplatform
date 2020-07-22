@@ -1,15 +1,8 @@
-//
-//  ContentView.swift
-//  Shared
-//
-//  Created by Angelo Stavrow on 2020-07-22.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!").padding()
+        Text("Hello, WriteFreely!").padding()
     }
 }
 
