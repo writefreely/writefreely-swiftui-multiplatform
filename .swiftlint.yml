@@ -1,2 +1,4 @@
 type_name:
-  allowed_symbols: ["_"] # Used in SwiftUI boilerplate naming
+  allowed_symbols: ["_"]      # Used in SwiftUI boilerplate naming
+identifier_name:
+  excluded: ["id"]            # Required for Identifiable conformance
