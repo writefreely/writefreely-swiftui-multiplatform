@@ -1,11 +1,5 @@
 import SwiftUI
 
-enum PostStatus {
-    case draft
-    case edited
-    case published
-}
-
 struct PostStatusBadge: View {
     @State var postStatus: PostStatus
 

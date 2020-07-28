@@ -1,6 +1,12 @@
 import Foundation
 import WriteFreely
 
+enum PostStatus {
+    case draft
+    case edited
+    case published
+}
+
 class Post: Identifiable, ObservableObject {
     @Published var title: String
     @Published var body: String
