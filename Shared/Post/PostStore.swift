@@ -6,6 +6,10 @@ class PostStore: ObservableObject {
     init(posts: [Post] = []) {
         self.posts = posts
     }
+
+    func add(_ post: Post) {
+        posts.append(post)
+    }
 }
 
 let testPostStore = PostStore(posts: testPostData)

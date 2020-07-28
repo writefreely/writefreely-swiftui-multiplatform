@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct PostEditor: View {
+    @EnvironmentObject var postStore: PostStore
     @ObservedObject var post: Post
+    @State private var isNewPost = false
 
     var body: some View {
         VStack {
@@ -24,6 +26,22 @@ struct PostEditor: View {
         .padding()
         .toolbar {
             PostStatusBadge(post: post)
+        }
+        .onAppear(perform: checkIfNewPost)
+        .onDisappear(perform: addPostToStore)
+    }
+
+    private func checkIfNewPost() {
+        if !postStore.posts.contains(where: { $0.id == post.id }) {
+            self.isNewPost = true
+        }
+    }
+
+    private func addPostToStore() {
+        if isNewPost {
+            withAnimation {
+                postStore.add(post)
+            }
         }
     }
 }

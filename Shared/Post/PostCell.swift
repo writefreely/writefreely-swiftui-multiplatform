@@ -1,11 +1,12 @@
 import SwiftUI
 
 struct PostCell: View {
+    @EnvironmentObject var postStore: PostStore
     @ObservedObject var post: Post
 
     var body: some View {
         NavigationLink(
-            destination: PostEditor(post: post)
+            destination: PostEditor(post: post).environmentObject(self.postStore)
         ) {
             HStack {
                 VStack(alignment: .leading) {
