@@ -1,10 +1,3 @@
-//
-//  PostEditor.swift
-//  WriteFreely-MultiPlatform
-//
-//  Created by Angelo Stavrow on 2020-07-24.
-//
-
 import SwiftUI
 
 struct PostEditor: View {
