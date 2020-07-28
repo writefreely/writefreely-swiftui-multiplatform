@@ -7,7 +7,6 @@ struct PostEditor: View {
     var body: some View {
         VStack {
             TextEditor(text: $post.title)
-                .border(Color.blue, width: 1)
                 .font(.title)
                 .frame(height: 100)
                 .onChange(of: post.title) { _ in
@@ -16,7 +15,6 @@ struct PostEditor: View {
                     }
                 }
             TextEditor(text: $post.body)
-                .border(Color.red, width: 1)
                 .font(.body)
                 .onChange(of: post.body) { _ in
                     if post.status == .published {
