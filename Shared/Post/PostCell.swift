@@ -4,10 +4,7 @@ struct PostCell: View {
     var post: Post
     var body: some View {
         NavigationLink(
-            destination: PostEditor(
-                textString: post.editableText,
-                postStatus: post.status
-            )
+            destination: PostEditor(post: post)
         ) {
             HStack {
                 VStack(alignment: .leading) {

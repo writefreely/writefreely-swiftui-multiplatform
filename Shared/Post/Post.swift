@@ -7,13 +7,6 @@ struct Post: Identifiable {
     var body: String
     var createdDate: Date
     var status: PostStatus = .draft
-    var editableText: String {
-        return """
-                # \(self.title)
-
-                \(self.body)
-                """
-    }
 }
 
 let testPost = Post(
