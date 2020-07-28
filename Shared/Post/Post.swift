@@ -1,12 +1,25 @@
 import Foundation
 import WriteFreely
 
-struct Post: Identifiable {
-    var id = UUID()
-    var title: String = "Title"
-    var body: String = "Write your post here..."
-    var createdDate: Date = Date()
-    var status: PostStatus = .draft
+class Post: Identifiable, ObservableObject {
+    @Published var title: String
+    @Published var body: String
+    @Published var createdDate: Date
+    @Published var status: PostStatus
+
+    let id = UUID()
+
+    init(
+        title: String = "Title",
+        body: String = "Write your post here...",
+        createdDate: Date = Date(),
+        status: PostStatus = .draft
+    ) {
+        self.title = title
+        self.body = body
+        self.createdDate = createdDate
+        self.status = status
+    }
 }
 
 let testPost = Post(

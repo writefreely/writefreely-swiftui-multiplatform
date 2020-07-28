@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PostEditor: View {
-    @State var post: Post
+    @ObservedObject var post: Post
     @State private var hasUnpublishedChanges: Bool = false
 
     var body: some View {
