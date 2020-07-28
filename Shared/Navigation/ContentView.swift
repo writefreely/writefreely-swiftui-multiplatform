@@ -11,7 +11,7 @@ struct ContentView: View {
                 .toolbar {
                     NavigationLink(
                         destination: PostEditor(
-                            post: Post(title: "Title", body: "Write your post here...", createdDate: Date())
+                            post: Post()
                         )
                     ) {
                         Image(systemName: "plus")

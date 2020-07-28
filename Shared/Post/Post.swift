@@ -3,9 +3,9 @@ import WriteFreely
 
 struct Post: Identifiable {
     var id = UUID()
-    var title: String
-    var body: String
-    var createdDate: Date
+    var title: String = "Title"
+    var body: String = "Write your post here..."
+    var createdDate: Date = Date()
     var status: PostStatus = .draft
 }
 
