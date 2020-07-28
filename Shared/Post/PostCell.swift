@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct PostCell: View {
-    var post: Post
+    @ObservedObject var post: Post
+
     var body: some View {
         NavigationLink(
             destination: PostEditor(post: post)
@@ -17,7 +18,7 @@ struct PostCell: View {
                         .lineLimit(1)
                 }
                 Spacer()
-                PostStatusBadge(postStatus: post.status)
+                PostStatusBadge(post: post)
             }
         }
     }

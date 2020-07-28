@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PostEditor: View {
     @ObservedObject var post: Post
-    @State private var hasUnpublishedChanges: Bool = false
 
     var body: some View {
         VStack {
@@ -11,24 +10,20 @@ struct PostEditor: View {
                 .frame(height: 100)
                 .onChange(of: post.title) { _ in
                     if post.status == .published {
-                        hasUnpublishedChanges = true
+                        post.status = .edited
                     }
                 }
             TextEditor(text: $post.body)
                 .font(.body)
                 .onChange(of: post.body) { _ in
                     if post.status == .published {
-                        hasUnpublishedChanges = true
+                        post.status = .edited
                     }
                 }
         }
         .padding()
         .toolbar {
-            if hasUnpublishedChanges {
-                PostStatusBadge(postStatus: .edited)
-            } else {
-                PostStatusBadge(postStatus: post.status)
-            }
+            PostStatusBadge(post: post)
         }
     }
 }

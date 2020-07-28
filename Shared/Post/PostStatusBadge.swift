@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct PostStatusBadge: View {
-    @State var postStatus: PostStatus
+    @ObservedObject var post: Post
 
     var body: some View {
-        let (badgeLabel, badgeColor) = setupBadgeProperties(for: postStatus)
+        let (badgeLabel, badgeColor) = setupBadgeProperties(for: post.status)
         Text(badgeLabel)
             .font(.caption)
             .fontWeight(.bold)
@@ -38,20 +38,20 @@ struct PostStatusBadge: View {
 
 struct PostStatusBadge_DraftPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadge(postStatus: .draft)
+        PostStatusBadge(post: testPostData[0])
     }
 }
 
 struct PostStatusBadge_EditedPreviews: PreviewProvider {
     static var previews: some View {
         Group {
-            PostStatusBadge(postStatus: .edited)
+            PostStatusBadge(post: testPostData[1])
         }
     }
 }
 
 struct PostStatusBadge_PublishedPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadge(postStatus: .published)
+        PostStatusBadge(post: testPostData[2])
     }
 }

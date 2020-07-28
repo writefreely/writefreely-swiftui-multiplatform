@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PostList: View {
-    var postStore: PostStore
+    @ObservedObject var postStore: PostStore
 
     var body: some View {
         List {
