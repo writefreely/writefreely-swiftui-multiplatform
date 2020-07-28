@@ -6,30 +6,31 @@ struct PostEditor: View {
 
     var body: some View {
         VStack {
-            TextField(post.title, text: $post.title)
+            TextEditor(text: $post.title)
+                .border(Color.blue, width: 1)
                 .font(.title)
-                .multilineTextAlignment(.center)
-                .padding(.bottom)
+                .frame(height: 100)
                 .onChange(of: post.title) { _ in
                     if post.status == .published {
                         hasUnpublishedChanges = true
                     }
                 }
             TextEditor(text: $post.body)
+                .border(Color.red, width: 1)
                 .font(.body)
-                .padding(.leading)
                 .onChange(of: post.body) { _ in
                     if post.status == .published {
                         hasUnpublishedChanges = true
                     }
                 }
-                .toolbar {
-                    if hasUnpublishedChanges {
-                        PostStatusBadge(postStatus: .edited)
-                    } else {
-                        PostStatusBadge(postStatus: post.status)
-                    }
-                }
+        }
+        .padding()
+        .toolbar {
+            if hasUnpublishedChanges {
+                PostStatusBadge(postStatus: .edited)
+            } else {
+                PostStatusBadge(postStatus: post.status)
+            }
         }
     }
 }
