@@ -9,11 +9,7 @@ struct ContentView: View {
                 .frame(maxHeight: .infinity)
                 .navigationTitle("Posts")
                 .toolbar {
-                    NavigationLink(
-                        destination: PostEditor(
-                            post: Post()
-                        )
-                    ) {
+                    NavigationLink(destination: PostEditor(post: Post())) {
                         Image(systemName: "plus")
                     }
                 }
