@@ -12,4 +12,4 @@ class PostStore: ObservableObject {
     }
 }
 
-let testPostStore = PostStore(posts: testPostData)
+var testPostStore = PostStore(posts: testPostData)
