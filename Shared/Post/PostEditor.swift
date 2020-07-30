@@ -28,6 +28,13 @@ struct PostEditor: View {
             ToolbarItem(placement: .status) {
                 PostStatusBadge(post: post)
             }
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    print("Publish button tapped!")
+                }, label: {
+                    Image(systemName: "paperplane")
+                })
+            }
         }
         .onAppear(perform: checkIfNewPost)
         .onDisappear(perform: addPostToStore)
