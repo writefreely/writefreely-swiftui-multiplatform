@@ -8,7 +8,7 @@ struct PostList: View {
             Text("\(postStore.posts.count) Posts")
                 .foregroundColor(.secondary)
             ForEach(postStore.posts) { post in
-                PostCell(post: post).environmentObject(self.postStore)
+                PostCell(post: post)
             }
         }
     }

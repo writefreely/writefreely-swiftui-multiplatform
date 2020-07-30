@@ -9,7 +9,7 @@ struct ContentView: View {
                 .frame(maxHeight: .infinity)
                 .navigationTitle("Posts")
                 .toolbar {
-                    NavigationLink(destination: PostEditor(post: Post()).environmentObject(self.postStore)) {
+                    NavigationLink(destination: PostEditor(post: Post())) {
                         Image(systemName: "plus")
                     }
                 }
@@ -17,6 +17,7 @@ struct ContentView: View {
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)
         }
+        .environmentObject(self.postStore)
     }
 }
 

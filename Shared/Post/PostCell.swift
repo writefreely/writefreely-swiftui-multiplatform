@@ -6,7 +6,7 @@ struct PostCell: View {
 
     var body: some View {
         NavigationLink(
-            destination: PostEditor(post: post).environmentObject(self.postStore)
+            destination: PostEditor(post: post)
         ) {
             HStack {
                 VStack(alignment: .leading) {
