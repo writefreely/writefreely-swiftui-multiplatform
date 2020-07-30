@@ -25,7 +25,9 @@ struct PostEditor: View {
         }
         .padding()
         .toolbar {
-            PostStatusBadge(post: post)
+            ToolbarItem(placement: .status) {
+                PostStatusBadge(post: post)
+            }
         }
         .onAppear(perform: checkIfNewPost)
         .onDisappear(perform: addPostToStore)
