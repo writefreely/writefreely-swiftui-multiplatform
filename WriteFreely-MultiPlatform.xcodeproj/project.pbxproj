@@ -146,7 +146,7 @@
 				17DF32D024C8B75C00BCE2E3 /* Model */,
 				1756AE7F24CB841200FD7257 /* Extensions */,
 				17DF32CC24C8B72300BCE2E3 /* Navigation */,
-				17DF32D224C8B78D00BCE2E3 /* Collection */,
+				17DF32D224C8B78D00BCE2E3 /* PostCollection */,
 				17DF32D124C8B78500BCE2E3 /* Post */,
 				17DF32D324C8C9F600BCE2E3 /* Components */,
 			);
@@ -234,11 +234,11 @@
 			path = Post;
 			sourceTree = "<group>";
 		};
-		17DF32D224C8B78D00BCE2E3 /* Collection */ = {
+		17DF32D224C8B78D00BCE2E3 /* PostCollection */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Collection;
+			path = PostCollection;
 			sourceTree = "<group>";
 		};
 		17DF32D324C8C9F600BCE2E3 /* Components */ = {
