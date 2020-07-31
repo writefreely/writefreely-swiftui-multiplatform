@@ -3,12 +3,13 @@ import SwiftUI
 struct PostList: View {
     @EnvironmentObject var postStore: PostStore
     var title: String
+    var posts: [Post]
 
     var body: some View {
         List {
             Text("\(postStore.posts.count) Posts")
                 .foregroundColor(.secondary)
-            ForEach(postStore.posts) { post in
+            ForEach(posts) { post in
                 PostCell(post: post)
             }
         }
