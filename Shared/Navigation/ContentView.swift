@@ -14,7 +14,7 @@ struct ContentView: View {
                     .frame(maxHeight: .infinity)
                     .toolbar {
                         NavigationLink(destination: PostEditor(post: Post())) {
-                            Image(systemName: "plus")
+                            Image(systemName: "square.and.pencil")
                         }
                 }
                 CollectionPicker(selectedCollection: $selectedCollection)
