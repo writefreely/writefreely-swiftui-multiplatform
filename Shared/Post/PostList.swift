@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PostList: View {
     @EnvironmentObject var postStore: PostStore
-    let title: String
+    var title: String
 
     var body: some View {
         List {
