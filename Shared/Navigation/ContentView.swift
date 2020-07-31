@@ -5,7 +5,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            PostList(postStore: postStore)
+            PostList()
                 .frame(maxHeight: .infinity)
                 .navigationTitle("Posts")
                 .toolbar {
@@ -17,7 +17,7 @@ struct ContentView: View {
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)
         }
-        .environmentObject(self.postStore)
+        .environmentObject(postStore)
     }
 }
 
