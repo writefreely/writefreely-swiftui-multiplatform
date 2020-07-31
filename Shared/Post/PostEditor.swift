@@ -36,21 +36,25 @@ struct PostEditor: View {
                 })
             }
         }
-        .onAppear(perform: checkIfNewPost)
-        .onDisappear(perform: addPostToStore)
+        .onAppear(perform: {
+            checkIfNewPost()
+            if self.isNewPost {
+                addNewPostToStore()
+            }
+        })
     }
 
     private func checkIfNewPost() {
         self.isNewPost = !postStore.posts.contains(where: { $0.id == post.id })
     }
 
-    private func addPostToStore() {
-        if isNewPost {
-            withAnimation {
-                postStore.add(post)
-            }
+    private func addNewPostToStore() {
+        withAnimation {
+            postStore.add(post)
+            self.isNewPost = false
         }
     }
+}
 }
 
 struct PostEditor_Previews: PreviewProvider {
