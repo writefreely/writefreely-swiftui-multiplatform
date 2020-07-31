@@ -7,7 +7,10 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                PostList(title: selectedCollection.title)
+                PostList(
+                    title: selectedCollection.title,
+                    posts: showPosts(for: selectedCollection)
+                )
                     .frame(maxHeight: .infinity)
                     .toolbar {
                         NavigationLink(destination: PostEditor(post: Post())) {
