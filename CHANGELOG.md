@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Post editor now has a Publish button to change post status 
+
 ### Changed
 
 - Updated license from AGPLv3 to GPLv3
