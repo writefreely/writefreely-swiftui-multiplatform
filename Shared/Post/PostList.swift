@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PostList: View {
     @EnvironmentObject var postStore: PostStore
+    let title: String
 
     var body: some View {
         List {
@@ -11,12 +12,13 @@ struct PostList: View {
                 PostCell(post: post)
             }
         }
+        .navigationTitle(title)
     }
 }
 
 struct PostList_Previews: PreviewProvider {
     static var previews: some View {
-        PostList()
+        PostList(title: "Posts")
             .environmentObject(testPostStore)
     }
 }

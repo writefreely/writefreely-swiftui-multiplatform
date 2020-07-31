@@ -5,9 +5,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            PostList()
+            PostList(title: "Posts")
                 .frame(maxHeight: .infinity)
-                .navigationTitle("Posts")
                 .toolbar {
                     NavigationLink(destination: PostEditor(post: Post())) {
                         Image(systemName: "plus")
