@@ -30,7 +30,7 @@ struct PostEditor: View {
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    print("Publish button tapped!")
+                    post.status = .published
                 }, label: {
                     Image(systemName: "paperplane")
                 })
