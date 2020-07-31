@@ -55,10 +55,17 @@ struct PostEditor: View {
         }
     }
 }
+
+struct PostEditor_NewDraftPreviews: PreviewProvider {
+    static var previews: some View {
+        PostEditor(post: Post())
+            .environmentObject(testPostStore)
+    }
 }
 
-struct PostEditor_Previews: PreviewProvider {
+struct PostEditor_ExistingPostPreviews: PreviewProvider {
     static var previews: some View {
-        PostEditor(post: testPost)
+        PostEditor(post: testPostData[0])
+            .environmentObject(testPostStore)
     }
 }
