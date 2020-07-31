@@ -41,9 +41,7 @@ struct PostEditor: View {
     }
 
     private func checkIfNewPost() {
-        if !postStore.posts.contains(where: { $0.id == post.id }) {
-            self.isNewPost = true
-        }
+        self.isNewPost = !postStore.posts.contains(where: { $0.id == post.id })
     }
 
     private func addPostToStore() {
