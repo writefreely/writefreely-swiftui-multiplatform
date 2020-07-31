@@ -6,13 +6,16 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            PostList(title: "Posts")
-                .frame(maxHeight: .infinity)
-                .toolbar {
-                    NavigationLink(destination: PostEditor(post: Post())) {
-                        Image(systemName: "plus")
-                    }
+            VStack {
+                PostList(title: selectedCollection.title)
+                    .frame(maxHeight: .infinity)
+                    .toolbar {
+                        NavigationLink(destination: PostEditor(post: Post())) {
+                            Image(systemName: "plus")
+                        }
                 }
+                CollectionPicker(selectedCollection: $selectedCollection)
+            }
 
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)
