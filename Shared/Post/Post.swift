@@ -1,5 +1,4 @@
 import Foundation
-import WriteFreely
 
 enum PostStatus {
     case draft
