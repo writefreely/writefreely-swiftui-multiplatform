@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PostList: View {
     @EnvironmentObject var postStore: PostStore
-    
+
     var body: some View {
         List {
             Text("\(postStore.posts.count) Posts")
