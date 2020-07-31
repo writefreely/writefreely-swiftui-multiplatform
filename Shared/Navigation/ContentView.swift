@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var postStore: PostStore
-    @State private var selectedCollection: PostCollection = defaultDraftCollection
+    @State private var selectedCollection: PostCollection = allPostsCollection
 
     var body: some View {
         NavigationView {
