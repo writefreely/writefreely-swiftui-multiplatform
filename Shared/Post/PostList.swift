@@ -19,7 +19,7 @@ struct PostList: View {
 
 struct PostList_Previews: PreviewProvider {
     static var previews: some View {
-        PostList(title: "Posts")
+        PostList(title: "Posts", posts: testPostData)
             .environmentObject(testPostStore)
     }
 }
