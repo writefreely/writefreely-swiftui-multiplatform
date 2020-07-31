@@ -11,6 +11,7 @@ class Post: Identifiable, ObservableObject {
     @Published var body: String
     @Published var createdDate: Date
     @Published var status: PostStatus
+    @Published var collection: PostCollection
 
     let id = UUID()
 
@@ -18,12 +19,14 @@ class Post: Identifiable, ObservableObject {
         title: String = "Title",
         body: String = "Write your post here...",
         createdDate: Date = Date(),
-        status: PostStatus = .draft
+        status: PostStatus = .draft,
+        collection: PostCollection = defaultDraftCollection
     ) {
         self.title = title
         self.body = body
         self.createdDate = createdDate
         self.status = status
+        self.collection = collection
     }
 }
 
