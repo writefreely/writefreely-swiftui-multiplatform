@@ -4,6 +4,7 @@ struct CollectionPicker: View {
     @Binding var selectedCollection: PostCollection
 
     private let collections = [
+        allPostsCollection,
         defaultDraftCollection,
         testPostCollection1,
         testPostCollection2,
