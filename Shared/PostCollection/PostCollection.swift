@@ -1,6 +1,6 @@
 import Foundation
 
-struct PostCollection: Identifiable {
+struct PostCollection: Identifiable, Hashable {
     let id = UUID()
     let title: String
 }
