@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171BFDF724D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
+		171BFDF824D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
 		1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
 		1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6D24CB255B00FD7257 /* PostStore.swift */; };
@@ -50,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		171BFDF624D49FD400888236 /* PostCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollection.swift; sourceTree = "<group>"; };
 		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1756AE6D24CB255B00FD7257 /* PostStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStore.swift; sourceTree = "<group>"; };
 		1756AE7324CB26FA00FD7257 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -237,6 +240,7 @@
 		17DF32D224C8B78D00BCE2E3 /* PostCollection */ = {
 			isa = PBXGroup;
 			children = (
+				171BFDF624D49FD400888236 /* PostCollection.swift */,
 			);
 			path = PostCollection;
 			sourceTree = "<group>";
@@ -458,6 +462,7 @@
 				1756AE7724CB2EDD00FD7257 /* PostEditor.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadge.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostList.swift in Sources */,
+				171BFDF724D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */,
 				1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */,
@@ -469,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				171BFDF824D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1756AE7824CB2EDD00FD7257 /* PostEditor.swift in Sources */,
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadge.swift in Sources */,
