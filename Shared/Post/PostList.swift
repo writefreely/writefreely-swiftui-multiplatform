@@ -7,7 +7,7 @@ struct PostList: View {
 
     var body: some View {
         List {
-            Text("\(postStore.posts.count) Posts")
+            Text("\(posts.count) Posts")
                 .foregroundColor(.secondary)
             ForEach(posts) { post in
                 PostCell(post: post)
