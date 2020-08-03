@@ -11,21 +11,21 @@ struct ContentView: View {
                     title: selectedCollection.title,
                     posts: showPosts(for: selectedCollection)
                 )
-                    .frame(maxHeight: .infinity)
-                    .toolbar {
-                        NavigationLink(destination: PostEditor(post: Post())) {
-                            Image(systemName: "square.and.pencil")
-                        }
+                .frame(maxHeight: .infinity)
+                .toolbar {
+                    NavigationLink(destination: PostEditor(post: Post())) {
+                        Image(systemName: "square.and.pencil")
+                    }
                 }
                 CollectionPicker(selectedCollection: $selectedCollection)
             }
-
+            
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)
         }
         .environmentObject(postStore)
     }
-
+    
     func showPosts(for: PostCollection) -> [Post] {
         if selectedCollection == allPostsCollection {
             return postStore.posts
