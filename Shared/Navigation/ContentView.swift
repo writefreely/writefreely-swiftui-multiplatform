@@ -6,7 +6,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+                CollectionSidebar(selectedCollection: $selectedCollection)
+
                 PostList(
                     title: selectedCollection.title,
                     posts: showPosts(for: selectedCollection)
@@ -17,9 +18,7 @@ struct ContentView: View {
                         Image(systemName: "square.and.pencil")
                     }
                 }
-                CollectionPicker(selectedCollection: $selectedCollection)
-            }
-            
+
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)
         }
