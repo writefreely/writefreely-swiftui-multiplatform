@@ -12,11 +12,6 @@ struct ContentView: View {
                     title: selectedCollection?.title ?? allPostsCollection.title,
                     posts: showPosts(for: selectedCollection ?? allPostsCollection)
                 )
-                .toolbar {
-                    NavigationLink(destination: PostEditor(post: Post())) {
-                        Image(systemName: "square.and.pencil")
-                    }
-                }
 
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)

@@ -14,6 +14,13 @@ struct PostList: View {
             }
         }
         .navigationTitle(title)
+        .toolbar {
+            Button(action: {
+                print("Creating New Draft!")
+            }, label: {
+                Image(systemName: "square.and.pencil")
+            })
+        }
     }
 
     func pluralizedPostCount(for posts: [Post]) -> String {
