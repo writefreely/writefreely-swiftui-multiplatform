@@ -7,13 +7,21 @@ struct PostList: View {
 
     var body: some View {
         List {
-            Text("\(posts.count) Posts")
+            Text(pluralizedPostCount(for: posts))
                 .foregroundColor(.secondary)
             ForEach(posts) { post in
                 PostCell(post: post)
             }
         }
         .navigationTitle(title)
+    }
+
+    func pluralizedPostCount(for posts: [Post]) -> String {
+        if posts.count == 1 {
+            return "1 post"
+        } else {
+            return "\(posts.count) posts"
+        }
     }
 }
 
