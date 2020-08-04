@@ -4,13 +4,7 @@ struct CollectionSidebar: View {
     @EnvironmentObject var postStore: PostStore
     @Binding var selectedCollection: PostCollection?
 
-    private let collections = [
-        allPostsCollection,
-        defaultDraftCollection,
-        testPostCollection1,
-        testPostCollection2,
-        testPostCollection3
-    ]
+    private let collections = postCollections
 
     var body: some View {
         List {

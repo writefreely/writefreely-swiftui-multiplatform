@@ -7,6 +7,16 @@ struct PostCollection: Identifiable, Hashable {
 
 let allPostsCollection = PostCollection(title: "All Posts")
 let defaultDraftCollection = PostCollection(title: "Drafts")
-let testPostCollection1 = PostCollection(title: "Collection 1")
-let testPostCollection2 = PostCollection(title: "Collection 2")
-let testPostCollection3 = PostCollection(title: "Collection 3")
+let userCollections = [
+    PostCollection(title: "Collection 1"),
+    PostCollection(title: "Collection 2"),
+    PostCollection(title: "Collection 3")
+]
+
+let postCollections = [
+    allPostsCollection,
+    defaultDraftCollection,
+    userCollections[0],
+    userCollections[1],
+    userCollections[2]
+]
