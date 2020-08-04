@@ -52,14 +52,14 @@ let testPostData = [
         body: "Look at me, creating a first post! That's cool.",
         createdDate: Date(timeIntervalSince1970: 1595429452),
         status: .published,
-        collection: testPostCollection1
+        collection: userCollections[0]
     ),
     Post(
         title: "Post 2: The Quickening",
         body: "See, here's the rule about Highlander jokes: _there can be only one_.",
         createdDate: Date(timeIntervalSince1970: 1595514125),
         status: .edited,
-        collection: testPostCollection1
+        collection: userCollections[0]
     ),
     Post(
         title: "The Post Revolutions",
@@ -71,7 +71,7 @@ let testPostData = [
         body: "How many movies does this person watch? How many movie-title jokes will they make?",
         createdDate: Date(timeIntervalSince1970: 1596219877),
         status: .published,
-        collection: testPostCollection2
+        collection: userCollections[1]
     ),
     Post(
         title: "Fast (Post) Five",
@@ -82,6 +82,6 @@ let testPostData = [
         body: "And there you have it, a Resident Evil movie reference.",
         createdDate: Date(timeIntervalSince1970: 1596043684),
         status: .edited,
-        collection: testPostCollection3
+        collection: userCollections[2]
     )
 ]
