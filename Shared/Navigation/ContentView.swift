@@ -2,15 +2,15 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var postStore: PostStore
-    @State private var selectedCollection: PostCollection = allPostsCollection
+    @State private var selectedCollection: PostCollection? = allPostsCollection
 
     var body: some View {
         NavigationView {
                 CollectionSidebar(selectedCollection: $selectedCollection)
 
                 PostList(
-                    title: selectedCollection.title,
-                    posts: showPosts(for: selectedCollection)
+                    title: selectedCollection?.title ?? allPostsCollection.title,
+                    posts: showPosts(for: selectedCollection ?? allPostsCollection)
                 )
                 .frame(maxHeight: .infinity)
                 .toolbar {
@@ -24,12 +24,14 @@ struct ContentView: View {
         }
         .environmentObject(postStore)
     }
-    
-    func showPosts(for: PostCollection) -> [Post] {
-        if selectedCollection == allPostsCollection {
+
+    func showPosts(for collection: PostCollection) -> [Post] {
+        if collection == allPostsCollection {
             return postStore.posts
         } else {
-            return postStore.posts.filter { $0.collection.title == selectedCollection.title }
+            return postStore.posts.filter {
+                $0.collection.title == collection.title
+            }
         }
     }
 }
