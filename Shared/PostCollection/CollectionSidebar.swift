@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct CollectionSidebar: View {
-    @EnvironmentObject var postStore: PostStore
     @Binding var selectedCollection: PostCollection?
 
     private let collections = postCollections
@@ -15,12 +14,11 @@ struct CollectionSidebar: View {
                 }
             }
         }
-        .listStyle(SidebarListStyle())
+    .listStyle(SidebarListStyle())
     }
 
 struct CollectionSidebar_Previews: PreviewProvider {
     static var previews: some View {
         CollectionSidebar()
-            .environmentObject(testPostStore)
     }
 }
