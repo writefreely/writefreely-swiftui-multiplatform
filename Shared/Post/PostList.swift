@@ -31,6 +31,16 @@ struct PostList: View {
             return "\(posts.count) posts"
         }
     }
+
+    private func showPosts(for collection: PostCollection) -> [Post] {
+        if collection == allPostsCollection {
+            return postStore.posts
+        } else {
+            return postStore.posts.filter {
+                $0.collection.title == collection.title
+            }
+        }
+    }
 }
 
 struct PostList_Previews: PreviewProvider {

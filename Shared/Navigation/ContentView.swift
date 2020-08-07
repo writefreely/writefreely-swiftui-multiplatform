@@ -18,16 +18,6 @@ struct ContentView: View {
         }
         .environmentObject(postStore)
     }
-
-    func showPosts(for collection: PostCollection) -> [Post] {
-        if collection == allPostsCollection {
-            return postStore.posts
-        } else {
-            return postStore.posts.filter {
-                $0.collection.title == collection.title
-            }
-        }
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {
