@@ -2,16 +2,12 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var postStore: PostStore
-    @State private var selectedCollection: PostCollection? = allPostsCollection
 
     var body: some View {
         NavigationView {
             CollectionSidebar()
 
-                PostList(
-                    title: selectedCollection?.title ?? allPostsCollection.title,
-                    posts: showPosts(for: selectedCollection ?? allPostsCollection)
-                )
+            PostList(selectedCollection: allPostsCollection)
 
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)

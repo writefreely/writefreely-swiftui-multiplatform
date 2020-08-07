@@ -5,21 +5,18 @@ struct PostCell: View {
     @ObservedObject var post: Post
 
     var body: some View {
-        NavigationLink(
-            destination: PostEditor(post: post)
-        ) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(post.title)
-                        .font(.headline)
-                        .lineLimit(1)
-                    Text(buildDateString(from: post.createdDate))
-                        .font(.caption)
-                        .lineLimit(1)
-                }
-                Spacer()
-                PostStatusBadge(post: post)
+        HStack {
+            VStack(alignment: .leading) {
+                Text(post.title)
+                    .font(.headline)
+                    .lineLimit(1)
+                Text(buildDateString(from: post.createdDate))
+                    .font(.caption)
+                    .lineLimit(1)
             }
+            Spacer()
+            PostStatusBadge(post: post)
+        }
         .padding(5)
     }
 

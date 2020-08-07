@@ -7,7 +7,8 @@ struct CollectionSidebar: View {
         List {
             ForEach(collections) { collection in
                 NavigationLink(
-                    destination: PostList(title: collection.title, posts: showPosts(for: collection)).tag(collection)) {
+                    destination: PostList(selectedCollection: collection)
+                ) {
                     Text(collection.title)
                 }
             }
