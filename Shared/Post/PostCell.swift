@@ -21,7 +21,7 @@ struct PostCell: View {
                 Spacer()
                 PostStatusBadge(post: post)
             }
-        }
+        .padding(5)
     }
 
     func buildDateString(from date: Date) -> String {
