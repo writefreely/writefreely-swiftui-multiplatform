@@ -25,29 +25,47 @@ struct PostEditor: View {
         }
         .padding()
         .toolbar {
-            PostStatusBadge(post: post)
+            ToolbarItem(placement: .status) {
+                PostStatusBadge(post: post)
+            }
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    post.status = .published
+                }, label: {
+                    Image(systemName: "paperplane")
+                })
+            }
         }
-        .onAppear(perform: checkIfNewPost)
-        .onDisappear(perform: addPostToStore)
+        .onAppear(perform: {
+            checkIfNewPost()
+            if self.isNewPost {
+                addNewPostToStore()
+            }
+        })
     }
 
     private func checkIfNewPost() {
-        if !postStore.posts.contains(where: { $0.id == post.id }) {
-            self.isNewPost = true
-        }
+        self.isNewPost = !postStore.posts.contains(where: { $0.id == post.id })
     }
 
-    private func addPostToStore() {
-        if isNewPost {
-            withAnimation {
-                postStore.add(post)
-            }
+    private func addNewPostToStore() {
+        withAnimation {
+            postStore.add(post)
+            self.isNewPost = false
         }
     }
 }
 
-struct PostEditor_Previews: PreviewProvider {
+struct PostEditor_NewDraftPreviews: PreviewProvider {
     static var previews: some View {
-        PostEditor(post: testPost)
+        PostEditor(post: Post())
+            .environmentObject(testPostStore)
+    }
+}
+
+struct PostEditor_ExistingPostPreviews: PreviewProvider {
+    static var previews: some View {
+        PostEditor(post: testPostData[0])
+            .environmentObject(testPostStore)
     }
 }

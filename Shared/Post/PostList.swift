@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct PostList: View {
-    @ObservedObject var postStore: PostStore
+    @EnvironmentObject var postStore: PostStore
 
     var body: some View {
         List {
             Text("\(postStore.posts.count) Posts")
                 .foregroundColor(.secondary)
             ForEach(postStore.posts) { post in
-                PostCell(post: post).environmentObject(self.postStore)
+                PostCell(post: post)
             }
         }
     }
@@ -16,6 +16,7 @@ struct PostList: View {
 
 struct PostList_Previews: PreviewProvider {
     static var previews: some View {
-        PostList(postStore: testPostStore)
+        PostList()
+            .environmentObject(testPostStore)
     }
 }
