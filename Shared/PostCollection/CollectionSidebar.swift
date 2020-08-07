@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CollectionSidebar: View {
     private let collections = postCollections
-    
+
     var body: some View {
         List {
             ForEach(collections) { collection in
@@ -13,8 +13,10 @@ struct CollectionSidebar: View {
                 }
             }
         }
-    .listStyle(SidebarListStyle())
+        .navigationTitle("Collections")
+        .listStyle(SidebarListStyle())
     }
+}
 
 struct CollectionSidebar_Previews: PreviewProvider {
     static var previews: some View {
