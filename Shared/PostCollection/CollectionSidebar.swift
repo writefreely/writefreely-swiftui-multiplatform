@@ -1,10 +1,8 @@
 import SwiftUI
 
 struct CollectionSidebar: View {
-    @Binding var selectedCollection: PostCollection?
-
     private let collections = postCollections
-
+    
     var body: some View {
         List {
             ForEach(collections) { collection in

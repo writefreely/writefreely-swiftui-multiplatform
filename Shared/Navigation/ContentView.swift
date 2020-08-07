@@ -6,7 +6,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-                CollectionSidebar(selectedCollection: $selectedCollection)
+            CollectionSidebar()
 
                 PostList(
                     title: selectedCollection?.title ?? allPostsCollection.title,
