@@ -16,7 +16,8 @@ struct PostList: View {
         .navigationTitle(title)
         .toolbar {
             Button(action: {
-                print("Creating New Draft!")
+                let post = Post()
+                postStore.add(post)
             }, label: {
                 Image(systemName: "square.and.pencil")
             })
