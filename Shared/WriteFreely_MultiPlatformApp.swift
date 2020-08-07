@@ -12,5 +12,12 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView(postStore: store)
         }
+
+        #if os(macOS)
+        Settings {
+            SettingsView()
+                .frame(minWidth: 300, maxWidth: 600, minHeight: 200, maxHeight: 800)
+        }
+        #endif
     }
 }
