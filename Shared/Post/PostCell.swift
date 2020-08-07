@@ -15,7 +15,6 @@ struct PostCell: View {
                         .lineLimit(1)
                     Text(buildDateString(from: post.createdDate))
                         .font(.caption)
-                        .foregroundColor(.secondary)
                         .lineLimit(1)
                 }
                 Spacer()
