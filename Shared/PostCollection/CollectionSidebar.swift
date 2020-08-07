@@ -18,13 +18,9 @@ struct CollectionSidebar: View {
         .listStyle(SidebarListStyle())
     }
 
-    func showPosts(for collection: PostCollection) -> [Post] {
-        if collection == allPostsCollection {
-            return postStore.posts
-        } else {
-            return postStore.posts.filter {
-                $0.collection.title == collection.title
-            }
-        }
+struct CollectionSidebar_Previews: PreviewProvider {
+    static var previews: some View {
+        CollectionSidebar()
+            .environmentObject(testPostStore)
     }
 }
