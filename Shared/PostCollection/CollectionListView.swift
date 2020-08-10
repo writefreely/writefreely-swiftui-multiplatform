@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CollectionSidebar: View {
+struct CollectionListView: View {
     private let collections = postCollections
 
     var body: some View {
@@ -20,6 +20,6 @@ struct CollectionSidebar: View {
 
 struct CollectionSidebar_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionSidebar()
+        CollectionListView()
     }
 }

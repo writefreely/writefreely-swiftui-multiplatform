@@ -5,7 +5,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            CollectionSidebar()
+            SidebarView()
 
             PostList(selectedCollection: allPostsCollection)
 

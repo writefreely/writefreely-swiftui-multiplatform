@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		171BFDF724D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		171BFDF824D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
-		171BFDFA24D4AF8300888236 /* CollectionSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionSidebar.swift */; };
-		171BFDFB24D4AF8300888236 /* CollectionSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionSidebar.swift */; };
+		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
+		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
 		1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
 		1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6D24CB255B00FD7257 /* PostStore.swift */; };
@@ -22,6 +22,8 @@
 		1756AE7A24CB65DF00FD7257 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7924CB65DF00FD7257 /* PostList.swift */; };
 		1756AE7B24CB65DF00FD7257 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7924CB65DF00FD7257 /* PostList.swift */; };
 		1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE8024CB844500FD7257 /* View+Keyboard.swift */; };
+		1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
+		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		17A5388824DDA31F00DEFF9A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* SettingsView.swift */; };
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
 		17A5388F24DDEC7400DEFF9A /* AccountLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountLogin.swift */; };
@@ -59,13 +61,14 @@
 
 /* Begin PBXFileReference section */
 		171BFDF624D49FD400888236 /* PostCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollection.swift; sourceTree = "<group>"; };
-		171BFDF924D4AF8300888236 /* CollectionSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSidebar.swift; sourceTree = "<group>"; };
+		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1756AE6D24CB255B00FD7257 /* PostStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStore.swift; sourceTree = "<group>"; };
 		1756AE7324CB26FA00FD7257 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		1756AE7624CB2EDD00FD7257 /* PostEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditor.swift; sourceTree = "<group>"; };
 		1756AE7924CB65DF00FD7257 /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		1756AE8024CB844500FD7257 /* View+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Keyboard.swift"; sourceTree = "<group>"; };
+		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		17A5388724DDA31F00DEFF9A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17A5388B24DDC83F00DEFF9A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		17A5388D24DDEC7400DEFF9A /* AccountLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLogin.swift; sourceTree = "<group>"; };
@@ -234,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				17DF328224C87D3300BCE2E3 /* ContentView.swift */,
+				1765F62924E18EA200C9EBF0 /* SidebarView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -263,7 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				171BFDF624D49FD400888236 /* PostCollection.swift */,
-				171BFDF924D4AF8300888236 /* CollectionSidebar.swift */,
+				171BFDF924D4AF8300888236 /* CollectionListView.swift */,
 			);
 			path = PostCollection;
 			sourceTree = "<group>";
@@ -475,9 +479,10 @@
 			files = (
 				17DF32AC24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */,
-				171BFDFA24D4AF8300888236 /* CollectionSidebar.swift in Sources */,
+				171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				1756AE7724CB2EDD00FD7257 /* PostEditor.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadge.swift in Sources */,
+				1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostList.swift in Sources */,
 				171BFDF724D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
@@ -493,10 +498,11 @@
 			files = (
 				171BFDF824D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
+				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756AE7824CB2EDD00FD7257 /* PostEditor.swift in Sources */,
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadge.swift in Sources */,
 				1756AE7B24CB65DF00FD7257 /* PostList.swift in Sources */,
-				171BFDFB24D4AF8300888236 /* CollectionSidebar.swift in Sources */,
+				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */,
 				17A5389324DDED0000DEFF9A /* Preferences.swift in Sources */,
