@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17120DA124E19839002B9F6C /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
+		17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
+		17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
+		17120DA724E19D11002B9F6C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DA424E19CBF002B9F6C /* SettingsView.swift */; };
 		171BFDF724D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		171BFDF824D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
@@ -60,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17120DA424E19CBF002B9F6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		171BFDF624D49FD400888236 /* PostCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollection.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -129,6 +134,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17120DA624E19CE2002B9F6C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				17120DA424E19CBF002B9F6C /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		1756AE7F24CB841200FD7257 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				17DF328B24C87D3500BCE2E3 /* Info.plist */,
+				17120DA624E19CE2002B9F6C /* Settings */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -494,8 +508,12 @@
 				1756AE7A24CB65DF00FD7257 /* PostList.swift in Sources */,
 				171BFDF724D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
+				17120DA724E19D11002B9F6C /* SettingsView.swift in Sources */,
+				17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */,
+				17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */,
 				1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */,
 				1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */,
+				17120DA124E19839002B9F6C /* AccountView.swift in Sources */,
 				1756AE7424CB26FA00FD7257 /* PostCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
