@@ -13,15 +13,7 @@ struct AccountView: View {
 
     var body: some View {
         if isLoggedIn {
-            VStack {
-                HStack {
-                    Text("Logged in as \(accountModel.username ?? "UNKNOWN") on \(accountModel.server ?? "UNKNOWN")")
-                }
-                Spacer()
-                Button(action: logoutHandler, label: {
-                    Text("Logout")
-                })
-            }
+            AccountLogoutView(accountModel: $accountModel, isLoggedIn: $isLoggedIn, isLoggingIn: $isLoggingIn)
         } else {
             VStack {
                 HStack {
@@ -92,10 +84,6 @@ The server could not be found. Please check that you've entered the information 
         }
     }
 
-    func logoutHandler() {
-        isLoggedIn = false
-        isLoggingIn = false
-    }
 }
 struct AccountLogin_Previews: PreviewProvider {
     static var previews: some View {
