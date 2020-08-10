@@ -16,7 +16,8 @@ struct WriteFreely_MultiPlatformApp: App {
         #if os(macOS)
         Settings {
             SettingsView()
-                .frame(minWidth: 300, maxWidth: 600, minHeight: 200, maxHeight: 800)
+                .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
+                .padding()
         }
         #endif
     }
