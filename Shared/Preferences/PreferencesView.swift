@@ -12,15 +12,12 @@ struct PreferencesView: View {
         }
         .pickerStyle(SegmentedPickerStyle())
         #elseif os(macOS)
-        Form {
-            Picker(selection: $appearance, label: Text("Appearance")) {
-                Text("System").tag(0)
-                Text("Light Mode").tag(1)
-                Text("Dark Mode").tag(2)
-            }
-            .frame(width: 200, height: 100, alignment: .topLeading)
-            .pickerStyle(RadioGroupPickerStyle())
+        Picker(selection: $appearance, label: EmptyView()) {
+            Text("System").tag(0)
+            Text("Light Mode").tag(1)
+            Text("Dark Mode").tag(2)
         }
+        .pickerStyle(RadioGroupPickerStyle())
         #endif
     }
 }

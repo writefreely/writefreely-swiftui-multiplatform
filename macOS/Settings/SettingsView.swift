@@ -5,18 +5,27 @@ struct SettingsView: View {
 
     var body: some View {
         TabView(selection: $selectedView) {
-            AccountView()
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Account")
+            Form {
+                Section(header: Text("Log in to your account")) {
+                    AccountView()
                 }
-                .tag(0)
-            PreferencesView()
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Preferences")
+            }
+            .tabItem {
+                Image(systemName: "person.crop.circle")
+                Text("Account")
+            }
+            .tag(0)
+            Form {
+                Section(header: Text("Appearance")) {
+                    PreferencesView()
+                    Spacer()
                 }
-                .tag(1)
+            }
+            .tabItem {
+                Image(systemName: "gear")
+                Text("Preferences")
+            }
+            .tag(1)
         }
     }
 }
