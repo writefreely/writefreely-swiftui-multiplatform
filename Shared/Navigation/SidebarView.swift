@@ -18,7 +18,7 @@ struct SidebarView: View {
                     isPresentingSettings = false
                 },
                 content: {
-                    SettingsView()
+                    SettingsView(isPresented: $isPresentingSettings)
                 }
             )
         }

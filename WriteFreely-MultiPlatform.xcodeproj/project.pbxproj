@@ -15,6 +15,7 @@
 		17120DAA24E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DA824E1B2F5002B9F6C /* AccountLogoutView.swift */; };
 		17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
 		17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
+		17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */; };
 		171BFDF724D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		171BFDF824D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
@@ -71,6 +72,7 @@
 		17120DA424E19CBF002B9F6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17120DA824E1B2F5002B9F6C /* AccountLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLogoutView.swift; sourceTree = "<group>"; };
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
+		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		171BFDF624D49FD400888236 /* PostCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollection.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				17120DA424E19CBF002B9F6C /* SettingsView.swift */,
+				17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
 				17120DA924E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */,
+				17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */,
 				1756AE7724CB2EDD00FD7257 /* PostEditor.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadge.swift in Sources */,
 				1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
