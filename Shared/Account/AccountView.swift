@@ -7,7 +7,11 @@ struct AccountView: View {
 
     var body: some View {
         if isLoggedIn {
-            AccountLogoutView(accountModel: $accountModel, isLoggedIn: $isLoggedIn, isLoggingIn: $isLoggingIn)
+            HStack {
+                Spacer()
+                AccountLogoutView(accountModel: $accountModel, isLoggedIn: $isLoggedIn, isLoggingIn: $isLoggingIn)
+                Spacer()
+            }
         } else {
             AccountLoginView(accountModel: $accountModel, isLoggedIn: $isLoggedIn, isLoggingIn: $isLoggingIn)
         }

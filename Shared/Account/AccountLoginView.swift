@@ -16,17 +16,40 @@ struct AccountLoginView: View {
             HStack {
                 Image(systemName: "person.circle")
                     .foregroundColor(.gray)
+                #if os(iOS)
                 TextField("Username", text: $username)
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                #else
+                TextField("Username", text: $username)
+                #endif
             }
             HStack {
                 Image(systemName: "lock.circle")
                     .foregroundColor(.gray)
+                #if os(iOS)
                 SecureField("Password", text: $password)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                #else
+                SecureField("Password", text: $password)
+                #endif
             }
             HStack {
                 Image(systemName: "link.circle")
                     .foregroundColor(.gray)
+                #if os(iOS)
                 TextField("Server URL", text: $server)
+                    .keyboardType(.URL)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                #else
+                TextField("Server URL", text: $server)
+                #endif
             }
             Spacer()
             if isLoggingIn {

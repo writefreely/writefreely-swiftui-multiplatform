@@ -12,12 +12,11 @@ struct PreferencesView: View {
         }
         .pickerStyle(SegmentedPickerStyle())
         #elseif os(macOS)
-        Picker(selection: $appearance, label: EmptyView()) {
+        Picker(selection: $appearance, label: Text("Appearance")) {
             Text("System").tag(0)
             Text("Light Mode").tag(1)
             Text("Dark Mode").tag(2)
         }
-        .pickerStyle(RadioGroupPickerStyle())
         #endif
     }
 }

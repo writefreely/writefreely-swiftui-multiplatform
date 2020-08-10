@@ -6,7 +6,7 @@ struct SettingsView: View {
     var body: some View {
         TabView(selection: $selectedView) {
             Form {
-                Section(header: Text("Log in to your account")) {
+                Section(header: Text("Login Details")) {
                     AccountView()
                 }
             }
@@ -15,11 +15,9 @@ struct SettingsView: View {
                 Text("Account")
             }
             .tag(0)
-            Form {
-                Section(header: Text("Appearance")) {
-                    PreferencesView()
-                    Spacer()
-                }
+            VStack {
+                PreferencesView()
+                Spacer()
             }
             .tabItem {
                 Image(systemName: "gear")
