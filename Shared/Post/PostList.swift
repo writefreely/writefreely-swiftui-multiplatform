@@ -3,6 +3,7 @@ import SwiftUI
 struct PostList: View {
     @EnvironmentObject var postStore: PostStore
     @State var selectedCollection: PostCollection
+    @State var isPresentingSettings = false
 
     var body: some View {
         #if os(iOS)
@@ -28,13 +29,25 @@ struct PostList: View {
                 })
             }
             ToolbarItem(placement: .bottomBar) {
+                Button(action: {
+                    isPresentingSettings = true
+                }, label: {
+                    Image(systemName: "gear")
+                }).sheet(
+                    isPresented: $isPresentingSettings,
+                    onDismiss: {
+                        isPresentingSettings = false
+                    },
+                    content: {
+                        SettingsView(isPresented: $isPresentingSettings)
+                    }
+                )
+            }
+            ToolbarItem(placement: .bottomBar) {
                 Spacer()
             }
             ToolbarItem(placement: .bottomBar) {
                 Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
-            }
-            ToolbarItem(placement: .bottomBar) {
-                Spacer()
             }
         }
         #else //if os(macOS)

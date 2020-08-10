@@ -7,7 +7,7 @@ struct SettingsView: View {
         VStack {
             SettingsHeaderView(isPresented: $isPresented)
             Form {
-                Section(header: Text("Account")) {
+                Section(header: Text("Login Details")) {
                     AccountView()
                 }
                 Section(header: Text("Appearance")) {
