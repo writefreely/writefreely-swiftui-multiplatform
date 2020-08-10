@@ -5,13 +5,13 @@ struct SettingsView: View {
 
     var body: some View {
         TabView(selection: $selectedView) {
-            AccountLogin()
+            AccountView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Account")
                 }
                 .tag(0)
-            Preferences()
+            PreferencesView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Preferences")

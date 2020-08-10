@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Preferences: View {
+struct PreferencesView: View {
     @State private var appearance: Int = 0
 
     var body: some View {
@@ -18,6 +18,6 @@ struct Preferences: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        Preferences()
+        PreferencesView()
     }
 }

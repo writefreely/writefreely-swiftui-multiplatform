@@ -1,13 +1,6 @@
-//
-//  AccountLogin.swift
-//  WriteFreely-MultiPlatform
-//
-//  Created by Angelo Stavrow on 2020-08-07.
-//
-
 import SwiftUI
 
-struct AccountLogin: View {
+struct AccountView: View {
     @State var accountModel = AccountModel()
 
     @State private var username: String = ""
@@ -125,6 +118,6 @@ The server could not be found. Please check that you've entered the information 
 }
 struct AccountLogin_Previews: PreviewProvider {
     static var previews: some View {
-        AccountLogin()
+        AccountView()
     }
 }

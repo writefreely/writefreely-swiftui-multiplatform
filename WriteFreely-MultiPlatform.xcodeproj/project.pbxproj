@@ -26,8 +26,8 @@
 		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		17A5388824DDA31F00DEFF9A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* SettingsView.swift */; };
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
-		17A5388F24DDEC7400DEFF9A /* AccountLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountLogin.swift */; };
-		17A5389324DDED0000DEFF9A /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* Preferences.swift */; };
+		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
+		17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
 		17DF329D24C87D3500BCE2E3 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF329C24C87D3500BCE2E3 /* Tests_iOS.swift */; };
 		17DF32A824C87D3500BCE2E3 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF32A724C87D3500BCE2E3 /* Tests_macOS.swift */; };
 		17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF328124C87D3300BCE2E3 /* WriteFreely_MultiPlatformApp.swift */; };
@@ -71,8 +71,8 @@
 		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		17A5388724DDA31F00DEFF9A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17A5388B24DDC83F00DEFF9A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
-		17A5388D24DDEC7400DEFF9A /* AccountLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLogin.swift; sourceTree = "<group>"; };
-		17A5389124DDED0000DEFF9A /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		17A5389124DDED0000DEFF9A /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		17DF328124C87D3300BCE2E3 /* WriteFreely_MultiPlatformApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFreely_MultiPlatformApp.swift; sourceTree = "<group>"; };
 		17DF328224C87D3300BCE2E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		17DF328324C87D3500BCE2E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -137,11 +137,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1765F62C24E1924800C9EBF0 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				17A5389124DDED0000DEFF9A /* PreferencesView.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		17A5388924DDA50500DEFF9A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				17A5388D24DDEC7400DEFF9A /* AccountLogin.swift */,
-				17A5389124DDED0000DEFF9A /* Preferences.swift */,
 				17A5388724DDA31F00DEFF9A /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -173,8 +179,9 @@
 				17DF32D024C8B75C00BCE2E3 /* Account */,
 				1756AE7F24CB841200FD7257 /* Extensions */,
 				17DF32CC24C8B72300BCE2E3 /* Navigation */,
-				17DF32D224C8B78D00BCE2E3 /* PostCollection */,
 				17DF32D124C8B78500BCE2E3 /* Post */,
+				17DF32D224C8B78D00BCE2E3 /* PostCollection */,
+				1765F62C24E1924800C9EBF0 /* Preferences */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -246,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				17A5388B24DDC83F00DEFF9A /* AccountModel.swift */,
+				17A5388D24DDEC7400DEFF9A /* AccountView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -505,10 +513,10 @@
 				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */,
-				17A5389324DDED0000DEFF9A /* Preferences.swift in Sources */,
+				17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */,
 				1756AE6F24CB255B00FD7257 /* PostStore.swift in Sources */,
 				1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */,
-				17A5388F24DDEC7400DEFF9A /* AccountLogin.swift in Sources */,
+				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
 				1756AE7524CB26FA00FD7257 /* PostCell.swift in Sources */,
 				17A5388824DDA31F00DEFF9A /* SettingsView.swift in Sources */,
 			);
