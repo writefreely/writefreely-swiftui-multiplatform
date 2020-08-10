@@ -14,72 +14,53 @@ struct AccountView: View {
     var body: some View {
         if isLoggedIn {
             VStack {
-                Spacer()
                 HStack {
-                    Text("Logged in as")
-                    Text(accountModel.username ?? "UNKNOWN")
-                        .font(.system(.body, design: .monospaced))
-                    Text("on")
-                    Text(accountModel.server ?? "UNKNOWN")
-                        .font(.system(.body, design: .monospaced))
+                    Text("Logged in as \(accountModel.username ?? "UNKNOWN") on \(accountModel.server ?? "UNKNOWN")")
                 }
                 Spacer()
                 Button(action: logoutHandler, label: {
                     Text("Logout")
                 })
-                Spacer()
             }
         } else {
-            Form {
-                Section(header: Text("Login to your account")) {
-                    VStack {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "person.circle")
-                                .foregroundColor(.gray)
-                            TextField("Username", text: $username)
-                            Spacer()
-                        }
-                        HStack {
-                            Spacer()
-                            Image(systemName: "lock.circle")
-                                .foregroundColor(.gray)
-                            TextField("Password", text: $password)
-                            Spacer()
-                        }
-                        HStack {
-                            Spacer()
-                            Image(systemName: "link.circle")
-                                .foregroundColor(.gray)
-                            TextField("Server URL", text: $server)
-                            Spacer()
-                        }
-                        Spacer()
-                        if isLoggingIn {
-                            ProgressView("Logging in...")
-                        } else {
-                            Button(action: {
-                                accountModel.login(
-                                    to: server,
-                                    as: username, password: password,
-                                    completion: loginHandler
-                                )
-                                isLoggingIn = true
-                            }, label: {
-                                Text("Login")
-                            }).disabled(isLoggedIn)
-                        }
-                        Spacer()
-                    }
+            VStack {
+                HStack {
+                    Image(systemName: "person.circle")
+                        .foregroundColor(.gray)
+                    TextField("Username", text: $username)
                 }
-                .padding()
-                .alert(isPresented: $isShowingAlert) {
-                    Alert(
-                        title: Text("Error Logging In"),
-                        message: Text(alertMessage),
-                        dismissButton: .default(Text("OK"))
-                    )
+                HStack {
+                    Image(systemName: "lock.circle")
+                        .foregroundColor(.gray)
+                    SecureField("Password", text: $password)
                 }
+                HStack {
+                    Image(systemName: "link.circle")
+                        .foregroundColor(.gray)
+                    TextField("Server URL", text: $server)
+                }
+                Spacer()
+                if isLoggingIn {
+                    ProgressView("Logging in...")
+                } else {
+                    Button(action: {
+                        accountModel.login(
+                            to: server,
+                            as: username, password: password,
+                            completion: loginHandler
+                        )
+                        isLoggingIn = true
+                    }, label: {
+                        Text("Login")
+                    }).disabled(isLoggedIn)
+                }
+            }
+            .alert(isPresented: $isShowingAlert) {
+                Alert(
+                    title: Text("Error Logging In"),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("OK"))
+                )
             }
         }
     }
