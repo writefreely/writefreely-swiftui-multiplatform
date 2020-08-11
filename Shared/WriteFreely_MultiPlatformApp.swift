@@ -13,7 +13,7 @@ struct WriteFreely_MultiPlatformApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(postStore: store, preferences: preferences)
-                .environment(\.colorScheme, preferences.preferredColorScheme)
+                .preferredColorScheme(preferences.preferredColorScheme)
         }
 
         #if os(macOS)
