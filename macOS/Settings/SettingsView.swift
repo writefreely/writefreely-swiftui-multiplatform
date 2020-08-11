@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var preferences: PreferencesModel
+    @ObservedObject var account: AccountModel
 
     @State var selectedView = 0
 
@@ -9,7 +10,7 @@ struct SettingsView: View {
         TabView(selection: $selectedView) {
             Form {
                 Section(header: Text("Login Details")) {
-                    AccountView()
+                    AccountView(account: account)
                 }
             }
             .tabItem {
@@ -32,12 +33,12 @@ struct SettingsView: View {
 
 struct SettingsView_AccountTabPreviews: PreviewProvider {
     static var previews: some View {
-        SettingsView(preferences: PreferencesModel(), selectedView: 0)
+        SettingsView(preferences: PreferencesModel(), account: AccountModel(), selectedView: 0)
     }
 }
 
 struct SettingsView_PreferencesTabPreviews: PreviewProvider {
     static var previews: some View {
-        SettingsView(preferences: PreferencesModel(), selectedView: 1)
+        SettingsView(preferences: PreferencesModel(), account: AccountModel(), selectedView: 1)
     }
 }

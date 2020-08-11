@@ -19,7 +19,7 @@ struct WriteFreely_MultiPlatformApp: App {
 
         #if os(macOS)
         Settings {
-            SettingsView(preferences: preferences)
+            SettingsView(preferences: preferences, account: account)
                 .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
                 .padding()
                 .preferredColorScheme(preferences.preferredColorScheme)
