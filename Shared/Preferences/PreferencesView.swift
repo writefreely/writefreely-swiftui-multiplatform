@@ -7,15 +7,15 @@ struct PreferencesView: View {
         #if os(iOS)
         Picker(selection: $preferences.appearance, label: Text("Appearance")) {
             Text("System").tag(0)
-            Text("Light Mode").tag(1)
-            Text("Dark Mode").tag(2)
+            Text("Light").tag(1)
+            Text("Dark").tag(2)
         }
         .pickerStyle(SegmentedPickerStyle())
         #elseif os(macOS)
         Picker(selection: $preferences.appearance, label: Text("Appearance")) {
             Text("System").tag(0)
-            Text("Light Mode").tag(1)
-            Text("Dark Mode").tag(2)
+            Text("Light").tag(1)
+            Text("Dark").tag(2)
         }
         #endif
     }
