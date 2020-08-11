@@ -1,25 +1,25 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State private var accountModel = AccountModel()
-    @State private var isLoggingIn: Bool = false
-    @State private var isLoggedIn: Bool = false
+    @ObservedObject var account: AccountModel
 
     var body: some View {
-        if isLoggedIn {
+        if account.isLoggedIn {
             HStack {
                 Spacer()
-                AccountLogoutView(accountModel: $accountModel, isLoggedIn: $isLoggedIn, isLoggingIn: $isLoggingIn)
+                AccountLogoutView(account: account)
                 Spacer()
             }
+            .padding()
         } else {
-            AccountLoginView(accountModel: $accountModel, isLoggedIn: $isLoggedIn, isLoggingIn: $isLoggingIn)
+            AccountLoginView(account: account)
+                .padding()
         }
     }
 }
 
 struct AccountLogin_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView()
+        AccountView(account: AccountModel())
     }
 }

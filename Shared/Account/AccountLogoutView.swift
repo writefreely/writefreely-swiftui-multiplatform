@@ -1,16 +1,14 @@
 import SwiftUI
 
 struct AccountLogoutView: View {
-    @Binding var accountModel: AccountModel
-    @Binding var isLoggedIn: Bool
-    @Binding var isLoggingIn: Bool
+    @ObservedObject var account: AccountModel
 
     var body: some View {
         VStack {
             Spacer()
             VStack {
-                Text("Logged in as \(accountModel.username ?? "UNKNOWN")")
-                Text("on \(accountModel.server ?? "UNKNOWN")")
+                Text("Logged in as \(account.username)")
+                Text("on \(account.server)")
             }
             Spacer()
             Button(action: logoutHandler, label: {
@@ -20,17 +18,12 @@ struct AccountLogoutView: View {
     }
 
     func logoutHandler() {
-        isLoggedIn = false
-        isLoggingIn = false
+        account.logout()
     }
 }
 
 struct AccountLogoutView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountLogoutView(
-            accountModel: .constant(AccountModel()),
-            isLoggedIn: .constant(true),
-            isLoggingIn: .constant(false)
-        )
+        AccountLogoutView(account: AccountModel())
     }
 }

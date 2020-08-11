@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var preferences: PreferencesModel
+    @EnvironmentObject var account: AccountModel
 
     @Binding var isPresented: Bool
 
@@ -10,7 +11,7 @@ struct SettingsView: View {
             SettingsHeaderView(isPresented: $isPresented)
             Form {
                 Section(header: Text("Login Details")) {
-                    AccountView()
+                    AccountView(account: account)
                 }
                 Section(header: Text("Appearance")) {
                     PreferencesView(preferences: preferences)
