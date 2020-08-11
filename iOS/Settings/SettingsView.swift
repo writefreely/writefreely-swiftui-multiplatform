@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var preferences: PreferencesModel
+
     @Binding var isPresented: Bool
 
     var body: some View {
@@ -11,10 +13,11 @@ struct SettingsView: View {
                     AccountView()
                 }
                 Section(header: Text("Appearance")) {
-                    PreferencesView()
+                    PreferencesView(preferences: preferences)
                 }
             }
         }
+        .preferredColorScheme(preferences.preferredColorScheme)
     }
 }
 

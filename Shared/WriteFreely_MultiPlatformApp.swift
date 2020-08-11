@@ -2,6 +2,8 @@ import SwiftUI
 
 @main
 struct WriteFreely_MultiPlatformApp: App {
+    @StateObject private var preferences = PreferencesModel()
+
     #if DEBUG
     @StateObject private var store = testPostStore
     #else
@@ -10,12 +12,13 @@ struct WriteFreely_MultiPlatformApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(postStore: store)
+            ContentView(postStore: store, preferences: preferences)
+                .environment(\.colorScheme, preferences.preferredColorScheme)
         }
 
         #if os(macOS)
         Settings {
-            SettingsView()
+            SettingsView(preferences: preferences)
                 .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
                 .padding()
         }

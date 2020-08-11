@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var postStore: PostStore
+    @ObservedObject var preferences: PreferencesModel
 
     var body: some View {
         NavigationView {
@@ -13,11 +14,12 @@ struct ContentView: View {
                 .foregroundColor(.secondary)
         }
         .environmentObject(postStore)
+        .environmentObject(preferences)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(postStore: testPostStore)
+        ContentView(postStore: testPostStore, preferences: PreferencesModel())
     }
 }

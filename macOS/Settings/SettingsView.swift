@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @ObservedObject var preferences: PreferencesModel
+
     @State var selectedView = 0
 
     var body: some View {
@@ -16,7 +18,7 @@ struct SettingsView: View {
             }
             .tag(0)
             VStack {
-                PreferencesView()
+                PreferencesView(preferences: preferences)
                 Spacer()
             }
             .tabItem {
@@ -30,12 +32,12 @@ struct SettingsView: View {
 
 struct SettingsView_AccountTabPreviews: PreviewProvider {
     static var previews: some View {
-        SettingsView(selectedView: 0)
+        SettingsView(preferences: PreferencesModel(), selectedView: 0)
     }
 }
 
 struct SettingsView_PreferencesTabPreviews: PreviewProvider {
     static var previews: some View {
-        SettingsView(selectedView: 1)
+        SettingsView(preferences: PreferencesModel(), selectedView: 1)
     }
 }
