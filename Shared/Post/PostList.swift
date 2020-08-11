@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PostList: View {
     @EnvironmentObject var postStore: PostStore
+
     @State var selectedCollection: PostCollection
     @State var isPresentingSettings = false
 
