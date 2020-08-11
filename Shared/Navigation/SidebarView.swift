@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct SidebarView: View {
-    @State var isPresentingSettings = false
-
     var body: some View {
         CollectionListView()
     }
