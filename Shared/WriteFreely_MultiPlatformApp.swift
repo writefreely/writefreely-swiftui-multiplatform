@@ -4,7 +4,10 @@ import SwiftUI
 struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var preferences = PreferencesModel()
     @StateObject private var account = AccountModel()
+
+    #if os(macOS)
     @State private var selectedTab = 0
+    #endif
 
     #if DEBUG
     @StateObject private var store = testPostStore
