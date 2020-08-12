@@ -34,7 +34,7 @@
 		1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE8024CB844500FD7257 /* View+Keyboard.swift */; };
 		1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
-		17A5388824DDA31F00DEFF9A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* SettingsView.swift */; };
+		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
 		17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
@@ -86,7 +86,7 @@
 		1756AE7924CB65DF00FD7257 /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		1756AE8024CB844500FD7257 /* View+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Keyboard.swift"; sourceTree = "<group>"; };
 		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
-		17A5388724DDA31F00DEFF9A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		17A5388724DDA31F00DEFF9A /* MacAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAccountView.swift; sourceTree = "<group>"; };
 		17A5388B24DDC83F00DEFF9A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		17A5389124DDED0000DEFF9A /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		17A5388924DDA50500DEFF9A /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				17A5388724DDA31F00DEFF9A /* SettingsView.swift */,
+				17A5388724DDA31F00DEFF9A /* MacAccountView.swift */,
 				1753F6AB24E431CC00309365 /* MacPreferencesView.swift */,
 			);
 			path = Settings;
@@ -562,7 +562,7 @@
 				1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
 				1756AE7524CB26FA00FD7257 /* PostCell.swift in Sources */,
-				17A5388824DDA31F00DEFF9A /* SettingsView.swift in Sources */,
+				17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

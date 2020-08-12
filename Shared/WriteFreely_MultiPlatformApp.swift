@@ -24,16 +24,12 @@ struct WriteFreely_MultiPlatformApp: App {
         #if os(macOS)
         Settings {
             TabView(selection: $selectedTab) {
-                Form {
-                    Section(header: Text("Login Details")) {
-                        AccountView(account: account)
+                MacAccountView(account: account)
+                    .tabItem {
+                        Image(systemName: "person.crop.circle")
+                        Text("Account")
                     }
-                }
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Account")
-                }
-                .tag(0)
+                    .tag(0)
                 MacPreferencesView(preferences: preferences)
                     .tabItem {
                         Image(systemName: "gear")

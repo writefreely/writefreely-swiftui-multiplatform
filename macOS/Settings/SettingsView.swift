@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SettingsView: View {
+struct MacAccountView: View {
     @ObservedObject var preferences: PreferencesModel
     @ObservedObject var account: AccountModel
 
@@ -33,12 +33,12 @@ struct SettingsView: View {
 
 struct SettingsView_AccountTabPreviews: PreviewProvider {
     static var previews: some View {
-        SettingsView(preferences: PreferencesModel(), account: AccountModel(), selectedView: 0)
+        MacAccountView(preferences: PreferencesModel(), account: AccountModel(), selectedView: 0)
     }
 }
 
 struct SettingsView_PreferencesTabPreviews: PreviewProvider {
     static var previews: some View {
-        SettingsView(preferences: PreferencesModel(), account: AccountModel(), selectedView: 1)
+        MacAccountView(preferences: PreferencesModel(), account: AccountModel(), selectedView: 1)
     }
 }
