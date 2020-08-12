@@ -34,15 +34,12 @@ struct WriteFreely_MultiPlatformApp: App {
                     Text("Account")
                 }
                 .tag(0)
-                VStack {
-                    PreferencesView(preferences: preferences)
-                    Spacer()
-                }
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Preferences")
-                }
-                .tag(1)
+                MacPreferencesView(preferences: preferences)
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("Preferences")
+                    }
+                    .tag(1)
             }
             .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
             .padding()
