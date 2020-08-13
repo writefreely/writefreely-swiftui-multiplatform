@@ -18,7 +18,7 @@ struct SettingsView: View {
                 }
             }
         }
-        .preferredColorScheme(preferences.preferredColorScheme)
+//        .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
     }
 }
 

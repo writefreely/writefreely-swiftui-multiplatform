@@ -18,7 +18,7 @@ struct WriteFreely_MultiPlatformApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(postStore: store, preferences: preferences, account: account)
-                .preferredColorScheme(preferences.preferredColorScheme)
+//                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
 
         #if os(macOS)
@@ -39,7 +39,7 @@ struct WriteFreely_MultiPlatformApp: App {
             }
             .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
             .padding()
-            .preferredColorScheme(preferences.preferredColorScheme)
+//            .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
         #endif
     }
