@@ -7,7 +7,7 @@ struct PostStatusBadge: View {
         let (badgeLabel, badgeColor) = setupBadgeProperties(for: post.status)
         Text(badgeLabel)
             .font(.caption)
-            .fontWeight(.bold)
+            .fontWeight(.semibold)
             .foregroundColor(.white)
             .textCase(.uppercase)
             .lineLimit(1)

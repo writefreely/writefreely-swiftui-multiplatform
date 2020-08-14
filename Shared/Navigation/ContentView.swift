@@ -5,14 +5,9 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            PostList()
-                .frame(maxHeight: .infinity)
-                .navigationTitle("Posts")
-                .toolbar {
-                    NavigationLink(destination: PostEditor(post: Post())) {
-                        Image(systemName: "plus")
-                    }
-                }
+            CollectionSidebar()
+
+            PostList(selectedCollection: allPostsCollection)
 
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)
