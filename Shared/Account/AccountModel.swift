@@ -1,7 +1,8 @@
 import Foundation
 
 enum AccountError: Error {
-    case invalidCredentials
+    case invalidPassword
+    case usernameNotFound
     case serverNotFound
 }
 
