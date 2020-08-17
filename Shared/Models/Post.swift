@@ -20,7 +20,7 @@ class Post: Identifiable, ObservableObject {
         body: String = "Write your post here...",
         createdDate: Date = Date(),
         status: PostStatus = .draft,
-        collection: PostCollection = defaultDraftCollection
+        collection: PostCollection = draftsCollection
     ) {
         self.title = title
         self.body = body
@@ -30,6 +30,7 @@ class Post: Identifiable, ObservableObject {
     }
 }
 
+#if DEBUG
 let testPost = Post(
     title: "Test Post Title",
     body: """
@@ -52,14 +53,14 @@ let testPostData = [
         body: "Look at me, creating a first post! That's cool.",
         createdDate: Date(timeIntervalSince1970: 1595429452),
         status: .published,
-        collection: userCollections[0]
+        collection: userCollection1
     ),
     Post(
         title: "Post 2: The Quickening",
         body: "See, here's the rule about Highlander jokes: _there can be only one_.",
         createdDate: Date(timeIntervalSince1970: 1595514125),
         status: .edited,
-        collection: userCollections[0]
+        collection: userCollection1
     ),
     Post(
         title: "The Post Revolutions",
@@ -71,7 +72,7 @@ let testPostData = [
         body: "How many movies does this person watch? How many movie-title jokes will they make?",
         createdDate: Date(timeIntervalSince1970: 1596219877),
         status: .published,
-        collection: userCollections[1]
+        collection: userCollection2
     ),
     Post(
         title: "Fast (Post) Five",
@@ -82,6 +83,7 @@ let testPostData = [
         body: "And there you have it, a Resident Evil movie reference.",
         createdDate: Date(timeIntervalSince1970: 1596043684),
         status: .edited,
-        collection: userCollections[2]
+        collection: userCollection3
     )
 ]
+#endif
