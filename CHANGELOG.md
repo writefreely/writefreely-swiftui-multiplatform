@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Post editor now has a Publish button to change post status 
 - Collections sidebar to choose a specific collection (i.e., blog)
+- Settings to provide the user interface for logging in, setting preferred color scheme 
 
 ### Changed
 

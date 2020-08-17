@@ -2,10 +2,12 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var postStore: PostStore
+    @ObservedObject var preferences: PreferencesModel
+    @ObservedObject var account: AccountModel
 
     var body: some View {
         NavigationView {
-            CollectionSidebar()
+            SidebarView()
 
             PostList(selectedCollection: allPostsCollection)
 
@@ -13,11 +15,13 @@ struct ContentView: View {
                 .foregroundColor(.secondary)
         }
         .environmentObject(postStore)
+        .environmentObject(preferences)
+        .environmentObject(account)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(postStore: testPostStore)
+        ContentView(postStore: testPostStore, preferences: PreferencesModel(), account: AccountModel())
     }
 }

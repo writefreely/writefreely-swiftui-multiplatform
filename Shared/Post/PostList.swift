@@ -2,39 +2,56 @@ import SwiftUI
 
 struct PostList: View {
     @EnvironmentObject var postStore: PostStore
+
     @State var selectedCollection: PostCollection
+    @State var isPresentingSettings = false
 
     var body: some View {
         #if os(iOS)
-        List {
-            ForEach(showPosts(for: selectedCollection)) { post in
-                NavigationLink(
-                    destination: PostEditor(post: post)
-                ) {
-                    PostCell(
-                        post: post
-                    )
+        GeometryReader { geometry in
+            List {
+                ForEach(showPosts(for: selectedCollection)) { post in
+                    NavigationLink(
+                        destination: PostEditor(post: post)
+                    ) {
+                        PostCell(
+                            post: post
+                        )
+                    }
                 }
             }
-        }
-        .navigationTitle(selectedCollection.title)
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    let post = Post()
-                    postStore.add(post)
-                }, label: {
-                    Image(systemName: "square.and.pencil")
-                })
-            }
-            ToolbarItem(placement: .bottomBar) {
-                Spacer()
-            }
-            ToolbarItem(placement: .bottomBar) {
-                Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
-            }
-            ToolbarItem(placement: .bottomBar) {
-                Spacer()
+            .navigationTitle(selectedCollection.title)
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        let post = Post()
+                        postStore.add(post)
+                    }, label: {
+                        Image(systemName: "square.and.pencil")
+                    })
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    HStack {
+                        Button(action: {
+                            isPresentingSettings = true
+                        }, label: {
+                            Image(systemName: "gear")
+                        }).sheet(
+                            isPresented: $isPresentingSettings,
+                            onDismiss: {
+                                isPresentingSettings = false
+                            },
+                            content: {
+                                SettingsView(isPresented: $isPresentingSettings)
+                            }
+                        )
+                        Spacer()
+                        Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
+                            .foregroundColor(.secondary)
+                    }
+                    .padding()
+                    .frame(width: geometry.size.width)
+                }
             }
         }
         #else //if os(macOS)

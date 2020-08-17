@@ -2,7 +2,9 @@ import SwiftUI
 
 struct PostEditor: View {
     @EnvironmentObject var postStore: PostStore
+
     @ObservedObject var post: Post
+
     @State private var isNewPost = false
 
     var body: some View {
