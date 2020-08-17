@@ -89,6 +89,7 @@ struct AccountLoginView: View {
             alertMessage = """
             Username not found. Did you use your email address by mistake?
             """
+            isShowingAlert = true
         } catch {
             alertMessage = "An unknown error occurred. Please try again."
             isShowingAlert = true
