@@ -27,8 +27,8 @@
 		1756AE6F24CB255B00FD7257 /* PostStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6D24CB255B00FD7257 /* PostStore.swift */; };
 		1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCellView.swift */; };
 		1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCellView.swift */; };
-		1756AE7724CB2EDD00FD7257 /* PostEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditor.swift */; };
-		1756AE7824CB2EDD00FD7257 /* PostEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditor.swift */; };
+		1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */; };
+		1756AE7824CB2EDD00FD7257 /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */; };
 		1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7924CB65DF00FD7257 /* PostListView.swift */; };
 		1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7924CB65DF00FD7257 /* PostListView.swift */; };
 		1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE8024CB844500FD7257 /* View+Keyboard.swift */; };
@@ -82,7 +82,7 @@
 		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1756AE6D24CB255B00FD7257 /* PostStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStore.swift; sourceTree = "<group>"; };
 		1756AE7324CB26FA00FD7257 /* PostCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellView.swift; sourceTree = "<group>"; };
-		1756AE7624CB2EDD00FD7257 /* PostEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditor.swift; sourceTree = "<group>"; };
+		1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorView.swift; sourceTree = "<group>"; };
 		1756AE7924CB65DF00FD7257 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		1756AE8024CB844500FD7257 /* View+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Keyboard.swift"; sourceTree = "<group>"; };
 		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		1739B8D324EAFAB700DA7421 /* PostEditor */ = {
 			isa = PBXGroup;
 			children = (
-				1756AE7624CB2EDD00FD7257 /* PostEditor.swift */,
+				1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */,
 			);
 			path = PostEditor;
 			sourceTree = "<group>";
@@ -531,7 +531,7 @@
 				17120DA924E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */,
-				1756AE7724CB2EDD00FD7257 /* PostEditor.swift in Sources */,
+				1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
 				17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
@@ -555,7 +555,7 @@
 				171BFDF824D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
-				1756AE7824CB2EDD00FD7257 /* PostEditor.swift in Sources */,
+				1756AE7824CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				17120DAA24E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,

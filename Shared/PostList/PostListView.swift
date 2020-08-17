@@ -12,7 +12,7 @@ struct PostListView: View {
             List {
                 ForEach(showPosts(for: selectedCollection)) { post in
                     NavigationLink(
-                        destination: PostEditor(post: post)
+                        destination: PostEditorView(post: post)
                     ) {
                         PostCellView(
                             post: post
@@ -58,7 +58,7 @@ struct PostListView: View {
         List {
             ForEach(showPosts(for: selectedCollection)) { post in
                 NavigationLink(
-                    destination: PostEditor(post: post)
+                    destination: PostEditorView(post: post)
                 ) {
                     PostCellView(
                         post: post
