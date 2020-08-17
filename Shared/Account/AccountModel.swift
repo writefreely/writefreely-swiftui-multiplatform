@@ -25,14 +25,16 @@ class AccountModel: ObservableObject {
 
         if server != validServer {
             result = .failure(.serverNotFound)
-        } else if username == validCredentials["username"] && password == validCredentials["password"] {
+        } else if username != validCredentials["username"] {
+            result = .failure(.usernameNotFound)
+        } else if password != validCredentials["password"] {
+            result = .failure(.invalidPassword)
+        } else {
             self.id = UUID()
             self.username = username
             self.password = password
             self.server = server
             result = .success(self.id!)
-        } else {
-            result = .failure(.invalidCredentials)
         }
 
         #if DEBUG
