@@ -80,11 +80,15 @@ struct AccountLoginView: View {
 The server could not be found. Please check that you've entered the information correctly and try again.
 """
             isShowingAlert = true
-        } catch AccountError.invalidCredentials {
+        } catch AccountError.invalidPassword {
             alertMessage = """
-            Invalid username or password. Please check that you've entered the information correctly and try again.
+            Invalid password. Please check that you've entered your password correctly and try logging in again.
             """
             isShowingAlert = true
+        } catch AccountError.usernameNotFound {
+            alertMessage = """
+            Username not found. Did you use your email address by mistake?
+            """
         } catch {
             alertMessage = "An unknown error occurred. Please try again."
             isShowingAlert = true
