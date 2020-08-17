@@ -28,7 +28,7 @@ struct PostEditor: View {
         .padding()
         .toolbar {
             ToolbarItem(placement: .status) {
-                PostStatusBadge(post: post)
+                PostStatusBadgeView(post: post)
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {

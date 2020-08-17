@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PostStatusBadge: View {
+struct PostStatusBadgeView: View {
     @ObservedObject var post: Post
 
     var body: some View {
@@ -38,20 +38,20 @@ struct PostStatusBadge: View {
 
 struct PostStatusBadge_DraftPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadge(post: testPostData[0])
+        PostStatusBadgeView(post: testPostData[0])
     }
 }
 
 struct PostStatusBadge_EditedPreviews: PreviewProvider {
     static var previews: some View {
         Group {
-            PostStatusBadge(post: testPostData[1])
+            PostStatusBadgeView(post: testPostData[1])
         }
     }
 }
 
 struct PostStatusBadge_PublishedPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadge(post: testPostData[2])
+        PostStatusBadgeView(post: testPostData[2])
     }
 }

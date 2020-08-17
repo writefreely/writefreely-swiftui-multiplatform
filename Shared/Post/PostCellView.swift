@@ -16,7 +16,7 @@ struct PostCellView: View {
                     .lineLimit(1)
             }
             Spacer()
-            PostStatusBadge(post: post)
+            PostStatusBadgeView(post: post)
         }
         .padding(5)
     }
