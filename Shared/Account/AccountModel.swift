@@ -62,7 +62,7 @@ class AccountModel: ObservableObject {
 
 #if DEBUG
 let validCredentials = [
-    "username": "name@example.com",
+    "username": "test-writer",
     "password": "12345"
 ]
 let validServer = "https://test.server.url"
