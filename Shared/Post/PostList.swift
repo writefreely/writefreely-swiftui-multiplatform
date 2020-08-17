@@ -14,7 +14,7 @@ struct PostList: View {
                     NavigationLink(
                         destination: PostEditor(post: post)
                     ) {
-                        PostCell(
+                        PostCellView(
                             post: post
                         )
                     }
@@ -60,7 +60,7 @@ struct PostList: View {
                 NavigationLink(
                     destination: PostEditor(post: post)
                 ) {
-                    PostCell(
+                    PostCellView(
                         post: post
                     )
                 }

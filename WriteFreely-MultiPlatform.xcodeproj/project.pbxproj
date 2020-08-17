@@ -25,8 +25,8 @@
 		1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
 		1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6D24CB255B00FD7257 /* PostStore.swift */; };
 		1756AE6F24CB255B00FD7257 /* PostStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6D24CB255B00FD7257 /* PostStore.swift */; };
-		1756AE7424CB26FA00FD7257 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCell.swift */; };
-		1756AE7524CB26FA00FD7257 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCell.swift */; };
+		1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCellView.swift */; };
+		1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCellView.swift */; };
 		1756AE7724CB2EDD00FD7257 /* PostEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditor.swift */; };
 		1756AE7824CB2EDD00FD7257 /* PostEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditor.swift */; };
 		1756AE7A24CB65DF00FD7257 /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7924CB65DF00FD7257 /* PostList.swift */; };
@@ -81,7 +81,7 @@
 		1753F6AB24E431CC00309365 /* MacPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPreferencesView.swift; sourceTree = "<group>"; };
 		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1756AE6D24CB255B00FD7257 /* PostStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStore.swift; sourceTree = "<group>"; };
-		1756AE7324CB26FA00FD7257 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		1756AE7324CB26FA00FD7257 /* PostCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellView.swift; sourceTree = "<group>"; };
 		1756AE7624CB2EDD00FD7257 /* PostEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditor.swift; sourceTree = "<group>"; };
 		1756AE7924CB65DF00FD7257 /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		1756AE8024CB844500FD7257 /* View+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Keyboard.swift"; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				1756AE6A24CB1E4B00FD7257 /* Post.swift */,
-				1756AE7324CB26FA00FD7257 /* PostCell.swift */,
+				1756AE7324CB26FA00FD7257 /* PostCellView.swift */,
 				1756AE7624CB2EDD00FD7257 /* PostEditor.swift */,
 				1756AE7924CB65DF00FD7257 /* PostList.swift */,
 				1756AE6D24CB255B00FD7257 /* PostStore.swift */,
@@ -536,7 +536,7 @@
 				1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */,
 				1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */,
 				17120DA124E19839002B9F6C /* AccountView.swift in Sources */,
-				1756AE7424CB26FA00FD7257 /* PostCell.swift in Sources */,
+				1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +561,7 @@
 				1756AE6F24CB255B00FD7257 /* PostStore.swift in Sources */,
 				1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
-				1756AE7524CB26FA00FD7257 /* PostCell.swift in Sources */,
+				1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */,
 				17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
