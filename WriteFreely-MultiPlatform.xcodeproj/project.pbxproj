@@ -156,6 +156,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		1739B8D324EAFAB700DA7421 /* PostEditor */ = {
+			isa = PBXGroup;
+			children = (
+				1756AE7624CB2EDD00FD7257 /* PostEditor.swift */,
+			);
+			path = PostEditor;
+			sourceTree = "<group>";
+		};
 		1756AE7F24CB841200FD7257 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +216,7 @@
 				17DF32D024C8B75C00BCE2E3 /* Account */,
 				1756AE7F24CB841200FD7257 /* Extensions */,
 				17DF32CC24C8B72300BCE2E3 /* Navigation */,
+				1739B8D324EAFAB700DA7421 /* PostEditor */,
 				17DF32D124C8B78500BCE2E3 /* Post */,
 				17DF32D224C8B78D00BCE2E3 /* PostCollection */,
 				1765F62C24E1924800C9EBF0 /* Preferences */,
@@ -295,7 +304,6 @@
 			children = (
 				1756AE6A24CB1E4B00FD7257 /* Post.swift */,
 				1756AE7324CB26FA00FD7257 /* PostCellView.swift */,
-				1756AE7624CB2EDD00FD7257 /* PostEditor.swift */,
 				1756AE7924CB65DF00FD7257 /* PostListView.swift */,
 				1756AE6D24CB255B00FD7257 /* PostStore.swift */,
 				17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */,
