@@ -217,7 +217,7 @@
 				1756AE7F24CB841200FD7257 /* Extensions */,
 				17DF32CC24C8B72300BCE2E3 /* Navigation */,
 				1739B8D324EAFAB700DA7421 /* PostEditor */,
-				17DF32D124C8B78500BCE2E3 /* Post */,
+				17DF32D124C8B78500BCE2E3 /* PostList */,
 				17DF32D224C8B78D00BCE2E3 /* PostCollection */,
 				1765F62C24E1924800C9EBF0 /* Preferences */,
 			);
@@ -299,7 +299,7 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
-		17DF32D124C8B78500BCE2E3 /* Post */ = {
+		17DF32D124C8B78500BCE2E3 /* PostList */ = {
 			isa = PBXGroup;
 			children = (
 				1756AE6A24CB1E4B00FD7257 /* Post.swift */,
@@ -308,7 +308,7 @@
 				1756AE6D24CB255B00FD7257 /* PostStore.swift */,
 				17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */,
 			);
-			path = Post;
+			path = PostList;
 			sourceTree = "<group>";
 		};
 		17DF32D224C8B78D00BCE2E3 /* PostCollection */ = {
