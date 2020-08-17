@@ -13,7 +13,6 @@ struct AccountLoginView: View {
                     .foregroundColor(.gray)
                 #if os(iOS)
                 TextField("Username", text: $account.username)
-                    .keyboardType(.emailAddress)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
