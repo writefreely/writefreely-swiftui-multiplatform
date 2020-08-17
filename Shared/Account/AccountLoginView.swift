@@ -77,8 +77,8 @@ struct AccountLoginView: View {
             _ = try result.get()
         } catch AccountError.serverNotFound {
             alertMessage = """
-The server could not be found. Please check that you've entered the information correctly and try again.
-"""
+            The server could not be found. Please check that you've entered the information correctly and try again.
+            """
             isShowingAlert = true
         } catch AccountError.invalidPassword {
             alertMessage = """
