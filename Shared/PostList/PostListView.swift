@@ -4,7 +4,10 @@ struct PostListView: View {
     @EnvironmentObject var postStore: PostStore
 
     @State var selectedCollection: PostCollection
-    @State var isPresentingSettings = false
+
+    #if os(iOS)
+    @State private var isPresentingSettings = false
+    #endif
 
     var body: some View {
         #if os(iOS)
