@@ -9,7 +9,7 @@ struct ContentView: View {
         NavigationView {
             SidebarView()
 
-            PostList(selectedCollection: allPostsCollection)
+            PostListView(selectedCollection: allPostsCollection)
 
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)

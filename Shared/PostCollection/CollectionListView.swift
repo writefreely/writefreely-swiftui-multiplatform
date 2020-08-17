@@ -7,7 +7,7 @@ struct CollectionListView: View {
         List {
             ForEach(collections) { collection in
                 NavigationLink(
-                    destination: PostList(selectedCollection: collection)
+                    destination: PostListView(selectedCollection: collection)
                 ) {
                     Text(collection.title)
                 }

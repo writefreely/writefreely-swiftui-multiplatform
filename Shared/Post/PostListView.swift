@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PostList: View {
+struct PostListView: View {
     @EnvironmentObject var postStore: PostStore
 
     @State var selectedCollection: PostCollection
@@ -101,7 +101,7 @@ struct PostList: View {
 struct PostList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PostList(selectedCollection: allPostsCollection)
+            PostListView(selectedCollection: allPostsCollection)
                 .environmentObject(testPostStore)
         }
     }
