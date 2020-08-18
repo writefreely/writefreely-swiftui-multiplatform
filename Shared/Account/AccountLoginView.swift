@@ -97,13 +97,7 @@ struct AccountLoginView: View {
     }
 }
 
-struct AccountLoginView_LoggedOutPreviews: PreviewProvider {
-    static var previews: some View {
-        AccountLoginView(account: AccountModel())
-    }
-}
-
-struct AccountLoginView_LoggingInPreviews: PreviewProvider {
+struct AccountLoginView_Previews: PreviewProvider {
     static var previews: some View {
         AccountLoginView(account: AccountModel())
     }

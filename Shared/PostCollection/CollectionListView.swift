@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct CollectionListView: View {
-    private let collections = postCollections
+    private var collections = CollectionListModel()
 
     var body: some View {
         List {
-            ForEach(collections) { collection in
+            ForEach(collections.collectionsList) { collection in
                 NavigationLink(
-                    destination: PostList(selectedCollection: collection)
+                    destination: PostListView(selectedCollection: collection)
                 ) {
                     Text(collection.title)
                 }

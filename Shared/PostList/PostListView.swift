@@ -1,10 +1,13 @@
 import SwiftUI
 
-struct PostList: View {
+struct PostListView: View {
     @EnvironmentObject var postStore: PostStore
 
     @State var selectedCollection: PostCollection
-    @State var isPresentingSettings = false
+
+    #if os(iOS)
+    @State private var isPresentingSettings = false
+    #endif
 
     var body: some View {
         #if os(iOS)
@@ -12,9 +15,9 @@ struct PostList: View {
             List {
                 ForEach(showPosts(for: selectedCollection)) { post in
                     NavigationLink(
-                        destination: PostEditor(post: post)
+                        destination: PostEditorView(post: post)
                     ) {
-                        PostCell(
+                        PostCellView(
                             post: post
                         )
                     }
@@ -58,9 +61,9 @@ struct PostList: View {
         List {
             ForEach(showPosts(for: selectedCollection)) { post in
                 NavigationLink(
-                    destination: PostEditor(post: post)
+                    destination: PostEditorView(post: post)
                 ) {
-                    PostCell(
+                    PostCellView(
                         post: post
                     )
                 }
@@ -101,7 +104,7 @@ struct PostList: View {
 struct PostList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PostList(selectedCollection: allPostsCollection)
+            PostListView(selectedCollection: allPostsCollection)
                 .environmentObject(testPostStore)
         }
     }

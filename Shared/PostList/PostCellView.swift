@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PostCell: View {
+struct PostCellView: View {
     @EnvironmentObject var postStore: PostStore
 
     @ObservedObject var post: Post
@@ -16,7 +16,7 @@ struct PostCell: View {
                     .lineLimit(1)
             }
             Spacer()
-            PostStatusBadge(post: post)
+            PostStatusBadgeView(post: post)
         }
         .padding(5)
     }
@@ -32,6 +32,6 @@ struct PostCell: View {
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        PostCell(post: testPost)
+        PostCellView(post: testPost)
     }
 }

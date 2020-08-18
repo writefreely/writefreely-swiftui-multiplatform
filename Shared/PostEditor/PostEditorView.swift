@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PostEditor: View {
+struct PostEditorView: View {
     @EnvironmentObject var postStore: PostStore
 
     @ObservedObject var post: Post
@@ -28,7 +28,7 @@ struct PostEditor: View {
         .padding()
         .toolbar {
             ToolbarItem(placement: .status) {
-                PostStatusBadge(post: post)
+                PostStatusBadgeView(post: post)
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
@@ -58,16 +58,16 @@ struct PostEditor: View {
     }
 }
 
-struct PostEditor_NewDraftPreviews: PreviewProvider {
+struct PostEditorView_NewDraftPreviews: PreviewProvider {
     static var previews: some View {
-        PostEditor(post: Post())
+        PostEditorView(post: Post())
             .environmentObject(testPostStore)
     }
 }
 
-struct PostEditor_ExistingPostPreviews: PreviewProvider {
+struct PostEditorView_ExistingPostPreviews: PreviewProvider {
     static var previews: some View {
-        PostEditor(post: testPostData[0])
+        PostEditorView(post: testPostData[0])
             .environmentObject(testPostStore)
     }
 }
