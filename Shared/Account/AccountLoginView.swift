@@ -1,65 +1,66 @@
 import SwiftUI
 
 struct AccountLoginView: View {
-    @ObservedObject var account: AccountModel
+    @EnvironmentObject var model: WriteFreelyModel
 
     @State private var isShowingAlert: Bool = false
     @State private var alertMessage: String = ""
-
+    @State private var username: String = ""
+    @State private var password: String = ""
+    @State private var server: String = ""
     var body: some View {
         VStack {
             HStack {
                 Image(systemName: "person.circle")
                     .foregroundColor(.gray)
                 #if os(iOS)
-                TextField("Username", text: $account.username)
+                TextField("Username", text: $username)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 #else
-                TextField("Username", text: $account.username)
+                TextField("Username", text: $username)
                 #endif
             }
             HStack {
                 Image(systemName: "lock.circle")
                     .foregroundColor(.gray)
                 #if os(iOS)
-                SecureField("Password", text: $account.password)
+                SecureField("Password", text: $password)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 #else
-                SecureField("Password", text: $account.password)
+                SecureField("Password", text: $password)
                 #endif
             }
             HStack {
                 Image(systemName: "link.circle")
                     .foregroundColor(.gray)
                 #if os(iOS)
-                TextField("Server URL", text: $account.server)
+                TextField("Server URL", text: $server)
                     .keyboardType(.URL)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 #else
-                TextField("Server URL", text: $account.server)
+                TextField("Server URL", text: $server)
                 #endif
             }
             Spacer()
-            if account.isLoggingIn {
+            if model.isLoggingIn {
                 ProgressView("Logging in...")
                     .padding()
             } else {
                 Button(action: {
-                    account.login(
-                        to: account.server,
-                        as: account.username, password: account.password,
-                        completion: loginHandler
+                    model.login(
+                        to: URL(string: server)!,
+                        as: username, password: password
                     )
                 }, label: {
                     Text("Login")
                 })
-                .disabled(account.isLoggedIn)
+                .disabled(model.account.isLoggedIn)
                 .padding()
             }
         }
@@ -99,6 +100,7 @@ struct AccountLoginView: View {
 
 struct AccountLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountLoginView(account: AccountModel())
+        AccountLoginView()
+            .environmentObject(WriteFreelyModel())
     }
 }

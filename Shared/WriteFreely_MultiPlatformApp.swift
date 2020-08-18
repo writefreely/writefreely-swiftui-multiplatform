@@ -18,7 +18,8 @@ struct WriteFreely_MultiPlatformApp: App {
         #if os(macOS)
         Settings {
             TabView(selection: $selectedTab) {
-                MacAccountView(account: model.account)
+                MacAccountView()
+                    .environmentObject(model)
                     .tabItem {
                         Image(systemName: "person.crop.circle")
                         Text("Account")

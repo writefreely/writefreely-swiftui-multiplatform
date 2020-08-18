@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct AccountLogoutView: View {
-    @ObservedObject var account: AccountModel
+    @EnvironmentObject var model: WriteFreelyModel
 
     var body: some View {
         VStack {
             Spacer()
             VStack {
-                Text("Logged in as \(account.username)")
-                Text("on \(account.server)")
+                Text("Logged in as \(model.account.user?.username ?? "Anonymous")")
+                Text("on \(model.account.server)")
             }
             Spacer()
             Button(action: logoutHandler, label: {
@@ -18,12 +18,13 @@ struct AccountLogoutView: View {
     }
 
     func logoutHandler() {
-        account.logout()
+        model.logout()
     }
 }
 
 struct AccountLogoutView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountLogoutView(account: AccountModel())
+        AccountLogoutView()
+            .environmentObject(WriteFreelyModel())
     }
 }

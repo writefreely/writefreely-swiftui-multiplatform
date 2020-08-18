@@ -10,7 +10,7 @@ struct SettingsView: View {
             SettingsHeaderView(isPresented: $isPresented)
             Form {
                 Section(header: Text("Login Details")) {
-                    AccountView(account: model.account)
+                    AccountView()
                 }
                 Section(header: Text("Appearance")) {
                     PreferencesView(preferences: model.preferences)

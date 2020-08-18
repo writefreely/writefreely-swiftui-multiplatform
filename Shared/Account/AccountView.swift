@@ -1,18 +1,18 @@
 import SwiftUI
 
 struct AccountView: View {
-    @ObservedObject var account: AccountModel
+    @EnvironmentObject var model: WriteFreelyModel
 
     var body: some View {
-        if account.isLoggedIn {
+        if model.account.isLoggedIn {
             HStack {
                 Spacer()
-                AccountLogoutView(account: account)
+                AccountLogoutView()
                 Spacer()
             }
             .padding()
         } else {
-            AccountLoginView(account: account)
+            AccountLoginView()
                 .padding()
         }
     }
@@ -20,6 +20,7 @@ struct AccountView: View {
 
 struct AccountLogin_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView(account: AccountModel())
+        AccountView()
+            .environmentObject(WriteFreelyModel())
     }
 }
