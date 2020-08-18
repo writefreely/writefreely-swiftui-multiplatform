@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct PostCellView: View {
-    @EnvironmentObject var postStore: PostStore
-
     @ObservedObject var post: Post
 
     var body: some View {

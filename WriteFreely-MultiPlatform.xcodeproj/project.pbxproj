@@ -20,6 +20,8 @@
 		171BFDF824D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
+		174D313224EC2831006CA9EE /* WriteFreelyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D313124EC2831006CA9EE /* WriteFreelyModel.swift */; };
+		174D313324EC2831006CA9EE /* WriteFreelyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D313124EC2831006CA9EE /* WriteFreelyModel.swift */; };
 		1753F6AC24E431CC00309365 /* MacPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753F6AB24E431CC00309365 /* MacPreferencesView.swift */; };
 		1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
 		1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
@@ -80,6 +82,7 @@
 		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		171BFDF624D49FD400888236 /* PostCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollection.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
+		174D313124EC2831006CA9EE /* WriteFreelyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFreelyModel.swift; sourceTree = "<group>"; };
 		1753F6AB24E431CC00309365 /* MacPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPreferencesView.swift; sourceTree = "<group>"; };
 		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1756AE6D24CB255B00FD7257 /* PostStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStore.swift; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 				1756AE6A24CB1E4B00FD7257 /* Post.swift */,
 				171BFDF624D49FD400888236 /* PostCollection.swift */,
 				1756AE6D24CB255B00FD7257 /* PostStore.swift */,
+				174D313124EC2831006CA9EE /* WriteFreelyModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -555,6 +559,7 @@
 				17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */,
 				17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */,
 				1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */,
+				174D313224EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,
 				1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */,
 				17120DA124E19839002B9F6C /* AccountView.swift in Sources */,
 				1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */,
@@ -568,6 +573,7 @@
 				171BFDF824D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
+				174D313324EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,
 				1756AE7824CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				17120DAA24E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,

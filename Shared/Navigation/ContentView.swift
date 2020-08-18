@@ -1,9 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var postStore: PostStore
-    @ObservedObject var preferences: PreferencesModel
-    @ObservedObject var account: AccountModel
+    @EnvironmentObject var model: WriteFreelyModel
 
     var body: some View {
         NavigationView {
@@ -14,14 +12,13 @@ struct ContentView: View {
             Text("Select a post, or create a new draft.")
                 .foregroundColor(.secondary)
         }
-        .environmentObject(postStore)
-        .environmentObject(preferences)
-        .environmentObject(account)
+        .environmentObject(model)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(postStore: testPostStore, preferences: PreferencesModel(), account: AccountModel())
+        ContentView()
+            .environmentObject(WriteFreelyModel())
     }
 }
