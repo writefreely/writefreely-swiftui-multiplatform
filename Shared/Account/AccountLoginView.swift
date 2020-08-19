@@ -60,7 +60,9 @@ struct AccountLoginView: View {
                 }, label: {
                     Text("Login")
                 })
-                .disabled(model.account.isLoggedIn)
+                .disabled(
+                    model.account.isLoggedIn || (username.isEmpty || password.isEmpty || server.isEmpty)
+                )
                 .padding()
             }
         }
