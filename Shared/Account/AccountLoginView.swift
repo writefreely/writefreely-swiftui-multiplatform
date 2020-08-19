@@ -69,33 +69,9 @@ struct AccountLoginView: View {
         .alert(isPresented: $isShowingAlert) {
             Alert(
                 title: Text("Error Logging In"),
-                message: Text(alertMessage),
+                message: Text(accountError.localizedDescription),
                 dismissButton: .default(Text("OK"))
             )
-        }
-    }
-
-    func loginHandler(result: Result<UUID, AccountError>) {
-        do {
-            _ = try result.get()
-        } catch AccountError.serverNotFound {
-            alertMessage = """
-            The server could not be found. Please check that you've entered the information correctly and try again.
-            """
-            isShowingAlert = true
-        } catch AccountError.invalidPassword {
-            alertMessage = """
-            Invalid password. Please check that you've entered your password correctly and try logging in again.
-            """
-            isShowingAlert = true
-        } catch AccountError.usernameNotFound {
-            alertMessage = """
-            Username not found. Did you use your email address by mistake?
-            """
-            isShowingAlert = true
-        } catch {
-            alertMessage = "An unknown error occurred. Please try again."
-            isShowingAlert = true
         }
     }
 }
