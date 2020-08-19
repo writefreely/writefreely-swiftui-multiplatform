@@ -3,7 +3,6 @@ import SwiftUI
 struct AccountLoginView: View {
     @EnvironmentObject var model: WriteFreelyModel
 
-    @State private var isShowingAlert: Bool = false
     @State private var alertMessage: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
@@ -66,8 +65,9 @@ struct AccountLoginView: View {
                 .padding()
             }
         }
-        .alert(isPresented: $isShowingAlert) {
-            Alert(
+        .alert(isPresented: $model.account.hasError) {
+            guard let accountError = model.account.currentError else { fatalError() }
+            return Alert(
                 title: Text("Error Logging In"),
                 message: Text(accountError.localizedDescription),
                 dismissButton: .default(Text("OK"))
