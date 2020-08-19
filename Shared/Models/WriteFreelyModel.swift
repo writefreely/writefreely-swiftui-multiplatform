@@ -41,25 +41,71 @@ extension WriteFreelyModel {
 
 private extension WriteFreelyModel {
     func loginHandler(result: Result<WFUser, Error>) {
-        isLoggingIn = false
+        DispatchQueue.main.async {
+            self.isLoggingIn = false
+        }
         do {
             let user = try result.get()
-            account.login(user)
-            dump(user)
+            DispatchQueue.main.async {
+                self.account.login(user)
+            }
+        // Cannot find 'WFError' in scope, so we need a workaround until that's fixed.
+        // } catch WFError.notFound {
+        //     DispatchQueue.main.async {
+        //         self.account.currentError = AccountError.usernameNotFound
+        //     }
+        // } catch WFError.unauthorized {
+        //     DispatchQueue.main.async {
+        //         self.account.currentError = AccountError.invalidPassword
+        //     }
         } catch {
-            dump(error)
+            if let error = error as? NSError, error.domain == NSURLErrorDomain, error.code == -1003 {
+                DispatchQueue.main.async {
+                    self.account.currentError = AccountError.serverNotFound
+                }
+            } else {
+                // This needs to be fixed by getting WFError in scope, as it's a fragile fix.
+                if error.localizedDescription.hasSuffix("(WriteFreely.WFError error 404.)") {
+                    DispatchQueue.main.async {
+                        self.account.currentError = AccountError.usernameNotFound
+                    }
+                } else if error.localizedDescription.hasSuffix("(WriteFreely.WFError error 401.)") {
+                    DispatchQueue.main.async {
+                        self.account.currentError = AccountError.invalidPassword
+                    }
+                }
+            }
         }
     }
 
     func logoutHandler(result: Result<Bool, Error>) {
         do {
-            let loggedOut = try result.get()
-            if loggedOut {
-                client = nil
-                account.logout()
+            _ = try result.get()
+            client = nil
+            DispatchQueue.main.async {
+                self.account.logout()
             }
         } catch {
-            dump(error)
+            // We get a 'cannot parse response' (similar to what we were seeing in the Swift package) NSURLError here,
+            // so we're using a hacky workaround — if we get the NSURLError, but the AccountModel still thinks we're
+            // logged in, try calling the logout function again and see what we get.
+            // Conditional cast from 'Error' to 'NSError' always succeeds but is the only way to check error properties.
+            if let error = error as? NSError,
+               error.domain == NSURLErrorDomain,
+               error.code == NSURLErrorCannotParseResponse {
+                if account.isLoggedIn {
+                    self.logout()
+                }
+            } else {
+                if error.localizedDescription.hasSuffix("(WriteFreely.WFError error 404.)") {
+                    // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
+                    // destroying the client object and setting the AccountModel to its logged out state.
+                    client = nil
+                    DispatchQueue.main.async {
+                        self.account.logout()
+                    }
+                }
+            }
         }
     }
 }
