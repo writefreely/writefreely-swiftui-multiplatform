@@ -12,10 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Post editor now has a Publish button to change post status 
 - Collections sidebar to choose a specific collection (i.e., blog)
 - Settings to provide the user interface for logging in, setting preferred color scheme 
+- The WriteFreelyModel type consolidates other models as Published properties in a single EnvironmentObject
+- Logging in and out a WriteFreely instance is now possible
 
 ### Changed
 
 - Updated license from AGPLv3 to GPLv3
+- Types have been renamed to be more consistent
+- WriteFreely Swift package version bumped to v0.2.1
 
 ## [0.0.2] - 2020-07-30
 
