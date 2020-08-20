@@ -49,30 +49,18 @@ private extension WriteFreelyModel {
             DispatchQueue.main.async {
                 self.account.login(user)
             }
-        // Cannot find 'WFError' in scope, so we need a workaround until that's fixed.
-        // } catch WFError.notFound {
-        //     DispatchQueue.main.async {
-        //         self.account.currentError = AccountError.usernameNotFound
-        //     }
-        // } catch WFError.unauthorized {
-        //     DispatchQueue.main.async {
-        //         self.account.currentError = AccountError.invalidPassword
-        //     }
+        } catch WFError.notFound {
+            DispatchQueue.main.async {
+                self.account.currentError = AccountError.usernameNotFound
+            }
+        } catch WFError.unauthorized {
+            DispatchQueue.main.async {
+                self.account.currentError = AccountError.invalidPassword
+            }
         } catch {
             if let error = error as? NSError, error.domain == NSURLErrorDomain, error.code == -1003 {
                 DispatchQueue.main.async {
                     self.account.currentError = AccountError.serverNotFound
-                }
-            } else {
-                // This needs to be fixed by getting WFError in scope, as it's a fragile fix.
-                if error.localizedDescription.hasSuffix("(WriteFreely.WFError error 404.)") {
-                    DispatchQueue.main.async {
-                        self.account.currentError = AccountError.usernameNotFound
-                    }
-                } else if error.localizedDescription.hasSuffix("(WriteFreely.WFError error 401.)") {
-                    DispatchQueue.main.async {
-                        self.account.currentError = AccountError.invalidPassword
-                    }
                 }
             }
         }
@@ -81,6 +69,13 @@ private extension WriteFreelyModel {
     func logoutHandler(result: Result<Bool, Error>) {
         do {
             _ = try result.get()
+            client = nil
+            DispatchQueue.main.async {
+                self.account.logout()
+            }
+        } catch WFError.notFound {
+            // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
+            // destroying the client object and setting the AccountModel to its logged-out state.
             client = nil
             DispatchQueue.main.async {
                 self.account.logout()
@@ -95,15 +90,6 @@ private extension WriteFreelyModel {
                error.code == NSURLErrorCannotParseResponse {
                 if account.isLoggedIn {
                     self.logout()
-                }
-            } else {
-                if error.localizedDescription.hasSuffix("(WriteFreely.WFError error 404.)") {
-                    // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
-                    // destroying the client object and setting the AccountModel to its logged out state.
-                    client = nil
-                    DispatchQueue.main.async {
-                        self.account.logout()
-                    }
                 }
             }
         }
