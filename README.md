@@ -8,9 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-⚠️ Building and testing the iOS targets will work on any version of macOS that supports Xcode 12, but building and testing the macOS target requires macOS 11 (Big Sur).
+⚠️ Building and testing the iOS targets will work on any version of macOS that supports Xcode 12, but building and testing the macOS target requires macOS 11 (Big Sur) beta 5.
 
-- Xcode 12 (currently in beta)
+- Xcode 12 beta 5
 - [SwiftLint](https://github.com/realm/SwiftLint)
 
 SwiftLint is run as a build phase for all targets, so that linting warnings and errors are shown in Xcode.
@@ -36,4 +36,4 @@ See also the list of [contributors](https://github.com/writeas/writefreely-swift
 
 ## License
 
-This project is licensed under the AGPL v3 License. See the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the GPL v3 License. See the [LICENSE.md](LICENSE.md) file for details.
