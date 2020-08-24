@@ -47,6 +47,7 @@ private extension WriteFreelyModel {
         }
         do {
             let user = try result.get()
+            saveTokenToKeychain(user.token, username: user.username, server: account.server)
             DispatchQueue.main.async {
                 self.account.login(user)
             }
@@ -70,16 +71,27 @@ private extension WriteFreelyModel {
     func logoutHandler(result: Result<Bool, Error>) {
         do {
             _ = try result.get()
-            client = nil
-            DispatchQueue.main.async {
-                self.account.logout()
+            do {
+                try purgeTokenFromKeychain(username: account.user?.username, server: account.server)
+                client = nil
+                DispatchQueue.main.async {
+                    self.account.logout()
+                }
+            } catch {
+                print("Something went wrong purging the token from the Keychain.")
             }
         } catch WFError.notFound {
             // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
-            // destroying the client object and setting the AccountModel to its logged-out state.
-            client = nil
-            DispatchQueue.main.async {
-                self.account.logout()
+            // purging the token from the Keychain, destroying the client object, and setting the AccountModel to its
+            // logged-out state.
+            do {
+                try purgeTokenFromKeychain(username: account.user?.username, server: account.server)
+                client = nil
+                DispatchQueue.main.async {
+                    self.account.logout()
+                }
+            } catch {
+                print("Something went wrong purging the token from the Keychain.")
             }
         } catch {
             // We get a 'cannot parse response' (similar to what we were seeing in the Swift package) NSURLError here,
