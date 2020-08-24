@@ -17,6 +17,10 @@ class WriteFreelyModel: ObservableObject {
         #if DEBUG
         for post in testPostData { store.add(post) }
         #endif
+
+        DispatchQueue.main.async {
+            self.account.restoreState()
+        }
     }
 }
 
@@ -31,7 +35,15 @@ extension WriteFreelyModel {
     }
 
     func logout() {
-        guard let loggedInClient = client else { return }
+        guard let loggedInClient = client else {
+            do {
+                try purgeTokenFromKeychain(username: account.username, server: account.server)
+                account.logout()
+            } catch {
+                fatalError("Failed to log out persisted state")
+            }
+            return
+        }
         loggedInClient.logout(completion: logoutHandler)
     }
 }

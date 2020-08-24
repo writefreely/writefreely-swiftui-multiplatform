@@ -36,6 +36,7 @@ struct AccountModel {
     let serverStringKey = "serverStringKey"
 
     var server: String = ""
+    var username: String = ""
     var hasError: Bool = false
     var currentError: AccountError? {
         didSet {
@@ -47,6 +48,7 @@ struct AccountModel {
 
     mutating func login(_ user: WFUser) {
         self.user = user
+        self.username = user.username ?? ""
         self.isLoggedIn = true
         defaults.set(true, forKey: isLoggedInFlag)
         defaults.set(user.username, forKey: usernameStringKey)
@@ -59,5 +61,11 @@ struct AccountModel {
         defaults.set(false, forKey: isLoggedInFlag)
         defaults.removeObject(forKey: usernameStringKey)
         defaults.removeObject(forKey: serverStringKey)
+    }
+
+    mutating func restoreState() {
+        isLoggedIn = defaults.bool(forKey: isLoggedInFlag)
+        server = defaults.string(forKey: serverStringKey) ?? ""
+        username = defaults.string(forKey: usernameStringKey) ?? ""
     }
 }
