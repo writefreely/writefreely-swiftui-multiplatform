@@ -22,18 +22,14 @@ class WriteFreelyModel: ObservableObject {
 // MARK: - WriteFreelyModel API
 
 extension WriteFreelyModel {
-    func login(
-        to server: URL,
-        as username: String,
-        password: String
-    ) {
+    func login(to server: URL, as username: String, password: String) {
         isLoggingIn = true
         account.server = server.absoluteString
         client = WFClient(for: server)
         client?.login(username: username, password: password, completion: loginHandler)
     }
 
-    func logout () {
+    func logout() {
         guard let loggedInClient = client else { return }
         loggedInClient.logout(completion: logoutHandler)
     }
