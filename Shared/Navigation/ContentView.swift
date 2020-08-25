@@ -20,6 +20,9 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let model = WriteFreelyModel()
         model.collections = CollectionListModel(with: [userCollection1, userCollection2, userCollection3])
+        for post in testPostData {
+            model.store.add(post)
+        }
         return ContentView()
             .environmentObject(model)
     }
