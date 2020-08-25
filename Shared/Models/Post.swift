@@ -30,6 +30,16 @@ class Post: Identifiable, ObservableObject {
         self.status = status
         self.collection = collection
     }
+
+    convenience init(wfPost: WFPost, in collection: PostCollection = draftsCollection) {
+        self.init(
+            title: wfPost.title ?? "",
+            body: wfPost.body,
+            createdDate: wfPost.createdDate ?? Date(),
+            status: .published,
+            collection: collection
+        )
+    }
 }
 
 #if DEBUG
