@@ -9,7 +9,6 @@ class WriteFreelyModel: ObservableObject {
     @Published var preferences = PreferencesModel()
     @Published var store = PostStore()
     @Published var collections = CollectionListModel(with: [])
-    @Published var post: Post?
     @Published var isLoggingIn: Bool = false
 
     private var client: WFClient?
