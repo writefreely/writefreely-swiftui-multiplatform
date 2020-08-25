@@ -35,7 +35,6 @@ class Post: Identifiable, ObservableObject {
             status: .published,
             collection: collection
         )
-        self.wfPost = wfPost
     }
 }
 
