@@ -7,6 +7,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
     @Published var store = PostStore()
+    @Published var collections = CollectionListModel(with: [])
     @Published var post: Post?
     @Published var isLoggingIn: Bool = false
 
@@ -37,6 +38,11 @@ extension WriteFreelyModel {
         guard let loggedInClient = client else { return }
         loggedInClient.logout(completion: logoutHandler)
     }
+
+    func fetchUserCollections() {
+        guard let loggedInClient = client else { return }
+        loggedInClient.getUserCollections(completion: fetchUserCollectionsHandler)
+    }
 }
 
 private extension WriteFreelyModel {
@@ -46,6 +52,7 @@ private extension WriteFreelyModel {
         }
         do {
             let user = try result.get()
+            fetchUserCollections()
             DispatchQueue.main.async {
                 self.account.login(user)
             }
@@ -92,6 +99,23 @@ private extension WriteFreelyModel {
                     self.logout()
                 }
             }
+        }
+    }
+
+    func fetchUserCollectionsHandler(result: Result<[WFCollection], Error>) {
+        do {
+            let fetchedCollections = try result.get()
+            var fetchedCollectionsArray: [PostCollection] = []
+            for fetchedCollection in fetchedCollections {
+                var postCollection = PostCollection(title: fetchedCollection.title)
+                postCollection.wfCollection = fetchedCollection
+                fetchedCollectionsArray.append(postCollection)
+            }
+            DispatchQueue.main.async {
+                self.collections = CollectionListModel(with: fetchedCollectionsArray)
+            }
+        } catch {
+            print(error)
         }
     }
 }
