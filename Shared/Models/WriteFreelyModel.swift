@@ -73,6 +73,7 @@ private extension WriteFreelyModel {
         do {
             let user = try result.get()
             fetchUserCollections()
+            fetchUserPosts()
             saveTokenToKeychain(user.token, username: user.username, server: account.server)
             DispatchQueue.main.async {
                 self.account.login(user)
@@ -103,6 +104,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     self.collections.clearUserCollection()
+                    self.store.purge()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -117,6 +119,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     self.collections.clearUserCollection()
+                    self.store.purge()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
