@@ -58,6 +58,11 @@ extension WriteFreelyModel {
         guard let loggedInClient = client else { return }
         loggedInClient.getUserCollections(completion: fetchUserCollectionsHandler)
     }
+
+    func fetchUserPosts() {
+        guard let loggedInClient = client else { return }
+        loggedInClient.getPosts(completion: fetchUserPostsHandler)
+    }
 }
 
 private extension WriteFreelyModel {
@@ -142,6 +147,28 @@ private extension WriteFreelyModel {
             }
             DispatchQueue.main.async {
                 self.collections = CollectionListModel(with: fetchedCollectionsArray)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
+        do {
+            let fetchedPosts = try result.get()
+            for fetchedPost in fetchedPosts {
+                var post: Post
+                if let matchingAlias = fetchedPost.collectionAlias {
+                    let postCollection = (
+                        collections.userCollections.filter { $0.wfCollection?.alias == matchingAlias }
+                    ).first
+                    post = Post(wfPost: fetchedPost, in: postCollection ?? draftsCollection)
+                } else {
+                    post = Post(wfPost: fetchedPost)
+                }
+                DispatchQueue.main.async {
+                    self.store.add(post)
+                }
             }
         } catch {
             print(error)
