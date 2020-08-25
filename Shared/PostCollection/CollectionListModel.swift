@@ -10,4 +10,9 @@ class CollectionListModel: ObservableObject {
         }
         collectionsList.append(contentsOf: self.userCollections)
     }
+
+    func clearUserCollection() {
+        userCollections = []
+        collectionsList = [ allPostsCollection, draftsCollection ]
+    }
 }

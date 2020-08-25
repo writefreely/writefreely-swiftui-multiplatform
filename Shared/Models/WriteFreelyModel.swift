@@ -79,6 +79,7 @@ private extension WriteFreelyModel {
             client = nil
             DispatchQueue.main.async {
                 self.account.logout()
+                self.collections.clearUserCollection()
             }
         } catch WFError.notFound {
             // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
@@ -86,6 +87,7 @@ private extension WriteFreelyModel {
             client = nil
             DispatchQueue.main.async {
                 self.account.logout()
+                self.collections.clearUserCollection()
             }
         } catch {
             // We get a 'cannot parse response' (similar to what we were seeing in the Swift package) NSURLError here,
