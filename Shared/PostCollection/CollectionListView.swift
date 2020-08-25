@@ -20,6 +20,9 @@ struct CollectionListView: View {
 
 struct CollectionSidebar_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionListView()
+        let model = WriteFreelyModel()
+        model.collections = CollectionListModel(with: [userCollection1, userCollection2, userCollection3])
+        return CollectionListView()
+            .environmentObject(model)
     }
 }
