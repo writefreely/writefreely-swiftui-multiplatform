@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PostEditorView: View {
-    @EnvironmentObject var postStore: PostStore
+    @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: Post
 
@@ -47,12 +47,12 @@ struct PostEditorView: View {
     }
 
     private func checkIfNewPost() {
-        self.isNewPost = !postStore.posts.contains(where: { $0.id == post.id })
+        self.isNewPost = !model.store.posts.contains(where: { $0.id == post.id })
     }
 
     private func addNewPostToStore() {
         withAnimation {
-            postStore.add(post)
+            model.store.add(post)
             self.isNewPost = false
         }
     }
@@ -61,13 +61,13 @@ struct PostEditorView: View {
 struct PostEditorView_NewDraftPreviews: PreviewProvider {
     static var previews: some View {
         PostEditorView(post: Post())
-            .environmentObject(testPostStore)
+            .environmentObject(WriteFreelyModel())
     }
 }
 
 struct PostEditorView_ExistingPostPreviews: PreviewProvider {
     static var previews: some View {
         PostEditorView(post: testPostData[0])
-            .environmentObject(testPostStore)
+            .environmentObject(WriteFreelyModel())
     }
 }

@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var preferences: PreferencesModel
-    @EnvironmentObject var account: AccountModel
+    @EnvironmentObject var model: WriteFreelyModel
 
     @Binding var isPresented: Bool
 
@@ -11,10 +10,10 @@ struct SettingsView: View {
             SettingsHeaderView(isPresented: $isPresented)
             Form {
                 Section(header: Text("Login Details")) {
-                    AccountView(account: account)
+                    AccountView()
                 }
                 Section(header: Text("Appearance")) {
-                    PreferencesView(preferences: preferences)
+                    PreferencesView(preferences: model.preferences)
                 }
             }
         }
@@ -25,5 +24,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(isPresented: .constant(true))
+            .environmentObject(WriteFreelyModel())
     }
 }

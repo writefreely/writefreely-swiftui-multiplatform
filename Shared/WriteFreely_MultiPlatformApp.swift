@@ -2,35 +2,30 @@ import SwiftUI
 
 @main
 struct WriteFreely_MultiPlatformApp: App {
-    @StateObject private var preferences = PreferencesModel()
-    @StateObject private var account = AccountModel()
+    @StateObject private var model = WriteFreelyModel()
 
     #if os(macOS)
     @State private var selectedTab = 0
     #endif
 
-    #if DEBUG
-    @StateObject private var store = testPostStore
-    #else
-    @StateObject private var store = PostStore()
-    #endif
-
     var body: some Scene {
         WindowGroup {
-            ContentView(postStore: store, preferences: preferences, account: account)
+            ContentView()
+                .environmentObject(model)
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
 
         #if os(macOS)
         Settings {
             TabView(selection: $selectedTab) {
-                MacAccountView(account: account)
+                MacAccountView()
+                    .environmentObject(model)
                     .tabItem {
                         Image(systemName: "person.crop.circle")
                         Text("Account")
                     }
                     .tag(0)
-                MacPreferencesView(preferences: preferences)
+                MacPreferencesView(preferences: model.preferences)
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Preferences")

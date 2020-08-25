@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct MacAccountView: View {
-    @ObservedObject var account: AccountModel
+    @EnvironmentObject var model: WriteFreelyModel
 
     var body: some View {
             Form {
                 Section(header: Text("Login Details")) {
-                    AccountView(account: account)
+                    AccountView()
                 }
             }
     }
@@ -14,6 +14,7 @@ struct MacAccountView: View {
 
 struct MacAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        MacAccountView(account: AccountModel())
+        MacAccountView()
+            .environmentObject(WriteFreelyModel())
     }
 }

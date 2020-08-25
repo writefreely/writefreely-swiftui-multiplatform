@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct PostListView: View {
-    @EnvironmentObject var postStore: PostStore
-
+    @EnvironmentObject var model: WriteFreelyModel
     @State var selectedCollection: PostCollection
 
     #if os(iOS)
@@ -23,12 +22,13 @@ struct PostListView: View {
                     }
                 }
             }
+            .environmentObject(model)
             .navigationTitle(selectedCollection.title)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
                         let post = Post()
-                        postStore.add(post)
+                        model.store.add(post)
                     }, label: {
                         Image(systemName: "square.and.pencil")
                     })
@@ -74,7 +74,7 @@ struct PostListView: View {
         .toolbar {
             Button(action: {
                 let post = Post()
-                postStore.add(post)
+                model.store.add(post)
             }, label: {
                 Image(systemName: "square.and.pencil")
             })
@@ -92,9 +92,9 @@ struct PostListView: View {
 
     private func showPosts(for collection: PostCollection) -> [Post] {
         if collection == allPostsCollection {
-            return postStore.posts
+            return model.store.posts
         } else {
-            return postStore.posts.filter {
+            return model.store.posts.filter {
                 $0.collection.title == collection.title
             }
         }
@@ -105,7 +105,7 @@ struct PostList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             PostListView(selectedCollection: allPostsCollection)
-                .environmentObject(testPostStore)
+                .environmentObject(WriteFreelyModel())
         }
     }
 }
