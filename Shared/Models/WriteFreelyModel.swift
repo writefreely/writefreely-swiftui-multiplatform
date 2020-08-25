@@ -62,6 +62,25 @@ extension WriteFreelyModel {
         guard let loggedInClient = client else { return }
         loggedInClient.getPosts(completion: fetchUserPostsHandler)
     }
+
+    func publish(post: Post) {
+        guard let loggedInClient = client else { return }
+        if post.wfPost == nil {
+            // This is a new local draft.
+            post.wfPost = WFPost(
+                body: post.body,
+                title: post.title,
+                createdDate: post.createdDate
+            )
+            loggedInClient.createPost(
+                post: post.wfPost!, in: post.collection.wfCollection?.alias, completion: publishHandler
+            )
+        } else {
+            // This is an existing post.
+            // 1. Update post.wfPost properties from post properties
+            // 2. Call loggedInClient.updatePost(postId:, updatedPost:, completion: publishHandler)
+        }
+    }
 }
 
 private extension WriteFreelyModel {
@@ -171,6 +190,21 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.store.add(post)
                 }
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func publishHandler(result: Result<WFPost, Error>) {
+        do {
+            let wfPost = try result.get()
+            let foundPostIndex = store.posts.firstIndex(where: {
+                $0.title == wfPost.title && $0.body == wfPost.body
+            })
+            guard let index = foundPostIndex else { return }
+            DispatchQueue.main.async {
+                self.store.posts[index].wfPost = wfPost
             }
         } catch {
             print(error)
