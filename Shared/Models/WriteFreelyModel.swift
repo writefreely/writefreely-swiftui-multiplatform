@@ -22,7 +22,7 @@ class WriteFreelyModel: ObservableObject {
         }
 
         #if DEBUG
-        for post in testPostData { store.add(post) }
+//        for post in testPostData { store.add(post) }
         #endif
 
         DispatchQueue.main.async {
