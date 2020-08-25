@@ -1,4 +1,5 @@
 import Foundation
+import WriteFreely
 
 enum PostStatus {
     case draft
@@ -12,6 +13,7 @@ class Post: Identifiable, ObservableObject {
     @Published var createdDate: Date
     @Published var status: PostStatus
     @Published var collection: PostCollection
+    @Published var wfPost: WFPost?
 
     let id = UUID()
 
