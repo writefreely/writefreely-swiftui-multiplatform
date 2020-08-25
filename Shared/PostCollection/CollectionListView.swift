@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct CollectionListView: View {
-    private var collections = CollectionListModel()
+    @EnvironmentObject var model: WriteFreelyModel
 
     var body: some View {
         List {
-            ForEach(collections.collectionsList) { collection in
+            ForEach(model.collections.collectionsList) { collection in
                 NavigationLink(
                     destination: PostListView(selectedCollection: collection)
                 ) {
