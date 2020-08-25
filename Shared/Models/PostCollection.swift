@@ -1,8 +1,16 @@
 import Foundation
+import WriteFreely
 
-struct PostCollection: Identifiable, Hashable {
+struct PostCollection: Identifiable {
     let id = UUID()
     let title: String
+    var wfCollection: WFCollection?
+}
+
+extension PostCollection {
+    static func == (lhs: PostCollection, rhs: PostCollection) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 let allPostsCollection = PostCollection(title: "All Posts")
