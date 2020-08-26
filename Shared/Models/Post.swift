@@ -8,12 +8,9 @@ enum PostStatus {
 }
 
 class Post: Identifiable, ObservableObject {
-    @Published var title: String
-    @Published var body: String
-    @Published var createdDate: Date
+    @Published var wfPost: WFPost
     @Published var status: PostStatus
     @Published var collection: PostCollection
-    @Published var wfPost: WFPost?
 
     let id = UUID()
 
@@ -24,9 +21,7 @@ class Post: Identifiable, ObservableObject {
         status: PostStatus = .draft,
         collection: PostCollection = draftsCollection
     ) {
-        self.title = title
-        self.body = body
-        self.createdDate = createdDate
+        self.wfPost = WFPost(body: body, title: title, createdDate: createdDate)
         self.status = status
         self.collection = collection
     }
