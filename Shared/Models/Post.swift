@@ -11,7 +11,6 @@ class Post: Identifiable, ObservableObject {
     @Published var wfPost: WFPost
     @Published var status: PostStatus
     @Published var collection: PostCollection
-    @Published var wfPost: WFPost?
 
     let id = UUID()
 
