@@ -65,6 +65,7 @@ extension WriteFreelyModel {
 
     func publish(post: Post) {
         guard let loggedInClient = client else { return }
+
         if post.wfPost == nil {
             // This is a new local draft.
             post.wfPost = WFPost(
@@ -77,8 +78,19 @@ extension WriteFreelyModel {
             )
         } else {
             // This is an existing post.
-            // 1. Update post.wfPost properties from post properties
-            // 2. Call loggedInClient.updatePost(postId:, updatedPost:, completion: publishHandler)
+            // 1. Update Post.wfPost properties from (redundant) Post properties
+            // FIXME: https://github.com/writeas/writefreely-swiftui-multiplatform/issues/27
+            guard var publishedPost = post.wfPost else { return }
+            publishedPost.title = post.title
+            publishedPost.body = post.body
+            publishedPost.createdDate = post.createdDate
+
+            // 2. Update the post on the server and call the handler
+            loggedInClient.updatePost(
+                postId: publishedPost.postId!,
+                updatedPost: publishedPost,
+                completion: publishHandler
+            )
         }
     }
 }
