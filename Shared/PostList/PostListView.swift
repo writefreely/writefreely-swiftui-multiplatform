@@ -3,6 +3,7 @@ import SwiftUI
 struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @State var selectedCollection: PostCollection
+    @State private var isPresentingRefreshWarning = false
 
     #if os(iOS)
     @State private var isPresentingSettings = false
@@ -78,6 +79,25 @@ struct PostListView: View {
             }, label: {
                 Image(systemName: "square.and.pencil")
             })
+            Button(action: {
+                isPresentingRefreshWarning = true
+            }, label: {
+                Image(systemName: "arrow.clockwise")
+            })
+            .alert(isPresented: $isPresentingRefreshWarning, content: {
+                Alert(
+                    title: Text("Are you sure you want to reload content from the server?"),
+                    message: Text("""
+                        Content on your Mac will be replaced by content from the server and any unpublished changes \
+                        will be lost, except for local drafts.
+
+                        You can't undo this action.
+                        """),
+                    primaryButton: .cancel(),
+                    secondaryButton: .destructive(Text("Reload From Server"), action: reloadFromServer)
+                )
+            })
+            .disabled(!model.account.isLoggedIn)
         }
         #endif
     }
@@ -97,6 +117,15 @@ struct PostListView: View {
             return model.store.posts.filter {
                 $0.collection.title == collection.title
             }
+        }
+    }
+
+    private func reloadFromServer() {
+        DispatchQueue.main.async {
+            model.store.purgeRemotePosts()
+            model.collections.clearUserCollection()
+            model.fetchUserCollections()
+            model.fetchUserPosts()
         }
     }
 }
