@@ -49,9 +49,32 @@ struct PostListView: View {
                                 SettingsView(isPresented: $isPresentingSettings)
                             }
                         )
+                        .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
                             .foregroundColor(.secondary)
+                        Spacer()
+                        Button(action: {
+                            isPresentingRefreshWarning = true
+                        }, label: {
+                            Image(systemName: "arrow.clockwise")
+                        })
+                        .actionSheet(isPresented: $isPresentingRefreshWarning, content: {
+                            ActionSheet(
+                                title: Text("Are you sure you want to reload content from the server?"),
+                                message: Text("""
+                        Content on your device will be replaced by content from the server and any unpublished changes \
+                        will be lost, except for local drafts.
+
+                        You can't undo this action.
+                        """),
+                                buttons: [
+                                    .cancel(),
+                                    .destructive(Text("Reload From Server"), action: reloadFromServer)
+                                ]
+                            )
+                        })
+                        .disabled(!model.account.isLoggedIn)
                     }
                     .padding()
                     .frame(width: geometry.size.width)
