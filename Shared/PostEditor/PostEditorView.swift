@@ -6,20 +6,21 @@ struct PostEditorView: View {
     @ObservedObject var post: Post
 
     @State private var isNewPost = false
-
+    @State private var title = ""
     var body: some View {
         VStack {
-            TextEditor(text: $post.title)
+            TextEditor(text: $title)
                 .font(.title)
                 .frame(height: 100)
-                .onChange(of: post.title) { _ in
-                    if post.status == .published {
+                .onChange(of: title) { _ in
+                    if post.status == .published && post.wfPost.title != title {
                         post.status = .edited
                     }
+                    post.wfPost.title = title
                 }
-            TextEditor(text: $post.body)
+            TextEditor(text: $post.wfPost.body)
                 .font(.body)
-                .onChange(of: post.body) { _ in
+                .onChange(of: post.wfPost.body) { _ in
                     if post.status == .published {
                         post.status = .edited
                     }
@@ -40,6 +41,7 @@ struct PostEditorView: View {
             }
         }
         .onAppear(perform: {
+            title = post.wfPost.title ?? ""
             checkIfNewPost()
             if self.isNewPost {
                 addNewPostToStore()
