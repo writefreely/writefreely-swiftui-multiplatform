@@ -48,7 +48,11 @@ struct PostEditorView: View {
             }
         })
         .onDisappear(perform: {
-            post.wfPost.updatedDate = Date()
+            if post.status == .edited {
+                DispatchQueue.main.async {
+                    model.store.update(post)
+                }
+            }
         })
     }
 

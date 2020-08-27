@@ -14,4 +14,15 @@ struct PostStore {
     mutating func purgeAllPosts() {
         posts = []
     }
-}
+
+    mutating func update(_ post: Post) {
+        // Find the local copy in the store
+        let localCopy = posts.first(where: { $0.id == post.id })
+
+        // If there's a local copy, update the updatedDate property of its WFPost
+        if let localCopy = localCopy {
+            localCopy.wfPost.updatedDate = Date()
+        } else {
+            print("local copy not found")
+        }
+    }
