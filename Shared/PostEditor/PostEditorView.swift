@@ -47,6 +47,9 @@ struct PostEditorView: View {
                 addNewPostToStore()
             }
         })
+        .onDisappear(perform: {
+            post.wfPost.updatedDate = Date()
+        })
     }
 
     private func checkIfNewPost() {
