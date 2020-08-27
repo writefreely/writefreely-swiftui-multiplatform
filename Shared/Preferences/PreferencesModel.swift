@@ -1,6 +1,9 @@
 import SwiftUI
 
 class PreferencesModel: ObservableObject {
+    private let defaults = UserDefaults.standard
+    let colorSchemeIntegerKey = "colorSchemeIntegerKey"
+
     /* We're stuck dropping into AppKit/UIKit to set light/dark schemes for now,
      * because setting the .preferredColorScheme modifier on views in SwiftUI is
      * currently unreliable.
@@ -49,6 +52,8 @@ class PreferencesModel: ObservableObject {
                 window?.overrideUserInterfaceStyle = .unspecified
                 #endif
             }
+
+            defaults.set(appearance, forKey: colorSchemeIntegerKey)
         }
     }
 }
