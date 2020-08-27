@@ -10,4 +10,8 @@ struct PostStore {
     mutating func add(_ post: Post) {
         posts.append(post)
     }
+
+    mutating func purge() {
+        posts = []
+    }
 }

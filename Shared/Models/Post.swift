@@ -1,4 +1,5 @@
 import Foundation
+import WriteFreely
 
 enum PostStatus {
     case draft
@@ -12,6 +13,7 @@ class Post: Identifiable, ObservableObject {
     @Published var createdDate: Date
     @Published var status: PostStatus
     @Published var collection: PostCollection
+    @Published var wfPost: WFPost?
 
     let id = UUID()
 
@@ -27,6 +29,16 @@ class Post: Identifiable, ObservableObject {
         self.createdDate = createdDate
         self.status = status
         self.collection = collection
+    }
+
+    convenience init(wfPost: WFPost, in collection: PostCollection = draftsCollection) {
+        self.init(
+            title: wfPost.title ?? "",
+            body: wfPost.body,
+            createdDate: wfPost.createdDate ?? Date(),
+            status: .published,
+            collection: collection
+        )
     }
 }
 

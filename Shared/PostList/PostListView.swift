@@ -103,9 +103,13 @@ struct PostListView: View {
 
 struct PostList_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        let model = WriteFreelyModel()
+        for post in testPostData {
+            model.store.add(post)
+        }
+        return Group {
             PostListView(selectedCollection: allPostsCollection)
-                .environmentObject(WriteFreelyModel())
+                .environmentObject(model)
         }
     }
 }
