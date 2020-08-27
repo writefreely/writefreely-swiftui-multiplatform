@@ -12,8 +12,14 @@ class WriteFreelyModel: ObservableObject {
     @Published var isLoggingIn: Bool = false
 
     private var client: WFClient?
+    private let defaults = UserDefaults.standard
 
     init() {
+        // Set the color scheme based on what's been saved in UserDefaults.
+        DispatchQueue.main.async {
+            self.preferences.appearance = self.defaults.integer(forKey: self.preferences.colorSchemeIntegerKey)
+        }
+
         #if DEBUG
         for post in testPostData { store.add(post) }
         #endif
