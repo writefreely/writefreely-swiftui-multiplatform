@@ -121,7 +121,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     self.collections.clearUserCollection()
-                    self.store.purge()
+                    self.store.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -136,7 +136,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     self.collections.clearUserCollection()
-                    self.store.purge()
+                    self.store.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")

@@ -7,7 +7,7 @@ struct AccountLogoutView: View {
         VStack {
             Spacer()
             VStack {
-                Text("Logged in as \(model.account.username ?? "Anonymous")")
+                Text("Logged in as \(model.account.username)")
                 Text("on \(model.account.server)")
             }
             Spacer()
