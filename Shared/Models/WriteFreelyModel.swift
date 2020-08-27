@@ -176,6 +176,7 @@ private extension WriteFreelyModel {
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         do {
             let fetchedPosts = try result.get()
+            var fetchedPostsArray: [Post] = []
             for fetchedPost in fetchedPosts {
                 var post: Post
                 if let matchingAlias = fetchedPost.collectionAlias {
@@ -186,9 +187,13 @@ private extension WriteFreelyModel {
                 } else {
                     post = Post(wfPost: fetchedPost)
                 }
-                DispatchQueue.main.async {
-                    self.store.add(post)
-                }
+                fetchedPostsArray.append(post)
+//                DispatchQueue.main.async {
+//                    self.store.add(post)
+//                }
+            }
+            DispatchQueue.main.async {
+                self.store.updateStore(with: fetchedPostsArray)
             }
         } catch {
             print(error)
