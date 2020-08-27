@@ -32,6 +32,7 @@ struct PostEditorView: View {
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
+                    model.publish(post: post)
                     post.status = .published
                 }, label: {
                     Image(systemName: "paperplane")
