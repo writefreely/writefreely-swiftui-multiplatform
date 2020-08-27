@@ -1,18 +1,18 @@
 import SwiftUI
 
-struct CollectionListModel {
+class CollectionListModel: ObservableObject {
     private(set) var userCollections: [PostCollection] = []
-    private(set) var collectionsList: [PostCollection]
+    @Published private(set) var collectionsList: [PostCollection] = [ allPostsCollection, draftsCollection ]
 
-    init() {
-        collectionsList = [ allPostsCollection, draftsCollection ]
-
-        #if DEBUG
-        userCollections = [ userCollection1, userCollection2, userCollection3 ]
-        #endif
-
+    init(with userCollections: [PostCollection]) {
         for userCollection in userCollections {
-            collectionsList.append(userCollection)
+            self.userCollections.append(userCollection)
         }
+        collectionsList.append(contentsOf: self.userCollections)
+    }
+
+    func clearUserCollection() {
+        userCollections = []
+        collectionsList = [ allPostsCollection, draftsCollection ]
     }
 }

@@ -18,7 +18,9 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(WriteFreelyModel())
+        let model = WriteFreelyModel()
+        model.collections = CollectionListModel(with: [userCollection1, userCollection2, userCollection3])
+        return ContentView()
+            .environmentObject(model)
     }
 }
