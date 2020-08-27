@@ -14,8 +14,4 @@ struct PostStore {
     mutating func purgeAllPosts() {
         posts = []
     }
-
-    mutating func purgeRemotePosts() {
-        posts = posts.filter { $0.wfPost.postId == nil }
-    }
 }

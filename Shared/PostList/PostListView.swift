@@ -145,7 +145,6 @@ struct PostListView: View {
 
     private func reloadFromServer() {
         DispatchQueue.main.async {
-            model.store.purgeRemotePosts()
             model.collections.clearUserCollection()
             model.fetchUserCollections()
             model.fetchUserPosts()
