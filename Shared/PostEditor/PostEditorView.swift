@@ -9,6 +9,10 @@ struct PostEditorView: View {
     @State private var title = ""
     var body: some View {
         VStack {
+            if post.hasNewerRemoteCopy {
+                Text("⚠️ Newer copy on server")
+                    .font(.callout)
+            }
             TextEditor(text: $title)
                 .font(.title)
                 .frame(height: 100)
