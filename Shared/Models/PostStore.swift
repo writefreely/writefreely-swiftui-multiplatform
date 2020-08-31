@@ -1,4 +1,5 @@
 import Foundation
+import WriteFreely
 
 struct PostStore {
     var posts: [Post]
@@ -23,7 +24,23 @@ struct PostStore {
         if let localCopy = localCopy {
             localCopy.wfPost.updatedDate = Date()
         } else {
-            print("local copy not found")
+            print("Error: Local copy not found")
+        }
+    }
+
+    mutating func replace(post: Post, with fetchedPost: WFPost) {
+        // Find the local copy in the store.
+        let localCopy = posts.first(where: { $0.id == post.id })
+
+        // Replace the local copy's wfPost property with the fetched copy.
+        if let localCopy = localCopy {
+            localCopy.wfPost = fetchedPost
+            DispatchQueue.main.async {
+                localCopy.hasNewerRemoteCopy = false
+                localCopy.status = .published
+            }
+        } else {
+            print("Error: Local copy not found")
         }
     }
 
