@@ -26,6 +26,22 @@ class WriteFreelyModel: ObservableObject {
 
         DispatchQueue.main.async {
             self.account.restoreState()
+            if self.account.isLoggedIn {
+                guard let serverURL = URL(string: self.account.server) else {
+                    print("Server URL not found")
+                    return
+                }
+                guard let token = self.fetchTokenFromKeychain(
+                        username: self.account.username,
+                        server: self.account.server
+                ) else {
+                    print("Could not fetch token from Keychain")
+                    return
+                }
+                self.account.login(WFUser(token: token, username: self.account.username))
+                self.client = WFClient(for: serverURL)
+                self.client?.user = self.account.user
+            }
         }
     }
 }
