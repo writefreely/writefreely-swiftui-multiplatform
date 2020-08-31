@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostEditorView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: Post
@@ -9,10 +10,6 @@ struct PostEditorView: View {
     @State private var title = ""
     var body: some View {
         VStack {
-            if post.hasNewerRemoteCopy {
-                Text("⚠️ Newer copy on server")
-                    .font(.callout)
-            }
             TextEditor(text: $title)
                 .font(.title)
                 .frame(height: 100)
@@ -33,7 +30,40 @@ struct PostEditorView: View {
         .padding()
         .toolbar {
             ToolbarItem(placement: .status) {
-                PostStatusBadgeView(post: post)
+                if post.hasNewerRemoteCopy {
+                    if horizontalSizeClass == .compact {
+                        VStack {
+                            PostStatusBadgeView(post: post)
+                            HStack {
+                                Text("⚠️ Newer copy on server. Replace local copy?")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Button(action: {
+                                    model.updateFromServer(post: post)
+                                }, label: {
+                                    Image(systemName: "square.and.arrow.down")
+                                })
+                            }
+                            .padding(.bottom)
+                        }
+                        .padding(.top)
+                    } else {
+                        HStack {
+                            PostStatusBadgeView(post: post)
+                                .padding(.trailing)
+                            Text("⚠️ Newer copy on server. Replace local copy?")
+                                .font(.callout)
+                                .foregroundColor(.secondary)
+                            Button(action: {
+                                model.updateFromServer(post: post)
+                            }, label: {
+                                Image(systemName: "square.and.arrow.down")
+                            })
+                        }
+                    }
+                } else {
+                    PostStatusBadgeView(post: post)
+                }
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
@@ -79,9 +109,24 @@ struct PostEditorView_NewDraftPreviews: PreviewProvider {
     }
 }
 
-struct PostEditorView_ExistingPostPreviews: PreviewProvider {
+struct PostEditorView_NewerLocalPostPreviews: PreviewProvider {
     static var previews: some View {
-        PostEditorView(post: testPostData[0])
+        return PostEditorView(post: testPost)
+            .environmentObject(WriteFreelyModel())
+    }
+}
+
+struct PostEditorView_NewerRemotePostPreviews: PreviewProvider {
+    static var previews: some View {
+        let newerRemotePost = Post(
+            title: testPost.wfPost.title ?? "",
+            body: testPost.wfPost.body,
+            createdDate: testPost.wfPost.createdDate ?? Date(),
+            status: testPost.status,
+            collection: testPost.collection
+        )
+        newerRemotePost.hasNewerRemoteCopy = true
+        return PostEditorView(post: newerRemotePost)
             .environmentObject(WriteFreelyModel())
     }
 }
