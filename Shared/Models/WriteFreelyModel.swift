@@ -42,6 +42,9 @@ class WriteFreelyModel: ObservableObject {
                 self.account.login(WFUser(token: token, username: self.account.username))
                 self.client = WFClient(for: serverURL)
                 self.client?.user = self.account.user
+                self.collections.clearUserCollection()
+                self.fetchUserCollections()
+                self.fetchUserPosts()
             }
         }
     }
