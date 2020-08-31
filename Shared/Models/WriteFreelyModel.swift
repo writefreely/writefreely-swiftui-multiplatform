@@ -100,6 +100,15 @@ extension WriteFreelyModel {
             )
         }
     }
+
+    func updateFromServer(post: Post) {
+        guard let loggedInClient = client else { return }
+        guard let postId = post.wfPost.postId else { return }
+        DispatchQueue.main.async {
+            self.selectedPost = post
+        }
+        loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
+    }
 }
 
 private extension WriteFreelyModel {
@@ -208,9 +217,6 @@ private extension WriteFreelyModel {
                     post = Post(wfPost: fetchedPost)
                 }
                 fetchedPostsArray.append(post)
-//                DispatchQueue.main.async {
-//                    self.store.add(post)
-//                }
             }
             DispatchQueue.main.async {
                 self.store.updateStore(with: fetchedPostsArray)
@@ -229,6 +235,18 @@ private extension WriteFreelyModel {
             guard let index = foundPostIndex else { return }
             DispatchQueue.main.async {
                 self.store.posts[index].wfPost = wfPost
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func updateFromServerHandler(result: Result<WFPost, Error>) {
+        do {
+            let fetchedPost = try result.get()
+            DispatchQueue.main.async {
+                guard let selectedPost = self.selectedPost else { return }
+                self.store.replace(post: selectedPost, with: fetchedPost)
             }
         } catch {
             print(error)
