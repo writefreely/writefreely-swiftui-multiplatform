@@ -10,6 +10,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var store = PostStore()
     @Published var collections = CollectionListModel(with: [])
     @Published var isLoggingIn: Bool = false
+    @Published var selectedPost: Post?
 
     private var client: WFClient?
     private let defaults = UserDefaults.standard
