@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct PostEditorView: View {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: Post
@@ -30,40 +29,7 @@ struct PostEditorView: View {
         .padding()
         .toolbar {
             ToolbarItem(placement: .status) {
-                if post.hasNewerRemoteCopy {
-                    if horizontalSizeClass == .compact {
-                        VStack {
-                            PostStatusBadgeView(post: post)
-                            HStack {
-                                Text("⚠️ Newer copy on server. Replace local copy?")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                Button(action: {
-                                    model.updateFromServer(post: post)
-                                }, label: {
-                                    Image(systemName: "square.and.arrow.down")
-                                })
-                            }
-                            .padding(.bottom)
-                        }
-                        .padding(.top)
-                    } else {
-                        HStack {
-                            PostStatusBadgeView(post: post)
-                                .padding(.trailing)
-                            Text("⚠️ Newer copy on server. Replace local copy?")
-                                .font(.callout)
-                                .foregroundColor(.secondary)
-                            Button(action: {
-                                model.updateFromServer(post: post)
-                            }, label: {
-                                Image(systemName: "square.and.arrow.down")
-                            })
-                        }
-                    }
-                } else {
-                    PostStatusBadgeView(post: post)
-                }
+                PostEditorStatusToolbarView(post: post)
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
