@@ -21,8 +21,8 @@ struct PostStatusBadgeView: View {
         var badgeColor: Color
 
         switch status {
-        case .draft:
-            badgeLabel = "draft"
+        case .local:
+            badgeLabel = "local"
             badgeColor = Color(red: 0.75, green: 0.5, blue: 0.85, opacity: 1.0)
         case .edited:
             badgeLabel = "edited"

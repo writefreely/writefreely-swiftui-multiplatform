@@ -2,7 +2,7 @@ import Foundation
 import WriteFreely
 
 enum PostStatus {
-    case draft
+    case local
     case edited
     case published
 }
@@ -18,7 +18,7 @@ class Post: Identifiable, ObservableObject {
         title: String = "Title",
         body: String = "Write your post here...",
         createdDate: Date = Date(),
-        status: PostStatus = .draft,
+        status: PostStatus = .local,
         collection: PostCollection = draftsCollection
     ) {
         self.wfPost = WFPost(body: body, title: title, createdDate: createdDate)
