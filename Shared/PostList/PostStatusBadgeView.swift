@@ -36,9 +36,9 @@ struct PostStatusBadgeView: View {
     }
 }
 
-struct PostStatusBadge_DraftPreviews: PreviewProvider {
+struct PostStatusBadge_LocalDraftPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadgeView(post: testPostData[0])
+        PostStatusBadgeView(post: testPostData[2])
     }
 }
 
@@ -52,6 +52,6 @@ struct PostStatusBadge_EditedPreviews: PreviewProvider {
 
 struct PostStatusBadge_PublishedPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadgeView(post: testPostData[2])
+        PostStatusBadgeView(post: testPostData[0])
     }
 }

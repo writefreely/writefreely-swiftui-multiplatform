@@ -61,7 +61,7 @@ struct PostEditorView: View {
     }
 }
 
-struct PostEditorView_NewDraftPreviews: PreviewProvider {
+struct PostEditorView_NewLocalDraftPreviews: PreviewProvider {
     static var previews: some View {
         PostEditorView(post: Post())
             .environmentObject(WriteFreelyModel())

@@ -9,7 +9,7 @@ struct ContentView: View {
 
             PostListView(selectedCollection: allPostsCollection)
 
-            Text("Select a post, or create a new draft.")
+            Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
