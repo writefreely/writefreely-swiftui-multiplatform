@@ -40,6 +40,10 @@
 		1756DBB824FED3A400207AB8 /* LocalStorageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB524FED3A400207AB8 /* LocalStorageModel.xcdatamodeld */; };
 		1756DBBA24FED45500207AB8 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB924FED45500207AB8 /* PersistenceManager.swift */; };
 		1756DBBB24FED45500207AB8 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB924FED45500207AB8 /* PersistenceManager.swift */; };
+		1756DC0124FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */; };
+		1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */; };
+		1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
+		1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
 		1762DCB324EB086C0019C4EB /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DCB224EB086C0019C4EB /* CollectionListModel.swift */; };
 		1762DCB424EB086C0019C4EB /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DCB224EB086C0019C4EB /* CollectionListModel.swift */; };
 		1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
@@ -99,6 +103,8 @@
 		1756DBB224FECDBB00207AB8 /* PostEditorStatusToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorStatusToolbarView.swift; sourceTree = "<group>"; };
 		1756DBB624FED3A400207AB8 /* LocalStorageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalStorageModel.xcdatamodel; sourceTree = "<group>"; };
 		1756DBB924FED45500207AB8 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1762DCB224EB086C0019C4EB /* CollectionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListModel.swift; sourceTree = "<group>"; };
 		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		17A5388724DDA31F00DEFF9A /* MacAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAccountView.swift; sourceTree = "<group>"; };
@@ -191,6 +197,8 @@
 		1762DCB124EB07680019C4EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */,
+				1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */,
 				1756AE6A24CB1E4B00FD7257 /* Post.swift */,
 				171BFDF624D49FD400888236 /* PostCollection.swift */,
 				1756AE6D24CB255B00FD7257 /* PostStore.swift */,
@@ -569,8 +577,10 @@
 				1762DCB324EB086C0019C4EB /* CollectionListModel.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				171BFDF724D49FD400888236 /* PostCollection.swift in Sources */,
+				1756DC0124FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17120DA724E19D11002B9F6C /* SettingsView.swift in Sources */,
+				1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
 				17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */,
 				17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */,
 				1756AE6E24CB255B00FD7257 /* PostStore.swift in Sources */,
@@ -597,6 +607,7 @@
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
 				1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				1753F6AC24E431CC00309365 /* MacPreferencesView.swift in Sources */,
+				1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
 				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */,
@@ -604,6 +615,7 @@
 				1756DBB824FED3A400207AB8 /* LocalStorageModel.xcdatamodeld in Sources */,
 				17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */,
 				1756AE6F24CB255B00FD7257 /* PostStore.swift in Sources */,
+				1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				1756DBB424FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
 				1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
