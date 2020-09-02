@@ -133,7 +133,8 @@ private extension WriteFreelyModel {
                 self.account.currentError = AccountError.invalidPassword
             }
         } catch {
-            if let error = error as? NSError, error.domain == NSURLErrorDomain, error.code == -1003 {
+            if (error as NSError).domain == NSURLErrorDomain,
+               (error as NSError).code == -1003 {
                 DispatchQueue.main.async {
                     self.account.currentError = AccountError.serverNotFound
                 }
@@ -175,9 +176,8 @@ private extension WriteFreelyModel {
             // so we're using a hacky workaround — if we get the NSURLError, but the AccountModel still thinks we're
             // logged in, try calling the logout function again and see what we get.
             // Conditional cast from 'Error' to 'NSError' always succeeds but is the only way to check error properties.
-            if let error = error as? NSError,
-               error.domain == NSURLErrorDomain,
-               error.code == NSURLErrorCannotParseResponse {
+            if (error as NSError).domain == NSURLErrorDomain,
+               (error as NSError).code == NSURLErrorCannotParseResponse {
                 if account.isLoggedIn {
                     self.logout()
                 }

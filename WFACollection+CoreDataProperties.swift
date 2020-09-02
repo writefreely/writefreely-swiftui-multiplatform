@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-
 extension WFACollection {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<WFACollection> {
@@ -19,6 +18,6 @@ extension WFACollection {
 
 }
 
-extension WFACollection : Identifiable {
+extension WFACollection: Identifiable {
 
 }
