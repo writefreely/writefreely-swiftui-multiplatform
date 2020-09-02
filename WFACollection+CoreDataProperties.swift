@@ -17,6 +17,6 @@ extension WFACollection {
 
 }
 
-extension WFACollection : Identifiable {
+extension WFACollection: Identifiable {
 
 }
