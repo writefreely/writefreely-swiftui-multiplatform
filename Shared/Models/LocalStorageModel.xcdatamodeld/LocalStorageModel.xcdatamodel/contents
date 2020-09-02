@@ -8,9 +8,13 @@
         <attribute name="styleSheet" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
-        <attribute name="views" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="alias"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="WFACollection" positionX="-18" positionY="27" width="128" height="149"/>
+        <element name="WFACollection" positionX="-18" positionY="27" width="128" height="134"/>
     </elements>
 </model>
