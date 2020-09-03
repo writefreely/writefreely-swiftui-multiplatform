@@ -105,13 +105,15 @@ struct PostListView: View {
     }
 
     private func showPosts(for collection: PostCollection) -> [Post] {
-        if collection == allPostsCollection {
-            return model.store.posts
+        var posts: [Post]
+        if collection == CollectionListModel.allPostsCollection {
+            posts = model.store.posts
+        } else if collection == CollectionListModel.draftsCollection {
+            posts = model.store.posts.filter { $0.collection == nil }
         } else {
-            return model.store.posts.filter {
-                $0.collection.title == collection.title
-            }
+            posts = model.store.posts.filter { $0.collection?.title == collection.title }
         }
+        return posts
     }
 
     private func reloadFromServer() {
@@ -130,7 +132,7 @@ struct PostList_Previews: PreviewProvider {
             model.store.add(post)
         }
         return Group {
-            PostListView(selectedCollection: allPostsCollection)
+            PostListView(selectedCollection: CollectionListModel.allPostsCollection)
                 .environmentObject(model)
         }
     }

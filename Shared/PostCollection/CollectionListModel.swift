@@ -1,18 +1,25 @@
 import SwiftUI
+import CoreData
 
 class CollectionListModel: ObservableObject {
-    private(set) var userCollections: [PostCollection] = []
-    @Published private(set) var collectionsList: [PostCollection] = [ allPostsCollection, draftsCollection ]
+    @Published var userCollections = [WFACollection]()
 
-    init(with userCollections: [PostCollection]) {
-        for userCollection in userCollections {
-            self.userCollections.append(userCollection)
-        }
-        collectionsList.append(contentsOf: self.userCollections)
+    static let allPostsCollection = PostCollection(title: "All Posts")
+    static let draftsCollection = PostCollection(title: "Drafts")
+
+    init() {
+//        let request = WFACollection.createFetchRequest()
+//        request.sortDescriptors = []
+//        do {
+//            userCollections = try PersistenceManager.persistentContainer.viewContext.fetch(request)
+//        } catch {
+//            print("Error: Failed to fetch user collections from local store")
+//            userCollections = []
+//        }
     }
 
     func clearUserCollection() {
         userCollections = []
-        collectionsList = [ allPostsCollection, draftsCollection ]
+        // Clear collections from CoreData store.
     }
 }

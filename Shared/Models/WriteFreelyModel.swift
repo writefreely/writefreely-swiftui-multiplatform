@@ -8,7 +8,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
     @Published var store = PostStore()
-    @Published var collections = CollectionListModel(with: [])
+    @Published var collections = CollectionListModel()
     @Published var isLoggingIn: Bool = false
     @Published var selectedPost: Post?
 
@@ -96,7 +96,7 @@ extension WriteFreelyModel {
         } else {
             // This is a new local draft.
             loggedInClient.createPost(
-                post: post.wfPost, in: post.collection.wfCollection?.alias, completion: publishHandler
+                post: post.wfPost, in: post.collection?.wfCollection?.alias, completion: publishHandler
             )
         }
     }
@@ -190,12 +190,24 @@ private extension WriteFreelyModel {
             let fetchedCollections = try result.get()
             var fetchedCollectionsArray: [PostCollection] = []
             for fetchedCollection in fetchedCollections {
-                var postCollection = PostCollection(title: fetchedCollection.title)
+                let postCollection = PostCollection(title: fetchedCollection.title)
                 postCollection.wfCollection = fetchedCollection
                 fetchedCollectionsArray.append(postCollection)
+
+                DispatchQueue.main.async {
+                    let localCollection = WFACollection(context: PersistenceManager.persistentContainer.viewContext)
+                    localCollection.alias = fetchedCollection.alias
+                    localCollection.blogDescription = fetchedCollection.description
+                    localCollection.email = fetchedCollection.email
+                    localCollection.isPublic = fetchedCollection.isPublic ?? false
+                    localCollection.styleSheet = fetchedCollection.styleSheet
+                    localCollection.title = fetchedCollection.title
+                    localCollection.url = fetchedCollection.url
+                }
             }
             DispatchQueue.main.async {
-                self.collections = CollectionListModel(with: fetchedCollectionsArray)
+//                self.collections = CollectionListModel(with: fetchedCollectionsArray)
+                PersistenceManager().saveContext()
             }
         } catch {
             print(error)
@@ -209,10 +221,10 @@ private extension WriteFreelyModel {
             for fetchedPost in fetchedPosts {
                 var post: Post
                 if let matchingAlias = fetchedPost.collectionAlias {
-                    let postCollection = (
-                        collections.userCollections.filter { $0.wfCollection?.alias == matchingAlias }
-                    ).first
-                    post = Post(wfPost: fetchedPost, in: postCollection ?? draftsCollection)
+                    let postCollection = PostCollection(title: (
+                        collections.userCollections.filter { $0.alias == matchingAlias }
+                    ).first?.title ?? "NO TITLE")
+                    post = Post(wfPost: fetchedPost, in: postCollection)
                 } else {
                     post = Post(wfPost: fetchedPost)
                 }

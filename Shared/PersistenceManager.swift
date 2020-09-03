@@ -7,13 +7,14 @@ import AppKit
 #endif
 
 class PersistenceManager {
-    let persistentContainer: NSPersistentContainer = {
+    static let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "LocalStorageModel")
-        container.loadPersistentStores(completionHandler: { (_, error) in
+        container.loadPersistentStores { _, error in
+            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             if let error = error {
                 fatalError("Unresolved error loading persistent store: \(error)")
             }
-        })
+        }
         return container
     }()
 
@@ -38,9 +39,9 @@ class PersistenceManager {
     }
 
     func saveContext() {
-        if persistentContainer.viewContext.hasChanges {
+        if PersistenceManager.persistentContainer.viewContext.hasChanges {
             do {
-                try persistentContainer.viewContext.save()
+                try PersistenceManager.persistentContainer.viewContext.save()
             } catch {
                 print("Error saving context: \(error)")
             }

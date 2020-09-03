@@ -10,7 +10,7 @@ enum PostStatus {
 class Post: Identifiable, ObservableObject, Hashable {
     @Published var wfPost: WFPost
     @Published var status: PostStatus
-    @Published var collection: PostCollection
+    @Published var collection: PostCollection?
     @Published var hasNewerRemoteCopy: Bool = false
 
     let id = UUID()
@@ -19,15 +19,15 @@ class Post: Identifiable, ObservableObject, Hashable {
         title: String = "Title",
         body: String = "Write your post here...",
         createdDate: Date = Date(),
-        status: PostStatus = .local,
-        collection: PostCollection = draftsCollection
+        status: PostStatus = .draft,
+        collection: PostCollection? = nil
     ) {
         self.wfPost = WFPost(body: body, title: title, createdDate: createdDate)
         self.status = status
         self.collection = collection
     }
 
-    convenience init(wfPost: WFPost, in collection: PostCollection = draftsCollection) {
+    convenience init(wfPost: WFPost, in collection: PostCollection? = nil) {
         self.init(
             title: wfPost.title ?? "",
             body: wfPost.body,
@@ -50,6 +50,10 @@ extension Post {
 }
 
 #if DEBUG
+let userCollection1 = PostCollection(title: "Collection 1")
+let userCollection2 = PostCollection(title: "Collection 2")
+let userCollection3 = PostCollection(title: "Collection 3")
+
 let testPost = Post(
     title: "Test Post Title",
     body: """
