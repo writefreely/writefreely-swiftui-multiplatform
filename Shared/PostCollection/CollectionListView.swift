@@ -4,20 +4,23 @@ struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.managedObjectContext) var moc
 
-    @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
+    @FetchRequest(
+        entity: WFACollection.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \WFACollection.title, ascending: true)]
+    ) var collections: FetchedResults<WFACollection>
 
     var body: some View {
         List {
-            NavigationLink(destination: PostListView(selectedCollection: CollectionListModel.allPostsCollection)) {
-                Text(CollectionListModel.allPostsCollection.title)
-            }
-            NavigationLink(destination: PostListView(selectedCollection: CollectionListModel.draftsCollection)) {
-                Text(CollectionListModel.draftsCollection.title)
+//            NavigationLink(destination: PostListView(selectedCollection: CollectionListModel.allPostsCollection)) {
+//                Text(CollectionListModel.allPostsCollection.title)
+//            }
+            NavigationLink(destination: PostListView(selectedCollection: nil)) {
+                Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
             }
             Section(header: Text("Your Blogs")) {
                 ForEach(collections, id: \.alias) { collection in
                     NavigationLink(
-                        destination: PostListView(selectedCollection: PostCollection(title: collection.title))
+                        destination: PostListView(selectedCollection: collection)
                     ) {
                         Text(collection.title)
                     }

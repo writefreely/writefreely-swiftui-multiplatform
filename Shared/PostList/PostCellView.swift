@@ -30,6 +30,11 @@ struct PostCellView: View {
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        PostCellView(post: testPost)
+        let testPost = Post(
+            title: "Test Post Title",
+            body: "Here's some cool sample body text.",
+            createdDate: Date()
+        )
+        return PostCellView(post: testPost)
     }
 }

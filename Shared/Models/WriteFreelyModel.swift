@@ -42,8 +42,9 @@ class WriteFreelyModel: ObservableObject {
                 self.account.login(WFUser(token: token, username: self.account.username))
                 self.client = WFClient(for: serverURL)
                 self.client?.user = self.account.user
-                self.collections.clearUserCollection()
-                self.fetchUserCollections()
+                if self.collections.userCollections.count == 0 {
+                    self.fetchUserCollections()
+                }
                 self.fetchUserPosts()
             }
         }
@@ -96,7 +97,7 @@ extension WriteFreelyModel {
         } else {
             // This is a new local draft.
             loggedInClient.createPost(
-                post: post.wfPost, in: post.collection?.wfCollection?.alias, completion: publishHandler
+                post: post.wfPost, in: post.collection?.alias, completion: publishHandler
             )
         }
     }
@@ -164,8 +165,8 @@ private extension WriteFreelyModel {
                 try purgeTokenFromKeychain(username: account.user?.username, server: account.server)
                 client = nil
                 DispatchQueue.main.async {
-                    self.account.logout()
                     self.collections.clearUserCollection()
+                    self.account.logout()
                     self.store.purgeAllPosts()
                 }
             } catch {
@@ -186,14 +187,12 @@ private extension WriteFreelyModel {
     }
 
     func fetchUserCollectionsHandler(result: Result<[WFCollection], Error>) {
+        DispatchQueue.main.async {
+            self.collections.loadCachedUserCollections()
+        }
         do {
             let fetchedCollections = try result.get()
-            var fetchedCollectionsArray: [PostCollection] = []
             for fetchedCollection in fetchedCollections {
-                let postCollection = PostCollection(title: fetchedCollection.title)
-                postCollection.wfCollection = fetchedCollection
-                fetchedCollectionsArray.append(postCollection)
-
                 DispatchQueue.main.async {
                     let localCollection = WFACollection(context: PersistenceManager.persistentContainer.viewContext)
                     localCollection.alias = fetchedCollection.alias
@@ -206,7 +205,6 @@ private extension WriteFreelyModel {
                 }
             }
             DispatchQueue.main.async {
-//                self.collections = CollectionListModel(with: fetchedCollectionsArray)
                 PersistenceManager().saveContext()
             }
         } catch {
@@ -221,10 +219,10 @@ private extension WriteFreelyModel {
             for fetchedPost in fetchedPosts {
                 var post: Post
                 if let matchingAlias = fetchedPost.collectionAlias {
-                    let postCollection = PostCollection(title: (
+                    let matchingCachedCollection = (
                         collections.userCollections.filter { $0.alias == matchingAlias }
-                    ).first?.title ?? "NO TITLE")
-                    post = Post(wfPost: fetchedPost, in: postCollection)
+                    ).first
+                    post = Post(wfPost: fetchedPost, in: matchingCachedCollection)
                 } else {
                     post = Post(wfPost: fetchedPost)
                 }
