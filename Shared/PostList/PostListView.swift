@@ -3,6 +3,7 @@ import SwiftUI
 struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @State var selectedCollection: WFACollection?
+    @State var showAllPosts: Bool = false
 
     #if os(iOS)
     @State private var isPresentingSettings = false
@@ -24,7 +25,9 @@ struct PostListView: View {
             }
             .environmentObject(model)
             .navigationTitle(
-                selectedCollection?.title ?? (model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
+                showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                )
             )
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -80,7 +83,9 @@ struct PostListView: View {
             }
         }
         .navigationTitle(
-            selectedCollection?.title ?? (model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
+            showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+            )
         )
         .navigationSubtitle(pluralizedPostCount(for: showPosts(for: selectedCollection)))
         .toolbar {
@@ -109,26 +114,17 @@ struct PostListView: View {
     }
 
     private func showPosts(for collection: WFACollection?) -> [Post] {
-        var posts: [Post]
-
-        if let selectedCollection = collection {
-            posts = model.store.posts.filter { $0.wfPost.collectionAlias == selectedCollection.alias }
+        if showAllPosts {
+            return model.store.posts
         } else {
-            posts = model.store.posts.filter { $0.wfPost.collectionAlias == nil }
+            var posts: [Post]
+            if let selectedCollection = collection {
+                posts = model.store.posts.filter { $0.wfPost.collectionAlias == selectedCollection.alias }
+            } else {
+                posts = model.store.posts.filter { $0.wfPost.collectionAlias == nil }
+            }
+            return posts
         }
-
-//        for post in model.store.posts {
-//            print("Post '\(post.wfPost.title ?? "Untitled")' in \(post.collection?.title ?? "No collection")")
-//        }
-//        if collection == CollectionListModel.allPostsCollection {
-//            posts = model.store.posts
-//        } else if collection == CollectionListModel.draftsCollection {
-//            posts = model.store.posts.filter { $0.collection == nil }
-//        } else {
-//            posts = model.store.posts.filter { $0.collection == collection }
-//        }
-
-        return posts
     }
 
     private func reloadFromServer() {

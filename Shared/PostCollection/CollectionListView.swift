@@ -11,16 +11,16 @@ struct CollectionListView: View {
 
     var body: some View {
         List {
-//            NavigationLink(destination: PostListView(selectedCollection: CollectionListModel.allPostsCollection)) {
-//                Text(CollectionListModel.allPostsCollection.title)
-//            }
-            NavigationLink(destination: PostListView(selectedCollection: nil)) {
+            NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: true)) {
+                Text("All Posts")
+            }
+            NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
                 Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
             }
             Section(header: Text("Your Blogs")) {
                 ForEach(collections, id: \.alias) { collection in
                     NavigationLink(
-                        destination: PostListView(selectedCollection: collection)
+                        destination: PostListView(selectedCollection: collection, showAllPosts: false)
                     ) {
                         Text(collection.title)
                     }
