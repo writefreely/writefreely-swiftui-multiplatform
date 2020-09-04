@@ -187,9 +187,6 @@ private extension WriteFreelyModel {
     }
 
     func fetchUserCollectionsHandler(result: Result<[WFCollection], Error>) {
-        DispatchQueue.main.async {
-            self.collections.loadCachedUserCollections()
-        }
         do {
             let fetchedCollections = try result.get()
             for fetchedCollection in fetchedCollections {
@@ -227,9 +224,22 @@ private extension WriteFreelyModel {
                     post = Post(wfPost: fetchedPost)
                 }
                 fetchedPostsArray.append(post)
+                let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
+                managedPost.postId = fetchedPost.postId
+                managedPost.slug = fetchedPost.slug
+                managedPost.appearance = fetchedPost.appearance
+                managedPost.language = fetchedPost.language
+                managedPost.rtl = fetchedPost.rtl ?? false
+                managedPost.createdDate = fetchedPost.createdDate
+                managedPost.updatedDate = fetchedPost.updatedDate
+                managedPost.title = fetchedPost.title
+                managedPost.body = fetchedPost.body
+                managedPost.collectionAlias = fetchedPost.collectionAlias
+                managedPost.status = 2  // 0 = local, 1 = edited, 2 = published
             }
             DispatchQueue.main.async {
                 self.store.updateStore(with: fetchedPostsArray)
+                PersistenceManager().saveContext()
             }
         } catch {
             print(error)

@@ -1,5 +1,6 @@
 import Foundation
 import WriteFreely
+import CoreData
 
 struct PostStore {
     var posts: [Post]
@@ -14,6 +15,16 @@ struct PostStore {
 
     mutating func purgeAllPosts() {
         posts = []
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFAPost")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try PersistenceManager.persistentContainer.persistentStoreCoordinator.execute(
+                deleteRequest, with: PersistenceManager.persistentContainer.viewContext
+            )
+        } catch {
+            print("Error: Failed to purge cached posts.")
+        }
     }
 
     mutating func update(_ post: Post) {
