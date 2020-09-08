@@ -2,28 +2,31 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @Environment(\.managedObjectContext) var moc
 
-    @ObservedObject var post: Post
+    @ObservedObject var post: WFAPost
 
-    @State private var isNewPost = false
-    @State private var title = ""
+    @State private var postTitle = ""
+    @State private var postBody = ""
+
     var body: some View {
         VStack {
-            TextEditor(text: $title)
+            TextEditor(text: $postTitle)
                 .font(.title)
                 .frame(height: 100)
-                .onChange(of: title) { _ in
-                    if post.status == .published && post.wfPost.title != title {
-                        post.status = .edited
+                .onChange(of: postTitle) { _ in
+                    if post.status == PostStatus.published.rawValue && post.title != postTitle {
+                        post.status = PostStatus.edited.rawValue
                     }
-                    post.wfPost.title = title
+                    post.title = postTitle
                 }
-            TextEditor(text: $post.wfPost.body)
+            TextEditor(text: $postBody)
                 .font(.body)
-                .onChange(of: post.wfPost.body) { _ in
-                    if post.status == .published {
-                        post.status = .edited
+                .onChange(of: postBody) { _ in
+                    if post.status == PostStatus.published.rawValue {
+                        post.status = PostStatus.edited.rawValue
                     }
+                    post.body = postBody
                 }
         }
         .padding()
@@ -34,65 +37,51 @@ struct PostEditorView: View {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
                     model.publish(post: post)
-                    post.status = .published
+                    post.status = PostStatus.published.rawValue
                 }, label: {
                     Image(systemName: "paperplane")
                 })
             }
         }
         .onAppear(perform: {
-            title = post.wfPost.title ?? ""
-            checkIfNewPost()
-            if self.isNewPost {
-                addNewPostToStore()
-            }
+            postTitle = post.title ?? ""
+            postBody = post.body ?? ""
         })
         .onDisappear(perform: {
-            if post.status == .edited {
+            if post.status == PostStatus.edited.rawValue {
                 DispatchQueue.main.async {
-                    model.store.update(post)
+                    PersistenceManager().saveContext()
                 }
             }
         })
     }
-
-    private func checkIfNewPost() {
-        self.isNewPost = !model.store.posts.contains(where: { $0.id == post.id })
-    }
-
-    private func addNewPostToStore() {
-        withAnimation {
-            model.store.add(post)
-            self.isNewPost = false
-        }
-    }
 }
 
-struct PostEditorView_NewLocalDraftPreviews: PreviewProvider {
-    static var previews: some View {
-        PostEditorView(post: Post())
-            .environmentObject(WriteFreelyModel())
-    }
-}
-
-struct PostEditorView_NewerLocalPostPreviews: PreviewProvider {
-    static var previews: some View {
-        return PostEditorView(post: testPost)
-            .environmentObject(WriteFreelyModel())
-    }
-}
-
-struct PostEditorView_NewerRemotePostPreviews: PreviewProvider {
-    static var previews: some View {
-        let newerRemotePost = Post(
-            title: testPost.wfPost.title ?? "",
-            body: testPost.wfPost.body,
-            createdDate: testPost.wfPost.createdDate ?? Date(),
-            status: testPost.status,
-            collection: testPost.collection
-        )
-        newerRemotePost.hasNewerRemoteCopy = true
-        return PostEditorView(post: newerRemotePost)
-            .environmentObject(WriteFreelyModel())
-    }
-}
+//struct PostEditorView_NewLocalDraftPreviews: PreviewProvider {
+//    static var previews: some View {
+//        PostEditorView(post: Post())
+//            .environmentObject(WriteFreelyModel())
+//    }
+//}
+//
+//struct PostEditorView_NewerLocalPostPreviews: PreviewProvider {
+//    static var previews: some View {
+//        return PostEditorView(post: testPost)
+//            .environmentObject(WriteFreelyModel())
+//    }
+//}
+//
+//struct PostEditorView_NewerRemotePostPreviews: PreviewProvider {
+//    static var previews: some View {
+//        let newerRemotePost = Post(
+//            title: testPost.wfPost.title ?? "",
+//            body: testPost.wfPost.body,
+//            createdDate: testPost.wfPost.createdDate ?? Date(),
+//            status: testPost.status,
+//            collection: testPost.collection
+//        )
+//        newerRemotePost.hasNewerRemoteCopy = true
+//        return PostEditorView(post: newerRemotePost)
+//            .environmentObject(WriteFreelyModel())
+//    }
+//}

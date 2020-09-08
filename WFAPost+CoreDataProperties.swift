@@ -1,3 +1,11 @@
+//
+//  WFAPost+CoreDataProperties.swift
+//  WriteFreely-MultiPlatform
+//
+//  Created by Angelo Stavrow on 2020-09-08.
+//
+//
+
 import Foundation
 import CoreData
 
@@ -18,6 +26,7 @@ extension WFAPost {
     @NSManaged public var status: Int32
     @NSManaged public var title: String?
     @NSManaged public var updatedDate: Date?
+    @NSManaged public var hasNewerRemoteCopy: Bool
 
 }
 

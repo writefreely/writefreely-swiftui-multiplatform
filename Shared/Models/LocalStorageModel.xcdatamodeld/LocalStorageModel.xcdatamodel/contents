@@ -19,6 +19,7 @@
         <attribute name="body" attributeType="String"/>
         <attribute name="collectionAlias" optional="YES" attributeType="String"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hasNewerRemoteCopy" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="language" optional="YES" attributeType="String"/>
         <attribute name="postId" optional="YES" attributeType="String"/>
         <attribute name="rtl" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -34,6 +35,6 @@
     </entity>
     <elements>
         <element name="WFACollection" positionX="14.806640625" positionY="202.9156341552734" width="128" height="148"/>
-        <element name="WFAPost" positionX="287.377197265625" positionY="243.2452697753906" width="128" height="194"/>
+        <element name="WFAPost" positionX="287.377197265625" positionY="243.2452697753906" width="128" height="209"/>
     </elements>
 </model>

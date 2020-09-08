@@ -10,7 +10,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var store = PostListModel()
     @Published var collections = CollectionListModel()
     @Published var isLoggingIn: Bool = false
-    @Published var selectedPost: Post?
+    @Published var selectedPost: WFAPost?
 
     private var client: WFClient?
     private let defaults = UserDefaults.standard
@@ -84,27 +84,41 @@ extension WriteFreelyModel {
         loggedInClient.getPosts(completion: fetchUserPostsHandler)
     }
 
-    func publish(post: Post) {
+    func publish(post: WFAPost) {
         guard let loggedInClient = client else { return }
 
-        if let existingPostId = post.wfPost.postId {
+        var wfPost = WFPost(
+            body: post.body ?? "",
+            title: post.title,
+            appearance: post.appearance,
+            language: post.language,
+            rtl: post.rtl,
+            createdDate: post.createdDate
+        )
+
+        if let existingPostId = post.postId {
             // This is an existing post.
+            wfPost.postId = post.postId
+            wfPost.slug = post.slug
+            wfPost.updatedDate = post.updatedDate
+            wfPost.collectionAlias = post.collectionAlias
+
             loggedInClient.updatePost(
                 postId: existingPostId,
-                updatedPost: post.wfPost,
+                updatedPost: wfPost,
                 completion: publishHandler
             )
         } else {
             // This is a new local draft.
             loggedInClient.createPost(
-                post: post.wfPost, in: post.collection?.alias, completion: publishHandler
+                post: wfPost, in: post.collectionAlias, completion: publishHandler
             )
         }
     }
 
-    func updateFromServer(post: Post) {
+    func updateFromServer(post: WFAPost) {
         guard let loggedInClient = client else { return }
-        guard let postId = post.wfPost.postId else { return }
+        guard let postId = post.postId else { return }
         DispatchQueue.main.async {
             self.selectedPost = post
         }
@@ -212,18 +226,7 @@ private extension WriteFreelyModel {
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         do {
             let fetchedPosts = try result.get()
-            var fetchedPostsArray: [Post] = []
             for fetchedPost in fetchedPosts {
-                var post: Post
-                if let matchingAlias = fetchedPost.collectionAlias {
-                    let matchingCachedCollection = (
-                        collections.userCollections.filter { $0.alias == matchingAlias }
-                    ).first
-                    post = Post(wfPost: fetchedPost, in: matchingCachedCollection)
-                } else {
-                    post = Post(wfPost: fetchedPost)
-                }
-                fetchedPostsArray.append(post)
                 let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
                 managedPost.postId = fetchedPost.postId
                 managedPost.slug = fetchedPost.slug
@@ -235,10 +238,9 @@ private extension WriteFreelyModel {
                 managedPost.title = fetchedPost.title
                 managedPost.body = fetchedPost.body
                 managedPost.collectionAlias = fetchedPost.collectionAlias
-                managedPost.status = PostStatus.published.rawValue  // 0 = local, 1 = edited, 2 = published
+                managedPost.status = PostStatus.published.rawValue
             }
             DispatchQueue.main.async {
-                self.store.updateStore(with: fetchedPostsArray)
                 PersistenceManager().saveContext()
             }
         } catch {
@@ -248,13 +250,25 @@ private extension WriteFreelyModel {
 
     func publishHandler(result: Result<WFPost, Error>) {
         do {
-            let wfPost = try result.get()
+            let fetchedPost = try result.get()
             let foundPostIndex = store.posts.firstIndex(where: {
-                $0.wfPost.title == wfPost.title && $0.wfPost.body == wfPost.body
+                $0.title == fetchedPost.title && $0.body == fetchedPost.body
             })
             guard let index = foundPostIndex else { return }
+            let cachedPost = self.store.posts[index]
+            cachedPost.appearance = fetchedPost.appearance
+            cachedPost.body = fetchedPost.body
+            cachedPost.collectionAlias = fetchedPost.collectionAlias
+            cachedPost.createdDate = fetchedPost.createdDate
+            cachedPost.language = fetchedPost.language
+            cachedPost.postId = fetchedPost.postId
+            cachedPost.rtl = fetchedPost.rtl ?? false
+            cachedPost.slug = fetchedPost.slug
+            cachedPost.status = PostStatus.published.rawValue
+            cachedPost.title = fetchedPost.title
+            cachedPost.updatedDate = fetchedPost.updatedDate
             DispatchQueue.main.async {
-                self.store.posts[index].wfPost = wfPost
+                PersistenceManager().saveContext()
             }
         } catch {
             print(error)
@@ -264,9 +278,20 @@ private extension WriteFreelyModel {
     func updateFromServerHandler(result: Result<WFPost, Error>) {
         do {
             let fetchedPost = try result.get()
+            guard let cachedPost = self.selectedPost else { return }
+            cachedPost.appearance = fetchedPost.appearance
+            cachedPost.body = fetchedPost.body
+            cachedPost.collectionAlias = fetchedPost.collectionAlias
+            cachedPost.createdDate = fetchedPost.createdDate
+            cachedPost.language = fetchedPost.language
+            cachedPost.postId = fetchedPost.postId
+            cachedPost.rtl = fetchedPost.rtl ?? false
+            cachedPost.slug = fetchedPost.slug
+            cachedPost.status = PostStatus.published.rawValue
+            cachedPost.title = fetchedPost.title
+            cachedPost.updatedDate = fetchedPost.updatedDate
             DispatchQueue.main.async {
-                guard let selectedPost = self.selectedPost else { return }
-                self.store.replace(post: selectedPost, with: fetchedPost)
+                PersistenceManager().saveContext()
             }
         } catch {
             print(error)
