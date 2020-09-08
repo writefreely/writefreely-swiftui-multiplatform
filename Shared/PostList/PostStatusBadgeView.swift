@@ -85,7 +85,7 @@ let testPostData = [
 struct PostStatusBadge_LocalDraftPreviews: PreviewProvider {
     static var previews: some View {
         userCollection1.title = "Collection 1"
-        PostStatusBadgeView(post: testPostData[2])
+        return PostStatusBadgeView(post: testPostData[2])
     }
 }
 

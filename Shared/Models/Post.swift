@@ -19,7 +19,7 @@ class Post: Identifiable, ObservableObject, Hashable {
         title: String = "Title",
         body: String = "Write your post here...",
         createdDate: Date = Date(),
-        status: PostStatus = .draft,
+        status: PostStatus = .local,
         collection: WFACollection? = nil
     ) {
         self.wfPost = WFPost(body: body, title: title, createdDate: createdDate)
