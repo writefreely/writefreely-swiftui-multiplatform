@@ -7,7 +7,7 @@ import Security
 class WriteFreelyModel: ObservableObject {
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
-    @Published var store = PostStore()
+    @Published var store = PostListModel()
     @Published var collections = CollectionListModel()
     @Published var isLoggingIn: Bool = false
     @Published var selectedPost: Post?

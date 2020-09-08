@@ -2,7 +2,7 @@ import Foundation
 import WriteFreely
 import CoreData
 
-struct PostStore {
+struct PostListModel {
     var posts: [Post]
 
     init(posts: [Post] = []) {
