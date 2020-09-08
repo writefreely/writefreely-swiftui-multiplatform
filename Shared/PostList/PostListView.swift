@@ -139,7 +139,7 @@ struct PostListView: View {
         managedPost.createdDate = post.wfPost.createdDate
         managedPost.title = post.wfPost.title
         managedPost.body = post.wfPost.body
-        managedPost.status = 0
+        managedPost.status = PostStatus.local.rawValue
         DispatchQueue.main.async {
             model.store.add(post)
             PersistenceManager().saveContext()

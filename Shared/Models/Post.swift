@@ -1,12 +1,6 @@
 import Foundation
 import WriteFreely
 
-enum PostStatus {
-    case local
-    case edited
-    case published
-}
-
 class Post: Identifiable, ObservableObject, Hashable {
     @Published var wfPost: WFPost
     @Published var status: PostStatus

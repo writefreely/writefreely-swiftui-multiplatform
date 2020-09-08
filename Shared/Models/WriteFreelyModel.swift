@@ -235,7 +235,7 @@ private extension WriteFreelyModel {
                 managedPost.title = fetchedPost.title
                 managedPost.body = fetchedPost.body
                 managedPost.collectionAlias = fetchedPost.collectionAlias
-                managedPost.status = 2  // 0 = local, 1 = edited, 2 = published
+                managedPost.status = PostStatus.published.rawValue  // 0 = local, 1 = edited, 2 = published
             }
             DispatchQueue.main.async {
                 self.store.updateStore(with: fetchedPostsArray)
