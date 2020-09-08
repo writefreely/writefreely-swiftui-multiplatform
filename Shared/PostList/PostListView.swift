@@ -32,8 +32,7 @@ struct PostListView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        let post = Post()
-                        model.store.add(post)
+                        createNewLocalDraft()
                     }, label: {
                         Image(systemName: "square.and.pencil")
                     })
@@ -90,8 +89,7 @@ struct PostListView: View {
         .navigationSubtitle(pluralizedPostCount(for: showPosts(for: selectedCollection)))
         .toolbar {
             Button(action: {
-                let post = Post()
-                model.store.add(post)
+                createNewLocalDraft()
             }, label: {
                 Image(systemName: "square.and.pencil")
             })
@@ -132,6 +130,19 @@ struct PostListView: View {
             model.collections.clearUserCollection()
             model.fetchUserCollections()
             model.fetchUserPosts()
+        }
+    }
+
+    private func createNewLocalDraft() {
+        let post = Post()
+        let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
+        managedPost.createdDate = post.wfPost.createdDate
+        managedPost.title = post.wfPost.title
+        managedPost.body = post.wfPost.body
+        managedPost.status = 0
+        DispatchQueue.main.async {
+            model.store.add(post)
+            PersistenceManager().saveContext()
         }
     }
 }
