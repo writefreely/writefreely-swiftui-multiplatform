@@ -2,31 +2,25 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Environment(\.managedObjectContext) var moc
 
     @ObservedObject var post: WFAPost
 
-    @State private var postTitle = ""
-    @State private var postBody = ""
-
     var body: some View {
         VStack {
-            TextEditor(text: $postTitle)
+            TextEditor(text: $post.title)
                 .font(.title)
                 .frame(height: 100)
-                .onChange(of: postTitle) { _ in
-                    if post.status == PostStatus.published.rawValue && post.title != postTitle {
-                        post.status = PostStatus.edited.rawValue
-                    }
-                    post.title = postTitle
-                }
-            TextEditor(text: $postBody)
-                .font(.body)
-                .onChange(of: postBody) { _ in
+                .onChange(of: post.title) { _ in
                     if post.status == PostStatus.published.rawValue {
                         post.status = PostStatus.edited.rawValue
                     }
-                    post.body = postBody
+                }
+            TextEditor(text: $post.body)
+                .font(.body)
+                .onChange(of: post.body) { _ in
+                    if post.status == PostStatus.published.rawValue {
+                        post.status = PostStatus.edited.rawValue
+                    }
                 }
         }
         .padding()
@@ -43,10 +37,6 @@ struct PostEditorView: View {
                 })
             }
         }
-        .onAppear(perform: {
-            postTitle = post.title ?? ""
-            postBody = post.body ?? ""
-        })
         .onDisappear(perform: {
             if post.status == PostStatus.edited.rawValue {
                 DispatchQueue.main.async {

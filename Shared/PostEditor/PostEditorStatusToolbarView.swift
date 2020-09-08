@@ -19,7 +19,7 @@ struct PostEditorStatusToolbarView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Button(action: {
-                            model.updateFromServer(post: post)
+                            model.updateFromServer(post: post)  // FIXME: This shouldn't change post status after update
                         }, label: {
                             Image(systemName: "square.and.arrow.down")
                         })

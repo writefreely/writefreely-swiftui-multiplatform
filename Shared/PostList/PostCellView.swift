@@ -6,7 +6,7 @@ struct PostCellView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(post.title ?? "")
+                Text(post.title)
                     .font(.headline)
                     .lineLimit(1)
                 Text(buildDateString(from: post.createdDate ?? Date()))

@@ -19,13 +19,6 @@ class WriteFreelyModel: ObservableObject {
         // Set the color scheme based on what's been saved in UserDefaults.
         DispatchQueue.main.async {
             self.preferences.appearance = self.defaults.integer(forKey: self.preferences.colorSchemeIntegerKey)
-        }
-
-        #if DEBUG
-//        for post in testPostData { store.add(post) }
-        #endif
-
-        DispatchQueue.main.async {
             self.account.restoreState()
             if self.account.isLoggedIn {
                 guard let serverURL = URL(string: self.account.server) else {
@@ -88,8 +81,8 @@ extension WriteFreelyModel {
         guard let loggedInClient = client else { return }
 
         var wfPost = WFPost(
-            body: post.body ?? "",
-            title: post.title,
+            body: post.body,
+            title: post.title.isEmpty ? "" : post.title,
             appearance: post.appearance,
             language: post.language,
             rtl: post.rtl,
@@ -227,18 +220,31 @@ private extension WriteFreelyModel {
         do {
             let fetchedPosts = try result.get()
             for fetchedPost in fetchedPosts {
-                let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
-                managedPost.postId = fetchedPost.postId
-                managedPost.slug = fetchedPost.slug
-                managedPost.appearance = fetchedPost.appearance
-                managedPost.language = fetchedPost.language
-                managedPost.rtl = fetchedPost.rtl ?? false
-                managedPost.createdDate = fetchedPost.createdDate
-                managedPost.updatedDate = fetchedPost.updatedDate
-                managedPost.title = fetchedPost.title
-                managedPost.body = fetchedPost.body
-                managedPost.collectionAlias = fetchedPost.collectionAlias
-                managedPost.status = PostStatus.published.rawValue
+                // For each fetched post, we
+                // 1. check to see if a matching post exists
+                if let managedPost = store.posts.first(where: { $0.postId == fetchedPost.postId }) {
+                    // If it exists, we set the hasNewerRemoteCopy flag as appropriate.
+                    if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
+                       let localPostUpdatedDate = managedPost.updatedDate {
+                        managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
+                    } else {
+                        print("Error: could not determine which copy of post is newer")
+                    }
+                } else {
+                    // If it doesn't exist, we create the managed object.
+                    let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
+                    managedPost.postId = fetchedPost.postId
+                    managedPost.slug = fetchedPost.slug
+                    managedPost.appearance = fetchedPost.appearance
+                    managedPost.language = fetchedPost.language
+                    managedPost.rtl = fetchedPost.rtl ?? false
+                    managedPost.createdDate = fetchedPost.createdDate
+                    managedPost.updatedDate = fetchedPost.updatedDate
+                    managedPost.title = fetchedPost.title ?? ""
+                    managedPost.body = fetchedPost.body
+                    managedPost.collectionAlias = fetchedPost.collectionAlias
+                    managedPost.status = PostStatus.published.rawValue
+                }
             }
             DispatchQueue.main.async {
                 PersistenceManager().saveContext()
@@ -265,7 +271,7 @@ private extension WriteFreelyModel {
             cachedPost.rtl = fetchedPost.rtl ?? false
             cachedPost.slug = fetchedPost.slug
             cachedPost.status = PostStatus.published.rawValue
-            cachedPost.title = fetchedPost.title
+            cachedPost.title = fetchedPost.title ?? ""
             cachedPost.updatedDate = fetchedPost.updatedDate
             DispatchQueue.main.async {
                 PersistenceManager().saveContext()
@@ -288,8 +294,9 @@ private extension WriteFreelyModel {
             cachedPost.rtl = fetchedPost.rtl ?? false
             cachedPost.slug = fetchedPost.slug
             cachedPost.status = PostStatus.published.rawValue
-            cachedPost.title = fetchedPost.title
+            cachedPost.title = fetchedPost.title ?? ""
             cachedPost.updatedDate = fetchedPost.updatedDate
+            cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
                 PersistenceManager().saveContext()
             }

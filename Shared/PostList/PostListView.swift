@@ -131,14 +131,12 @@ struct PostListView: View {
     }
 
     private func createNewLocalDraft() {
-        let post = Post()
         let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
-        managedPost.createdDate = post.wfPost.createdDate
-        managedPost.title = post.wfPost.title
-        managedPost.body = post.wfPost.body
+        managedPost.createdDate = Date()
+        managedPost.title = ""
+        managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
         DispatchQueue.main.async {
-//            model.store.add(post)
             PersistenceManager().saveContext()
         }
     }
