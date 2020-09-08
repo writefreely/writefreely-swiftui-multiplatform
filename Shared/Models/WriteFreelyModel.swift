@@ -10,6 +10,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var store = PostStore()
     @Published var collections = CollectionListModel(with: [])
     @Published var isLoggingIn: Bool = false
+    @Published var selectedPost: Post?
 
     private var client: WFClient?
     private let defaults = UserDefaults.standard
@@ -26,6 +27,25 @@ class WriteFreelyModel: ObservableObject {
 
         DispatchQueue.main.async {
             self.account.restoreState()
+            if self.account.isLoggedIn {
+                guard let serverURL = URL(string: self.account.server) else {
+                    print("Server URL not found")
+                    return
+                }
+                guard let token = self.fetchTokenFromKeychain(
+                        username: self.account.username,
+                        server: self.account.server
+                ) else {
+                    print("Could not fetch token from Keychain")
+                    return
+                }
+                self.account.login(WFUser(token: token, username: self.account.username))
+                self.client = WFClient(for: serverURL)
+                self.client?.user = self.account.user
+                self.collections.clearUserCollection()
+                self.fetchUserCollections()
+                self.fetchUserPosts()
+            }
         }
     }
 }
@@ -80,6 +100,15 @@ extension WriteFreelyModel {
             )
         }
     }
+
+    func updateFromServer(post: Post) {
+        guard let loggedInClient = client else { return }
+        guard let postId = post.wfPost.postId else { return }
+        DispatchQueue.main.async {
+            self.selectedPost = post
+        }
+        loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
+    }
 }
 
 private extension WriteFreelyModel {
@@ -121,7 +150,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     self.collections.clearUserCollection()
-                    self.store.purge()
+                    self.store.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -136,7 +165,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     self.collections.clearUserCollection()
-                    self.store.purge()
+                    self.store.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -176,6 +205,7 @@ private extension WriteFreelyModel {
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         do {
             let fetchedPosts = try result.get()
+            var fetchedPostsArray: [Post] = []
             for fetchedPost in fetchedPosts {
                 var post: Post
                 if let matchingAlias = fetchedPost.collectionAlias {
@@ -186,9 +216,10 @@ private extension WriteFreelyModel {
                 } else {
                     post = Post(wfPost: fetchedPost)
                 }
-                DispatchQueue.main.async {
-                    self.store.add(post)
-                }
+                fetchedPostsArray.append(post)
+            }
+            DispatchQueue.main.async {
+                self.store.updateStore(with: fetchedPostsArray)
             }
         } catch {
             print(error)
@@ -204,6 +235,18 @@ private extension WriteFreelyModel {
             guard let index = foundPostIndex else { return }
             DispatchQueue.main.async {
                 self.store.posts[index].wfPost = wfPost
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func updateFromServerHandler(result: Result<WFPost, Error>) {
+        do {
+            let fetchedPost = try result.get()
+            DispatchQueue.main.async {
+                guard let selectedPost = self.selectedPost else { return }
+                self.store.replace(post: selectedPost, with: fetchedPost)
             }
         } catch {
             print(error)

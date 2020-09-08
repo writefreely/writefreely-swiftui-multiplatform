@@ -7,10 +7,11 @@ enum PostStatus {
     case published
 }
 
-class Post: Identifiable, ObservableObject {
+class Post: Identifiable, ObservableObject, Hashable {
     @Published var wfPost: WFPost
     @Published var status: PostStatus
     @Published var collection: PostCollection
+    @Published var hasNewerRemoteCopy: Bool = false
 
     let id = UUID()
 
@@ -35,6 +36,16 @@ class Post: Identifiable, ObservableObject {
             collection: collection
         )
         self.wfPost = wfPost
+    }
+}
+
+extension Post {
+    static func == (lhs: Post, rhs: Post) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 

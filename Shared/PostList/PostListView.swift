@@ -48,9 +48,17 @@ struct PostListView: View {
                                 SettingsView(isPresented: $isPresentingSettings)
                             }
                         )
+                        .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
                             .foregroundColor(.secondary)
+                        Spacer()
+                        Button(action: {
+                            reloadFromServer()
+                        }, label: {
+                            Image(systemName: "arrow.clockwise")
+                        })
+                        .disabled(!model.account.isLoggedIn)
                     }
                     .padding()
                     .frame(width: geometry.size.width)
@@ -78,6 +86,12 @@ struct PostListView: View {
             }, label: {
                 Image(systemName: "square.and.pencil")
             })
+            Button(action: {
+                reloadFromServer()
+            }, label: {
+                Image(systemName: "arrow.clockwise")
+            })
+            .disabled(!model.account.isLoggedIn)
         }
         #endif
     }
@@ -97,6 +111,14 @@ struct PostListView: View {
             return model.store.posts.filter {
                 $0.collection.title == collection.title
             }
+        }
+    }
+
+    private func reloadFromServer() {
+        DispatchQueue.main.async {
+            model.collections.clearUserCollection()
+            model.fetchUserCollections()
+            model.fetchUserPosts()
         }
     }
 }

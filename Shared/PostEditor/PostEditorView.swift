@@ -29,7 +29,7 @@ struct PostEditorView: View {
         .padding()
         .toolbar {
             ToolbarItem(placement: .status) {
-                PostStatusBadgeView(post: post)
+                PostEditorStatusToolbarView(post: post)
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
@@ -45,6 +45,13 @@ struct PostEditorView: View {
             checkIfNewPost()
             if self.isNewPost {
                 addNewPostToStore()
+            }
+        })
+        .onDisappear(perform: {
+            if post.status == .edited {
+                DispatchQueue.main.async {
+                    model.store.update(post)
+                }
             }
         })
     }
@@ -68,9 +75,24 @@ struct PostEditorView_NewLocalDraftPreviews: PreviewProvider {
     }
 }
 
-struct PostEditorView_ExistingPostPreviews: PreviewProvider {
+struct PostEditorView_NewerLocalPostPreviews: PreviewProvider {
     static var previews: some View {
-        PostEditorView(post: testPostData[0])
+        return PostEditorView(post: testPost)
+            .environmentObject(WriteFreelyModel())
+    }
+}
+
+struct PostEditorView_NewerRemotePostPreviews: PreviewProvider {
+    static var previews: some View {
+        let newerRemotePost = Post(
+            title: testPost.wfPost.title ?? "",
+            body: testPost.wfPost.body,
+            createdDate: testPost.wfPost.createdDate ?? Date(),
+            status: testPost.status,
+            collection: testPost.collection
+        )
+        newerRemotePost.hasNewerRemoteCopy = true
+        return PostEditorView(post: newerRemotePost)
             .environmentObject(WriteFreelyModel())
     }
 }
