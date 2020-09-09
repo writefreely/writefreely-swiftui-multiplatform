@@ -52,31 +52,18 @@ struct PostEditorView: View {
     }
 }
 
-//struct PostEditorView_NewLocalDraftPreviews: PreviewProvider {
-//    static var previews: some View {
-//        PostEditorView(post: Post())
-//            .environmentObject(WriteFreelyModel())
-//    }
-//}
-//
-//struct PostEditorView_NewerLocalPostPreviews: PreviewProvider {
-//    static var previews: some View {
-//        return PostEditorView(post: testPost)
-//            .environmentObject(WriteFreelyModel())
-//    }
-//}
-//
-//struct PostEditorView_NewerRemotePostPreviews: PreviewProvider {
-//    static var previews: some View {
-//        let newerRemotePost = Post(
-//            title: testPost.wfPost.title ?? "",
-//            body: testPost.wfPost.body,
-//            createdDate: testPost.wfPost.createdDate ?? Date(),
-//            status: testPost.status,
-//            collection: testPost.collection
-//        )
-//        newerRemotePost.hasNewerRemoteCopy = true
-//        return PostEditorView(post: newerRemotePost)
-//            .environmentObject(WriteFreelyModel())
-//    }
-//}
+struct PostEditorView_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = PersistenceManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.title = "Test Post Title"
+        testPost.body = "Here's some cool sample body text."
+        testPost.createdDate = Date()
+
+        let model = WriteFreelyModel()
+
+        return PostEditorView(post: testPost)
+            .environment(\.managedObjectContext, context)
+            .environmentObject(model)
+    }
+}

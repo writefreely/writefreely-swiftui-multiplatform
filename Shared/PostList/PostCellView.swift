@@ -28,13 +28,15 @@ struct PostCellView: View {
     }
 }
 
-//struct PostCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let testPost = Post(
-//            title: "Test Post Title",
-//            body: "Here's some cool sample body text.",
-//            createdDate: Date()
-//        )
-//        return PostCellView(post: testPost)
-//    }
-//}
+struct PostCell_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = PersistenceManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.title = "Test Post Title"
+        testPost.body = "Here's some cool sample body text."
+        testPost.createdDate = Date()
+
+        return PostCellView(post: testPost)
+            .environment(\.managedObjectContext, context)
+    }
+}
