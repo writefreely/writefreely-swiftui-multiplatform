@@ -7,7 +7,7 @@ import Security
 class WriteFreelyModel: ObservableObject {
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
-    @Published var store = PostListModel()
+    @Published var posts = PostListModel()
     @Published var collections = CollectionListModel()
     @Published var isLoggingIn: Bool = false
     @Published var selectedPost: WFAPost?
@@ -159,7 +159,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     self.collections.clearUserCollection()
-                    self.store.purgeAllPosts()
+                    self.posts.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -174,7 +174,7 @@ private extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.collections.clearUserCollection()
                     self.account.logout()
-                    self.store.purgeAllPosts()
+                    self.posts.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -222,7 +222,7 @@ private extension WriteFreelyModel {
             for fetchedPost in fetchedPosts {
                 // For each fetched post, we
                 // 1. check to see if a matching post exists
-                if let managedPost = store.posts.first(where: { $0.postId == fetchedPost.postId }) {
+                if let managedPost = posts.userPosts.first(where: { $0.postId == fetchedPost.postId }) {
                     // If it exists, we set the hasNewerRemoteCopy flag as appropriate.
                     if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
                        let localPostUpdatedDate = managedPost.updatedDate {
@@ -248,6 +248,7 @@ private extension WriteFreelyModel {
             }
             DispatchQueue.main.async {
                 PersistenceManager().saveContext()
+                self.posts.loadCachedPosts()
             }
         } catch {
             print(error)
@@ -257,11 +258,11 @@ private extension WriteFreelyModel {
     func publishHandler(result: Result<WFPost, Error>) {
         do {
             let fetchedPost = try result.get()
-            let foundPostIndex = store.posts.firstIndex(where: {
+            let foundPostIndex = posts.userPosts.firstIndex(where: {
                 $0.title == fetchedPost.title && $0.body == fetchedPost.body
             })
             guard let index = foundPostIndex else { return }
-            let cachedPost = self.store.posts[index]
+            let cachedPost = self.posts.userPosts[index]
             cachedPost.appearance = fetchedPost.appearance
             cachedPost.body = fetchedPost.body
             cachedPost.collectionAlias = fetchedPost.collectionAlias

@@ -4,11 +4,6 @@ struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.managedObjectContext) var moc
 
-    @FetchRequest(
-        entity: WFAPost.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \WFAPost.createdDate, ascending: true)]
-    ) var posts: FetchedResults<WFAPost>
-
     @State var selectedCollection: WFACollection?
     @State var showAllPosts: Bool = false
 
@@ -19,14 +14,7 @@ struct PostListView: View {
     var body: some View {
         #if os(iOS)
         GeometryReader { geometry in
-            List {
-                ForEach(showPosts(for: selectedCollection)) { post in
-                    NavigationLink(destination: PostEditorView(post: post)) {
-                        PostCellView(post: post)
-                    }
-                }
-            }
-            .environmentObject(model)
+            PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts)
             .navigationTitle(
                 showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                     model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
@@ -73,13 +61,7 @@ struct PostListView: View {
             }
         }
         #else //if os(macOS)
-        List {
-            ForEach(showPosts(for: selectedCollection)) { post in
-                NavigationLink(destination: PostEditorView(post: post)) {
-                    PostCellView(post: post)
-                }
-            }
-        }
+        PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts)
         .navigationTitle(
             showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                 model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
@@ -112,12 +94,12 @@ struct PostListView: View {
 
     private func showPosts(for collection: WFACollection?) -> [WFAPost] {
         if showAllPosts {
-            return model.store.posts
+            return model.posts.userPosts
         } else {
             if let selectedCollection = collection {
-                return model.store.posts.filter { $0.collectionAlias == selectedCollection.alias }
+                return model.posts.userPosts.filter { $0.collectionAlias == selectedCollection.alias }
             } else {
-                return model.store.posts.filter { $0.collectionAlias == nil }
+                return model.posts.userPosts.filter { $0.collectionAlias == nil }
             }
         }
     }

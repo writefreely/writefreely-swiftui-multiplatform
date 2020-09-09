@@ -3,7 +3,7 @@ import WriteFreely
 import CoreData
 
 class PostListModel: ObservableObject {
-    @Published var posts = [WFAPost]()
+    @Published var userPosts = [WFAPost]()
 
     init() {
         loadCachedPosts()
@@ -14,17 +14,17 @@ class PostListModel: ObservableObject {
         let sort = NSSortDescriptor(key: "createdDate", ascending: false)
         request.sortDescriptors = [sort]
 
-        posts = []
+        userPosts = []
         do {
             let cachedPosts = try PersistenceManager.persistentContainer.viewContext.fetch(request)
-            posts.append(contentsOf: cachedPosts)
+            userPosts.append(contentsOf: cachedPosts)
         } catch {
             print("Error: Failed to fetch cached posts.")
         }
     }
 
     func purgeAllPosts() {
-        posts = []
+        userPosts = []
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFAPost")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
