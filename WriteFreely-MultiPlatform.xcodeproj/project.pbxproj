@@ -16,15 +16,11 @@
 		17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
 		17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
 		17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */; };
-		171BFDF724D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
-		171BFDF824D49FD400888236 /* PostCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF624D49FD400888236 /* PostCollection.swift */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		174D313224EC2831006CA9EE /* WriteFreelyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D313124EC2831006CA9EE /* WriteFreelyModel.swift */; };
 		174D313324EC2831006CA9EE /* WriteFreelyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D313124EC2831006CA9EE /* WriteFreelyModel.swift */; };
 		1753F6AC24E431CC00309365 /* MacPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1753F6AB24E431CC00309365 /* MacPreferencesView.swift */; };
-		1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
-		1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6A24CB1E4B00FD7257 /* Post.swift */; };
 		1756AE6E24CB255B00FD7257 /* PostListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6D24CB255B00FD7257 /* PostListModel.swift */; };
 		1756AE6F24CB255B00FD7257 /* PostListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE6D24CB255B00FD7257 /* PostListModel.swift */; };
 		1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCellView.swift */; };
@@ -98,11 +94,9 @@
 		17120DA824E1B2F5002B9F6C /* AccountLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLogoutView.swift; sourceTree = "<group>"; };
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
 		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
-		171BFDF624D49FD400888236 /* PostCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollection.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		174D313124EC2831006CA9EE /* WriteFreelyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFreelyModel.swift; sourceTree = "<group>"; };
 		1753F6AB24E431CC00309365 /* MacPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPreferencesView.swift; sourceTree = "<group>"; };
-		1756AE6A24CB1E4B00FD7257 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1756AE6D24CB255B00FD7257 /* PostListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListModel.swift; sourceTree = "<group>"; };
 		1756AE7324CB26FA00FD7257 /* PostCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellView.swift; sourceTree = "<group>"; };
 		1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorView.swift; sourceTree = "<group>"; };
@@ -213,8 +207,6 @@
 				1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */,
 				17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */,
 				17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */,
-				1756AE6A24CB1E4B00FD7257 /* Post.swift */,
-				171BFDF624D49FD400888236 /* PostCollection.swift */,
 				17C42E612507D8E600072984 /* PostStatus.swift */,
 				174D313124EC2831006CA9EE /* WriteFreelyModel.swift */,
 				1756DBB524FED3A400207AB8 /* LocalStorageModel.xcdatamodeld */,
@@ -595,7 +587,6 @@
 				1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1762DCB324EB086C0019C4EB /* CollectionListModel.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */,
-				171BFDF724D49FD400888236 /* PostCollection.swift in Sources */,
 				17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
 				1756DC0124FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
@@ -605,7 +596,6 @@
 				17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */,
 				1756AE6E24CB255B00FD7257 /* PostListModel.swift in Sources */,
 				174D313224EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,
-				1756AE6B24CB1E4B00FD7257 /* Post.swift in Sources */,
 				17120DA124E19839002B9F6C /* AccountView.swift in Sources */,
 				1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */,
 			);
@@ -615,7 +605,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				171BFDF824D49FD400888236 /* PostCollection.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756DBBB24FED45500207AB8 /* PersistenceManager.swift in Sources */,
@@ -640,7 +629,6 @@
 				1756AE6F24CB255B00FD7257 /* PostListModel.swift in Sources */,
 				1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				1756DBB424FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
-				1756AE6C24CB1E4B00FD7257 /* Post.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
 				1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */,
 				17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */,
