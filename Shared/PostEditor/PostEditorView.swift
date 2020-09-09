@@ -43,7 +43,7 @@ struct PostEditorView: View {
             }
         })
         .onDisappear(perform: {
-            if post.status == PostStatus.edited.rawValue {
+            if post.status < PostStatus.published.rawValue {
                 DispatchQueue.main.async {
                     PersistenceManager().saveContext()
                 }
