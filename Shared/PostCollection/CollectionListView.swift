@@ -34,7 +34,7 @@ struct CollectionListView: View {
 
 struct CollectionListView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
 
         return CollectionListView()

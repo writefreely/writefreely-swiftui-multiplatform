@@ -113,20 +113,20 @@ struct PostListView: View {
     }
 
     private func createNewLocalDraft() {
-        let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
+        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
         DispatchQueue.main.async {
-            PersistenceManager().saveContext()
+            LocalStorageManager().saveContext()
         }
     }
 }
 
 struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
 
         return PostListView()

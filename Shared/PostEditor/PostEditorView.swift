@@ -45,7 +45,7 @@ struct PostEditorView: View {
         .onDisappear(perform: {
             if post.status < PostStatus.published.rawValue {
                 DispatchQueue.main.async {
-                    PersistenceManager().saveContext()
+                    LocalStorageManager().saveContext()
                 }
             }
         })
@@ -54,7 +54,7 @@ struct PostEditorView: View {
 
 struct PostEditorView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = "Test Post Title"
         testPost.body = "Here's some cool sample body text."

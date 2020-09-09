@@ -30,7 +30,7 @@ struct PostCellView: View {
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = "Test Post Title"
         testPost.body = "Here's some cool sample body text."

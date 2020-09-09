@@ -15,7 +15,7 @@ class CollectionListModel: ObservableObject {
 
         userCollections = []
         do {
-            let cachedCollections = try PersistenceManager.persistentContainer.viewContext.fetch(request)
+            let cachedCollections = try LocalStorageManager.persistentContainer.viewContext.fetch(request)
             userCollections.append(contentsOf: cachedCollections)
         } catch {
             print("Error: Failed to fetch cached user collections.")
@@ -28,8 +28,8 @@ class CollectionListModel: ObservableObject {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try PersistenceManager.persistentContainer.persistentStoreCoordinator.execute(
-                deleteRequest, with: PersistenceManager.persistentContainer.viewContext
+            try LocalStorageManager.persistentContainer.persistentStoreCoordinator.execute(
+                deleteRequest, with: LocalStorageManager.persistentContainer.viewContext
             )
         } catch {
             print("Error: Failed to purge cached collections.")

@@ -63,7 +63,7 @@ struct PostEditorStatusToolbarView: View {
 
 struct PESTView_StandardPreviews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
         let testPost = WFAPost(context: context)
         testPost.status = PostStatus.published.rawValue
@@ -75,7 +75,7 @@ struct PESTView_StandardPreviews: PreviewProvider {
 
 struct PESTView_OutdatedLocalCopyPreviews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
         let testPost = WFAPost(context: context)
         testPost.status = PostStatus.published.rawValue

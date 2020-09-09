@@ -16,7 +16,7 @@ class PostListModel: ObservableObject {
 
         userPosts = []
         do {
-            let cachedPosts = try PersistenceManager.persistentContainer.viewContext.fetch(request)
+            let cachedPosts = try LocalStorageManager.persistentContainer.viewContext.fetch(request)
             userPosts.append(contentsOf: cachedPosts)
         } catch {
             print("Error: Failed to fetch cached posts.")
@@ -29,8 +29,8 @@ class PostListModel: ObservableObject {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try PersistenceManager.persistentContainer.persistentStoreCoordinator.execute(
-                deleteRequest, with: PersistenceManager.persistentContainer.viewContext
+            try LocalStorageManager.persistentContainer.persistentStoreCoordinator.execute(
+                deleteRequest, with: LocalStorageManager.persistentContainer.viewContext
             )
         } catch {
             print("Error: Failed to purge cached posts.")

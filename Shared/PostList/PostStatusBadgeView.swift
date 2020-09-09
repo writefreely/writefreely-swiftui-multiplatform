@@ -38,7 +38,7 @@ struct PostStatusBadgeView: View {
 
 struct PostStatusBadge_LocalDraftPreviews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.status = PostStatus.local.rawValue
 
@@ -49,7 +49,7 @@ struct PostStatusBadge_LocalDraftPreviews: PreviewProvider {
 
 struct PostStatusBadge_EditedPreviews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.status = PostStatus.edited.rawValue
 
@@ -60,7 +60,7 @@ struct PostStatusBadge_EditedPreviews: PreviewProvider {
 
 struct PostStatusBadge_PublishedPreviews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.status = PostStatus.published.rawValue
 

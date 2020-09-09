@@ -6,7 +6,7 @@ import UIKit
 import AppKit
 #endif
 
-class PersistenceManager {
+class LocalStorageManager {
     static let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "LocalStorageModel")
         container.loadPersistentStores { _, error in
@@ -36,15 +36,17 @@ class PersistenceManager {
     }
 
     func saveContext() {
-        if PersistenceManager.persistentContainer.viewContext.hasChanges {
+        if LocalStorageManager.persistentContainer.viewContext.hasChanges {
             do {
-                try PersistenceManager.persistentContainer.viewContext.save()
+                try LocalStorageManager.persistentContainer.viewContext.save()
             } catch {
                 print("Error saving context: \(error)")
             }
         }
     }
+}
 
+private extension LocalStorageManager {
     func saveContextOnResignActive(_ notification: Notification) {
         saveContext()
     }

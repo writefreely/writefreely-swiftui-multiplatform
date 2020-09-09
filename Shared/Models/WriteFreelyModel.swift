@@ -198,7 +198,7 @@ private extension WriteFreelyModel {
             let fetchedCollections = try result.get()
             for fetchedCollection in fetchedCollections {
                 DispatchQueue.main.async {
-                    let localCollection = WFACollection(context: PersistenceManager.persistentContainer.viewContext)
+                    let localCollection = WFACollection(context: LocalStorageManager.persistentContainer.viewContext)
                     localCollection.alias = fetchedCollection.alias
                     localCollection.blogDescription = fetchedCollection.description
                     localCollection.email = fetchedCollection.email
@@ -209,7 +209,7 @@ private extension WriteFreelyModel {
                 }
             }
             DispatchQueue.main.async {
-                PersistenceManager().saveContext()
+                LocalStorageManager().saveContext()
             }
         } catch {
             print(error)
@@ -232,7 +232,7 @@ private extension WriteFreelyModel {
                     }
                 } else {
                     // If it doesn't exist, we create the managed object.
-                    let managedPost = WFAPost(context: PersistenceManager.persistentContainer.viewContext)
+                    let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
                     managedPost.postId = fetchedPost.postId
                     managedPost.slug = fetchedPost.slug
                     managedPost.appearance = fetchedPost.appearance
@@ -247,7 +247,7 @@ private extension WriteFreelyModel {
                 }
             }
             DispatchQueue.main.async {
-                PersistenceManager().saveContext()
+                LocalStorageManager().saveContext()
                 self.posts.loadCachedPosts()
             }
         } catch {
@@ -275,7 +275,7 @@ private extension WriteFreelyModel {
             cachedPost.title = fetchedPost.title ?? ""
             cachedPost.updatedDate = fetchedPost.updatedDate
             DispatchQueue.main.async {
-                PersistenceManager().saveContext()
+                LocalStorageManager().saveContext()
             }
         } catch {
             print(error)
@@ -299,7 +299,7 @@ private extension WriteFreelyModel {
             cachedPost.updatedDate = fetchedPost.updatedDate
             cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
-                PersistenceManager().saveContext()
+                LocalStorageManager().saveContext()
             }
         } catch {
             print(error)

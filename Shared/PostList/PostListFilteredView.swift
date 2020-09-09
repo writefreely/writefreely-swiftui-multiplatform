@@ -37,7 +37,7 @@ struct PostListFilteredView: View {
 
 struct PostListFilteredView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = PersistenceManager.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
 
         return PostListFilteredView(filter: nil, showAllPosts: false)
             .environment(\.managedObjectContext, context)
