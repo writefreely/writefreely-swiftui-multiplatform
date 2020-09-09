@@ -32,10 +32,7 @@ class PersistenceManager {
         // See: https://developer.apple.com/documentation/foundation/notificationcenter/1413994-removeobserver
         // And: https://developer.apple.com/documentation/foundation/notificationcenter/1407263-removeobserver
         // swiftlint:disable:next discarded_notification_center_observer
-        center.addObserver(forName: notification, object: nil, queue: nil) { [weak self] _ in
-            guard let self = self else { return }
-            self.saveContext()
-        }
+        center.addObserver(forName: notification, object: nil, queue: nil, using: self.saveContextOnResignActive)
     }
 
     func saveContext() {
@@ -46,5 +43,9 @@ class PersistenceManager {
                 print("Error saving context: \(error)")
             }
         }
+    }
+
+    func saveContextOnResignActive(_ notification: Notification) {
+        saveContext()
     }
 }
