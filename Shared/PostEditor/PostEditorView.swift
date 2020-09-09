@@ -37,6 +37,11 @@ struct PostEditorView: View {
                 })
             }
         }
+        .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
+            if post.status == PostStatus.edited.rawValue && !post.hasNewerRemoteCopy {
+                post.status = PostStatus.published.rawValue
+            }
+        })
         .onDisappear(perform: {
             if post.status == PostStatus.edited.rawValue {
                 DispatchQueue.main.async {
