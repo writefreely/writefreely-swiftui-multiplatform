@@ -23,15 +23,16 @@ class CollectionListModel: ObservableObject {
     }
 
     func clearUserCollection() {
-        // Make sure the userCollections property is properly populated.
-        // FIXME: Without this, sometimes the userCollections array is empty.
-        loadCachedUserCollections()
-
-        for userCollection in userCollections {
-            PersistenceManager.persistentContainer.viewContext.delete(userCollection)
-        }
-        PersistenceManager().saveContext()
-
         userCollections = []
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFACollection")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try PersistenceManager.persistentContainer.persistentStoreCoordinator.execute(
+                deleteRequest, with: PersistenceManager.persistentContainer.viewContext
+            )
+        } catch {
+            print("Error: Failed to purge cached collections.")
+        }
     }
 }
