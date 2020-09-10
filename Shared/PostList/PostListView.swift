@@ -117,6 +117,9 @@ struct PostListView: View {
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
+        if let selectedCollectionAlias = selectedCollection?.alias {
+            managedPost.collectionAlias = selectedCollectionAlias
+        }
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
         }
