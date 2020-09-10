@@ -1,5 +1,4 @@
-import Foundation
-import WriteFreely
+import SwiftUI
 import CoreData
 
 class PostListModel: ObservableObject {
