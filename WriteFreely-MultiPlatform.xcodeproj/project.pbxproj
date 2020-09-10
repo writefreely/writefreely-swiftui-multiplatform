@@ -40,8 +40,6 @@
 		1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */; };
 		1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
 		1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
-		1762DCB324EB086C0019C4EB /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DCB224EB086C0019C4EB /* CollectionListModel.swift */; };
-		1762DCB424EB086C0019C4EB /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1762DCB224EB086C0019C4EB /* CollectionListModel.swift */; };
 		1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
@@ -107,7 +105,6 @@
 		1756DBB924FED45500207AB8 /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
 		1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		1762DCB224EB086C0019C4EB /* CollectionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListModel.swift; sourceTree = "<group>"; };
 		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		17A5388724DDA31F00DEFF9A /* MacAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAccountView.swift; sourceTree = "<group>"; };
 		17A5388B24DDC83F00DEFF9A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
@@ -358,7 +355,6 @@
 		17DF32D224C8B78D00BCE2E3 /* PostCollection */ = {
 			isa = PBXGroup;
 			children = (
-				1762DCB224EB086C0019C4EB /* CollectionListModel.swift */,
 				171BFDF924D4AF8300888236 /* CollectionListView.swift */,
 			);
 			path = PostCollection;
@@ -585,7 +581,6 @@
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
 				17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
-				1762DCB324EB086C0019C4EB /* CollectionListModel.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
 				1756DC0124FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
@@ -623,7 +618,6 @@
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */,
 				17B996D92502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
-				1762DCB424EB086C0019C4EB /* CollectionListModel.swift in Sources */,
 				1756DBB824FED3A400207AB8 /* LocalStorageModel.xcdatamodeld in Sources */,
 				17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */,
 				1756AE6F24CB255B00FD7257 /* PostListModel.swift in Sources */,

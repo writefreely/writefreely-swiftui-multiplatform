@@ -44,6 +44,19 @@ class LocalStorageManager {
             }
         }
     }
+
+    func purgeUserCollections() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFACollection")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try LocalStorageManager.persistentContainer.persistentStoreCoordinator.execute(
+                deleteRequest, with: LocalStorageManager.persistentContainer.viewContext
+            )
+        } catch {
+            print("Error: Failed to purge cached collections.")
+        }
+    }
 }
 
 private extension LocalStorageManager {

@@ -8,7 +8,6 @@ class WriteFreelyModel: ObservableObject {
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
     @Published var posts = PostListModel()
-    @Published var collections = CollectionListModel()
     @Published var isLoggingIn: Bool = false
     @Published var selectedPost: WFAPost?
 
@@ -35,9 +34,7 @@ class WriteFreelyModel: ObservableObject {
                 self.account.login(WFUser(token: token, username: self.account.username))
                 self.client = WFClient(for: serverURL)
                 self.client?.user = self.account.user
-                if self.collections.userCollections.count == 0 {
-                    self.fetchUserCollections()
-                }
+                self.fetchUserCollections()
                 self.fetchUserPosts()
             }
         }
@@ -158,7 +155,7 @@ private extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    self.collections.clearUserCollection()
+                    LocalStorageManager().purgeUserCollections()
                     self.posts.purgeAllPosts()
                 }
             } catch {
@@ -172,7 +169,7 @@ private extension WriteFreelyModel {
                 try purgeTokenFromKeychain(username: account.user?.username, server: account.server)
                 client = nil
                 DispatchQueue.main.async {
-                    self.collections.clearUserCollection()
+                    LocalStorageManager().purgeUserCollections()
                     self.account.logout()
                     self.posts.purgeAllPosts()
                 }
