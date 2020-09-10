@@ -174,8 +174,8 @@ private extension WriteFreelyModel {
                 try purgeTokenFromKeychain(username: account.user?.username, server: account.server)
                 client = nil
                 DispatchQueue.main.async {
-                    LocalStorageManager().purgeUserCollections()
                     self.account.logout()
+                    LocalStorageManager().purgeUserCollections()
                     self.posts.purgeAllPosts()
                 }
             } catch {

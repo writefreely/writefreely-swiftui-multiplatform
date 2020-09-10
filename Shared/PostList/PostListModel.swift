@@ -28,9 +28,7 @@ class PostListModel: ObservableObject {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try LocalStorageManager.persistentContainer.persistentStoreCoordinator.execute(
-                deleteRequest, with: LocalStorageManager.persistentContainer.viewContext
-            )
+            try LocalStorageManager.persistentContainer.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
             print("Error: Failed to purge cached posts.")
         }
