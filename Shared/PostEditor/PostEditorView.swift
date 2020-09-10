@@ -30,8 +30,7 @@ struct PostEditorView: View {
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    model.publish(post: post)
-                    post.status = PostStatus.published.rawValue
+                    publishPost()
                 }, label: {
                     Image(systemName: "paperplane")
                 })
@@ -49,6 +48,14 @@ struct PostEditorView: View {
                 }
             }
         })
+    }
+
+    private func publishPost() {
+        DispatchQueue.main.async {
+            LocalStorageManager().saveContext()
+            model.posts.loadCachedPosts()
+            model.publish(post: post)
+        }
     }
 }
 
