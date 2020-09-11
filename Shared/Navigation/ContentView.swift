@@ -13,6 +13,18 @@ struct ContentView: View {
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
+
+        #if os(iOS)
+        EmptyView()
+            .sheet(
+                isPresented: $model.isPresentingSettingsView,
+                onDismiss: { model.isPresentingSettingsView = false },
+                content: {
+                    SettingsView()
+                        .environmentObject(model)
+                }
+            )
+        #endif
     }
 }
 
