@@ -7,10 +7,6 @@ struct PostListView: View {
     @State var selectedCollection: WFACollection?
     @State var showAllPosts: Bool = false
 
-    #if os(iOS)
-    @State private var isPresentingSettings = false
-    #endif
-
     var body: some View {
         #if os(iOS)
         GeometryReader { geometry in
@@ -31,18 +27,10 @@ struct PostListView: View {
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
                         Button(action: {
-                            isPresentingSettings = true
+                            model.isPresentingSettingsView = true
                         }, label: {
                             Image(systemName: "gear")
-                        }).sheet(
-                            isPresented: $isPresentingSettings,
-                            onDismiss: {
-                                isPresentingSettings = false
-                            },
-                            content: {
-                                SettingsView(isPresented: $isPresentingSettings)
-                            }
-                        )
+                        })
                         .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))

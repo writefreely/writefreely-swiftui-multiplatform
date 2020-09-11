@@ -11,6 +11,10 @@ class WriteFreelyModel: ObservableObject {
     @Published var isLoggingIn: Bool = false
     @Published var selectedPost: WFAPost?
 
+    #if os(iOS)
+    @Published var isPresentingSettingsView: Bool = false
+    #endif
+
     private var client: WFClient?
     private let defaults = UserDefaults.standard
 
