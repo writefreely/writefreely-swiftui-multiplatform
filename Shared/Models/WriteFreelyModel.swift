@@ -7,10 +7,13 @@ import Security
 class WriteFreelyModel: ObservableObject {
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
-    @Published var store = PostStore()
-    @Published var collections = CollectionListModel(with: [])
+    @Published var posts = PostListModel()
     @Published var isLoggingIn: Bool = false
-    @Published var selectedPost: Post?
+    @Published var selectedPost: WFAPost?
+
+    #if os(iOS)
+    @Published var isPresentingSettingsView: Bool = false
+    #endif
 
     private var client: WFClient?
     private let defaults = UserDefaults.standard
@@ -19,13 +22,6 @@ class WriteFreelyModel: ObservableObject {
         // Set the color scheme based on what's been saved in UserDefaults.
         DispatchQueue.main.async {
             self.preferences.appearance = self.defaults.integer(forKey: self.preferences.colorSchemeIntegerKey)
-        }
-
-        #if DEBUG
-//        for post in testPostData { store.add(post) }
-        #endif
-
-        DispatchQueue.main.async {
             self.account.restoreState()
             if self.account.isLoggedIn {
                 guard let serverURL = URL(string: self.account.server) else {
@@ -42,7 +38,6 @@ class WriteFreelyModel: ObservableObject {
                 self.account.login(WFUser(token: token, username: self.account.username))
                 self.client = WFClient(for: serverURL)
                 self.client?.user = self.account.user
-                self.collections.clearUserCollection()
                 self.fetchUserCollections()
                 self.fetchUserPosts()
             }
@@ -83,31 +78,50 @@ extension WriteFreelyModel {
         loggedInClient.getPosts(completion: fetchUserPostsHandler)
     }
 
-    func publish(post: Post) {
+    func publish(post: WFAPost) {
         guard let loggedInClient = client else { return }
 
-        if let existingPostId = post.wfPost.postId {
+        var wfPost = WFPost(
+            body: post.body,
+            title: post.title.isEmpty ? "" : post.title,
+            appearance: post.appearance,
+            language: post.language,
+            rtl: post.rtl,
+            createdDate: post.createdDate
+        )
+
+        if let existingPostId = post.postId {
             // This is an existing post.
+            wfPost.postId = post.postId
+            wfPost.slug = post.slug
+            wfPost.updatedDate = post.updatedDate
+            wfPost.collectionAlias = post.collectionAlias
+
             loggedInClient.updatePost(
                 postId: existingPostId,
-                updatedPost: post.wfPost,
+                updatedPost: wfPost,
                 completion: publishHandler
             )
         } else {
             // This is a new local draft.
             loggedInClient.createPost(
-                post: post.wfPost, in: post.collection.wfCollection?.alias, completion: publishHandler
+                post: wfPost, in: post.collectionAlias, completion: publishHandler
             )
         }
     }
 
-    func updateFromServer(post: Post) {
+    func updateFromServer(post: WFAPost) {
         guard let loggedInClient = client else { return }
-        guard let postId = post.wfPost.postId else { return }
+        guard let postId = post.postId else { return }
         DispatchQueue.main.async {
             self.selectedPost = post
         }
-        loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
+        if let postCollectionAlias = post.collectionAlias,
+           let postSlug = post.slug {
+            loggedInClient.getPost(bySlug: postSlug, from: postCollectionAlias, completion: updateFromServerHandler)
+        } else {
+            loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
+        }
     }
 }
 
@@ -133,7 +147,8 @@ private extension WriteFreelyModel {
                 self.account.currentError = AccountError.invalidPassword
             }
         } catch {
-            if let error = error as? NSError, error.domain == NSURLErrorDomain, error.code == -1003 {
+            if (error as NSError).domain == NSURLErrorDomain,
+               (error as NSError).code == -1003 {
                 DispatchQueue.main.async {
                     self.account.currentError = AccountError.serverNotFound
                 }
@@ -149,8 +164,8 @@ private extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    self.collections.clearUserCollection()
-                    self.store.purgeAllPosts()
+                    LocalStorageManager().purgeUserCollections()
+                    self.posts.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -164,8 +179,8 @@ private extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    self.collections.clearUserCollection()
-                    self.store.purgeAllPosts()
+                    LocalStorageManager().purgeUserCollections()
+                    self.posts.purgeAllPosts()
                 }
             } catch {
                 print("Something went wrong purging the token from the Keychain.")
@@ -175,9 +190,8 @@ private extension WriteFreelyModel {
             // so we're using a hacky workaround — if we get the NSURLError, but the AccountModel still thinks we're
             // logged in, try calling the logout function again and see what we get.
             // Conditional cast from 'Error' to 'NSError' always succeeds but is the only way to check error properties.
-            if let error = error as? NSError,
-               error.domain == NSURLErrorDomain,
-               error.code == NSURLErrorCannotParseResponse {
+            if (error as NSError).domain == NSURLErrorDomain,
+               (error as NSError).code == NSURLErrorCannotParseResponse {
                 if account.isLoggedIn {
                     self.logout()
                 }
@@ -188,14 +202,20 @@ private extension WriteFreelyModel {
     func fetchUserCollectionsHandler(result: Result<[WFCollection], Error>) {
         do {
             let fetchedCollections = try result.get()
-            var fetchedCollectionsArray: [PostCollection] = []
             for fetchedCollection in fetchedCollections {
-                var postCollection = PostCollection(title: fetchedCollection.title)
-                postCollection.wfCollection = fetchedCollection
-                fetchedCollectionsArray.append(postCollection)
+                DispatchQueue.main.async {
+                    let localCollection = WFACollection(context: LocalStorageManager.persistentContainer.viewContext)
+                    localCollection.alias = fetchedCollection.alias
+                    localCollection.blogDescription = fetchedCollection.description
+                    localCollection.email = fetchedCollection.email
+                    localCollection.isPublic = fetchedCollection.isPublic ?? false
+                    localCollection.styleSheet = fetchedCollection.styleSheet
+                    localCollection.title = fetchedCollection.title
+                    localCollection.url = fetchedCollection.url
+                }
             }
             DispatchQueue.main.async {
-                self.collections = CollectionListModel(with: fetchedCollectionsArray)
+                LocalStorageManager().saveContext()
             }
         } catch {
             print(error)
@@ -205,21 +225,36 @@ private extension WriteFreelyModel {
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         do {
             let fetchedPosts = try result.get()
-            var fetchedPostsArray: [Post] = []
             for fetchedPost in fetchedPosts {
-                var post: Post
-                if let matchingAlias = fetchedPost.collectionAlias {
-                    let postCollection = (
-                        collections.userCollections.filter { $0.wfCollection?.alias == matchingAlias }
-                    ).first
-                    post = Post(wfPost: fetchedPost, in: postCollection ?? draftsCollection)
+                // For each fetched post, we
+                // 1. check to see if a matching post exists
+                if let managedPost = posts.userPosts.first(where: { $0.postId == fetchedPost.postId }) {
+                    // If it exists, we set the hasNewerRemoteCopy flag as appropriate.
+                    if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
+                       let localPostUpdatedDate = managedPost.updatedDate {
+                        managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
+                    } else {
+                        print("Error: could not determine which copy of post is newer")
+                    }
                 } else {
-                    post = Post(wfPost: fetchedPost)
+                    // If it doesn't exist, we create the managed object.
+                    let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
+                    managedPost.postId = fetchedPost.postId
+                    managedPost.slug = fetchedPost.slug
+                    managedPost.appearance = fetchedPost.appearance
+                    managedPost.language = fetchedPost.language
+                    managedPost.rtl = fetchedPost.rtl ?? false
+                    managedPost.createdDate = fetchedPost.createdDate
+                    managedPost.updatedDate = fetchedPost.updatedDate
+                    managedPost.title = fetchedPost.title ?? ""
+                    managedPost.body = fetchedPost.body
+                    managedPost.collectionAlias = fetchedPost.collectionAlias
+                    managedPost.status = PostStatus.published.rawValue
                 }
-                fetchedPostsArray.append(post)
             }
             DispatchQueue.main.async {
-                self.store.updateStore(with: fetchedPostsArray)
+                LocalStorageManager().saveContext()
+                self.posts.loadCachedPosts()
             }
         } catch {
             print(error)
@@ -228,13 +263,25 @@ private extension WriteFreelyModel {
 
     func publishHandler(result: Result<WFPost, Error>) {
         do {
-            let wfPost = try result.get()
-            let foundPostIndex = store.posts.firstIndex(where: {
-                $0.wfPost.title == wfPost.title && $0.wfPost.body == wfPost.body
+            let fetchedPost = try result.get()
+            let foundPostIndex = posts.userPosts.firstIndex(where: {
+                $0.title == fetchedPost.title && $0.body == fetchedPost.body
             })
             guard let index = foundPostIndex else { return }
+            let cachedPost = self.posts.userPosts[index]
+            cachedPost.appearance = fetchedPost.appearance
+            cachedPost.body = fetchedPost.body
+            cachedPost.collectionAlias = fetchedPost.collectionAlias
+            cachedPost.createdDate = fetchedPost.createdDate
+            cachedPost.language = fetchedPost.language
+            cachedPost.postId = fetchedPost.postId
+            cachedPost.rtl = fetchedPost.rtl ?? false
+            cachedPost.slug = fetchedPost.slug
+            cachedPost.status = PostStatus.published.rawValue
+            cachedPost.title = fetchedPost.title ?? ""
+            cachedPost.updatedDate = fetchedPost.updatedDate
             DispatchQueue.main.async {
-                self.store.posts[index].wfPost = wfPost
+                LocalStorageManager().saveContext()
             }
         } catch {
             print(error)
@@ -242,11 +289,26 @@ private extension WriteFreelyModel {
     }
 
     func updateFromServerHandler(result: Result<WFPost, Error>) {
+        // ⚠️ NOTE:
+        // The API does not return a collection alias, so we take care not to overwrite the
+        // cached post's collection alias with the 'nil' value from the fetched post.
+        // See: https://github.com/writeas/writefreely-swift/issues/20
         do {
             let fetchedPost = try result.get()
+            guard let cachedPost = self.selectedPost else { return }
+            cachedPost.appearance = fetchedPost.appearance
+            cachedPost.body = fetchedPost.body
+            cachedPost.createdDate = fetchedPost.createdDate
+            cachedPost.language = fetchedPost.language
+            cachedPost.postId = fetchedPost.postId
+            cachedPost.rtl = fetchedPost.rtl ?? false
+            cachedPost.slug = fetchedPost.slug
+            cachedPost.status = PostStatus.published.rawValue
+            cachedPost.title = fetchedPost.title ?? ""
+            cachedPost.updatedDate = fetchedPost.updatedDate
+            cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
-                guard let selectedPost = self.selectedPost else { return }
-                self.store.replace(post: selectedPost, with: fetchedPost)
+                LocalStorageManager().saveContext()
             }
         } catch {
             print(error)

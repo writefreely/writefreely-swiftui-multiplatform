@@ -3,26 +3,23 @@ import SwiftUI
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
 
-    @ObservedObject var post: Post
+    @ObservedObject var post: WFAPost
 
-    @State private var isNewPost = false
-    @State private var title = ""
     var body: some View {
         VStack {
-            TextEditor(text: $title)
+            TextEditor(text: $post.title)
                 .font(.title)
                 .frame(height: 100)
-                .onChange(of: title) { _ in
-                    if post.status == .published && post.wfPost.title != title {
-                        post.status = .edited
+                .onChange(of: post.title) { _ in
+                    if post.status == PostStatus.published.rawValue {
+                        post.status = PostStatus.edited.rawValue
                     }
-                    post.wfPost.title = title
                 }
-            TextEditor(text: $post.wfPost.body)
+            TextEditor(text: $post.body)
                 .font(.body)
-                .onChange(of: post.wfPost.body) { _ in
-                    if post.status == .published {
-                        post.status = .edited
+                .onChange(of: post.body) { _ in
+                    if post.status == PostStatus.published.rawValue {
+                        post.status = PostStatus.edited.rawValue
                     }
                 }
         }
@@ -33,66 +30,47 @@ struct PostEditorView: View {
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    model.publish(post: post)
-                    post.status = .published
+                    publishPost()
                 }, label: {
                     Image(systemName: "paperplane")
                 })
             }
         }
-        .onAppear(perform: {
-            title = post.wfPost.title ?? ""
-            checkIfNewPost()
-            if self.isNewPost {
-                addNewPostToStore()
+        .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
+            if post.status == PostStatus.edited.rawValue && !post.hasNewerRemoteCopy {
+                post.status = PostStatus.published.rawValue
             }
         })
         .onDisappear(perform: {
-            if post.status == .edited {
+            if post.status < PostStatus.published.rawValue {
                 DispatchQueue.main.async {
-                    model.store.update(post)
+                    LocalStorageManager().saveContext()
                 }
             }
         })
     }
 
-    private func checkIfNewPost() {
-        self.isNewPost = !model.store.posts.contains(where: { $0.id == post.id })
-    }
-
-    private func addNewPostToStore() {
-        withAnimation {
-            model.store.add(post)
-            self.isNewPost = false
+    private func publishPost() {
+        DispatchQueue.main.async {
+            LocalStorageManager().saveContext()
+            model.posts.loadCachedPosts()
+            model.publish(post: post)
         }
     }
 }
 
-struct PostEditorView_NewLocalDraftPreviews: PreviewProvider {
+struct PostEditorView_Previews: PreviewProvider {
     static var previews: some View {
-        PostEditorView(post: Post())
-            .environmentObject(WriteFreelyModel())
-    }
-}
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.title = "Test Post Title"
+        testPost.body = "Here's some cool sample body text."
+        testPost.createdDate = Date()
 
-struct PostEditorView_NewerLocalPostPreviews: PreviewProvider {
-    static var previews: some View {
+        let model = WriteFreelyModel()
+
         return PostEditorView(post: testPost)
-            .environmentObject(WriteFreelyModel())
-    }
-}
-
-struct PostEditorView_NewerRemotePostPreviews: PreviewProvider {
-    static var previews: some View {
-        let newerRemotePost = Post(
-            title: testPost.wfPost.title ?? "",
-            body: testPost.wfPost.body,
-            createdDate: testPost.wfPost.createdDate ?? Date(),
-            status: testPost.status,
-            collection: testPost.collection
-        )
-        newerRemotePost.hasNewerRemoteCopy = true
-        return PostEditorView(post: newerRemotePost)
-            .environmentObject(WriteFreelyModel())
+            .environment(\.managedObjectContext, context)
+            .environmentObject(model)
     }
 }

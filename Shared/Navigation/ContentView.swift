@@ -7,23 +7,34 @@ struct ContentView: View {
         NavigationView {
             SidebarView()
 
-            PostListView(selectedCollection: allPostsCollection)
+            PostListView(selectedCollection: nil, showAllPosts: true)
 
             Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
+
+        #if os(iOS)
+        EmptyView()
+            .sheet(
+                isPresented: $model.isPresentingSettingsView,
+                onDismiss: { model.isPresentingSettingsView = false },
+                content: {
+                    SettingsView()
+                        .environmentObject(model)
+                }
+            )
+        #endif
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        model.collections = CollectionListModel(with: [userCollection1, userCollection2, userCollection3])
-        for post in testPostData {
-            model.store.add(post)
-        }
+
         return ContentView()
+            .environment(\.managedObjectContext, context)
             .environmentObject(model)
     }
 }

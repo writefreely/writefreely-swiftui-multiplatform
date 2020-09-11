@@ -3,11 +3,9 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var model: WriteFreelyModel
 
-    @Binding var isPresented: Bool
-
     var body: some View {
         VStack {
-            SettingsHeaderView(isPresented: $isPresented)
+            SettingsHeaderView()
             Form {
                 Section(header: Text("Login Details")) {
                     AccountView()
@@ -23,7 +21,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(isPresented: .constant(true))
+        SettingsView()
             .environmentObject(WriteFreelyModel())
     }
 }

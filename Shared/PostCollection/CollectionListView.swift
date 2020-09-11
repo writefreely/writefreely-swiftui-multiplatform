@@ -2,14 +2,28 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @Environment(\.managedObjectContext) var moc
+
+    @FetchRequest(
+        entity: WFACollection.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \WFACollection.title, ascending: true)]
+    ) var collections: FetchedResults<WFACollection>
 
     var body: some View {
         List {
-            ForEach(model.collections.collectionsList) { collection in
-                NavigationLink(
-                    destination: PostListView(selectedCollection: collection)
-                ) {
-                    Text(collection.title)
+            NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: true)) {
+                Text("All Posts")
+            }
+            NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
+                Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
+            }
+            Section(header: Text("Your Blogs")) {
+                ForEach(collections, id: \.alias) { collection in
+                    NavigationLink(
+                        destination: PostListView(selectedCollection: collection, showAllPosts: false)
+                    ) {
+                        Text(collection.title)
+                    }
                 }
             }
         }
@@ -18,11 +32,13 @@ struct CollectionListView: View {
     }
 }
 
-struct CollectionSidebar_Previews: PreviewProvider {
+struct CollectionListView_Previews: PreviewProvider {
     static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        model.collections = CollectionListModel(with: [userCollection1, userCollection2, userCollection3])
+
         return CollectionListView()
+            .environment(\.managedObjectContext, context)
             .environmentObject(model)
     }
 }

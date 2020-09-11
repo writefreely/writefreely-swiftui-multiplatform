@@ -6,7 +6,7 @@ struct PostEditorStatusToolbarView: View {
     #endif
     @EnvironmentObject var model: WriteFreelyModel
 
-    @ObservedObject var post: Post
+    @ObservedObject var post: WFAPost
 
     var body: some View {
         if post.hasNewerRemoteCopy {
@@ -61,58 +61,27 @@ struct PostEditorStatusToolbarView: View {
     }
 }
 
-struct ToolbarView_LocalPreviews: PreviewProvider {
+struct PESTView_StandardPreviews: PreviewProvider {
     static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        let post = testPost
-        return PostEditorStatusToolbarView(post: post)
+        let testPost = WFAPost(context: context)
+        testPost.status = PostStatus.published.rawValue
+
+        return PostEditorStatusToolbarView(post: testPost)
             .environmentObject(model)
     }
 }
 
-struct ToolbarView_RemotePreviews: PreviewProvider {
+struct PESTView_OutdatedLocalCopyPreviews: PreviewProvider {
     static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        let newerRemotePost = Post(
-            title: testPost.wfPost.title ?? "",
-            body: testPost.wfPost.body,
-            createdDate: testPost.wfPost.createdDate ?? Date(),
-            status: testPost.status,
-            collection: testPost.collection
-        )
-        newerRemotePost.hasNewerRemoteCopy = true
-        return PostEditorStatusToolbarView(post: newerRemotePost)
-            .environmentObject(model)
-    }
-}
+        let testPost = WFAPost(context: context)
+        testPost.status = PostStatus.published.rawValue
+        testPost.hasNewerRemoteCopy = true
 
-#if os(iOS)
-struct ToolbarView_CompactLocalPreviews: PreviewProvider {
-    static var previews: some View {
-        let model = WriteFreelyModel()
-        let post = testPost
-        return PostEditorStatusToolbarView(post: post)
+        return PostEditorStatusToolbarView(post: testPost)
             .environmentObject(model)
-            .environment(\.horizontalSizeClass, .compact)
     }
 }
-#endif
-
-#if os(iOS)
-struct ToolbarView_CompactRemotePreviews: PreviewProvider {
-    static var previews: some View {
-        let model = WriteFreelyModel()
-        let newerRemotePost = Post(
-            title: testPost.wfPost.title ?? "",
-            body: testPost.wfPost.body,
-            createdDate: testPost.wfPost.createdDate ?? Date(),
-            status: testPost.status,
-            collection: testPost.collection
-        )
-        newerRemotePost.hasNewerRemoteCopy = true
-        return PostEditorStatusToolbarView(post: newerRemotePost)
-            .environmentObject(model)
-            .environment(\.horizontalSizeClass, .compact)
-    }
-}
-#endif

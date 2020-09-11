@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct PostStatusBadgeView: View {
-    @ObservedObject var post: Post
+    @ObservedObject var post: WFAPost
 
     var body: some View {
-        let (badgeLabel, badgeColor) = setupBadgeProperties(for: post.status)
+        let (badgeLabel, badgeColor) = setupBadgeProperties(for: PostStatus(rawValue: post.status)!)
         Text(badgeLabel)
             .font(.caption)
             .fontWeight(.semibold)
@@ -38,20 +38,33 @@ struct PostStatusBadgeView: View {
 
 struct PostStatusBadge_LocalDraftPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadgeView(post: testPostData[2])
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.status = PostStatus.local.rawValue
+
+        return PostStatusBadgeView(post: testPost)
+            .environment(\.managedObjectContext, context)
     }
 }
 
 struct PostStatusBadge_EditedPreviews: PreviewProvider {
     static var previews: some View {
-        Group {
-            PostStatusBadgeView(post: testPostData[1])
-        }
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.status = PostStatus.edited.rawValue
+
+        return PostStatusBadgeView(post: testPost)
+            .environment(\.managedObjectContext, context)
     }
 }
 
 struct PostStatusBadge_PublishedPreviews: PreviewProvider {
     static var previews: some View {
-        PostStatusBadgeView(post: testPostData[0])
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.status = PostStatus.published.rawValue
+
+        return PostStatusBadgeView(post: testPost)
+            .environment(\.managedObjectContext, context)
     }
 }

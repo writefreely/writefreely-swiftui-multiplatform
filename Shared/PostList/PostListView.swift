@@ -2,33 +2,24 @@ import SwiftUI
 
 struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @State var selectedCollection: PostCollection
+    @Environment(\.managedObjectContext) var moc
 
-    #if os(iOS)
-    @State private var isPresentingSettings = false
-    #endif
+    @State var selectedCollection: WFACollection?
+    @State var showAllPosts: Bool = false
 
     var body: some View {
         #if os(iOS)
         GeometryReader { geometry in
-            List {
-                ForEach(showPosts(for: selectedCollection)) { post in
-                    NavigationLink(
-                        destination: PostEditorView(post: post)
-                    ) {
-                        PostCellView(
-                            post: post
-                        )
-                    }
-                }
-            }
-            .environmentObject(model)
-            .navigationTitle(selectedCollection.title)
+            PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts)
+            .navigationTitle(
+                showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                )
+            )
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        let post = Post()
-                        model.store.add(post)
+                        createNewLocalDraft()
                     }, label: {
                         Image(systemName: "square.and.pencil")
                     })
@@ -36,18 +27,10 @@ struct PostListView: View {
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
                         Button(action: {
-                            isPresentingSettings = true
+                            model.isPresentingSettingsView = true
                         }, label: {
                             Image(systemName: "gear")
-                        }).sheet(
-                            isPresented: $isPresentingSettings,
-                            onDismiss: {
-                                isPresentingSettings = false
-                            },
-                            content: {
-                                SettingsView(isPresented: $isPresentingSettings)
-                            }
-                        )
+                        })
                         .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
@@ -66,23 +49,16 @@ struct PostListView: View {
             }
         }
         #else //if os(macOS)
-        List {
-            ForEach(showPosts(for: selectedCollection)) { post in
-                NavigationLink(
-                    destination: PostEditorView(post: post)
-                ) {
-                    PostCellView(
-                        post: post
-                    )
-                }
-            }
-        }
-        .navigationTitle(selectedCollection.title)
+        PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts)
+        .navigationTitle(
+            showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+            )
+        )
         .navigationSubtitle(pluralizedPostCount(for: showPosts(for: selectedCollection)))
         .toolbar {
             Button(action: {
-                let post = Post()
-                model.store.add(post)
+                createNewLocalDraft()
             }, label: {
                 Image(systemName: "square.and.pencil")
             })
@@ -96,7 +72,7 @@ struct PostListView: View {
         #endif
     }
 
-    private func pluralizedPostCount(for posts: [Post]) -> String {
+    private func pluralizedPostCount(for posts: [WFAPost]) -> String {
         if posts.count == 1 {
             return "1 post"
         } else {
@@ -104,34 +80,47 @@ struct PostListView: View {
         }
     }
 
-    private func showPosts(for collection: PostCollection) -> [Post] {
-        if collection == allPostsCollection {
-            return model.store.posts
+    private func showPosts(for collection: WFACollection?) -> [WFAPost] {
+        if showAllPosts {
+            return model.posts.userPosts
         } else {
-            return model.store.posts.filter {
-                $0.collection.title == collection.title
+            if let selectedCollection = collection {
+                return model.posts.userPosts.filter { $0.collectionAlias == selectedCollection.alias }
+            } else {
+                return model.posts.userPosts.filter { $0.collectionAlias == nil }
             }
         }
     }
 
     private func reloadFromServer() {
         DispatchQueue.main.async {
-            model.collections.clearUserCollection()
             model.fetchUserCollections()
             model.fetchUserPosts()
         }
     }
+
+    private func createNewLocalDraft() {
+        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
+        managedPost.createdDate = Date()
+        managedPost.title = ""
+        managedPost.body = ""
+        managedPost.status = PostStatus.local.rawValue
+        if let selectedCollectionAlias = selectedCollection?.alias {
+            managedPost.collectionAlias = selectedCollectionAlias
+        }
+        DispatchQueue.main.async {
+            LocalStorageManager().saveContext()
+        }
+    }
 }
 
-struct PostList_Previews: PreviewProvider {
+struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        for post in testPostData {
-            model.store.add(post)
-        }
-        return Group {
-            PostListView(selectedCollection: allPostsCollection)
-                .environmentObject(model)
-        }
+
+        return PostListView()
+            .environment(\.managedObjectContext, context)
+            .environmentObject(model)
     }
 }

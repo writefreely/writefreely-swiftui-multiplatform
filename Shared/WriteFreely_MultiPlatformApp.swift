@@ -12,6 +12,7 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(model)
+                .environment(\.managedObjectContext, LocalStorageManager.persistentContainer.viewContext)
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
 

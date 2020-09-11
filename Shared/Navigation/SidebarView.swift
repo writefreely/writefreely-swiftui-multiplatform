@@ -8,9 +8,11 @@ struct SidebarView: View {
 
 struct SidebarView_Previews: PreviewProvider {
     static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        model.collections = CollectionListModel(with: [userCollection1, userCollection2, userCollection3])
+
         return SidebarView()
+            .environment(\.managedObjectContext, context)
             .environmentObject(model)
     }
 }

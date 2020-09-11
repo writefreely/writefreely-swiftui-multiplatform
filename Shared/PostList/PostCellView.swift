@@ -1,15 +1,15 @@
 import SwiftUI
 
 struct PostCellView: View {
-    @ObservedObject var post: Post
+    @ObservedObject var post: WFAPost
 
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(post.wfPost.title ?? "")
+                Text(post.title)
                     .font(.headline)
                     .lineLimit(1)
-                Text(buildDateString(from: post.wfPost.createdDate ?? Date()))
+                Text(buildDateString(from: post.createdDate ?? Date()))
                     .font(.caption)
                     .lineLimit(1)
             }
@@ -30,6 +30,13 @@ struct PostCellView: View {
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        PostCellView(post: testPost)
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.title = "Test Post Title"
+        testPost.body = "Here's some cool sample body text."
+        testPost.createdDate = Date()
+
+        return PostCellView(post: testPost)
+            .environment(\.managedObjectContext, context)
     }
 }
