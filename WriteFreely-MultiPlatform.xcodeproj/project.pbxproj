@@ -54,6 +54,8 @@
 		17C42E632507D8E600072984 /* PostStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E612507D8E600072984 /* PostStatus.swift */; };
 		17C42E652509237800072984 /* PostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E642509237800072984 /* PostListFilteredView.swift */; };
 		17C42E662509237800072984 /* PostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E642509237800072984 /* PostListFilteredView.swift */; };
+		17C42E70250AA12300072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */; };
+		17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */; };
 		17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
 		17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
 		17DF329D24C87D3500BCE2E3 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF329C24C87D3500BCE2E3 /* Tests_iOS.swift */; };
@@ -114,6 +116,7 @@
 		17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17C42E612507D8E600072984 /* PostStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStatus.swift; sourceTree = "<group>"; };
 		17C42E642509237800072984 /* PostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListFilteredView.swift; sourceTree = "<group>"; };
+		17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+ExecuteAndMergeChanges.swift"; sourceTree = "<group>"; };
 		17D435E724E3128F0036B539 /* PreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesModel.swift; sourceTree = "<group>"; };
 		17DF328124C87D3300BCE2E3 /* WriteFreely_MultiPlatformApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFreely_MultiPlatformApp.swift; sourceTree = "<group>"; };
 		17DF328224C87D3300BCE2E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -193,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				1756AE8024CB844500FD7257 /* View+Keyboard.swift */,
+				17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -591,6 +595,7 @@
 				17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */,
 				1756AE6E24CB255B00FD7257 /* PostListModel.swift in Sources */,
 				174D313224EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,
+				17C42E70250AA12300072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
 				17120DA124E19839002B9F6C /* AccountView.swift in Sources */,
 				1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */,
 			);
@@ -610,6 +615,7 @@
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
+				17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
 				1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				1753F6AC24E431CC00309365 /* MacPreferencesView.swift in Sources */,
 				1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,

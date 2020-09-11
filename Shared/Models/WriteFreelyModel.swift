@@ -11,6 +11,10 @@ class WriteFreelyModel: ObservableObject {
     @Published var isLoggingIn: Bool = false
     @Published var selectedPost: WFAPost?
 
+    #if os(iOS)
+    @Published var isPresentingSettingsView: Bool = false
+    #endif
+
     private var client: WFClient?
     private let defaults = UserDefaults.standard
 
@@ -112,7 +116,12 @@ extension WriteFreelyModel {
         DispatchQueue.main.async {
             self.selectedPost = post
         }
-        loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
+        if let postCollectionAlias = post.collectionAlias,
+           let postSlug = post.slug {
+            loggedInClient.getPost(bySlug: postSlug, from: postCollectionAlias, completion: updateFromServerHandler)
+        } else {
+            loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
+        }
     }
 }
 
@@ -169,8 +178,8 @@ private extension WriteFreelyModel {
                 try purgeTokenFromKeychain(username: account.user?.username, server: account.server)
                 client = nil
                 DispatchQueue.main.async {
-                    LocalStorageManager().purgeUserCollections()
                     self.account.logout()
+                    LocalStorageManager().purgeUserCollections()
                     self.posts.purgeAllPosts()
                 }
             } catch {
@@ -280,12 +289,15 @@ private extension WriteFreelyModel {
     }
 
     func updateFromServerHandler(result: Result<WFPost, Error>) {
+        // ⚠️ NOTE:
+        // The API does not return a collection alias, so we take care not to overwrite the
+        // cached post's collection alias with the 'nil' value from the fetched post.
+        // See: https://github.com/writeas/writefreely-swift/issues/20
         do {
             let fetchedPost = try result.get()
             guard let cachedPost = self.selectedPost else { return }
             cachedPost.appearance = fetchedPost.appearance
             cachedPost.body = fetchedPost.body
-            cachedPost.collectionAlias = fetchedPost.collectionAlias
             cachedPost.createdDate = fetchedPost.createdDate
             cachedPost.language = fetchedPost.language
             cachedPost.postId = fetchedPost.postId
