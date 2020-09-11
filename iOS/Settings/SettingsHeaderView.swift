@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsHeaderView: View {
-    @Binding var isPresented: Bool
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         HStack {
@@ -10,7 +10,7 @@ struct SettingsHeaderView: View {
                 .fontWeight(.bold)
             Spacer()
             Button(action: {
-                isPresented = false
+                presentationMode.wrappedValue.dismiss()
             }, label: {
                 Image(systemName: "xmark.circle")
             })
@@ -21,6 +21,6 @@ struct SettingsHeaderView: View {
 
 struct SettingsHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsHeaderView(isPresented: .constant(true))
+        SettingsHeaderView()
     }
 }
