@@ -31,7 +31,7 @@
       "size" : "29x29"
     },
     {
-      "filename" : "icon-40@2x.png",
+      "filename" : "icon-40@2x-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -97,7 +97,7 @@
       "size" : "40x40"
     },
     {
-      "filename" : "icon-40@2x-1.png",
+      "filename" : "icon-40@2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
@@ -121,6 +121,7 @@
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "ios-marketing.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
