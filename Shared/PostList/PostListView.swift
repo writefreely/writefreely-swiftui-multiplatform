@@ -111,6 +111,7 @@ struct PostListView: View {
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
         }
+        model.selectedPost = managedPost
     }
 }
 

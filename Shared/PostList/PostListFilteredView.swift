@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostListFilteredView: View {
+    @EnvironmentObject var model: WriteFreelyModel
     var fetchRequest: FetchRequest<WFAPost>
 
     init(filter: String?, showAllPosts: Bool) {
@@ -28,7 +29,11 @@ struct PostListFilteredView: View {
 
     var body: some View {
         List(fetchRequest.wrappedValue, id: \.self) { post in
-            NavigationLink(destination: PostEditorView(post: post)) {
+            NavigationLink(
+                destination: PostEditorView(post: post),
+                tag: post,
+                selection: $model.selectedPost
+            ) {
                 PostCellView(post: post)
             }
         }
