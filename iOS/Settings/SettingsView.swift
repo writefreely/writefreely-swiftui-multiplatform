@@ -13,6 +13,13 @@ struct SettingsView: View {
                 Section(header: Text("Appearance")) {
                     PreferencesView(preferences: model.preferences)
                 }
+                Section(header: Text("Support")) {
+                    HStack {
+                        Spacer()
+                        Link("Visit Help Forum", destination: model.helpURL)
+                        Spacer()
+                    }
+                }
             }
         }
 //        .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
