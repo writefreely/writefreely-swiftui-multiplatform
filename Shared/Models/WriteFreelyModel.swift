@@ -1,6 +1,7 @@
 import Foundation
 import WriteFreely
 import Security
+import Network
 
 // MARK: - WriteFreelyModel
 
@@ -9,6 +10,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var preferences = PreferencesModel()
     @Published var posts = PostListModel()
     @Published var isLoggingIn: Bool = false
+    @Published var hasNetworkConnection: Bool = false
     @Published var selectedPost: WFAPost?
 
     #if os(iOS)
@@ -19,9 +21,10 @@ class WriteFreelyModel: ObservableObject {
 
     private var client: WFClient?
     private let defaults = UserDefaults.standard
+    private let monitor = NWPathMonitor()
+    private let queue = DispatchQueue(label: "NetworkMonitor")
 
     init() {
-        // Set the color scheme based on what's been saved in UserDefaults.
         DispatchQueue.main.async {
             self.preferences.appearance = self.defaults.integer(forKey: self.preferences.colorSchemeIntegerKey)
             self.account.restoreState()
@@ -44,6 +47,13 @@ class WriteFreelyModel: ObservableObject {
                 self.fetchUserPosts()
             }
         }
+
+        monitor.pathUpdateHandler = { path in
+            DispatchQueue.main.async {
+                self.hasNetworkConnection = path.status == .satisfied
+            }
+        }
+        monitor.start(queue: queue)
     }
 }
 
