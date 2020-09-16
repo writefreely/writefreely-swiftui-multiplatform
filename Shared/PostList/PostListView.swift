@@ -105,6 +105,10 @@ struct PostListView: View {
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
+        if let languageCode = Locale.current.languageCode {
+            managedPost.language = languageCode
+            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+        }
         if let selectedCollectionAlias = selectedCollection?.alias {
             managedPost.collectionAlias = selectedCollectionAlias
         }
