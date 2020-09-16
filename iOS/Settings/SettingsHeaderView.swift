@@ -4,16 +4,22 @@ struct SettingsHeaderView: View {
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
-        HStack {
-            Text("Settings")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            Spacer()
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Image(systemName: "xmark.circle")
-            })
+        VStack {
+            HStack {
+                Text("Settings")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Spacer()
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "xmark.circle")
+                })
+            }
+            Text("WriteFreely v\(Bundle.main.appMarketingVersion) (build \(Bundle.main.appBuildVersion))")
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .padding(.top)
         }
         .padding()
     }
