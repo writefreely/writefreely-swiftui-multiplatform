@@ -41,7 +41,7 @@ struct PostListView: View {
                         }, label: {
                             Image(systemName: "arrow.clockwise")
                         })
-                        .disabled(!model.account.isLoggedIn)
+                        .disabled(!model.account.isLoggedIn || !model.hasNetworkConnection)
                     }
                     .padding()
                     .frame(width: geometry.size.width)
@@ -67,7 +67,7 @@ struct PostListView: View {
             }, label: {
                 Image(systemName: "arrow.clockwise")
             })
-            .disabled(!model.account.isLoggedIn)
+            .disabled(!model.account.isLoggedIn || !model.hasNetworkConnection)
         }
         #endif
     }
