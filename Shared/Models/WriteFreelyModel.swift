@@ -15,6 +15,8 @@ class WriteFreelyModel: ObservableObject {
     @Published var isPresentingSettingsView: Bool = false
     #endif
 
+    let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
+
     private var client: WFClient?
     private let defaults = UserDefaults.standard
 
