@@ -83,6 +83,13 @@ extension WriteFreelyModel {
     func publish(post: WFAPost) {
         guard let loggedInClient = client else { return }
 
+        if post.language == nil {
+            if let languageCode = Locale.current.languageCode {
+                post.language = languageCode
+                post.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+            }
+        }
+
         var wfPost = WFPost(
             body: post.body,
             title: post.title.isEmpty ? "" : post.title,
