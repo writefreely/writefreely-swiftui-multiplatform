@@ -14,15 +14,17 @@ struct CollectionListView: View {
             NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: true)) {
                 Text("All Posts")
             }
-            NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
-                Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
-            }
-            Section(header: Text("Your Blogs")) {
-                ForEach(collections, id: \.alias) { collection in
-                    NavigationLink(
-                        destination: PostListView(selectedCollection: collection, showAllPosts: false)
-                    ) {
-                        Text(collection.title)
+            if model.account.isLoggedIn {
+                NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
+                    Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
+                }
+                Section(header: Text("Your Blogs")) {
+                    ForEach(collections, id: \.alias) { collection in
+                        NavigationLink(
+                            destination: PostListView(selectedCollection: collection, showAllPosts: false)
+                        ) {
+                            Text(collection.title)
+                        }
                     }
                 }
             }
