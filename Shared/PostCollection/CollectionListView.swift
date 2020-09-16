@@ -27,12 +27,14 @@ struct CollectionListView: View {
                 }
             }
         }
-        .navigationTitle("Collections")
+        .navigationTitle(
+            model.account.isLoggedIn ? "\(URL(string: model.account.server)?.host ?? "WriteFreely")" : "WriteFreely"
+        )
         .listStyle(SidebarListStyle())
     }
 }
 
-struct CollectionListView_Previews: PreviewProvider {
+struct CollectionListView_LoggedOutPreviews: PreviewProvider {
     static var previews: some View {
         let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
