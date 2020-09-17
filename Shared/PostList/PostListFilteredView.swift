@@ -29,6 +29,7 @@ struct PostListFilteredView: View {
     }
 
     var body: some View {
+        #if os(iOS)
         List {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
                 NavigationLink(
@@ -47,10 +48,38 @@ struct PostListFilteredView: View {
                 }
             })
         }
+        #else
+        List {
+            ForEach(fetchRequest.wrappedValue, id: \.self) { post in
+                NavigationLink(
+                    destination: PostEditorView(post: post),
+                    tag: post,
+                    selection: $model.selectedPost
+                ) {
+                    PostCellView(post: post)
+                }
+                .deleteDisabled(post.status != PostStatus.local.rawValue)
+            }
+            .onDelete(perform: { indexSet in
+                for index in indexSet {
+                    let post = fetchRequest.wrappedValue[index]
+                    delete(post)
+                }
+            })
+        }
+        .onDeleteCommand(perform: {
+            guard let selectedPost = model.selectedPost else { return }
+            if selectedPost.status == PostStatus.local.rawValue {
+                delete(selectedPost)
+            }
+        })
+        #endif
     }
 
     func delete(_ post: WFAPost) {
-        model.posts.remove(post)
+        withAnimation {
+            model.posts.remove(post)
+        }
     }
 }
 
