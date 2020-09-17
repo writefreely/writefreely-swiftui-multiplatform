@@ -13,6 +13,24 @@ struct ContentView: View {
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
+        .alert(isPresented: $model.isPresentingDeleteAlert) {
+            Alert(
+                title: Text("Delete Post?"),
+                message: Text("This action cannot be undone."),
+                primaryButton: .destructive(Text("Delete"), action: {
+                    if let postToDelete = model.postToDelete {
+                        model.selectedPost = nil
+                        withAnimation {
+                            model.posts.remove(postToDelete)
+                        }
+                        model.postToDelete = nil
+                    }
+                }),
+                secondaryButton: .cancel() {
+                    model.postToDelete = nil
+                }
+            )
+        }
 
         #if os(iOS)
         EmptyView()

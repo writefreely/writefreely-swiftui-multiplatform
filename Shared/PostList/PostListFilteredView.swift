@@ -70,16 +70,15 @@ struct PostListFilteredView: View {
         .onDeleteCommand(perform: {
             guard let selectedPost = model.selectedPost else { return }
             if selectedPost.status == PostStatus.local.rawValue {
-                delete(selectedPost)
+                model.postToDelete = selectedPost
+                model.isPresentingDeleteAlert = true
             }
         })
         #endif
     }
 
     func delete(_ post: WFAPost) {
-        withAnimation {
-            model.posts.remove(post)
-        }
+        model.posts.remove(post)
     }
 }
 

@@ -12,7 +12,8 @@ class WriteFreelyModel: ObservableObject {
     @Published var isLoggingIn: Bool = false
     @Published var hasNetworkConnection: Bool = false
     @Published var selectedPost: WFAPost?
-
+    @Published var isPresentingDeleteAlert: Bool = false
+    @Published var postToDelete: WFAPost?
     #if os(iOS)
     @Published var isPresentingSettingsView: Bool = false
     #endif
