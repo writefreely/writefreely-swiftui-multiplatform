@@ -3,6 +3,7 @@ import SwiftUI
 struct PostEditorStatusToolbarView: View {
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.presentationMode) var presentationMode
     #endif
     @EnvironmentObject var model: WriteFreelyModel
 
@@ -52,6 +53,57 @@ struct PostEditorStatusToolbarView: View {
                     model.updateFromServer(post: post)
                 }, label: {
                     Image(systemName: "square.and.arrow.down")
+                })
+            }
+            #endif
+        } else if post.wasDeletedFromServer {
+            #if os(iOS)
+            if horizontalSizeClass == .compact {
+                VStack {
+                    PostStatusBadgeView(post: post)
+                    HStack {
+                        Text("‼️ Post deleted from server. Delete local copy?")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                            model.selectedPost = nil
+                            model.posts.remove(post)
+                        }, label: {
+                            Image(systemName: "trash")
+                        })
+                    }
+                    .padding(.bottom)
+                }
+                .padding(.top)
+            } else {
+                HStack {
+                    PostStatusBadgeView(post: post)
+                        .padding(.trailing)
+                    Text("‼️ Post deleted from server. Delete local copy?")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                        model.selectedPost = nil
+                        model.posts.remove(post)
+                    }, label: {
+                        Image(systemName: "trash")
+                    })
+                }
+            }
+            #else
+            HStack {
+                PostStatusBadgeView(post: post)
+                    .padding(.trailing)
+                Text("‼️ Post deleted from server. Delete local copy?")
+                    .font(.callout)
+                    .foregroundColor(.secondary)
+                Button(action: {
+                    model.selectedPost = nil
+                    model.posts.remove(post)
+                }, label: {
+                    Image(systemName: "trash")
                 })
             }
             #endif

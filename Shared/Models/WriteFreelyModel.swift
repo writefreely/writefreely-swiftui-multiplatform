@@ -244,20 +244,19 @@ private extension WriteFreelyModel {
 
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         do {
+            var postsToDelete = posts.userPosts
             let fetchedPosts = try result.get()
             for fetchedPost in fetchedPosts {
-                // For each fetched post, we
-                // 1. check to see if a matching post exists
                 if let managedPost = posts.userPosts.first(where: { $0.postId == fetchedPost.postId }) {
-                    // If it exists, we set the hasNewerRemoteCopy flag as appropriate.
+                    managedPost.wasDeletedFromServer = false
                     if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
                        let localPostUpdatedDate = managedPost.updatedDate {
                         managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
                     } else {
                         print("Error: could not determine which copy of post is newer")
                     }
+                    postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
                 } else {
-                    // If it doesn't exist, we create the managed object.
                     let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
                     managedPost.postId = fetchedPost.postId
                     managedPost.slug = fetchedPost.slug
@@ -270,7 +269,11 @@ private extension WriteFreelyModel {
                     managedPost.body = fetchedPost.body
                     managedPost.collectionAlias = fetchedPost.collectionAlias
                     managedPost.status = PostStatus.published.rawValue
+                    managedPost.wasDeletedFromServer = false
                 }
+            }
+            for post in postsToDelete {
+                post.wasDeletedFromServer = true
             }
             DispatchQueue.main.async {
                 LocalStorageManager().saveContext()
@@ -377,7 +380,6 @@ private extension WriteFreelyModel {
 
         var secItem: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &secItem)
-
         guard status != errSecItemNotFound else {
             return nil
         }
