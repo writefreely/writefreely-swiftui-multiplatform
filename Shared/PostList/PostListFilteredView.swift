@@ -38,12 +38,12 @@ struct PostListFilteredView: View {
                 ) {
                     PostCellView(post: post)
                 }
-            }.onDelete(perform: { indexSet in
+                .deleteDisabled(post.status != PostStatus.local.rawValue)
+            }
+            .onDelete(perform: { indexSet in
                 for index in indexSet {
                     let post = fetchRequest.wrappedValue[index]
-                    if post.status == PostStatus.local.rawValue {
-                        delete(post)
-                    }
+                    delete(post)
                 }
             })
         }
