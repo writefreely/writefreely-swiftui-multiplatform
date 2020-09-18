@@ -18,7 +18,10 @@ class WriteFreelyModel: ObservableObject {
     @Published var isPresentingSettingsView: Bool = false
     #endif
 
+    // swiftlint:disable line_length
     let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
+    let licensesURL = URL(string: "https://github.com/writeas/writefreely-swiftui-multiplatform/tree/main/Shared/Resources/Licenses")!
+    // swiftlint:enable line_length
 
     private var client: WFClient?
     private let defaults = UserDefaults.standard
@@ -349,7 +352,6 @@ private extension WriteFreelyModel {
             kSecAttrAccount as String: username ?? "anonymous",
             kSecAttrService as String: server
         ]
-
         let status = SecItemAdd(query as CFDictionary, nil)
         guard status == errSecDuplicateItem || status == errSecSuccess else {
             fatalError("Error storing in Keychain with OSStatus: \(status)")
@@ -362,7 +364,6 @@ private extension WriteFreelyModel {
             kSecAttrAccount as String: username ?? "anonymous",
             kSecAttrService as String: server
         ]
-
         let status = SecItemDelete(query as CFDictionary)
         guard status == errSecSuccess || status == errSecItemNotFound else {
             fatalError("Error deleting from Keychain with OSStatus: \(status)")
@@ -378,23 +379,19 @@ private extension WriteFreelyModel {
             kSecReturnAttributes as String: true,
             kSecReturnData as String: true
         ]
-
         var secItem: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &secItem)
         guard status != errSecItemNotFound else {
             return nil
         }
-
         guard status == errSecSuccess else {
             fatalError("Error fetching from Keychain with OSStatus: \(status)")
         }
-
         guard let existingSecItem = secItem as? [String: Any],
               let tokenData = existingSecItem[kSecValueData as String] as? Data,
               let token = String(data: tokenData, encoding: .utf8) else {
             return nil
         }
-
         return token
     }
 }
