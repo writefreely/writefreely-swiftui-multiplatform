@@ -49,6 +49,7 @@
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
 		17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
 		17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */; };
+		17B5103B2515448D00E9631F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 17B5103A2515448D00E9631F /* Credits.rtf */; };
 		17B7827425152CF8008D96C9 /* Hack-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827125152CF8008D96C9 /* Hack-License.txt */; };
 		17B7827525152CF8008D96C9 /* Hack-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827125152CF8008D96C9 /* Hack-License.txt */; };
 		17B7827625152CF8008D96C9 /* Lora-Cyrillic-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827225152CF8008D96C9 /* Lora-Cyrillic-OFL.txt */; };
@@ -129,6 +130,7 @@
 		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		17A5389124DDED0000DEFF9A /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		17B5103A2515448D00E9631F /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		17B7827125152CF8008D96C9 /* Hack-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Hack-License.txt"; sourceTree = "<group>"; };
 		17B7827225152CF8008D96C9 /* Lora-Cyrillic-OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Lora-Cyrillic-OFL.txt"; sourceTree = "<group>"; };
 		17B7827325152CF8008D96C9 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				17DF329224C87D3500BCE2E3 /* Info.plist */,
 				17DF329324C87D3500BCE2E3 /* macOS.entitlements */,
 				17A5388924DDA50500DEFF9A /* Settings */,
+				17B5103A2515448D00E9631F /* Credits.rtf */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 			files = (
 				17B7827525152CF8008D96C9 /* Hack-License.txt in Resources */,
 				17DF32AF24C87D3500BCE2E3 /* Assets.xcassets in Resources */,
+				17B5103B2515448D00E9631F /* Credits.rtf in Resources */,
 				17D4F39F2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */,
 				17B7827725152CF8008D96C9 /* Lora-Cyrillic-OFL.txt in Resources */,
 				17D4F3A62514F1E900517CE6 /* Hack-Regular.ttf in Resources */,
