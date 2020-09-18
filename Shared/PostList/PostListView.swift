@@ -105,6 +105,14 @@ struct PostListView: View {
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
+        switch model.preferences.font {
+        case 1:
+            managedPost.appearance = "sans"
+        case 2:
+            managedPost.appearance = "wrap"
+        default:
+            managedPost.appearance = "serif"
+        }
         if let languageCode = Locale.current.languageCode {
             managedPost.language = languageCode
             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
