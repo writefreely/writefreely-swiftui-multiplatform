@@ -7,21 +7,56 @@ struct PostEditorView: View {
 
     var body: some View {
         VStack {
-            TextEditor(text: $post.title)
-                .font(.title)
-                .frame(height: 100)
-                .onChange(of: post.title) { _ in
-                    if post.status == PostStatus.published.rawValue {
-                        post.status = PostStatus.edited.rawValue
+            switch post.appearance {
+            case "sans":
+                TextEditor(text: $post.title)
+                    .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
+                    .frame(height: 100)
+                    .onChange(of: post.title) { _ in
+                        if post.status == PostStatus.published.rawValue {
+                            post.status = PostStatus.edited.rawValue
+                        }
                     }
-                }
-            TextEditor(text: $post.body)
-                .font(.body)
-                .onChange(of: post.body) { _ in
-                    if post.status == PostStatus.published.rawValue {
-                        post.status = PostStatus.edited.rawValue
+                TextEditor(text: $post.body)
+                    .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
+                    .onChange(of: post.body) { _ in
+                        if post.status == PostStatus.published.rawValue {
+                            post.status = PostStatus.edited.rawValue
+                        }
                     }
-                }
+            case "wrap", "mono", "code":
+                TextEditor(text: $post.title)
+                    .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
+                    .frame(height: 100)
+                    .onChange(of: post.title) { _ in
+                        if post.status == PostStatus.published.rawValue {
+                            post.status = PostStatus.edited.rawValue
+                        }
+                    }
+                TextEditor(text: $post.body)
+                    .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
+                    .onChange(of: post.body) { _ in
+                        if post.status == PostStatus.published.rawValue {
+                            post.status = PostStatus.edited.rawValue
+                        }
+                    }
+            default:
+                TextEditor(text: $post.title)
+                    .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
+                    .frame(height: 100)
+                    .onChange(of: post.title) { _ in
+                        if post.status == PostStatus.published.rawValue {
+                            post.status = PostStatus.edited.rawValue
+                        }
+                    }
+                TextEditor(text: $post.body)
+                    .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
+                    .onChange(of: post.body) { _ in
+                        if post.status == PostStatus.published.rawValue {
+                            post.status = PostStatus.edited.rawValue
+                        }
+                    }
+            }
         }
         .padding()
         .toolbar {
@@ -71,6 +106,7 @@ struct PostEditorView_Previews: PreviewProvider {
         testPost.title = "Test Post Title"
         testPost.body = "Here's some cool sample body text."
         testPost.createdDate = Date()
+        testPost.appearance = "code"
 
         let model = WriteFreelyModel()
 
