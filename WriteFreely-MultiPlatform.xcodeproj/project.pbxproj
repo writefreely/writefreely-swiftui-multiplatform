@@ -49,6 +49,12 @@
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
 		17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
 		17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */; };
+		17B7827425152CF8008D96C9 /* Hack-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827125152CF8008D96C9 /* Hack-License.txt */; };
+		17B7827525152CF8008D96C9 /* Hack-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827125152CF8008D96C9 /* Hack-License.txt */; };
+		17B7827625152CF8008D96C9 /* Lora-Cyrillic-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827225152CF8008D96C9 /* Lora-Cyrillic-OFL.txt */; };
+		17B7827725152CF8008D96C9 /* Lora-Cyrillic-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827225152CF8008D96C9 /* Lora-Cyrillic-OFL.txt */; };
+		17B7827825152CF8008D96C9 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827325152CF8008D96C9 /* OpenSans-License.txt */; };
+		17B7827925152CF8008D96C9 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17B7827325152CF8008D96C9 /* OpenSans-License.txt */; };
 		17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
 		17B996D92502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
 		17B996DA2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */; };
@@ -123,6 +129,9 @@
 		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		17A5389124DDED0000DEFF9A /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		17B7827125152CF8008D96C9 /* Hack-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Hack-License.txt"; sourceTree = "<group>"; };
+		17B7827225152CF8008D96C9 /* Lora-Cyrillic-OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Lora-Cyrillic-OFL.txt"; sourceTree = "<group>"; };
+		17B7827325152CF8008D96C9 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 		17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17C42E612507D8E600072984 /* PostStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStatus.swift; sourceTree = "<group>"; };
@@ -248,9 +257,20 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		17B7827025152BF1008D96C9 /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				17B7827125152CF8008D96C9 /* Hack-License.txt */,
+				17B7827225152CF8008D96C9 /* Lora-Cyrillic-OFL.txt */,
+				17B7827325152CF8008D96C9 /* OpenSans-License.txt */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
 		17D4F3722514EE4400517CE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17B7827025152BF1008D96C9 /* Licenses */,
 				17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */,
 				17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */,
 				17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */,
@@ -527,10 +547,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */,
+				17B7827825152CF8008D96C9 /* OpenSans-License.txt in Resources */,
 				17DF32AE24C87D3500BCE2E3 /* Assets.xcassets in Resources */,
 				17D4F39E2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */,
 				17D4F36C2514EE2F00517CE6 /* LoraGX.ttf in Resources */,
 				17D4F3A52514F1E900517CE6 /* Hack-Regular.ttf in Resources */,
+				17B7827625152CF8008D96C9 /* Lora-Cyrillic-OFL.txt in Resources */,
+				17B7827425152CF8008D96C9 /* Hack-License.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,10 +561,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17B7827525152CF8008D96C9 /* Hack-License.txt in Resources */,
 				17DF32AF24C87D3500BCE2E3 /* Assets.xcassets in Resources */,
 				17D4F39F2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */,
+				17B7827725152CF8008D96C9 /* Lora-Cyrillic-OFL.txt in Resources */,
 				17D4F3A62514F1E900517CE6 /* Hack-Regular.ttf in Resources */,
 				17D4F36D2514EE2F00517CE6 /* LoraGX.ttf in Resources */,
+				17B7827925152CF8008D96C9 /* OpenSans-License.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
