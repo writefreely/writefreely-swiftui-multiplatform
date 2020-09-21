@@ -56,7 +56,7 @@ struct PostEditorStatusToolbarView: View {
                 })
             }
             #endif
-        } else if post.wasDeletedFromServer {
+        } else if post.wasDeletedFromServer && post.status != PostStatus.local.rawValue {
             #if os(iOS)
             if horizontalSizeClass == .compact {
                 VStack {
@@ -132,6 +132,19 @@ struct PESTView_OutdatedLocalCopyPreviews: PreviewProvider {
         let testPost = WFAPost(context: context)
         testPost.status = PostStatus.published.rawValue
         testPost.hasNewerRemoteCopy = true
+
+        return PostEditorStatusToolbarView(post: testPost)
+            .environmentObject(model)
+    }
+}
+
+struct PESTView_DeletedRemoteCopyPreviews: PreviewProvider {
+    static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let model = WriteFreelyModel()
+        let testPost = WFAPost(context: context)
+        testPost.status = PostStatus.published.rawValue
+        testPost.wasDeletedFromServer = true
 
         return PostEditorStatusToolbarView(post: testPost)
             .environmentObject(model)
