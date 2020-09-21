@@ -9,9 +9,8 @@ struct PostEditorView: View {
         VStack {
             switch post.appearance {
             case "sans":
-                TextEditor(text: $post.title)
+                TextField("", text: $post.title)
                     .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .frame(height: 100)
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue {
                             post.status = PostStatus.edited.rawValue
@@ -25,9 +24,8 @@ struct PostEditorView: View {
                         }
                     }
             case "wrap", "mono", "code":
-                TextEditor(text: $post.title)
+                TextField("", text: $post.title)
                     .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .frame(height: 100)
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue {
                             post.status = PostStatus.edited.rawValue
@@ -41,9 +39,8 @@ struct PostEditorView: View {
                         }
                     }
             default:
-                TextEditor(text: $post.title)
+                TextField("", text: $post.title)
                     .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .frame(height: 100)
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue {
                             post.status = PostStatus.edited.rawValue
