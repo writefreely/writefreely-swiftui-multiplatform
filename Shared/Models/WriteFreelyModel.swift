@@ -245,7 +245,7 @@ private extension WriteFreelyModel {
 
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         do {
-            var postsToDelete = posts.userPosts
+            var postsToDelete = posts.userPosts.filter { $0.status != PostStatus.local.rawValue }
             let fetchedPosts = try result.get()
             for fetchedPost in fetchedPosts {
                 if let managedPost = posts.userPosts.first(where: { $0.postId == fetchedPost.postId }) {
