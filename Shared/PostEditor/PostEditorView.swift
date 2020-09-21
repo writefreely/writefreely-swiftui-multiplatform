@@ -60,7 +60,7 @@ struct PostEditorView: View {
         }
         .padding()
         .toolbar {
-            ToolbarItem(placement: .status) {
+            ToolbarItem(placement: .principal) {
                 PostEditorStatusToolbarView(post: post)
             }
             ToolbarItem(placement: .primaryAction) {

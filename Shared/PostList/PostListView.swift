@@ -31,7 +31,6 @@ struct PostListView: View {
                         }, label: {
                             Image(systemName: "gear")
                         })
-                        .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
                             .foregroundColor(.secondary)
