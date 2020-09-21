@@ -55,6 +55,7 @@ struct PostEditorView: View {
                     }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .padding()
         .toolbar {
             ToolbarItem(placement: .principal) {
