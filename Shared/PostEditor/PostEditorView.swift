@@ -94,6 +94,9 @@ struct PostEditorView: View {
             model.posts.loadCachedPosts()
             model.publish(post: post)
         }
+        #if os(iOS)
+        self.hideKeyboard()
+        #endif
     }
 }
 
