@@ -129,11 +129,11 @@ struct PESTView_OutdatedLocalCopyPreviews: PreviewProvider {
     static var previews: some View {
         let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        let testPost = WFAPost(context: context)
-        testPost.status = PostStatus.published.rawValue
-        testPost.hasNewerRemoteCopy = true
+        let updatedPost = WFAPost(context: context)
+        updatedPost.status = PostStatus.published.rawValue
+        updatedPost.hasNewerRemoteCopy = true
 
-        return PostEditorStatusToolbarView(post: testPost)
+        return PostEditorStatusToolbarView(post: updatedPost)
             .environmentObject(model)
     }
 }
@@ -142,11 +142,11 @@ struct PESTView_DeletedRemoteCopyPreviews: PreviewProvider {
     static var previews: some View {
         let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
-        let testPost = WFAPost(context: context)
-        testPost.status = PostStatus.published.rawValue
-        testPost.wasDeletedFromServer = true
+        let deletedPost = WFAPost(context: context)
+        deletedPost.status = PostStatus.published.rawValue
+        deletedPost.wasDeletedFromServer = true
 
-        return PostEditorStatusToolbarView(post: testPost)
+        return PostEditorStatusToolbarView(post: deletedPost)
             .environmentObject(model)
     }
 }

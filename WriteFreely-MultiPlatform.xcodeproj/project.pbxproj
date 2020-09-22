@@ -28,7 +28,6 @@
 		1756AE7424CB26FA00FD7257 /* PostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCellView.swift */; };
 		1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7324CB26FA00FD7257 /* PostCellView.swift */; };
 		1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */; };
-		1756AE7824CB2EDD00FD7257 /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */; };
 		1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7924CB65DF00FD7257 /* PostListView.swift */; };
 		1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE7924CB65DF00FD7257 /* PostListView.swift */; };
 		1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756AE8024CB844500FD7257 /* View+Keyboard.swift */; };
@@ -50,6 +49,7 @@
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
 		17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
+		17A67CAF251A5DD7002F163D /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A67CAE251A5DD7002F163D /* PostEditorView.swift */; };
 		17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */; };
 		17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
 		17B996D92502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
@@ -126,6 +126,7 @@
 		17A5388B24DDC83F00DEFF9A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		17A5389124DDED0000DEFF9A /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		17A67CAE251A5DD7002F163D /* PostEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorView.swift; sourceTree = "<group>"; };
 		17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -204,7 +205,6 @@
 		1739B8D324EAFAB700DA7421 /* PostEditor */ = {
 			isa = PBXGroup;
 			children = (
-				1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */,
 				1756DBB224FECDBB00207AB8 /* PostEditorStatusToolbarView.swift */,
 			);
 			path = PostEditor;
@@ -259,6 +259,22 @@
 				1753F6AB24E431CC00309365 /* MacPreferencesView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		17A67CAB251A5D7E002F163D /* PostEditor */ = {
+			isa = PBXGroup;
+			children = (
+				1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */,
+			);
+			path = PostEditor;
+			sourceTree = "<group>";
+		};
+		17A67CAC251A5D8D002F163D /* PostEditor */ = {
+			isa = PBXGroup;
+			children = (
+				17A67CAE251A5DD7002F163D /* PostEditorView.swift */,
+			);
+			path = PostEditor;
 			sourceTree = "<group>";
 		};
 		17D4F3722514EE4400517CE6 /* Resources */ = {
@@ -325,6 +341,7 @@
 				17DF328B24C87D3500BCE2E3 /* Info.plist */,
 				17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */,
 				17681E3F251940F200D394AE /* Extensions */,
+				17A67CAB251A5D7E002F163D /* PostEditor */,
 				17120DA624E19CE2002B9F6C /* Settings */,
 			);
 			path = iOS;
@@ -335,6 +352,7 @@
 			children = (
 				17DF329224C87D3500BCE2E3 /* Info.plist */,
 				17DF329324C87D3500BCE2E3 /* macOS.entitlements */,
+				17A67CAC251A5D8D002F163D /* PostEditor */,
 				17A5388924DDA50500DEFF9A /* Settings */,
 			);
 			path = macOS;
@@ -660,7 +678,6 @@
 				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756DBBB24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
 				174D313324EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,
-				1756AE7824CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				17120DAA24E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
@@ -673,6 +690,7 @@
 				1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
 				17B996DB2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */,
 				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
+				17A67CAF251A5DD7002F163D /* PostEditorView.swift in Sources */,
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */,
 				17B996D92502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
