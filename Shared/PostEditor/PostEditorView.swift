@@ -9,50 +9,77 @@ struct PostEditorView: View {
         VStack {
             switch post.appearance {
             case "sans":
-                TextField("", text: $post.title)
+                TextField("Title (optional)", text: $post.title)
                     .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue {
                             post.status = PostStatus.edited.rawValue
                         }
                     }
-                TextEditor(text: $post.body)
-                    .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
-                    .onChange(of: post.body) { _ in
-                        if post.status == PostStatus.published.rawValue {
-                            post.status = PostStatus.edited.rawValue
-                        }
+                ZStack(alignment: .topLeading) {
+                    if post.body.count == 0 {
+                        Text("Write...")
+                            .foregroundColor(Color(UIColor.placeholderText))
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 8)
+                            .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
                     }
+                    TextEditor(text: $post.body)
+                        .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
+                        .onChange(of: post.body) { _ in
+                            if post.status == PostStatus.published.rawValue {
+                                post.status = PostStatus.edited.rawValue
+                            }
+                    }
+                }
             case "wrap", "mono", "code":
-                TextField("", text: $post.title)
+                TextField("Title (optional)", text: $post.title)
                     .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue {
                             post.status = PostStatus.edited.rawValue
                         }
                     }
-                TextEditor(text: $post.body)
-                    .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
-                    .onChange(of: post.body) { _ in
-                        if post.status == PostStatus.published.rawValue {
-                            post.status = PostStatus.edited.rawValue
-                        }
+                ZStack(alignment: .topLeading) {
+                    if post.body.count == 0 {
+                        Text("Write...")
+                            .foregroundColor(Color(UIColor.placeholderText))
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 8)
+                            .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
                     }
+                    TextEditor(text: $post.body)
+                        .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
+                        .onChange(of: post.body) { _ in
+                            if post.status == PostStatus.published.rawValue {
+                                post.status = PostStatus.edited.rawValue
+                            }
+                    }
+                }
             default:
-                TextField("", text: $post.title)
+                TextField("Title (optional)", text: $post.title)
                     .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue {
                             post.status = PostStatus.edited.rawValue
                         }
                     }
-                TextEditor(text: $post.body)
-                    .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
-                    .onChange(of: post.body) { _ in
-                        if post.status == PostStatus.published.rawValue {
-                            post.status = PostStatus.edited.rawValue
-                        }
+                ZStack(alignment: .topLeading) {
+                    if post.body.count == 0 {
+                        Text("Write...")
+                            .foregroundColor(Color(UIColor.placeholderText))
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 8)
+                            .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
                     }
+                    TextEditor(text: $post.body)
+                        .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
+                        .onChange(of: post.body) { _ in
+                            if post.status == PostStatus.published.rawValue {
+                                post.status = PostStatus.edited.rawValue
+                            }
+                    }
+                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -100,7 +127,22 @@ struct PostEditorView: View {
     }
 }
 
-struct PostEditorView_Previews: PreviewProvider {
+struct PostEditorView_EmptyPostPreviews: PreviewProvider {
+    static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.createdDate = Date()
+        testPost.appearance = "norm"
+
+        let model = WriteFreelyModel()
+
+        return PostEditorView(post: testPost)
+            .environment(\.managedObjectContext, context)
+            .environmentObject(model)
+    }
+}
+
+struct PostEditorView_ExistingPostPreviews: PreviewProvider {
     static var previews: some View {
         let context = LocalStorageManager.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
