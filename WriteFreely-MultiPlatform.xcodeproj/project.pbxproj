@@ -211,7 +211,6 @@
 		1756AE7F24CB841200FD7257 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1756AE8024CB844500FD7257 /* View+Keyboard.swift */,
 				17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */,
 				17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */,
 			);
@@ -244,6 +243,7 @@
 		17681E3F251940F200D394AE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1756AE8024CB844500FD7257 /* View+Keyboard.swift */,
 				17681E402519410E00D394AE /* UINavigationController+Appearance.swift */,
 			);
 			path = Extensions;
