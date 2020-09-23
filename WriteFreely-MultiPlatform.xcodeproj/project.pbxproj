@@ -101,6 +101,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = EditorLaunchingPolicy.md; sourceTree = "<group>"; };
 		17120DA424E19CBF002B9F6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17120DA824E1B2F5002B9F6C /* AccountLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLogoutView.swift; sourceTree = "<group>"; };
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
@@ -193,6 +194,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1709ADDE251B99D40053AF79 /* Technotes */ = {
+			isa = PBXGroup;
+			children = (
+				1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */,
+			);
+			path = Technotes;
+			sourceTree = "<group>";
+		};
 		17120DA624E19CE2002B9F6C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +304,7 @@
 				17DF32CA24C8856C00BCE2E3 /* CHANGELOG.md */,
 				17DF32C724C8853700BCE2E3 /* CODE_OF_CONDUCT.md */,
 				17DF32C824C8854B00BCE2E3 /* CONTRIBUTING.md */,
+				1709ADDE251B99D40053AF79 /* Technotes */,
 				17DF328024C87D3300BCE2E3 /* Shared */,
 				17DF328A24C87D3500BCE2E3 /* iOS */,
 				17DF329124C87D3500BCE2E3 /* macOS */,
