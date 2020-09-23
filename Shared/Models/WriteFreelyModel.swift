@@ -59,7 +59,9 @@ class WriteFreelyModel: ObservableObject {
             }
 
             if let lastDraft = self.editor.fetchLastDraft() {
-                self.selectedPost = lastDraft
+                DispatchQueue.main.async {
+                    self.selectedPost = lastDraft
+                }
             } else {
                 let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
                 managedPost.createdDate = Date()
@@ -80,8 +82,8 @@ class WriteFreelyModel: ObservableObject {
                 }
                 DispatchQueue.main.async {
                     LocalStorageManager().saveContext()
+                    self.selectedPost = managedPost
                 }
-                self.selectedPost = managedPost
             }
         }
 
