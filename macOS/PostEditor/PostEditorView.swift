@@ -128,6 +128,13 @@ struct PostEditorView: View {
                 post.status = PostStatus.published.rawValue
             }
         })
+        .onChange(of: post.status, perform: { _ in
+            if post.status != PostStatus.published.rawValue {
+                DispatchQueue.main.async {
+                    model.editor.setLastDraft(post)
+                }
+            }
+        })
         .onDisappear(perform: {
             if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
