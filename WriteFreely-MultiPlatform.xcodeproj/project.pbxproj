@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170DFA33251BBC44001D82A0 /* PostEditorModel.swift */; };
+		170DFA35251BBC44001D82A0 /* PostEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170DFA33251BBC44001D82A0 /* PostEditorModel.swift */; };
 		17120DA124E19839002B9F6C /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
 		17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
 		17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
@@ -102,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = EditorLaunchingPolicy.md; sourceTree = "<group>"; };
+		170DFA33251BBC44001D82A0 /* PostEditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorModel.swift; sourceTree = "<group>"; };
 		17120DA424E19CBF002B9F6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17120DA824E1B2F5002B9F6C /* AccountLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLogoutView.swift; sourceTree = "<group>"; };
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
@@ -214,6 +217,7 @@
 		1739B8D324EAFAB700DA7421 /* PostEditor */ = {
 			isa = PBXGroup;
 			children = (
+				170DFA33251BBC44001D82A0 /* PostEditorModel.swift */,
 				1756DBB224FECDBB00207AB8 /* PostEditorStatusToolbarView.swift */,
 			);
 			path = PostEditor;
@@ -650,6 +654,7 @@
 				1756DBBA24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
 				1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */,
 				17C42E652509237800072984 /* PostListFilteredView.swift in Sources */,
+				170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
 				17480CA5251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17120DA924E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
@@ -710,6 +715,7 @@
 				1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				1756DBB424FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
+				170DFA35251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */,
 				17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */,
 				17C42E632507D8E600072984 /* PostStatus.swift in Sources */,
