@@ -129,7 +129,7 @@ struct PostEditorView: View {
             }
         })
         .onDisappear(perform: {
-            if post.status < PostStatus.published.rawValue {
+            if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
                     LocalStorageManager().saveContext()
                 }
