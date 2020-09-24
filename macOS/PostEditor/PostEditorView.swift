@@ -133,16 +133,25 @@ struct PostEditorView: View {
                 DispatchQueue.main.async {
                     model.editor.setLastDraft(post)
                 }
-            }
-        })
-        .onDisappear(perform: {
-            if post.status != PostStatus.published.rawValue {
-                DispatchQueue.main.async {
-                    LocalStorageManager().saveContext()
-                }
             } else {
                 DispatchQueue.main.async {
                     model.editor.clearLastDraft()
+                }
+            }
+        })
+        .onDisappear(perform: {
+            if post.title.count == 0
+                && post.body.count == 0
+                && post.status == PostStatus.local.rawValue
+                && post.updatedDate == nil
+                && post.postId == nil {
+                withAnimation {
+                    model.posts.remove(post)
+                    model.posts.loadCachedPosts()
+                }
+            } else if post.status != PostStatus.published.rawValue {
+                DispatchQueue.main.async {
+                    LocalStorageManager().saveContext()
                 }
             }
         })
