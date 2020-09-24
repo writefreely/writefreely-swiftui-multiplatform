@@ -31,7 +31,6 @@ struct PostListView: View {
                         }, label: {
                             Image(systemName: "gear")
                         })
-                        .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
                             .foregroundColor(.secondary)
@@ -41,7 +40,7 @@ struct PostListView: View {
                         }, label: {
                             Image(systemName: "arrow.clockwise")
                         })
-                        .disabled(!model.account.isLoggedIn)
+                        .disabled(!model.account.isLoggedIn || !model.hasNetworkConnection)
                     }
                     .padding()
                     .frame(width: geometry.size.width)
@@ -67,7 +66,7 @@ struct PostListView: View {
             }, label: {
                 Image(systemName: "arrow.clockwise")
             })
-            .disabled(!model.account.isLoggedIn)
+            .disabled(!model.account.isLoggedIn || !model.hasNetworkConnection)
         }
         #endif
     }
@@ -105,13 +104,25 @@ struct PostListView: View {
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
+        switch model.preferences.font {
+        case 1:
+            managedPost.appearance = "sans"
+        case 2:
+            managedPost.appearance = "wrap"
+        default:
+            managedPost.appearance = "serif"
+        }
+        if let languageCode = Locale.current.languageCode {
+            managedPost.language = languageCode
+            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+        }
         if let selectedCollectionAlias = selectedCollection?.alias {
             managedPost.collectionAlias = selectedCollectionAlias
         }
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
+            model.selectedPost = managedPost
         }
-        model.selectedPost = managedPost
     }
 }
 
