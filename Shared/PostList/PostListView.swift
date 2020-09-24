@@ -31,7 +31,6 @@ struct PostListView: View {
                         }, label: {
                             Image(systemName: "gear")
                         })
-                        .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
                             .foregroundColor(.secondary)
@@ -105,6 +104,14 @@ struct PostListView: View {
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
+        switch model.preferences.font {
+        case 1:
+            managedPost.appearance = "sans"
+        case 2:
+            managedPost.appearance = "wrap"
+        default:
+            managedPost.appearance = "serif"
+        }
         if let languageCode = Locale.current.languageCode {
             managedPost.language = languageCode
             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
@@ -114,8 +121,8 @@ struct PostListView: View {
         }
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
+            model.selectedPost = managedPost
         }
-        model.selectedPost = managedPost
     }
 }
 
