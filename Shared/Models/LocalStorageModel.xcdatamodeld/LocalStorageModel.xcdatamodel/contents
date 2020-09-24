@@ -27,6 +27,7 @@
         <attribute name="status" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="updatedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="wasDeletedFromServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="postId"/>
@@ -35,6 +36,6 @@
     </entity>
     <elements>
         <element name="WFACollection" positionX="14.806640625" positionY="202.9156341552734" width="128" height="148"/>
-        <element name="WFAPost" positionX="287.377197265625" positionY="243.2452697753906" width="128" height="209"/>
+        <element name="WFAPost" positionX="287.377197265625" positionY="243.2452697753906" width="128" height="14"/>
     </elements>
 </model>
