@@ -22,6 +22,11 @@ class PostListModel: ObservableObject {
         }
     }
 
+    func remove(_ post: WFAPost) {
+        LocalStorageManager.persistentContainer.viewContext.delete(post)
+        LocalStorageManager().saveContext()
+    }
+
     func purgeAllPosts() {
         userPosts = []
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFAPost")
