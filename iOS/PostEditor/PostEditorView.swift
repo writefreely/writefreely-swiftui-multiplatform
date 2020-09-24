@@ -106,8 +106,19 @@ struct PostEditorView: View {
                 post.status = PostStatus.published.rawValue
             }
         })
+        .onChange(of: post.status, perform: { _ in
+            if post.status != PostStatus.published.rawValue {
+                DispatchQueue.main.async {
+                    model.editor.setLastDraft(post)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    model.editor.clearLastDraft()
+                }
+            }
+        })
         .onDisappear(perform: {
-            if post.status < PostStatus.published.rawValue {
+            if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
                     LocalStorageManager().saveContext()
                 }
