@@ -910,7 +910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "ios-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -934,7 +934,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "ios-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -962,7 +962,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = "mac-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = macosx;
@@ -988,7 +988,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = "mac-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = macosx;
