@@ -27,6 +27,7 @@ extension WFAPost {
     @NSManaged public var title: String
     @NSManaged public var updatedDate: Date?
     @NSManaged public var hasNewerRemoteCopy: Bool
+    @NSManaged public var wasDeletedFromServer: Bool
 
 }
 

@@ -13,6 +13,35 @@ struct SettingsView: View {
                 Section(header: Text("Appearance")) {
                     PreferencesView(preferences: model.preferences)
                 }
+                Section(header: Text("Support")) {
+                    HStack {
+                        Spacer()
+                        Link("Visit Help Forum", destination: model.helpURL)
+                        Spacer()
+                    }
+                }
+                Section(header: Text("Acknowledgements")) {
+                        VStack {
+                            VStack(alignment: .leading) {
+                                Text("This application makes use of the following open-source projects:")
+                                    .padding(.bottom)
+                                Text("• Lora typeface")
+                                    .padding(.leading)
+                                Text("• Open Sans typeface")
+                                    .padding(.leading)
+                                Text("• Hack typeface")
+                                    .padding(.leading)
+                            }
+                            .padding(.bottom)
+                            .foregroundColor(.secondary)
+                            HStack {
+                                Spacer()
+                                Link("View the licenses", destination: model.licensesURL)
+                                Spacer()
+                            }
+                        }
+                        .padding()
+                }
             }
         }
 //        .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.

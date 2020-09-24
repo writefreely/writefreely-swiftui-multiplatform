@@ -3,6 +3,7 @@ import SwiftUI
 class PreferencesModel: ObservableObject {
     private let defaults = UserDefaults.standard
     let colorSchemeIntegerKey = "colorSchemeIntegerKey"
+    let defaultFontIntegerKey = "defaultFontIntegerKey"
 
     /* We're stuck dropping into AppKit/UIKit to set light/dark schemes for now,
      * because setting the .preferredColorScheme modifier on views in SwiftUI is
@@ -54,6 +55,11 @@ class PreferencesModel: ObservableObject {
             }
 
             defaults.set(appearance, forKey: colorSchemeIntegerKey)
+        }
+    }
+    @Published var font: Int = 0 {
+        didSet {
+            defaults.set(font, forKey: defaultFontIntegerKey)
         }
     }
 }
