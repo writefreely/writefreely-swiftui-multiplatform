@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct PostListFilteredView: View {
+    @EnvironmentObject var model: WriteFreelyModel
+
     var fetchRequest: FetchRequest<WFAPost>
 
     init(filter: String?, showAllPosts: Bool) {
@@ -27,19 +29,61 @@ struct PostListFilteredView: View {
     }
 
     var body: some View {
-        List(fetchRequest.wrappedValue, id: \.self) { post in
-            NavigationLink(destination: PostEditorView(post: post)) {
-                PostCellView(post: post)
+        #if os(iOS)
+        List {
+            ForEach(fetchRequest.wrappedValue, id: \.self) { post in
+                NavigationLink(
+                    destination: PostEditorView(post: post),
+                    tag: post,
+                    selection: $model.selectedPost
+                ) {
+                    PostCellView(post: post)
+                }
+                .deleteDisabled(post.status != PostStatus.local.rawValue)
             }
+            .onDelete(perform: { indexSet in
+                for index in indexSet {
+                    let post = fetchRequest.wrappedValue[index]
+                    delete(post)
+                }
+            })
         }
+        #else
+        List {
+            ForEach(fetchRequest.wrappedValue, id: \.self) { post in
+                NavigationLink(
+                    destination: PostEditorView(post: post),
+                    tag: post,
+                    selection: $model.selectedPost
+                ) {
+                    PostCellView(post: post)
+                }
+                .deleteDisabled(post.status != PostStatus.local.rawValue)
+            }
+            .onDelete(perform: { indexSet in
+                for index in indexSet {
+                    let post = fetchRequest.wrappedValue[index]
+                    delete(post)
+                }
+            })
+        }
+        .onDeleteCommand(perform: {
+            guard let selectedPost = model.selectedPost else { return }
+            if selectedPost.status == PostStatus.local.rawValue {
+                model.postToDelete = selectedPost
+                model.isPresentingDeleteAlert = true
+            }
+        })
+        #endif
+    }
+
+    func delete(_ post: WFAPost) {
+        model.posts.remove(post)
     }
 }
 
 struct PostListFilteredView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.persistentContainer.viewContext
-
         return PostListFilteredView(filter: nil, showAllPosts: false)
-            .environment(\.managedObjectContext, context)
     }
 }
