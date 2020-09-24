@@ -52,6 +52,10 @@ struct AccountLoginView: View {
                     .padding()
             } else {
                 Button(action: {
+                    let secureProtocolPrefix = "https://"
+                    if !server.hasPrefix(secureProtocolPrefix) {
+                        server = secureProtocolPrefix + server
+                    }
                     model.login(
                         to: URL(string: server)!,
                         as: username, password: password
