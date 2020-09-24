@@ -111,6 +111,10 @@ struct PostEditorView: View {
                 DispatchQueue.main.async {
                     model.editor.setLastDraft(post)
                 }
+            } else {
+                DispatchQueue.main.async {
+                    model.editor.clearLastDraft()
+                }
             }
         })
         .onDisappear(perform: {

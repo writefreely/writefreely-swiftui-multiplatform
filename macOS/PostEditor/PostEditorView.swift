@@ -140,6 +140,10 @@ struct PostEditorView: View {
                 DispatchQueue.main.async {
                     LocalStorageManager().saveContext()
                 }
+            } else {
+                DispatchQueue.main.async {
+                    model.editor.clearLastDraft()
+                }
             }
         })
     }

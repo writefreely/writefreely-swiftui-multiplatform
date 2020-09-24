@@ -15,7 +15,11 @@ class WriteFreelyModel: ObservableObject {
     @Published var selectedPost: WFAPost? {
         didSet {
             if let post = selectedPost {
-                if post.status != PostStatus.published.rawValue { editor.setLastDraft(post) }
+                if post.status != PostStatus.published.rawValue {
+                    editor.setLastDraft(post)
+                } else {
+                    editor.clearLastDraft()
+                }
             } else {
                 editor.clearLastDraft()
             }
