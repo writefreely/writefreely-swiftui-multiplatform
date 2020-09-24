@@ -31,7 +31,6 @@ struct PostListView: View {
                         }, label: {
                             Image(systemName: "gear")
                         })
-                        .padding(.leading)
                         Spacer()
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
                             .foregroundColor(.secondary)
@@ -122,8 +121,8 @@ struct PostListView: View {
         }
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
+            model.selectedPost = managedPost
         }
-        model.selectedPost = managedPost
     }
 }
 
