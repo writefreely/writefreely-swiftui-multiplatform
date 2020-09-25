@@ -26,10 +26,13 @@ class WriteFreelyModel: ObservableObject {
         }
     }
     @Published var isPresentingDeleteAlert: Bool = false
+    @Published var isPresentingLoginErrorAlert: Bool = false
     @Published var postToDelete: WFAPost?
     #if os(iOS)
     @Published var isPresentingSettingsView: Bool = false
     #endif
+
+    var loginErrorMessage: String?
 
     // swiftlint:disable line_length
     let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
@@ -188,17 +191,25 @@ private extension WriteFreelyModel {
             }
         } catch WFError.notFound {
             DispatchQueue.main.async {
-                self.account.currentError = AccountError.usernameNotFound
+                self.loginErrorMessage = AccountError.usernameNotFound.localizedDescription
+                self.isPresentingLoginErrorAlert = true
             }
         } catch WFError.unauthorized {
             DispatchQueue.main.async {
-                self.account.currentError = AccountError.invalidPassword
+                self.loginErrorMessage = AccountError.invalidPassword.localizedDescription
+                self.isPresentingLoginErrorAlert = true
             }
         } catch {
             if (error as NSError).domain == NSURLErrorDomain,
                (error as NSError).code == -1003 {
                 DispatchQueue.main.async {
-                    self.account.currentError = AccountError.serverNotFound
+                    self.loginErrorMessage = AccountError.serverNotFound.localizedDescription
+                    self.isPresentingLoginErrorAlert = true
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.loginErrorMessage = error.localizedDescription
+                    self.isPresentingLoginErrorAlert = true
                 }
             }
         }

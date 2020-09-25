@@ -37,12 +37,7 @@ struct AccountModel {
 
     var server: String = ""
     var username: String = ""
-    var hasError: Bool = false
-    var currentError: AccountError? {
-        didSet {
-            hasError = true
-        }
-    }
+
     private(set) var user: WFUser?
     private(set) var isLoggedIn: Bool = false
 
