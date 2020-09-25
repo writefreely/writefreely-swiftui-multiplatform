@@ -79,9 +79,20 @@ class WriteFreelyModel: ObservableObject {
 
 extension WriteFreelyModel {
     func login(to server: URL, as username: String, password: String) {
+        let secureProtocolPrefix = "https://"
+        let insecureProtocolPrefix = "http://"
+        var serverString = server.absoluteString
+        // If there's neither an http or https prefix, prepend "https://" to the server string.
+        if !(serverString.hasPrefix(secureProtocolPrefix) || serverString.hasPrefix(insecureProtocolPrefix)) {
+            serverString = secureProtocolPrefix + serverString
+        }
+        // If the server string is prefixed with http, upgrade to https before attempting to login.
+        if serverString.hasPrefix(insecureProtocolPrefix) {
+            serverString = serverString.replacingOccurrences(of: insecureProtocolPrefix, with: secureProtocolPrefix)
+        }
         isLoggingIn = true
-        account.server = server.absoluteString
-        client = WFClient(for: server)
+        account.server = serverString
+        client = WFClient(for: URL(string: serverString)!)
         client?.login(username: username, password: password, completion: loginHandler)
     }
 
