@@ -107,17 +107,19 @@ struct PostEditorView: View {
             }
         })
         .onChange(of: post.status, perform: { _ in
-            if post.status != PostStatus.published.rawValue {
-                DispatchQueue.main.async {
-                    model.editor.setLastDraft(post)
-                }
+            if post.status == PostStatus.published.rawValue {
+                model.editor.clearLastDraft()
             } else {
-                DispatchQueue.main.async {
-                    model.editor.clearLastDraft()
-                }
+                model.editor.setLastDraft(post)
+            }
+        })
+        .onAppear(perform: {
+            if post.status != PostStatus.published.rawValue {
+                model.editor.setLastDraft(post)
             }
         })
         .onDisappear(perform: {
+            model.editor.clearLastDraft()
             if post.title.count == 0
                 && post.body.count == 0
                 && post.status == PostStatus.local.rawValue
