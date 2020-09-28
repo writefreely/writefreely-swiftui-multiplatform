@@ -88,7 +88,14 @@ struct PostEditorView: View {
             ToolbarItem(placement: .principal) {
                 PostEditorStatusToolbarView(post: post)
             }
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button(action: {
+                    sharePost()
+                }, label: {
+                    Image(systemName: "square.and.arrow.up")
+                })
+                .disabled(post.postId == nil)
+
                 Button(action: {
                     publishPost()
                 }, label: {
