@@ -84,6 +84,12 @@
 		17DF32C324C87D8D00BCE2E3 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 17DF32C224C87D8D00BCE2E3 /* WriteFreely */; };
 		17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */; };
 		17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */; };
+		17DFDE87251D309400A25F31 /* Hack-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE84251D309400A25F31 /* Hack-License.txt */; };
+		17DFDE88251D309400A25F31 /* Hack-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE84251D309400A25F31 /* Hack-License.txt */; };
+		17DFDE89251D309400A25F31 /* Lora-Cyrillic-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE85251D309400A25F31 /* Lora-Cyrillic-OFL.txt */; };
+		17DFDE8A251D309400A25F31 /* Lora-Cyrillic-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE85251D309400A25F31 /* Lora-Cyrillic-OFL.txt */; };
+		17DFDE8B251D309400A25F31 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE86251D309400A25F31 /* OpenSans-License.txt */; };
+		17DFDE8C251D309400A25F31 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE86251D309400A25F31 /* OpenSans-License.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +169,9 @@
 		17DF32C924C8855E00BCE2E3 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		17DF32CA24C8856C00BCE2E3 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStatusBadgeView.swift; sourceTree = "<group>"; };
+		17DFDE84251D309400A25F31 /* Hack-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Hack-License.txt"; sourceTree = "<group>"; };
+		17DFDE85251D309400A25F31 /* Lora-Cyrillic-OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Lora-Cyrillic-OFL.txt"; sourceTree = "<group>"; };
+		17DFDE86251D309400A25F31 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +304,7 @@
 		17D4F3722514EE4400517CE6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17DFDE83251D309400A25F31 /* Licenses */,
 				17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */,
 				17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */,
 				17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */,
@@ -440,6 +450,16 @@
 			path = PostCollection;
 			sourceTree = "<group>";
 		};
+		17DFDE83251D309400A25F31 /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				17DFDE84251D309400A25F31 /* Hack-License.txt */,
+				17DFDE85251D309400A25F31 /* Lora-Cyrillic-OFL.txt */,
+				17DFDE86251D309400A25F31 /* OpenSans-License.txt */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -576,10 +596,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */,
+				17DFDE8B251D309400A25F31 /* OpenSans-License.txt in Resources */,
 				17DF32AE24C87D3500BCE2E3 /* Assets.xcassets in Resources */,
 				17D4F39E2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */,
 				17D4F36C2514EE2F00517CE6 /* LoraGX.ttf in Resources */,
 				17D4F3A52514F1E900517CE6 /* Hack-Regular.ttf in Resources */,
+				17DFDE89251D309400A25F31 /* Lora-Cyrillic-OFL.txt in Resources */,
+				17DFDE87251D309400A25F31 /* Hack-License.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,10 +611,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				17DF32AF24C87D3500BCE2E3 /* Assets.xcassets in Resources */,
+				17DFDE8C251D309400A25F31 /* OpenSans-License.txt in Resources */,
 				17B5103B2515448D00E9631F /* Credits.rtf in Resources */,
 				17D4F39F2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */,
 				17D4F3A62514F1E900517CE6 /* Hack-Regular.ttf in Resources */,
 				17D4F36D2514EE2F00517CE6 /* LoraGX.ttf in Resources */,
+				17DFDE8A251D309400A25F31 /* Lora-Cyrillic-OFL.txt in Resources */,
+				17DFDE88251D309400A25F31 /* Hack-License.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,7 +910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "ios-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -908,7 +934,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "ios-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -936,7 +962,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = "mac-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = macosx;
@@ -962,7 +988,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = "mac-1.0d1";
+				MARKETING_VERSION = 1.0d1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = macosx;

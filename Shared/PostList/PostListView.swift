@@ -120,7 +120,6 @@ struct PostListView: View {
             managedPost.collectionAlias = selectedCollectionAlias
         }
         DispatchQueue.main.async {
-            LocalStorageManager().saveContext()
             model.selectedPost = managedPost
         }
     }
