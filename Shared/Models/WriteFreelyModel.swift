@@ -26,10 +26,13 @@ class WriteFreelyModel: ObservableObject {
         }
     }
     @Published var isPresentingDeleteAlert: Bool = false
+    @Published var isPresentingLoginErrorAlert: Bool = false
     @Published var postToDelete: WFAPost?
     #if os(iOS)
     @Published var isPresentingSettingsView: Bool = false
     #endif
+
+    var loginErrorMessage: String?
 
     // swiftlint:disable line_length
     let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
@@ -79,9 +82,20 @@ class WriteFreelyModel: ObservableObject {
 
 extension WriteFreelyModel {
     func login(to server: URL, as username: String, password: String) {
+        let secureProtocolPrefix = "https://"
+        let insecureProtocolPrefix = "http://"
+        var serverString = server.absoluteString
+        // If there's neither an http or https prefix, prepend "https://" to the server string.
+        if !(serverString.hasPrefix(secureProtocolPrefix) || serverString.hasPrefix(insecureProtocolPrefix)) {
+            serverString = secureProtocolPrefix + serverString
+        }
+        // If the server string is prefixed with http, upgrade to https before attempting to login.
+        if serverString.hasPrefix(insecureProtocolPrefix) {
+            serverString = serverString.replacingOccurrences(of: insecureProtocolPrefix, with: secureProtocolPrefix)
+        }
         isLoggingIn = true
-        account.server = server.absoluteString
-        client = WFClient(for: server)
+        account.server = serverString
+        client = WFClient(for: URL(string: serverString)!)
         client?.login(username: username, password: password, completion: loginHandler)
     }
 
@@ -177,17 +191,25 @@ private extension WriteFreelyModel {
             }
         } catch WFError.notFound {
             DispatchQueue.main.async {
-                self.account.currentError = AccountError.usernameNotFound
+                self.loginErrorMessage = AccountError.usernameNotFound.localizedDescription
+                self.isPresentingLoginErrorAlert = true
             }
         } catch WFError.unauthorized {
             DispatchQueue.main.async {
-                self.account.currentError = AccountError.invalidPassword
+                self.loginErrorMessage = AccountError.invalidPassword.localizedDescription
+                self.isPresentingLoginErrorAlert = true
             }
         } catch {
             if (error as NSError).domain == NSURLErrorDomain,
                (error as NSError).code == -1003 {
                 DispatchQueue.main.async {
-                    self.account.currentError = AccountError.serverNotFound
+                    self.loginErrorMessage = AccountError.serverNotFound.localizedDescription
+                    self.isPresentingLoginErrorAlert = true
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.loginErrorMessage = error.localizedDescription
+                    self.isPresentingLoginErrorAlert = true
                 }
             }
         }
