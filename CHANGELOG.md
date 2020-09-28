@@ -23,11 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The post editor's status badge has been moved to the top of the screen.
 - The layout of the post editor has been improved to provide a larger editing area on iPhone.
 - The app now launches to either the last draft you were working on, or a new blank post.
+- Empty local posts are discarded when you navigate away from the post editor.
+- Server addresses with an insecure protocol ("http://") are upgraded to a secure protocol ("https://") before login is attempted.
 
 ### Fixed
 
 - Language-related properties "lang" and "rtl" are set for new posts based on the system's locale.
 - The keyboard is now dismissed on publishing a post.
+- Server addresses can now be entered without the protocol ("https://") when logging in.
 
 ## [0.1.1] - 2020-09-14
 
