@@ -152,6 +152,15 @@ struct PostEditorView: View {
         self.hideKeyboard()
         #endif
     }
+
+    private func sharePost() {
+        guard let urlString = model.selectedPost?.slug != nil ?
+                "\(model.account.server)/\((model.selectedPost?.collectionAlias)!)/\((model.selectedPost?.slug)!)" :
+                "\(model.account.server)/\((model.selectedPost?.postId)!)" else { return }
+        guard let data = URL(string: urlString) else { return }
+        let activityView = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityView, animated: true, completion: nil)
+    }
 }
 
 struct PostEditorView_EmptyPostPreviews: PreviewProvider {
