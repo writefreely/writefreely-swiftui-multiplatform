@@ -90,13 +90,6 @@ struct PostEditorView: View {
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: {
-                    sharePost()
-                }, label: {
-                    Image(systemName: "square.and.arrow.up")
-                })
-                .disabled(post.postId == nil)
-
-                Button(action: {
                     publishPost()
                 }, label: {
                     Image(systemName: "paperplane")
@@ -106,6 +99,12 @@ struct PostEditorView: View {
                         !model.account.isLoggedIn ||
                         !model.hasNetworkConnection
                 )
+                Button(action: {
+                    sharePost()
+                }, label: {
+                    Image(systemName: "square.and.arrow.up")
+                })
+                .disabled(post.postId == nil)
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
@@ -158,8 +157,20 @@ struct PostEditorView: View {
                 "\(model.account.server)/\((model.selectedPost?.collectionAlias)!)/\((model.selectedPost?.slug)!)" :
                 "\(model.account.server)/\((model.selectedPost?.postId)!)" else { return }
         guard let data = URL(string: urlString) else { return }
+
         let activityView = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+
         UIApplication.shared.windows.first?.rootViewController?.present(activityView, animated: true, completion: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityView.popoverPresentationController?.permittedArrowDirections = .up
+            activityView.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
+            activityView.popoverPresentationController?.sourceRect = CGRect(
+                x: UIScreen.main.bounds.width,
+                y: -125,
+                width: 200,
+                height: 200
+            )
+        }
     }
 }
 
