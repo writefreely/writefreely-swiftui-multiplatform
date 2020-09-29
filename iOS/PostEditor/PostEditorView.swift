@@ -125,14 +125,16 @@ struct PostEditorView: View {
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: {
-                    publishPost()
+                    if model.account.isLoggedIn {
+                        publishPost()
+                    } else {
+                        self.model.isPresentingSettingsView = true
+                    }
                 }, label: {
                     Image(systemName: "paperplane")
                 })
                 .disabled(
-                    post.status == PostStatus.published.rawValue ||
-                        !model.account.isLoggedIn ||
-                        !model.hasNetworkConnection
+                    post.status == PostStatus.published.rawValue || !model.hasNetworkConnection || post.body.count == 0
                 )
                 Button(action: {
                     sharePost()
