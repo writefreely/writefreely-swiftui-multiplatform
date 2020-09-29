@@ -1,10 +1,6 @@
 import SwiftUI
 
 struct PostEditorStatusToolbarView: View {
-    #if os(iOS)
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @Environment(\.presentationMode) var presentationMode
-    #endif
     @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: WFAPost
@@ -12,36 +8,7 @@ struct PostEditorStatusToolbarView: View {
     var body: some View {
         if post.hasNewerRemoteCopy {
             #if os(iOS)
-            if horizontalSizeClass == .compact {
-                VStack {
-                    PostStatusBadgeView(post: post)
-                    HStack {
-                        Text("⚠️ Newer copy on server. Replace local copy?")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        Button(action: {
-                            model.updateFromServer(post: post)
-                        }, label: {
-                            Image(systemName: "square.and.arrow.down")
-                        })
-                    }
-                    .padding(.bottom)
-                }
-                .padding(.top)
-            } else {
-                HStack {
-                    PostStatusBadgeView(post: post)
-                        .padding(.trailing)
-                    Text("⚠️ Newer copy on server. Replace local copy?")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
-                    Button(action: {
-                        model.updateFromServer(post: post)
-                    }, label: {
-                        Image(systemName: "square.and.arrow.down")
-                    })
-                }
-            }
+            PostStatusBadgeView(post: post)
             #else
             HStack {
                 PostStatusBadgeView(post: post)
@@ -58,50 +25,19 @@ struct PostEditorStatusToolbarView: View {
             #endif
         } else if post.wasDeletedFromServer && post.status != PostStatus.local.rawValue {
             #if os(iOS)
-            if horizontalSizeClass == .compact {
-                VStack {
-                    PostStatusBadgeView(post: post)
-                    HStack {
-                        Text("‼️ Post deleted from server. Delete local copy?")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        Button(action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                            model.selectedPost = nil
-                            model.posts.remove(post)
-                        }, label: {
-                            Image(systemName: "trash")
-                        })
-                    }
-                    .padding(.bottom)
-                }
-                .padding(.top)
-            } else {
-                HStack {
-                    PostStatusBadgeView(post: post)
-                        .padding(.trailing)
-                    Text("‼️ Post deleted from server. Delete local copy?")
-                        .font(.callout)
-                        .foregroundColor(.secondary)
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                        model.selectedPost = nil
-                        model.posts.remove(post)
-                    }, label: {
-                        Image(systemName: "trash")
-                    })
-                }
-            }
+            PostStatusBadgeView(post: post)
             #else
             HStack {
                 PostStatusBadgeView(post: post)
                     .padding(.trailing)
-                Text("‼️ Post deleted from server. Delete local copy?")
+                Text("⚠️ Post deleted from server. Delete local copy?")
                     .font(.callout)
                     .foregroundColor(.secondary)
                 Button(action: {
                     model.selectedPost = nil
-                    model.posts.remove(post)
+                    DispatchQueue.main.async {
+                        model.posts.remove(post)
+                    }
                 }, label: {
                     Image(systemName: "trash")
                 })

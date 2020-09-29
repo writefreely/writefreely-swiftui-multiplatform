@@ -2,11 +2,46 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
-
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var post: WFAPost
 
     var body: some View {
         VStack {
+            if post.hasNewerRemoteCopy {
+                HStack {
+                    Text("⚠️ Newer copy on server. Replace local copy?")
+                        .font(horizontalSizeClass == .compact ? .caption : .body)
+                        .foregroundColor(.secondary)
+                    Button(action: {
+                        model.updateFromServer(post: post)
+                    }, label: {
+                        Image(systemName: "square.and.arrow.down")
+                    })
+                }
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                .background(Color(UIColor.secondarySystemBackground))
+                .clipShape(Capsule())
+                .padding(.bottom)
+            } else if post.wasDeletedFromServer {
+                HStack {
+                    Text("⚠️ Post deleted from server. Delete local copy?")
+                        .font(horizontalSizeClass == .compact ? .caption : .body)
+                        .foregroundColor(.secondary)
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                        DispatchQueue.main.async {
+                            model.posts.remove(post)
+                        }
+                    }, label: {
+                        Image(systemName: "trash")
+                    })
+                }
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                .background(Color(UIColor.secondarySystemBackground))
+                .clipShape(Capsule())
+                .padding(.bottom)
+            }
             switch post.appearance {
             case "sans":
                 TextField("Title (optional)", text: $post.title)
@@ -88,7 +123,7 @@ struct PostEditorView: View {
             ToolbarItem(placement: .principal) {
                 PostEditorStatusToolbarView(post: post)
             }
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: {
                     publishPost()
                 }, label: {
@@ -99,6 +134,12 @@ struct PostEditorView: View {
                         !model.account.isLoggedIn ||
                         !model.hasNetworkConnection
                 )
+                Button(action: {
+                    sharePost()
+                }, label: {
+                    Image(systemName: "square.and.arrow.up")
+                })
+                .disabled(post.postId == nil)
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
@@ -123,7 +164,7 @@ struct PostEditorView: View {
                 && post.status == PostStatus.local.rawValue
                 && post.updatedDate == nil
                 && post.postId == nil {
-                withAnimation {
+                DispatchQueue.main.async {
                     model.posts.remove(post)
                     model.posts.loadCachedPosts()
                 }
@@ -144,6 +185,27 @@ struct PostEditorView: View {
         #if os(iOS)
         self.hideKeyboard()
         #endif
+    }
+
+    private func sharePost() {
+        guard let urlString = model.selectedPost?.slug != nil ?
+                "\(model.account.server)/\((model.selectedPost?.collectionAlias)!)/\((model.selectedPost?.slug)!)" :
+                "\(model.account.server)/\((model.selectedPost?.postId)!)" else { return }
+        guard let data = URL(string: urlString) else { return }
+
+        let activityView = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+
+        UIApplication.shared.windows.first?.rootViewController?.present(activityView, animated: true, completion: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            activityView.popoverPresentationController?.permittedArrowDirections = .up
+            activityView.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
+            activityView.popoverPresentationController?.sourceRect = CGRect(
+                x: UIScreen.main.bounds.width,
+                y: -125,
+                width: 200,
+                height: 200
+            )
+        }
     }
 }
 
@@ -170,6 +232,7 @@ struct PostEditorView_ExistingPostPreviews: PreviewProvider {
         testPost.body = "Here's some cool sample body text."
         testPost.createdDate = Date()
         testPost.appearance = "code"
+        testPost.hasNewerRemoteCopy = true
 
         let model = WriteFreelyModel()
 

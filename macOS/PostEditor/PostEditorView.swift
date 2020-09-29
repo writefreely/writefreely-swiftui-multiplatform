@@ -145,7 +145,7 @@ struct PostEditorView: View {
                 && post.status == PostStatus.local.rawValue
                 && post.updatedDate == nil
                 && post.postId == nil {
-                withAnimation {
+                DispatchQueue.main.async {
                     model.posts.remove(post)
                     model.posts.loadCachedPosts()
                 }
