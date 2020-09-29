@@ -2,11 +2,45 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
-
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var post: WFAPost
 
     var body: some View {
         VStack {
+            if post.hasNewerRemoteCopy {
+                HStack {
+                    Text("⚠️ Newer copy on server. Replace local copy?")
+                        .font(horizontalSizeClass == .compact ? .caption : .body)
+                        .foregroundColor(.secondary)
+                    Button(action: {
+                        model.updateFromServer(post: post)
+                    }, label: {
+                        Image(systemName: "square.and.arrow.down")
+                    })
+                }
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                .background(Color(UIColor.secondarySystemBackground))
+                .clipShape(Capsule())
+                .padding(.bottom)
+            } else if post.wasDeletedFromServer {
+                HStack {
+                    Text("⚠️ Post deleted from server. Delete local copy?")
+                        .font(horizontalSizeClass == .compact ? .caption : .body)
+                        .foregroundColor(.secondary)
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                        model.selectedPost = nil
+                        model.posts.remove(post)
+                    }, label: {
+                        Image(systemName: "trash")
+                    })
+                }
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                .background(Color(UIColor.secondarySystemBackground))
+                .clipShape(Capsule())
+                .padding(.bottom)
+            }
             switch post.appearance {
             case "sans":
                 TextField("Title (optional)", text: $post.title)
@@ -197,6 +231,7 @@ struct PostEditorView_ExistingPostPreviews: PreviewProvider {
         testPost.body = "Here's some cool sample body text."
         testPost.createdDate = Date()
         testPost.appearance = "code"
+        testPost.hasNewerRemoteCopy = true
 
         let model = WriteFreelyModel()
 
