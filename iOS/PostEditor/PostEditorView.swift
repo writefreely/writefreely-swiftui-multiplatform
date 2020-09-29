@@ -30,8 +30,9 @@ struct PostEditorView: View {
                         .foregroundColor(.secondary)
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
-                        model.selectedPost = nil
-                        model.posts.remove(post)
+                        DispatchQueue.main.async {
+                            model.posts.remove(post)
+                        }
                     }, label: {
                         Image(systemName: "trash")
                     })
@@ -163,7 +164,7 @@ struct PostEditorView: View {
                 && post.status == PostStatus.local.rawValue
                 && post.updatedDate == nil
                 && post.postId == nil {
-                withAnimation {
+                DispatchQueue.main.async {
                     model.posts.remove(post)
                     model.posts.loadCachedPosts()
                 }

@@ -35,7 +35,9 @@ struct PostEditorStatusToolbarView: View {
                     .foregroundColor(.secondary)
                 Button(action: {
                     model.selectedPost = nil
-                    model.posts.remove(post)
+                    DispatchQueue.main.async {
+                        model.posts.remove(post)
+                    }
                 }, label: {
                     Image(systemName: "trash")
                 })
