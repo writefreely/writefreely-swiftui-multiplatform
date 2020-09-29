@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - You can now choose a default font for new local drafts in the Settings screen.
 - The post editor shows your content in the set typeface.
 - Placeholder text has been added to the post editor.
+- [iOS] The URL of published posts can be shared from the post editor via the system share sheet. 
 
 ### Changed
 
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Language-related properties "lang" and "rtl" are set for new posts based on the system's locale.
 - The keyboard is now dismissed on publishing a post.
 - Server addresses can now be entered without the protocol ("https://") when logging in.
+- [iPadOS] Fixed a crash when dismissing a blank post.
 
 ## [0.1.1] - 2020-09-14
 
