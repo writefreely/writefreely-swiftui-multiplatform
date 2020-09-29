@@ -9,6 +9,9 @@ struct AccountLoginView: View {
     @State private var server: String = ""
     var body: some View {
         VStack {
+            Text("Log in to publish and share your posts.")
+                .font(.caption)
+                .foregroundColor(.secondary)
             HStack {
                 Image(systemName: "person.circle")
                     .foregroundColor(.gray)
@@ -57,7 +60,7 @@ struct AccountLoginView: View {
                         as: username, password: password
                     )
                 }, label: {
-                    Text("Login")
+                    Text("Log In")
                 })
                 .disabled(
                     model.account.isLoggedIn || (username.isEmpty || password.isEmpty || server.isEmpty)
