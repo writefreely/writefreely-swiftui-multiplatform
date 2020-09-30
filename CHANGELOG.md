@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - You can now choose a default font for new local drafts in the Settings screen.
 - The post editor shows your content in the set typeface.
 - Placeholder text has been added to the post editor.
-- [iOS] The URL of published posts can be shared from the post editor via the system share sheet. 
+- [iOS] The URL of published posts can be shared from the post editor via the system share sheet.
 
 ### Changed
 
@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The app now launches to either the last draft you were working on, or a new blank post.
 - Empty local posts are discarded when you navigate away from the post editor.
 - Server addresses with an insecure protocol ("http://") are upgraded to a secure protocol ("https://") before login is attempted.
+- Attempting to publish a post when you're not logged in presents the login form.
 
 ### Fixed
 
