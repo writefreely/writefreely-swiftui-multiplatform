@@ -115,7 +115,10 @@ struct PostEditorView: View {
                     if model.account.isLoggedIn {
                         publishPost()
                     } else {
-                        // TODO: Open the Preferences window.
+                        let mainMenu = NSApplication.shared.mainMenu
+                        let appMenuItem = mainMenu?.item(withTitle: "WriteFreely")
+                        let prefsItem = appMenuItem?.submenu?.item(withTitle: "Preferences…")
+                        NSApplication.shared.sendAction(prefsItem!.action!, to: prefsItem?.target, from: nil)
                     }
                 }, label: {
                     Image(systemName: "paperplane")
