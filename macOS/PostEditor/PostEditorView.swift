@@ -112,14 +112,16 @@ struct PostEditorView: View {
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
-                    publishPost()
+                    if model.account.isLoggedIn {
+                        publishPost()
+                    } else {
+                        // TODO: Open the Preferences window.
+                    }
                 }, label: {
                     Image(systemName: "paperplane")
                 })
                 .disabled(
-                    post.status == PostStatus.published.rawValue ||
-                        !model.account.isLoggedIn ||
-                        !model.hasNetworkConnection
+                    post.status == PostStatus.published.rawValue || !model.hasNetworkConnection || post.body.count == 0
                 )
             }
         }

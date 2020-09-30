@@ -12,7 +12,7 @@ struct AccountLogoutView: View {
             }
             Spacer()
             Button(action: logoutHandler, label: {
-                Text("Logout")
+                Text("Log Out")
             })
         }
     }

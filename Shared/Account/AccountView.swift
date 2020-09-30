@@ -13,7 +13,7 @@ struct AccountView: View {
             .padding()
         } else {
             AccountLoginView()
-                .padding()
+                .padding(.top)
         }
     }
 }
