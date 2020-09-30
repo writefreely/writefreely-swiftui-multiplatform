@@ -5,6 +5,7 @@ struct PostEditorView: View {
 
     @ObservedObject var post: WFAPost
     @State private var isHovering: Bool = false
+    @State private var didCopyUrlToPasteboard: Bool = false
 
     var body: some View {
         VStack {
@@ -110,7 +111,8 @@ struct PostEditorView: View {
             ToolbarItem(placement: .status) {
                 PostEditorStatusToolbarView(post: post)
             }
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .primaryAction) {
+                Spacer()
                 Button(action: {
                     if model.account.isLoggedIn {
                         publishPost()
@@ -123,9 +125,24 @@ struct PostEditorView: View {
                 }, label: {
                     Image(systemName: "paperplane")
                 })
+                .help("Publish the post to the web. You must be logged in to do this.")
                 .disabled(
                     post.status == PostStatus.published.rawValue || !model.hasNetworkConnection || post.body.count == 0
                 )
+                Button(action: {
+                        sharePost()
+                }, label: {
+                    Image(systemName: "square.and.arrow.up")
+                })
+                .help("Copy the post's URL to your Mac's pasteboard.")
+                .disabled(post.postId == nil)
+                .alert(isPresented: $didCopyUrlToPasteboard) {
+                    Alert(
+                        title: Text("Copied post URL to the pasteboard."),
+                        message: nil,
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
@@ -168,6 +185,16 @@ struct PostEditorView: View {
             model.posts.loadCachedPosts()
             model.publish(post: post)
         }
+    }
+
+    private func sharePost() {
+        guard let urlString = model.selectedPost?.slug != nil ?
+                "\(model.account.server)/\((model.selectedPost?.collectionAlias)!)/\((model.selectedPost?.slug)!)" :
+                "\(model.account.server)/\((model.selectedPost?.postId)!)" else { return }
+        // guard let data = URL(string: urlString) else { return }
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        didCopyUrlToPasteboard = pasteboard.setString(urlString, forType: .string)
     }
 }
 
