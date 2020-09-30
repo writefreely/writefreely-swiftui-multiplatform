@@ -47,6 +47,7 @@
 		1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		17681E412519410E00D394AE /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17681E402519410E00D394AE /* UINavigationController+Appearance.swift */; };
+		17767E532524DAB100DA1625 /* PostEditorSharingPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17767E522524DAB100DA1625 /* PostEditorSharingPicker.swift */; };
 		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
@@ -133,6 +134,7 @@
 		17582193251A4E53004FC441 /* UITextView+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Appearance.swift"; sourceTree = "<group>"; };
 		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		17681E402519410E00D394AE /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
+		17767E522524DAB100DA1625 /* PostEditorSharingPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEditorSharingPicker.swift; sourceTree = "<group>"; };
 		17A5388724DDA31F00DEFF9A /* MacAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAccountView.swift; sourceTree = "<group>"; };
 		17A5388B24DDC83F00DEFF9A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 		17A67CAC251A5D8D002F163D /* PostEditor */ = {
 			isa = PBXGroup;
 			children = (
+				17767E522524DAB100DA1625 /* PostEditorSharingPicker.swift */,
 				17A67CAE251A5DD7002F163D /* PostEditorView.swift */,
 			);
 			path = PostEditor;
@@ -734,6 +737,7 @@
 				1753F6AC24E431CC00309365 /* MacPreferencesView.swift in Sources */,
 				1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
 				17B996DB2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */,
+				17767E532524DAB100DA1625 /* PostEditorSharingPicker.swift in Sources */,
 				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				17A67CAF251A5DD7002F163D /* PostEditorView.swift in Sources */,
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
