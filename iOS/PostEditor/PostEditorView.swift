@@ -190,9 +190,20 @@ struct PostEditorView: View {
     }
 
     private func sharePost() {
-        guard let urlString = model.selectedPost?.slug != nil ?
-                "\(model.account.server)/\((model.selectedPost?.collectionAlias)!)/\((model.selectedPost?.slug)!)" :
-                "\(model.account.server)/\((model.selectedPost?.postId)!)" else { return }
+        // If the post doesn't have a post ID, it isn't published, and therefore can't be shared, so return early.
+        guard let postId = post.postId else { return }
+
+        var urlString: String
+
+        if let postSlug = post.slug,
+           let postCollectionAlias = post.collectionAlias {
+            // This post is in a collection, so share the URL as server/collectionAlias/postSlug.
+            urlString = "\(model.account.server)/\((postCollectionAlias))/\((postSlug))"
+        } else {
+            // This is a draft post, so share the URL as server/postID
+            urlString = "\(model.account.server)/\((postId))"
+        }
+
         guard let data = URL(string: urlString) else { return }
 
         let activityView = UIActivityViewController(activityItems: [data], applicationActivities: nil)
