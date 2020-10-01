@@ -5,8 +5,7 @@ extension UINavigationController {
         super.viewDidLoad()
 
         let standardAppearance = UINavigationBarAppearance()
-        standardAppearance.configureWithTransparentBackground()
-
+        standardAppearance.configureWithOpaqueBackground()
         navigationBar.standardAppearance = standardAppearance
     }
 }
