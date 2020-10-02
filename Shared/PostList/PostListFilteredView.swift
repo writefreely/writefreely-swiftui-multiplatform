@@ -3,9 +3,12 @@ import SwiftUI
 struct PostListFilteredView: View {
     @EnvironmentObject var model: WriteFreelyModel
 
+    @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
+    var showAllPosts: Bool
 
     init(filter: String?, showAllPosts: Bool) {
+        self.showAllPosts = showAllPosts
         if showAllPosts {
             fetchRequest = FetchRequest<WFAPost>(
                 entity: WFAPost.entity(),
@@ -37,7 +40,16 @@ struct PostListFilteredView: View {
                     tag: post,
                     selection: $model.selectedPost
                 ) {
-                    PostCellView(post: post)
+                    if showAllPosts {
+                        if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                            PostCellView(post: post, collectionName: collection.title)
+                        } else {
+                            let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                            PostCellView(post: post, collectionName: collectionName)
+                        }
+                    } else {
+                        PostCellView(post: post)
+                    }
                 }
                 .deleteDisabled(post.status != PostStatus.local.rawValue)
             }
