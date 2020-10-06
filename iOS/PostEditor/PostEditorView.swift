@@ -5,6 +5,8 @@ struct PostEditorView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var post: WFAPost
+    @State private var updatingTitleFromServer: Bool = false
+    @State private var updatingBodyFromServer: Bool = false
 
     var body: some View {
         VStack {
@@ -47,8 +49,11 @@ struct PostEditorView: View {
                 TextField("Title (optional)", text: $post.title)
                     .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue {
+                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
                             post.status = PostStatus.edited.rawValue
+                        }
+                        if updatingTitleFromServer {
+                            updatingTitleFromServer = false
                         }
                     }
                 ZStack(alignment: .topLeading) {
@@ -62,8 +67,11 @@ struct PostEditorView: View {
                     TextEditor(text: $post.body)
                         .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
                         .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue {
+                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
+                            }
+                            if updatingBodyFromServer {
+                                updatingBodyFromServer = false
                             }
                     }
                 }
@@ -71,8 +79,11 @@ struct PostEditorView: View {
                 TextField("Title (optional)", text: $post.title)
                     .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue {
+                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
                             post.status = PostStatus.edited.rawValue
+                        }
+                        if updatingTitleFromServer {
+                            updatingTitleFromServer = false
                         }
                     }
                 ZStack(alignment: .topLeading) {
@@ -86,8 +97,11 @@ struct PostEditorView: View {
                     TextEditor(text: $post.body)
                         .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
                         .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue {
+                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
+                            }
+                            if updatingBodyFromServer {
+                                updatingBodyFromServer = false
                             }
                     }
                 }
@@ -95,8 +109,11 @@ struct PostEditorView: View {
                 TextField("Title (optional)", text: $post.title)
                     .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue {
+                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
                             post.status = PostStatus.edited.rawValue
+                        }
+                        if updatingTitleFromServer {
+                            updatingTitleFromServer = false
                         }
                     }
                 ZStack(alignment: .topLeading) {
@@ -110,8 +127,11 @@ struct PostEditorView: View {
                     TextEditor(text: $post.body)
                         .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
                         .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue {
+                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
+                            }
+                            if updatingBodyFromServer {
+                                updatingBodyFromServer = false
                             }
                     }
                 }
@@ -145,8 +165,9 @@ struct PostEditorView: View {
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
-            if post.status == PostStatus.edited.rawValue && !post.hasNewerRemoteCopy {
-                post.status = PostStatus.published.rawValue
+            if !post.hasNewerRemoteCopy {
+                updatingTitleFromServer = true
+                updatingBodyFromServer = true
             }
         })
         .onChange(of: post.status, perform: { _ in

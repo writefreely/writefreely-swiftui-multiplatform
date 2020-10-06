@@ -5,6 +5,8 @@ struct PostEditorView: View {
 
     @ObservedObject var post: WFAPost
     @State private var isHovering: Bool = false
+    @State private var updatingTitleFromServer: Bool = false
+    @State private var updatingBodyFromServer: Bool = false
 
     var body: some View {
         VStack {
@@ -15,8 +17,11 @@ struct PostEditorView: View {
                     .padding(.bottom)
                     .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue {
+                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
                             post.status = PostStatus.edited.rawValue
+                        }
+                        if updatingTitleFromServer {
+                            updatingTitleFromServer = false
                         }
                     }
                 ZStack(alignment: .topLeading) {
@@ -31,8 +36,11 @@ struct PostEditorView: View {
                         .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
                         .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
                         .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue {
+                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
+                            }
+                            if updatingBodyFromServer {
+                                updatingBodyFromServer = false
                             }
                         }
                         .onHover(perform: { hovering in
@@ -46,8 +54,11 @@ struct PostEditorView: View {
                     .padding(.bottom)
                     .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue {
+                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
                             post.status = PostStatus.edited.rawValue
+                        }
+                        if updatingTitleFromServer {
+                            updatingTitleFromServer = false
                         }
                     }
                 ZStack(alignment: .topLeading) {
@@ -62,8 +73,11 @@ struct PostEditorView: View {
                         .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
                         .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
                         .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue {
+                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
+                            }
+                            if updatingBodyFromServer {
+                                updatingBodyFromServer = false
                             }
                         }
                         .onHover(perform: { hovering in
@@ -77,8 +91,11 @@ struct PostEditorView: View {
                     .padding(.bottom)
                     .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue {
+                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
                             post.status = PostStatus.edited.rawValue
+                        }
+                        if updatingTitleFromServer {
+                            updatingTitleFromServer = false
                         }
                     }
                 ZStack(alignment: .topLeading) {
@@ -93,8 +110,11 @@ struct PostEditorView: View {
                         .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
                         .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
                         .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue {
+                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
+                            }
+                            if updatingBodyFromServer {
+                                updatingBodyFromServer = false
                             }
                         }
                         .onHover(perform: { hovering in
