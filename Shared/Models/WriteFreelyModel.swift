@@ -94,11 +94,11 @@ extension WriteFreelyModel {
             serverString = serverString.replacingOccurrences(of: insecureProtocolPrefix, with: secureProtocolPrefix)
         }
         isLoggingIn = true
-        account.server = serverString
         var serverURL = URL(string: serverString)!
         if !serverURL.path.isEmpty {
             serverURL.deleteLastPathComponent()
         }
+        account.server = serverURL.absoluteString
         client = WFClient(for: serverURL)
         client?.login(username: username, password: password, completion: loginHandler)
     }
