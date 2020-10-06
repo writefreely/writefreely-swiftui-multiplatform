@@ -1141,7 +1141,7 @@
 			repositoryURL = "git@github.com:writeas/writefreely-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				minimumVersion = 0.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
