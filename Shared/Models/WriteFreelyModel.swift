@@ -324,6 +324,10 @@ private extension WriteFreelyModel {
     }
 
     func publishHandler(result: Result<WFPost, Error>) {
+        // ⚠️ NOTE:
+        // The API does not return a collection alias, so we take care not to overwrite the
+        // cached post's collection alias with the 'nil' value from the fetched post.
+        // See: https://github.com/writeas/writefreely-swift/issues/20
         do {
             let fetchedPost = try result.get()
             let foundPostIndex = posts.userPosts.firstIndex(where: {
@@ -333,7 +337,6 @@ private extension WriteFreelyModel {
             let cachedPost = self.posts.userPosts[index]
             cachedPost.appearance = fetchedPost.appearance
             cachedPost.body = fetchedPost.body
-            cachedPost.collectionAlias = fetchedPost.collectionAlias
             cachedPost.createdDate = fetchedPost.createdDate
             cachedPost.language = fetchedPost.language
             cachedPost.postId = fetchedPost.postId
