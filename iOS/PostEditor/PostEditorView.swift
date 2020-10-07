@@ -2,9 +2,18 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.presentationMode) var presentationMode
+
     @ObservedObject var post: WFAPost
+
+    @State private var selectedCollection: WFACollection?
+
+    @FetchRequest(
+        entity: WFACollection.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \WFACollection.title, ascending: true)]
+    ) var collections: FetchedResults<WFACollection>
 
     var body: some View {
         VStack {
@@ -123,25 +132,51 @@ struct PostEditorView: View {
             ToolbarItem(placement: .principal) {
                 PostEditorStatusToolbarView(post: post)
             }
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: {
-                    if model.account.isLoggedIn {
-                        publishPost()
-                    } else {
-                        self.model.isPresentingSettingsView = true
+            ToolbarItem(placement: .primaryAction) {
+                Menu(content: {
+                    Button(action: {
+                        if model.account.isLoggedIn {
+                            publishPost()
+                        } else {
+                            self.model.isPresentingSettingsView = true
+                        }
+                    }, label: {
+                        Label(
+                            post.status == PostStatus.local.rawValue ? "Publish…" : "Publish",
+                            systemImage: "paperplane"
+                        )
+                    })
+                    .disabled(
+                        post.status ==
+                            PostStatus.published.rawValue ||
+                            !model.hasNetworkConnection ||
+                            post.body.count == 0
+                    )
+                    Button(action: {
+                            sharePost()
+                    }, label: {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    })
+                    .disabled(post.postId == nil)
+                    Button(action: {
+                        print("Tapped 'Delete...' button")
+                    }, label: {
+                        Label("Delete…", systemImage: "trash")
+                    })
+                    if model.account.isLoggedIn && post.status != PostStatus.local.rawValue {
+                        Section(header: Text("Move To Collection")) {
+                            Label("Move to:", systemImage: "arrowshape.zigzag.right")
+                            Picker(selection: $selectedCollection, label: Text("Move to…")) {
+                                Text("  Drafts").tag(nil as WFACollection?)
+                                ForEach(collections) { collection in
+                                    Text("  \(collection.title)").tag(collection as WFACollection?)
+                                }
+                            }
+                        }
                     }
                 }, label: {
-                    Image(systemName: "paperplane")
+                    Image(systemName: "ellipsis.circle")
                 })
-                .disabled(
-                    post.status == PostStatus.published.rawValue || !model.hasNetworkConnection || post.body.count == 0
-                )
-                Button(action: {
-                    sharePost()
-                }, label: {
-                    Image(systemName: "square.and.arrow.up")
-                })
-                .disabled(post.postId == nil)
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
@@ -159,6 +194,17 @@ struct PostEditorView: View {
                     model.editor.clearLastDraft()
                 }
             }
+        })
+        .onChange(of: selectedCollection, perform: { newValue in
+            if post.collectionAlias != newValue?.alias {
+                post.status = PostStatus.edited.rawValue
+                post.collectionAlias = newValue?.alias
+                model.posts.loadCachedPosts()
+                LocalStorageManager().saveContext()
+            }
+        })
+        .onAppear(perform: {
+            self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
         })
         .onDisappear(perform: {
             if post.title.count == 0
@@ -179,14 +225,19 @@ struct PostEditorView: View {
     }
 
     private func publishPost() {
-        DispatchQueue.main.async {
-            LocalStorageManager().saveContext()
-            model.posts.loadCachedPosts()
-            model.publish(post: post)
+        if post.status == PostStatus.local.rawValue {
+            // If post is local, prompt user to choose where they want to publish.
+        } else {
+            // Otherwise, publish local changes to the server
+            DispatchQueue.main.async {
+                LocalStorageManager().saveContext()
+                model.posts.loadCachedPosts()
+                model.publish(post: post)
+            }
+            #if os(iOS)
+            self.hideKeyboard()
+            #endif
         }
-        #if os(iOS)
-        self.hideKeyboard()
-        #endif
     }
 
     private func sharePost() {
