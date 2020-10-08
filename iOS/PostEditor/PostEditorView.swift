@@ -134,26 +134,51 @@ struct PostEditorView: View {
             }
             ToolbarItem(placement: .primaryAction) {
                 Menu(content: {
-                    Button(action: {
-                        if model.account.isLoggedIn {
-                            publishPost()
-                        } else {
-                            self.model.isPresentingSettingsView = true
-                        }
-                    }, label: {
-                        Label(
-                            post.status == PostStatus.local.rawValue ? "Publish…" : "Publish",
-                            systemImage: "paperplane"
+                    if post.status == PostStatus.local.rawValue {
+                        Menu(content: {
+                            Label("Publish to…", systemImage: "paperplane")
+                            Button(action: {
+                                if model.account.isLoggedIn {
+                                    post.collectionAlias = nil
+                                    publishPost()
+                                } else {
+                                    self.model.isPresentingSettingsView = true
+                                }
+                            }, label: { Text("  Drafts") })
+                            ForEach(collections) { collection in
+                                Button(action: {
+                                    if model.account.isLoggedIn {
+                                        post.collectionAlias = collection.alias
+                                        publishPost()
+                                    } else {
+                                        self.model.isPresentingSettingsView = true
+                                    }
+                                }, label: {
+                                    Text("  \(collection.title)")
+                                })
+                            }
+                        }, label: {
+                            Label("Publish…", systemImage: "paperplane")
+                        })
+                    } else {
+                        Button(action: {
+                            if model.account.isLoggedIn {
+                                publishPost()
+                            } else {
+                                self.model.isPresentingSettingsView = true
+                            }
+                        }, label: {
+                            Label("Publish", systemImage: "paperplane")
+                        })
+                        .disabled(
+                            post.status ==
+                                PostStatus.published.rawValue ||
+                                !model.hasNetworkConnection ||
+                                post.body.count == 0
                         )
-                    })
-                    .disabled(
-                        post.status ==
-                            PostStatus.published.rawValue ||
-                            !model.hasNetworkConnection ||
-                            post.body.count == 0
-                    )
+                    }
                     Button(action: {
-                            sharePost()
+                        sharePost()
                     }, label: {
                         Label("Share", systemImage: "square.and.arrow.up")
                     })
@@ -225,19 +250,14 @@ struct PostEditorView: View {
     }
 
     private func publishPost() {
-        if post.status == PostStatus.local.rawValue {
-            // If post is local, prompt user to choose where they want to publish.
-        } else {
-            // Otherwise, publish local changes to the server
-            DispatchQueue.main.async {
-                LocalStorageManager().saveContext()
-                model.posts.loadCachedPosts()
-                model.publish(post: post)
-            }
-            #if os(iOS)
-            self.hideKeyboard()
-            #endif
+        DispatchQueue.main.async {
+            LocalStorageManager().saveContext()
+            model.posts.loadCachedPosts()
+            model.publish(post: post)
         }
+        #if os(iOS)
+        self.hideKeyboard()
+        #endif
     }
 
     private func sharePost() {
