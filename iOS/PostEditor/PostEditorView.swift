@@ -144,7 +144,9 @@ struct PostEditorView: View {
                                 } else {
                                     self.model.isPresentingSettingsView = true
                                 }
-                            }, label: { Text("  Drafts") })
+                            }, label: {
+                                Text("  \(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")")
+                            })
                             ForEach(collections) { collection in
                                 Button(action: {
                                     if model.account.isLoggedIn {
@@ -192,7 +194,9 @@ struct PostEditorView: View {
                         Section(header: Text("Move To Collection")) {
                             Label("Move to:", systemImage: "arrowshape.zigzag.right")
                             Picker(selection: $selectedCollection, label: Text("Move to…")) {
-                                Text("  Drafts").tag(nil as WFACollection?)
+                                Text(
+                                    "  \(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")"
+                                ).tag(nil as WFACollection?)
                                 ForEach(collections) { collection in
                                     Text("  \(collection.title)").tag(collection as WFACollection?)
                                 }
