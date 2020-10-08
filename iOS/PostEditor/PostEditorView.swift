@@ -183,11 +183,11 @@ struct PostEditorView: View {
                         Label("Share", systemImage: "square.and.arrow.up")
                     })
                     .disabled(post.postId == nil)
-                    Button(action: {
-                        print("Tapped 'Delete...' button")
-                    }, label: {
-                        Label("Delete…", systemImage: "trash")
-                    })
+//                    Button(action: {
+//                        print("Tapped 'Delete...' button")
+//                    }, label: {
+//                        Label("Delete…", systemImage: "trash")
+//                    })
                     if model.account.isLoggedIn && post.status != PostStatus.local.rawValue {
                         Section(header: Text("Move To Collection")) {
                             Label("Move to:", systemImage: "arrowshape.zigzag.right")
