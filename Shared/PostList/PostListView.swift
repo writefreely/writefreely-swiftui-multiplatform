@@ -104,6 +104,7 @@ struct PostListView: View {
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
+        managedPost.collectionAlias = nil
         switch model.preferences.font {
         case 1:
             managedPost.appearance = "sans"
@@ -116,11 +117,12 @@ struct PostListView: View {
             managedPost.language = languageCode
             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
         }
-        if let selectedCollectionAlias = selectedCollection?.alias {
-            managedPost.collectionAlias = selectedCollectionAlias
-        }
         DispatchQueue.main.async {
-            model.selectedPost = managedPost
+            self.selectedCollection = nil
+            self.showAllPosts = false
+            withAnimation {
+                self.model.selectedPost = managedPost
+            }
         }
     }
 }
