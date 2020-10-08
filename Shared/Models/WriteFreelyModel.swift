@@ -179,16 +179,8 @@ extension WriteFreelyModel {
         guard let loggedInClient = client,
               let postId = post.postId else { return }
 
-        if let newCollectionAlias = newCollection?.alias {
-            post.collectionAlias = newCollectionAlias
-            loggedInClient.movePost(postId: postId, to: newCollectionAlias, completion: movePostHandler)
-        } else {
-            // Moving a post to Drafts is not yet supported by the Swift package.
-            DispatchQueue.main.async {
-                post.collectionAlias = oldCollection?.alias
-                self.selectedPost = nil
-            }
-        }
+        post.collectionAlias = newCollection?.alias
+        loggedInClient.movePost(postId: postId, to: newCollection?.alias, completion: movePostHandler)
     }
 }
 

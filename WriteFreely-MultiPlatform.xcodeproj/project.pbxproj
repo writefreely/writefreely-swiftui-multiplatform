@@ -1140,8 +1140,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:writeas/writefreely-swift.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				branch = "extend-move-api-to-drafts";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
