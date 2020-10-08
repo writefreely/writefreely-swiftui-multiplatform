@@ -195,12 +195,12 @@ struct PostEditorView: View {
                 }
             }
         })
-        .onChange(of: selectedCollection, perform: { newValue in
-            if post.collectionAlias != newValue?.alias {
-                post.status = PostStatus.edited.rawValue
-                post.collectionAlias = newValue?.alias
-                model.posts.loadCachedPosts()
-                LocalStorageManager().saveContext()
+        .onChange(of: selectedCollection, perform: { [selectedCollection] newCollection in
+            if post.collectionAlias == newCollection?.alias {
+                return
+            } else {
+                post.collectionAlias = newCollection?.alias
+                model.move(post: post, from: selectedCollection, to: newCollection)
             }
         })
         .onAppear(perform: {

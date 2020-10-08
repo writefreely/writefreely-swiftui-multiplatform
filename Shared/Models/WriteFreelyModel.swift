@@ -174,6 +174,22 @@ extension WriteFreelyModel {
             loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
         }
     }
+
+    func move(post: WFAPost, from oldCollection: WFACollection?, to newCollection: WFACollection?) {
+        guard let loggedInClient = client,
+              let postId = post.postId else { return }
+
+        if let newCollectionAlias = newCollection?.alias {
+            post.collectionAlias = newCollectionAlias
+            loggedInClient.movePost(postId: postId, to: newCollectionAlias, completion: movePostHandler)
+        } else {
+            // Moving a post to Drafts is not yet supported by the Swift package.
+            DispatchQueue.main.async {
+                post.collectionAlias = oldCollection?.alias
+                self.selectedPost = nil
+            }
+        }
+    }
 }
 
 private extension WriteFreelyModel {
@@ -376,6 +392,23 @@ private extension WriteFreelyModel {
                 LocalStorageManager().saveContext()
             }
         } catch {
+            print(error)
+        }
+    }
+
+    func movePostHandler(result: Result<Bool, Error>) {
+        do {
+            let succeeded = try result.get()
+            if succeeded {
+                DispatchQueue.main.async {
+                    LocalStorageManager().saveContext()
+                    self.posts.loadCachedPosts()
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                LocalStorageManager.persistentContainer.viewContext.rollback()
+            }
             print(error)
         }
     }
