@@ -5,7 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0a2] - 2020-10-02
+## [1.0.0b2] - 2020-10-12
+
+### Known Issues
+
+- Publishing changes to the server doesn't update the badge status from 'Edited' to 'Published' until you tap the Publish button a second time.
+- When moving a published post from Drafts to a blog, the share link does not update accordingly.
+    - **Workaround:** Log out of your account and then log back in. This will **permanently delete** any unpublished posts and changes!
+
+### Added
+
+- A new Menu button has been added to the post editor to collect all post-related functions.
+- When you first publish a local draft, you're now asked where it should be published (i.e. to Drafts, or to one of your blogs).
+- You can now move a post to a collection from the post editor menu.
+
+### Changed
+
+- New local posts are now always created as Drafts.
+- The post editor's Publish and Share buttons are now found under a new Menu button.
+- Logging in now ignores any path added to the server URL.
+- The WriteFreely Swift package now requires v0.3.0 as the minimum version. 
+
+### Fixed
+
+- Fixed a bug where entering an invalid server URL would hang the login attempt. 
+- Fixed a crash that could occur when sharing a post on iPad.
+- Fixed a bug that set the post status to 'Edited' after updating a published post to a newer version from the server.
+- Fixed a release name in this change log.
+
+## [1.0.0b1] - 2020-10-02
 
 ### Added
 
@@ -98,7 +126,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Contributing guide
     - This changelog
 
-[1.0.0a2]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0a1...v1.0.0a2
+[1.0.0b2]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0b1...v1.0.0b2
+[1.0.0b1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0a1...v1.0.0b1
 [1.0.0a1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v0.1.1...v1.0.0a1
 [0.1.1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v0.0.2...v0.1.0
