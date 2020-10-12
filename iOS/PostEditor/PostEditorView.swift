@@ -2,11 +2,20 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.presentationMode) var presentationMode
+
     @ObservedObject var post: WFAPost
     @State private var updatingTitleFromServer: Bool = false
     @State private var updatingBodyFromServer: Bool = false
+
+    @State private var selectedCollection: WFACollection?
+
+    @FetchRequest(
+        entity: WFACollection.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \WFACollection.title, ascending: true)]
+    ) var collections: FetchedResults<WFACollection>
 
     var body: some View {
         VStack {
@@ -143,25 +152,80 @@ struct PostEditorView: View {
             ToolbarItem(placement: .principal) {
                 PostEditorStatusToolbarView(post: post)
             }
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: {
-                    if model.account.isLoggedIn {
-                        publishPost()
+            ToolbarItem(placement: .primaryAction) {
+                Menu(content: {
+                    if post.status == PostStatus.local.rawValue {
+                        Menu(content: {
+                            Label("Publish to…", systemImage: "paperplane")
+                            Button(action: {
+                                if model.account.isLoggedIn {
+                                    post.collectionAlias = nil
+                                    publishPost()
+                                } else {
+                                    self.model.isPresentingSettingsView = true
+                                }
+                            }, label: {
+                                Text("  \(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")")
+                            })
+                            ForEach(collections) { collection in
+                                Button(action: {
+                                    if model.account.isLoggedIn {
+                                        post.collectionAlias = collection.alias
+                                        publishPost()
+                                    } else {
+                                        self.model.isPresentingSettingsView = true
+                                    }
+                                }, label: {
+                                    Text("  \(collection.title)")
+                                })
+                            }
+                        }, label: {
+                            Label("Publish…", systemImage: "paperplane")
+                        })
                     } else {
-                        self.model.isPresentingSettingsView = true
+                        Button(action: {
+                            if model.account.isLoggedIn {
+                                publishPost()
+                            } else {
+                                self.model.isPresentingSettingsView = true
+                            }
+                        }, label: {
+                            Label("Publish", systemImage: "paperplane")
+                        })
+                        .disabled(
+                            post.status ==
+                                PostStatus.published.rawValue ||
+                                !model.hasNetworkConnection ||
+                                post.body.count == 0
+                        )
+                    }
+                    Button(action: {
+                        sharePost()
+                    }, label: {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    })
+                    .disabled(post.postId == nil)
+//                    Button(action: {
+//                        print("Tapped 'Delete...' button")
+//                    }, label: {
+//                        Label("Delete…", systemImage: "trash")
+//                    })
+                    if model.account.isLoggedIn && post.status != PostStatus.local.rawValue {
+                        Section(header: Text("Move To Collection")) {
+                            Label("Move to:", systemImage: "arrowshape.zigzag.right")
+                            Picker(selection: $selectedCollection, label: Text("Move to…")) {
+                                Text(
+                                    "  \(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")"
+                                ).tag(nil as WFACollection?)
+                                ForEach(collections) { collection in
+                                    Text("  \(collection.title)").tag(collection as WFACollection?)
+                                }
+                            }
+                        }
                     }
                 }, label: {
-                    Image(systemName: "paperplane")
+                    Image(systemName: "ellipsis.circle")
                 })
-                .disabled(
-                    post.status == PostStatus.published.rawValue || !model.hasNetworkConnection || post.body.count == 0
-                )
-                Button(action: {
-                    sharePost()
-                }, label: {
-                    Image(systemName: "square.and.arrow.up")
-                })
-                .disabled(post.postId == nil)
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
@@ -180,6 +244,17 @@ struct PostEditorView: View {
                     model.editor.clearLastDraft()
                 }
             }
+        })
+        .onChange(of: selectedCollection, perform: { [selectedCollection] newCollection in
+            if post.collectionAlias == newCollection?.alias {
+                return
+            } else {
+                post.collectionAlias = newCollection?.alias
+                model.move(post: post, from: selectedCollection, to: newCollection)
+            }
+        })
+        .onAppear(perform: {
+            self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
         })
         .onDisappear(perform: {
             if post.title.count == 0
