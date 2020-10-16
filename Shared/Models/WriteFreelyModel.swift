@@ -11,8 +11,8 @@ class WriteFreelyModel: ObservableObject {
     @Published var posts = PostListModel()
     @Published var editor = PostEditorModel()
     @Published var isLoggingIn: Bool = false
-    @Published var hasNetworkConnection: Bool = false
     @Published var isProcessingRequest: Bool = false
+    @Published var hasNetworkConnection: Bool = true
     @Published var selectedPost: WFAPost? {
         didSet {
             if let post = selectedPost {
@@ -28,6 +28,7 @@ class WriteFreelyModel: ObservableObject {
     }
     @Published var isPresentingDeleteAlert: Bool = false
     @Published var isPresentingLoginErrorAlert: Bool = false
+    @Published var isPresentingNetworkErrorAlert: Bool = false
     @Published var postToDelete: WFAPost?
     #if os(iOS)
     @Published var isPresentingSettingsView: Bool = false
@@ -83,6 +84,10 @@ class WriteFreelyModel: ObservableObject {
 
 extension WriteFreelyModel {
     func login(to server: URL, as username: String, password: String) {
+        if !hasNetworkConnection {
+            isPresentingNetworkErrorAlert = true
+            return
+        }
         let secureProtocolPrefix = "https://"
         let insecureProtocolPrefix = "http://"
         var serverString = server.absoluteString
@@ -105,6 +110,10 @@ extension WriteFreelyModel {
     }
 
     func logout() {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else {
             do {
                 try purgeTokenFromKeychain(username: account.username, server: account.server)
@@ -118,6 +127,10 @@ extension WriteFreelyModel {
     }
 
     func fetchUserCollections() {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
         // We're starting the network request.
         DispatchQueue.main.async {
@@ -127,6 +140,10 @@ extension WriteFreelyModel {
     }
 
     func fetchUserPosts() {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
         // We're starting the network request.
         DispatchQueue.main.async {
@@ -136,6 +153,10 @@ extension WriteFreelyModel {
     }
 
     func publish(post: WFAPost) {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
         // We're starting the network request.
         DispatchQueue.main.async {
@@ -179,6 +200,10 @@ extension WriteFreelyModel {
     }
 
     func updateFromServer(post: WFAPost) {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
         guard let postId = post.postId else { return }
         // We're starting the network request.
@@ -195,6 +220,10 @@ extension WriteFreelyModel {
     }
 
     func move(post: WFAPost, from oldCollection: WFACollection?, to newCollection: WFACollection?) {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client,
               let postId = post.postId else { return }
         // We're starting the network request.
