@@ -386,6 +386,7 @@ private extension WriteFreelyModel {
             cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
                 LocalStorageManager().saveContext()
+                self.posts.loadCachedPosts()
             }
         } catch {
             print(error)
@@ -396,9 +397,10 @@ private extension WriteFreelyModel {
         do {
             let succeeded = try result.get()
             if succeeded {
-                DispatchQueue.main.async {
-                    LocalStorageManager().saveContext()
-                    self.posts.loadCachedPosts()
+                if let post = selectedPost {
+                    updateFromServer(post: post)
+                } else {
+                    return
                 }
             }
         } catch {
