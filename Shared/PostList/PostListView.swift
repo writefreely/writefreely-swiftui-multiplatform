@@ -35,12 +35,16 @@ struct PostListView: View {
                         Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
                             .foregroundColor(.secondary)
                         Spacer()
-                        Button(action: {
-                            reloadFromServer()
-                        }, label: {
-                            Image(systemName: "arrow.clockwise")
-                        })
-                        .disabled(!model.account.isLoggedIn || !model.hasNetworkConnection)
+                        if model.isProcessingRequest {
+                            ProgressView()
+                        } else {
+                            Button(action: {
+                                reloadFromServer()
+                            }, label: {
+                                Image(systemName: "arrow.clockwise")
+                            })
+                            .disabled(!model.account.isLoggedIn || !model.hasNetworkConnection)
+                        }
                     }
                     .padding()
                     .frame(width: geometry.size.width)

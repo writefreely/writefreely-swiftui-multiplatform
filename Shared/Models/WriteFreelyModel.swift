@@ -12,6 +12,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var editor = PostEditorModel()
     @Published var isLoggingIn: Bool = false
     @Published var hasNetworkConnection: Bool = false
+    @Published var isProcessingRequest: Bool = false
     @Published var selectedPost: WFAPost? {
         didSet {
             if let post = selectedPost {
