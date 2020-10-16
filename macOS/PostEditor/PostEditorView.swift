@@ -143,9 +143,7 @@ struct PostEditorView: View {
                 }, label: {
                     Image(systemName: "paperplane")
                 })
-                .disabled(
-                    post.status == PostStatus.published.rawValue || !model.hasNetworkConnection || post.body.count == 0
-                )
+                .disabled(post.status == PostStatus.published.rawValue || || post.body.count == 0)
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
