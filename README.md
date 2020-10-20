@@ -2,15 +2,21 @@
 
 A multiplatform (iOS, iPadOS, and macOS) client for [WriteFreely](https://writefreely.org/), built in SwiftUI.
 
+## How To Get The Apps
+
+The iOS app is now [available on the App Store](https://apps.apple.com/us/app/writefreely/id1531530896) for iPhones and iPads running iOS 14. Check out [this help forum topic](https://discuss.write.as/t/using-the-writefreely-ios-app/1946) for a guide on using the app.
+
+The Mac app is still under development.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-⚠️ Building and testing the iOS targets will work on any version of macOS that supports Xcode 12, but building and testing the macOS target requires macOS 11 (Big Sur) beta 5.
+⚠️ Building and testing the iOS targets will work on any version of macOS that supports Xcode 12, but building and testing the macOS target requires macOS 11 (Big Sur) beta 9.
 
-- Xcode 12 beta 5
+- Xcode 12
 - [SwiftLint](https://github.com/realm/SwiftLint)
 
 SwiftLint is run as a build phase for all targets, so that linting warnings and errors are shown in Xcode.
@@ -21,7 +27,7 @@ To run the tests, select the scheme you want to test (iOS or macOS) and choose *
 
 ## Contributing
 
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
