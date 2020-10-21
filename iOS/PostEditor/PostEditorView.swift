@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostEditorView: View {
+    private let bodyLineSpacing: CGFloat = 17 * 0.5
     @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.managedObjectContext) var moc
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -76,6 +77,7 @@ struct PostEditorView: View {
                     }
                     TextEditor(text: $post.body)
                         .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
+                        .lineSpacing(bodyLineSpacing)
                         .onChange(of: post.body) { _ in
                             if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
@@ -107,6 +109,7 @@ struct PostEditorView: View {
                     }
                     TextEditor(text: $post.body)
                         .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
+                        .lineSpacing(bodyLineSpacing)
                         .onChange(of: post.body) { _ in
                             if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
@@ -138,6 +141,7 @@ struct PostEditorView: View {
                     }
                     TextEditor(text: $post.body)
                         .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
+                        .lineSpacing(bodyLineSpacing)
                         .onChange(of: post.body) { _ in
                             if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                                 post.status = PostStatus.edited.rawValue
