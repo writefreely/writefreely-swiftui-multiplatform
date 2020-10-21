@@ -211,12 +211,7 @@ extension WriteFreelyModel {
             self.selectedPost = post
             self.isProcessingRequest = true
         }
-        if let postCollectionAlias = post.collectionAlias,
-           let postSlug = post.slug {
-            loggedInClient.getPost(bySlug: postSlug, from: postCollectionAlias, completion: updateFromServerHandler)
-        } else {
-            loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
-        }
+        loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
     }
 
     func move(post: WFAPost, from oldCollection: WFACollection?, to newCollection: WFACollection?) {
@@ -231,6 +226,7 @@ extension WriteFreelyModel {
             self.isProcessingRequest = true
         }
 
+        selectedPost = post
         post.collectionAlias = newCollection?.alias
         loggedInClient.movePost(postId: postId, to: newCollection?.alias, completion: movePostHandler)
     }
@@ -450,6 +446,7 @@ private extension WriteFreelyModel {
             cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
                 LocalStorageManager().saveContext()
+                self.posts.loadCachedPosts()
             }
         } catch {
             print(error)
@@ -464,9 +461,10 @@ private extension WriteFreelyModel {
         do {
             let succeeded = try result.get()
             if succeeded {
-                DispatchQueue.main.async {
-                    LocalStorageManager().saveContext()
-                    self.posts.loadCachedPosts()
+                if let post = selectedPost {
+                    updateFromServer(post: post)
+                } else {
+                    return
                 }
             }
         } catch {
