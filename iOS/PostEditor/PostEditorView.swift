@@ -56,6 +56,7 @@ struct PostEditorView: View {
             switch post.appearance {
             case "sans":
                 TextField("Title (optional)", text: $post.title)
+                    .padding(.horizontal, 4)
                     .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
@@ -86,6 +87,7 @@ struct PostEditorView: View {
                 }
             case "wrap", "mono", "code":
                 TextField("Title (optional)", text: $post.title)
+                    .padding(.horizontal, 4)
                     .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
@@ -116,6 +118,7 @@ struct PostEditorView: View {
                 }
             default:
                 TextField("Title (optional)", text: $post.title)
+                    .padding(.horizontal, 4)
                     .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
                         if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
