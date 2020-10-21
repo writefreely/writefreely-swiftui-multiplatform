@@ -11,7 +11,8 @@ class WriteFreelyModel: ObservableObject {
     @Published var posts = PostListModel()
     @Published var editor = PostEditorModel()
     @Published var isLoggingIn: Bool = false
-    @Published var hasNetworkConnection: Bool = false
+    @Published var isProcessingRequest: Bool = false
+    @Published var hasNetworkConnection: Bool = true
     @Published var selectedPost: WFAPost? {
         didSet {
             if let post = selectedPost {
@@ -27,6 +28,7 @@ class WriteFreelyModel: ObservableObject {
     }
     @Published var isPresentingDeleteAlert: Bool = false
     @Published var isPresentingLoginErrorAlert: Bool = false
+    @Published var isPresentingNetworkErrorAlert: Bool = false
     @Published var postToDelete: WFAPost?
     #if os(iOS)
     @Published var isPresentingSettingsView: Bool = false
@@ -82,6 +84,10 @@ class WriteFreelyModel: ObservableObject {
 
 extension WriteFreelyModel {
     func login(to server: URL, as username: String, password: String) {
+        if !hasNetworkConnection {
+            isPresentingNetworkErrorAlert = true
+            return
+        }
         let secureProtocolPrefix = "https://"
         let insecureProtocolPrefix = "http://"
         var serverString = server.absoluteString
@@ -104,6 +110,10 @@ extension WriteFreelyModel {
     }
 
     func logout() {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else {
             do {
                 try purgeTokenFromKeychain(username: account.username, server: account.server)
@@ -117,17 +127,41 @@ extension WriteFreelyModel {
     }
 
     func fetchUserCollections() {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
+        // We're starting the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = true
+        }
         loggedInClient.getUserCollections(completion: fetchUserCollectionsHandler)
     }
 
     func fetchUserPosts() {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
+        // We're starting the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = true
+        }
         loggedInClient.getPosts(completion: fetchUserPostsHandler)
     }
 
     func publish(post: WFAPost) {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
+        // We're starting the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = true
+        }
 
         if post.language == nil {
             if let languageCode = Locale.current.languageCode {
@@ -166,10 +200,16 @@ extension WriteFreelyModel {
     }
 
     func updateFromServer(post: WFAPost) {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client else { return }
         guard let postId = post.postId else { return }
+        // We're starting the network request.
         DispatchQueue.main.async {
             self.selectedPost = post
+            self.isProcessingRequest = true
         }
         if let postCollectionAlias = post.collectionAlias,
            let postSlug = post.slug {
@@ -180,8 +220,16 @@ extension WriteFreelyModel {
     }
 
     func move(post: WFAPost, from oldCollection: WFACollection?, to newCollection: WFACollection?) {
+        if !hasNetworkConnection {
+            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            return
+        }
         guard let loggedInClient = client,
               let postId = post.postId else { return }
+        // We're starting the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = true
+        }
 
         post.collectionAlias = newCollection?.alias
         loggedInClient.movePost(postId: postId, to: newCollection?.alias, completion: movePostHandler)
@@ -271,6 +319,10 @@ private extension WriteFreelyModel {
     }
 
     func fetchUserCollectionsHandler(result: Result<[WFCollection], Error>) {
+        // We're done with the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = false
+        }
         do {
             let fetchedCollections = try result.get()
             for fetchedCollection in fetchedCollections {
@@ -294,6 +346,10 @@ private extension WriteFreelyModel {
     }
 
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
+        // We're done with the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = false
+        }
         do {
             var postsToDelete = posts.userPosts.filter { $0.status != PostStatus.local.rawValue }
             let fetchedPosts = try result.get()
@@ -336,6 +392,10 @@ private extension WriteFreelyModel {
     }
 
     func publishHandler(result: Result<WFPost, Error>) {
+        // We're done with the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = false
+        }
         // ⚠️ NOTE:
         // The API does not return a collection alias, so we take care not to overwrite the
         // cached post's collection alias with the 'nil' value from the fetched post.
@@ -366,6 +426,10 @@ private extension WriteFreelyModel {
     }
 
     func updateFromServerHandler(result: Result<WFPost, Error>) {
+        // We're done with the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = false
+        }
         // ⚠️ NOTE:
         // The API does not return a collection alias, so we take care not to overwrite the
         // cached post's collection alias with the 'nil' value from the fetched post.
@@ -393,6 +457,10 @@ private extension WriteFreelyModel {
     }
 
     func movePostHandler(result: Result<Bool, Error>) {
+        // We're done with the network request.
+        DispatchQueue.main.async {
+            self.isProcessingRequest = false
+        }
         do {
             let succeeded = try result.get()
             if succeeded {

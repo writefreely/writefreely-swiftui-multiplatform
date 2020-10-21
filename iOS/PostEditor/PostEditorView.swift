@@ -153,7 +153,10 @@ struct PostEditorView: View {
                 PostEditorStatusToolbarView(post: post)
             }
             ToolbarItem(placement: .primaryAction) {
-                Menu(content: {
+                if model.isProcessingRequest {
+                    ProgressView()
+                } else {
+                    Menu(content: {
                     if post.status == PostStatus.local.rawValue {
                         Menu(content: {
                             Label("Publish to…", systemImage: "paperplane")
@@ -192,12 +195,7 @@ struct PostEditorView: View {
                         }, label: {
                             Label("Publish", systemImage: "paperplane")
                         })
-                        .disabled(
-                            post.status ==
-                                PostStatus.published.rawValue ||
-                                !model.hasNetworkConnection ||
-                                post.body.count == 0
-                        )
+                        .disabled(post.status == PostStatus.published.rawValue || post.body.count == 0)
                     }
                     Button(action: {
                         sharePost()
@@ -226,6 +224,7 @@ struct PostEditorView: View {
                 }, label: {
                     Image(systemName: "ellipsis.circle")
                 })
+                }
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
