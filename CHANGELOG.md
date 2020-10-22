@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0b2] - 2020-10-12
+## [Unreleased]
+
+### Added
+
+- A link in the README to the App Store product page for the iOS app.
+- An alert now warns you if you try to perform a task that requires an internet connection when there is no network connection.
+
+### Changed
+
+- Buttons that handle network requests (e.g. publishing, reloading from server) now show a busy indicator while waiting to complete the task.
+
+### Fixed
+
+- After moving a post from Drafts/Anonymous to a blog, the share link format retained the old single-post format. This is now fixed.
+
+## [1.0.0] - 2020-10-20
 
 ### Known Issues
 
@@ -126,7 +141,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Contributing guide
     - This changelog
 
-[1.0.0b2]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0b1...v1.0.0b2
+[1.0.0]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0b1...v1.0.0
 [1.0.0b1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0a1...v1.0.0b1
 [1.0.0a1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v0.1.1...v1.0.0a1
 [0.1.1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v0.1.0...v0.1.1
