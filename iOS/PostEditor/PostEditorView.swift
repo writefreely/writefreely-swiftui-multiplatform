@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct PostEditorView: View {
-    private let bodyLineSpacing: CGFloat = 17 * 0.5
     @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.managedObjectContext) var moc
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -36,104 +35,11 @@ struct PostEditorView: View {
                     }
                 )
             }
-            switch post.appearance {
-            case "sans":
-                TextField("Title (optional)", text: $post.title)
-                    .padding(.horizontal, 4)
-                    .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                            post.status = PostStatus.edited.rawValue
-                        }
-                        if updatingTitleFromServer {
-                            updatingTitleFromServer = false
-                        }
-                    }
-                ZStack(alignment: .topLeading) {
-                    if post.body.count == 0 {
-                        Text("Write...")
-                            .foregroundColor(Color(UIColor.placeholderText))
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 8)
-                            .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
-                    }
-                    TextEditor(text: $post.body)
-                        .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
-                        .lineSpacing(bodyLineSpacing)
-                        .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                                post.status = PostStatus.edited.rawValue
-                            }
-                            if updatingBodyFromServer {
-                                updatingBodyFromServer = false
-                            }
-                    }
-                }
-            case "wrap", "mono", "code":
-                TextField("Title (optional)", text: $post.title)
-                    .padding(.horizontal, 4)
-                    .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                            post.status = PostStatus.edited.rawValue
-                        }
-                        if updatingTitleFromServer {
-                            updatingTitleFromServer = false
-                        }
-                    }
-                ZStack(alignment: .topLeading) {
-                    if post.body.count == 0 {
-                        Text("Write...")
-                            .foregroundColor(Color(UIColor.placeholderText))
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 8)
-                            .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
-                    }
-                    TextEditor(text: $post.body)
-                        .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
-                        .lineSpacing(bodyLineSpacing)
-                        .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                                post.status = PostStatus.edited.rawValue
-                            }
-                            if updatingBodyFromServer {
-                                updatingBodyFromServer = false
-                            }
-                    }
-                }
-            default:
-                TextField("Title (optional)", text: $post.title)
-                    .padding(.horizontal, 4)
-                    .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                            post.status = PostStatus.edited.rawValue
-                        }
-                        if updatingTitleFromServer {
-                            updatingTitleFromServer = false
-                        }
-                    }
-                ZStack(alignment: .topLeading) {
-                    if post.body.count == 0 {
-                        Text("Write...")
-                            .foregroundColor(Color(UIColor.placeholderText))
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 8)
-                            .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
-                    }
-                    TextEditor(text: $post.body)
-                        .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
-                        .lineSpacing(bodyLineSpacing)
-                        .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                                post.status = PostStatus.edited.rawValue
-                            }
-                            if updatingBodyFromServer {
-                                updatingBodyFromServer = false
-                            }
-                    }
-                }
-            }
+            PostTextEditingView(
+                post: _post,
+                updatingTitleFromServer: $updatingTitleFromServer,
+                updatingBodyFromServer: $updatingBodyFromServer
+            )
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding()

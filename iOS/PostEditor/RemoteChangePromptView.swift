@@ -6,7 +6,6 @@ enum RemotePostChangeType {
 }
 
 struct RemoteChangePromptView: View {
-    @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State private var promptText: String = "This is placeholder prompt text. Replace it?"
     @State private var promptIcon: Image = Image(systemName: "questionmark.square.dashed")
