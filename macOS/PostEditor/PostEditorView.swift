@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostEditorView: View {
+    private let bodyLineSpacing: CGFloat = 17 * 0.5
     @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: WFAPost
@@ -14,6 +15,7 @@ struct PostEditorView: View {
             case "sans":
                 TextField("Title (optional)", text: $post.title)
                     .textFieldStyle(PlainTextFieldStyle())
+                    .padding(.horizontal, 4)
                     .padding(.bottom)
                     .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
@@ -34,6 +36,7 @@ struct PostEditorView: View {
                     }
                     TextEditor(text: $post.body)
                         .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
+                        .lineSpacing(bodyLineSpacing)
                         .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
                         .onChange(of: post.body) { _ in
                             if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
@@ -51,6 +54,7 @@ struct PostEditorView: View {
             case "wrap", "mono", "code":
                 TextField("Title (optional)", text: $post.title)
                     .textFieldStyle(PlainTextFieldStyle())
+                    .padding(.horizontal, 4)
                     .padding(.bottom)
                     .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
@@ -71,6 +75,7 @@ struct PostEditorView: View {
                     }
                     TextEditor(text: $post.body)
                         .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
+                        .lineSpacing(bodyLineSpacing)
                         .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
                         .onChange(of: post.body) { _ in
                             if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
@@ -88,6 +93,7 @@ struct PostEditorView: View {
             default:
                 TextField("Title (optional)", text: $post.title)
                     .textFieldStyle(PlainTextFieldStyle())
+                    .padding(.horizontal, 4)
                     .padding(.bottom)
                     .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
                     .onChange(of: post.title) { _ in
@@ -108,6 +114,7 @@ struct PostEditorView: View {
                     }
                     TextEditor(text: $post.body)
                         .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
+                        .lineSpacing(bodyLineSpacing)
                         .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
                         .onChange(of: post.body) { _ in
                             if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
