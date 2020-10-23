@@ -7,6 +7,7 @@ enum PostAppearance: String {
 }
 
 struct PostTextEditingView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject var post: WFAPost
     @Binding var updatingTitleFromServer: Bool
     @Binding var updatingBodyFromServer: Bool
@@ -44,7 +45,7 @@ struct PostTextEditingView: View {
                 }
                 TextEditor(text: $post.body)
                     .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
-                    .lineSpacing(17 * bodyLineSpacingMultiplier)
+                    .lineSpacing(17 * (horizontalSizeClass == .compact ? 0.25 : bodyLineSpacingMultiplier))
                     .onChange(of: post.body) { _ in
                         if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                             post.status = PostStatus.edited.rawValue
