@@ -10,129 +10,12 @@ struct PostEditorView: View {
     @State private var updatingBodyFromServer: Bool = false
 
     var body: some View {
-        VStack {
-            switch post.appearance {
-            case "sans":
-                TextField("Title (optional)", text: $post.title)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .padding(.horizontal, 4)
-                    .padding(.bottom)
-                    .font(.custom("OpenSans-Regular", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                            post.status = PostStatus.edited.rawValue
-                        }
-                        if updatingTitleFromServer {
-                            updatingTitleFromServer = false
-                        }
-                    }
-                ZStack(alignment: .topLeading) {
-                    if post.body.count == 0 {
-                        Text("Write...")
-                            .foregroundColor(Color(NSColor.placeholderTextColor))
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 2)
-                            .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
-                    }
-                    TextEditor(text: $post.body)
-                        .font(.custom("OpenSans-Regular", size: 17, relativeTo: Font.TextStyle.body))
-                        .lineSpacing(bodyLineSpacing)
-                        .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
-                        .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                                post.status = PostStatus.edited.rawValue
-                            }
-                            if updatingBodyFromServer {
-                                updatingBodyFromServer = false
-                            }
-                        }
-                        .onHover(perform: { hovering in
-                            self.isHovering = hovering
-                        })
-                }
-                .background(Color(NSColor.controlBackgroundColor))
-            case "wrap", "mono", "code":
-                TextField("Title (optional)", text: $post.title)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .padding(.horizontal, 4)
-                    .padding(.bottom)
-                    .font(.custom("Hack", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                            post.status = PostStatus.edited.rawValue
-                        }
-                        if updatingTitleFromServer {
-                            updatingTitleFromServer = false
-                        }
-                    }
-                ZStack(alignment: .topLeading) {
-                    if post.body.count == 0 {
-                        Text("Write...")
-                            .foregroundColor(Color(NSColor.placeholderTextColor))
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 2)
-                            .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
-                    }
-                    TextEditor(text: $post.body)
-                        .font(.custom("Hack", size: 17, relativeTo: Font.TextStyle.body))
-                        .lineSpacing(bodyLineSpacing)
-                        .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
-                        .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                                post.status = PostStatus.edited.rawValue
-                            }
-                            if updatingBodyFromServer {
-                                updatingBodyFromServer = false
-                            }
-                        }
-                        .onHover(perform: { hovering in
-                            self.isHovering = hovering
-                        })
-                }
-                .background(Color(NSColor.controlBackgroundColor))
-            default:
-                TextField("Title (optional)", text: $post.title)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .padding(.horizontal, 4)
-                    .padding(.bottom)
-                    .font(.custom("Lora", size: 26, relativeTo: Font.TextStyle.largeTitle))
-                    .onChange(of: post.title) { _ in
-                        if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                            post.status = PostStatus.edited.rawValue
-                        }
-                        if updatingTitleFromServer {
-                            updatingTitleFromServer = false
-                        }
-                    }
-                ZStack(alignment: .topLeading) {
-                    if post.body.count == 0 {
-                        Text("Write...")
-                            .foregroundColor(Color(NSColor.placeholderTextColor))
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 2)
-                            .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
-                    }
-                    TextEditor(text: $post.body)
-                        .font(.custom("Lora", size: 17, relativeTo: Font.TextStyle.body))
-                        .lineSpacing(bodyLineSpacing)
-                        .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
-                        .onChange(of: post.body) { _ in
-                            if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                                post.status = PostStatus.edited.rawValue
-                            }
-                            if updatingBodyFromServer {
-                                updatingBodyFromServer = false
-                            }
-                        }
-                        .onHover(perform: { hovering in
-                            self.isHovering = hovering
-                        })
-                }
-                .background(Color(NSColor.controlBackgroundColor))
-            }
-        }
+        PostTextEditingView(
+            post: post,
+            updatingTitleFromServer: $updatingTitleFromServer,
+            updatingBodyFromServer: $updatingBodyFromServer
+        )
         .padding()
-        .background(Color.white)
         .toolbar {
             ToolbarItem(placement: .status) {
                 PostEditorStatusToolbarView(post: post)
@@ -150,7 +33,7 @@ struct PostEditorView: View {
                 }, label: {
                     Image(systemName: "paperplane")
                 })
-                .disabled(post.status == PostStatus.published.rawValue || || post.body.count == 0)
+                .disabled(post.status == PostStatus.published.rawValue || post.body.count == 0)
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
