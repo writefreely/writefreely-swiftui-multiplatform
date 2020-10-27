@@ -24,7 +24,7 @@ class Coordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if (text == "\n") {
+        if text == "\n" {
             self.isFirstResponder.toggle()
             return false
         }

@@ -24,6 +24,7 @@ struct PostBodyTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var textStyle: UIFont
     @Binding var isFirstResponder: Bool
+    var lineSpacing: CGFloat
 
     func makeUIView(context: UIViewRepresentableContext<PostBodyTextView>) -> UITextView {
         let textView = UITextView(frame: .zero)
@@ -40,7 +41,16 @@ struct PostBodyTextView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<PostBodyTextView>) {
-        uiView.text = text
+        let attributedString = NSMutableAttributedString(string: text)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        attributedString.addAttribute(
+            NSAttributedString.Key.paragraphStyle,
+            value: paragraphStyle,
+            range: NSMakeRange(0, attributedString.length) // swiftlint:disable:this legacy_constructor
+        )
+
+        uiView.attributedText = attributedString
         let font = textStyle
         let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
         uiView.font = fontMetrics.scaledFont(for: font)
