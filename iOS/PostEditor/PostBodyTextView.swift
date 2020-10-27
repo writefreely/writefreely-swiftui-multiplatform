@@ -1,20 +1,54 @@
-//
-//  PostBodyTextView.swift
-//  WriteFreely-MultiPlatform (iOS)
-//
-//  Created by Angelo Stavrow on 2020-10-27.
-//
+// Based on https://stackoverflow.com/a/56508132/1234545
 
 import SwiftUI
 
-struct PostBodyTextView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+struct PostBodyTextView: UIViewRepresentable {
 
-struct PostBodyTextView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostBodyTextView()
+    class Coordinator: NSObject, UITextViewDelegate {
+        @Binding var text: String
+        @Binding var isFirstResponder: Bool
+        var didBecomeFirstResponder: Bool = false
+
+        init(text: Binding<String>, isFirstResponder: Binding<Bool>) {
+            _text = text
+            _isFirstResponder = isFirstResponder
+        }
+
+        func textViewDidChangeSelection(_ textView: UITextView) {
+            DispatchQueue.main.async {
+                self.text = textView.text ?? ""
+            }
+        }
+    }
+
+    @Binding var text: String
+    @Binding var textStyle: UIFont
+    @Binding var isFirstResponder: Bool
+
+    func makeUIView(context: UIViewRepresentableContext<PostBodyTextView>) -> UITextView {
+        let textView = UITextView(frame: .zero)
+        textView.delegate = context.coordinator
+        let font = textStyle
+        let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
+        textView.font = fontMetrics.scaledFont(for: font)
+        textView.backgroundColor = UIColor.clear
+        return textView
+    }
+
+    func makeCoordinator() -> PostBodyTextView.Coordinator {
+        return Coordinator(text: $text, isFirstResponder: $isFirstResponder)
+    }
+
+    func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<PostBodyTextView>) {
+        uiView.text = text
+        let font = textStyle
+        let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
+        uiView.font = fontMetrics.scaledFont(for: font)
+
+        // We don't want the text field to become first responder every time SwiftUI refreshes the view.
+        if isFirstResponder && !context.coordinator.didBecomeFirstResponder {
+            uiView.becomeFirstResponder()
+            context.coordinator.didBecomeFirstResponder = true
+        }
     }
 }
