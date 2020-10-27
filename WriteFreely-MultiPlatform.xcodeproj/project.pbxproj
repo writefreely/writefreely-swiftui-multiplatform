@@ -53,6 +53,8 @@
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
 		17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5389124DDED0000DEFF9A /* PreferencesView.swift */; };
 		17A67CAF251A5DD7002F163D /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A67CAE251A5DD7002F163D /* PostEditorView.swift */; };
+		17AD0A5E25489E810057D763 /* PostTitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD0A5D25489E810057D763 /* PostTitleTextView.swift */; };
+		17AD0A6425489E900057D763 /* PostBodyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD0A6325489E900057D763 /* PostBodyTextView.swift */; };
 		17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */; };
 		17B5103B2515448D00E9631F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 17B5103A2515448D00E9631F /* Credits.rtf */; };
 		17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
@@ -141,6 +143,8 @@
 		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		17A5389124DDED0000DEFF9A /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		17A67CAE251A5DD7002F163D /* PostEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorView.swift; sourceTree = "<group>"; };
+		17AD0A5D25489E810057D763 /* PostTitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitleTextView.swift; sourceTree = "<group>"; };
+		17AD0A6325489E900057D763 /* PostBodyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBodyTextView.swift; sourceTree = "<group>"; };
 		17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B5103A2515448D00E9631F /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -294,6 +298,8 @@
 				1756AE7624CB2EDD00FD7257 /* PostEditorView.swift */,
 				173E19D0254318F600440F0F /* RemoteChangePromptView.swift */,
 				173E19E2254329CC00440F0F /* PostTextEditingView.swift */,
+				17AD0A5D25489E810057D763 /* PostTitleTextView.swift */,
+				17AD0A6325489E900057D763 /* PostBodyTextView.swift */,
 			);
 			path = PostEditor;
 			sourceTree = "<group>";
@@ -694,6 +700,8 @@
 				170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
 				17480CA5251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
+				17AD0A6425489E900057D763 /* PostBodyTextView.swift in Sources */,
+				17AD0A5E25489E810057D763 /* PostTitleTextView.swift in Sources */,
 				17120DA924E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				1756DBB324FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
