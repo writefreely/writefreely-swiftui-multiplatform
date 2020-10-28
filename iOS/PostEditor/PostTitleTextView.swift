@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-class Coordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
+class PostTitleCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
     @Binding var text: String
     @Binding var isFirstResponder: Bool
     var didBecomeFirstResponder: Bool = false
@@ -17,7 +17,7 @@ class Coordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
         _isFirstResponder = isFirstResponder
     }
 
-    func textViewDidChangeSelection(_ textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         DispatchQueue.main.async {
             self.postTitleTextView.text = textView.text ?? ""
         }
@@ -75,7 +75,7 @@ struct PostTitleTextView: UIViewRepresentable {
         return textView
     }
 
-    func makeCoordinator() -> Coordinator {
+    func makeCoordinator() -> PostTitleCoordinator {
         return Coordinator(self, text: $text, isFirstResponder: $isFirstResponder)
     }
 

@@ -1,26 +1,44 @@
-// Based on https://stackoverflow.com/a/56508132/1234545
+// Based on https://stackoverflow.com/a/56508132/1234545 and https://stackoverflow.com/a/48360549/1234545
 
 import SwiftUI
 
-struct PostBodyTextView: UIViewRepresentable {
+class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
+    @Binding var text: String
+    @Binding var isFirstResponder: Bool
+    var lineSpacingMultiplier: CGFloat
+    var didBecomeFirstResponder: Bool = false
+    var postBodyTextView: PostBodyTextView
 
-    class Coordinator: NSObject, UITextViewDelegate {
-        @Binding var text: String
-        @Binding var isFirstResponder: Bool
-        var didBecomeFirstResponder: Bool = false
+    weak var textView: UITextView?
 
-        init(text: Binding<String>, isFirstResponder: Binding<Bool>) {
-            _text = text
-            _isFirstResponder = isFirstResponder
-        }
+    init(
+        _ textView: PostBodyTextView,
+        text: Binding<String>,
+        isFirstResponder: Binding<Bool>,
+        lineSpacingMultiplier: CGFloat
+    ) {
+        self.postBodyTextView = textView
+        _text = text
+        _isFirstResponder = isFirstResponder
+        self.lineSpacingMultiplier = lineSpacingMultiplier
+    }
 
-        func textViewDidChangeSelection(_ textView: UITextView) {
-            DispatchQueue.main.async {
-                self.text = textView.text ?? ""
-            }
+    func textViewDidChange(_ textView: UITextView) {
+        DispatchQueue.main.async {
+            self.postBodyTextView.text = textView.text ?? ""
         }
     }
 
+    func layoutManager(
+        _ layoutManager: NSLayoutManager,
+        lineSpacingAfterGlyphAt glyphIndex: Int,
+        withProposedLineFragmentRect rect: CGRect
+    ) -> CGFloat {
+        return 17 * lineSpacingMultiplier
+    }
+}
+
+struct PostBodyTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var textStyle: UIFont
     @Binding var isFirstResponder: Bool
@@ -28,29 +46,36 @@ struct PostBodyTextView: UIViewRepresentable {
 
     func makeUIView(context: UIViewRepresentableContext<PostBodyTextView>) -> UITextView {
         let textView = UITextView(frame: .zero)
+
+        textView.isEditable = true
+        textView.isUserInteractionEnabled = true
+        textView.isScrollEnabled = true
+        textView.alwaysBounceVertical = false
+
+        context.coordinator.textView = textView
         textView.delegate = context.coordinator
+        textView.layoutManager.delegate = context.coordinator
+
         let font = textStyle
         let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
         textView.font = fontMetrics.scaledFont(for: font)
         textView.backgroundColor = UIColor.clear
+
         return textView
     }
 
-    func makeCoordinator() -> PostBodyTextView.Coordinator {
-        return Coordinator(text: $text, isFirstResponder: $isFirstResponder)
+    func makeCoordinator() -> PostBodyCoordinator {
+        return Coordinator(
+            self,
+            text: $text,
+            isFirstResponder: $isFirstResponder,
+            lineSpacingMultiplier: lineSpacing
+        )
     }
 
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<PostBodyTextView>) {
-        let attributedString = NSMutableAttributedString(string: text)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineSpacing
-        attributedString.addAttribute(
-            NSAttributedString.Key.paragraphStyle,
-            value: paragraphStyle,
-            range: NSMakeRange(0, attributedString.length) // swiftlint:disable:this legacy_constructor
-        )
+        uiView.text = text
 
-        uiView.attributedText = attributedString
         let font = textStyle
         let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
         uiView.font = fontMetrics.scaledFont(for: font)

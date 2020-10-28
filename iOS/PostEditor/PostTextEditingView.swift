@@ -70,9 +70,9 @@ struct PostTextEditingView: View {
                     text: $post.body,
                     textStyle: $bodyTextStyle,
                     isFirstResponder: $bodyIsFirstResponder,
-                    lineSpacing: 17 * (
-                        horizontalSizeClass == .compact ? bodyLineSpacingMultiplier / 2 : bodyLineSpacingMultiplier
-                    )
+                    lineSpacing: horizontalSizeClass == .compact
+                        ? bodyLineSpacingMultiplier / 2
+                        : bodyLineSpacingMultiplier
                 )
                 .onChange(of: post.body) { _ in
                     if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
