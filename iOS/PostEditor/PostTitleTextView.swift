@@ -1,5 +1,4 @@
-// Based on https://lostmoa.com/blog/DynamicHeightForTextFieldInSwiftUI/
-// and https://stackoverflow.com/a/56508132/1234545
+// Based on https://lostmoa.com/blog/DynamicHeightForTextFieldInSwiftUI and https://stackoverflow.com/a/56508132/1234545
 
 import SwiftUI
 
@@ -37,9 +36,7 @@ class PostTitleCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegat
         atEnd layoutFinishedFlag: Bool
     ) {
         DispatchQueue.main.async {
-            guard let view = self.textView else {
-                return
-            }
+            guard let view = self.textView else { return }
             let size = view.sizeThatFits(view.bounds.size)
             if self.postTitleTextView.height != size.height {
                 self.postTitleTextView.height = size.height

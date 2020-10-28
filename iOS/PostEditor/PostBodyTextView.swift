@@ -34,7 +34,20 @@ class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate
         lineSpacingAfterGlyphAt glyphIndex: Int,
         withProposedLineFragmentRect rect: CGRect
     ) -> CGFloat {
-        return 17 * lineSpacingMultiplier
+        // HACK: - This seems to be the only way to get line spacing to update dynamically on iPad
+        //         when switching between full-screen, split-screen, and slide-over views.
+        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
+            // Get the width of the window to determine the size class
+            if window.frame.width < 600 {
+                // Use 0.25 multiplier for compact size class
+                return 17 * 0.25
+            } else {
+                // Use 0.5 multiplier otherwise
+                return 17 * 0.5
+            }
+        } else {
+            return 17 * lineSpacingMultiplier
+        }
     }
 }
 
@@ -42,7 +55,7 @@ struct PostBodyTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var textStyle: UIFont
     @Binding var isFirstResponder: Bool
-    var lineSpacing: CGFloat
+    @State var lineSpacing: CGFloat
 
     func makeUIView(context: UIViewRepresentableContext<PostBodyTextView>) -> UITextView {
         let textView = UITextView(frame: .zero)

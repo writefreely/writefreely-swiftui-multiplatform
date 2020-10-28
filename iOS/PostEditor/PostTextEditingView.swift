@@ -11,7 +11,7 @@ struct PostTextEditingView: View {
     @State private var titleIsFirstResponder: Bool = true
     @State private var bodyTextStyle: UIFont = UIFont(name: "Lora-Regular", size: 17)!
     @State private var bodyIsFirstResponder: Bool = false
-    private let bodyLineSpacingMultiplier: CGFloat = 0.5
+    private let lineSpacingMultiplier: CGFloat = 0.5
 
     init(
         post: ObservedObject<WFAPost>,
@@ -70,9 +70,7 @@ struct PostTextEditingView: View {
                     text: $post.body,
                     textStyle: $bodyTextStyle,
                     isFirstResponder: $bodyIsFirstResponder,
-                    lineSpacing: horizontalSizeClass == .compact
-                        ? bodyLineSpacingMultiplier / 2
-                        : bodyLineSpacingMultiplier
+                    lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
                 )
                 .onChange(of: post.body) { _ in
                     if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
