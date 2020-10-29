@@ -13,19 +13,7 @@ class WriteFreelyModel: ObservableObject {
     @Published var isLoggingIn: Bool = false
     @Published var isProcessingRequest: Bool = false
     @Published var hasNetworkConnection: Bool = true
-    @Published var selectedPost: WFAPost? {
-        didSet {
-            if let post = selectedPost {
-                if post.status != PostStatus.published.rawValue {
-                    editor.setLastDraft(post)
-                } else {
-                    editor.clearLastDraft()
-                }
-            } else {
-                editor.clearLastDraft()
-            }
-        }
-    }
+    @Published var selectedPost: WFAPost?
     @Published var isPresentingDeleteAlert: Bool = false
     @Published var isPresentingLoginErrorAlert: Bool = false
     @Published var isPresentingNetworkErrorAlert: Bool = false

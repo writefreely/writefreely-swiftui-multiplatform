@@ -128,17 +128,6 @@ struct PostEditorView: View {
                 updatingBodyFromServer = true
             }
         })
-        .onChange(of: post.status, perform: { _ in
-            if post.status != PostStatus.published.rawValue {
-                DispatchQueue.main.async {
-                    model.editor.setLastDraft(post)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    model.editor.clearLastDraft()
-                }
-            }
-        })
         .onChange(of: selectedCollection, perform: { [selectedCollection] newCollection in
             if post.collectionAlias == newCollection?.alias {
                 return
