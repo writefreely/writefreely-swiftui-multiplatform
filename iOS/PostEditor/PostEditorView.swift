@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Environment(\.managedObjectContext) var moc
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.presentationMode) var presentationMode
 
@@ -147,7 +146,6 @@ struct PostEditorView: View {
                 && post.postId == nil {
                 DispatchQueue.main.async {
                     model.posts.remove(post)
-                    model.posts.loadCachedPosts()
                 }
             } else if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
@@ -160,7 +158,6 @@ struct PostEditorView: View {
     private func publishPost() {
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
-            model.posts.loadCachedPosts()
             model.publish(post: post)
         }
         #if os(iOS)

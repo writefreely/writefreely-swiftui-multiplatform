@@ -335,44 +335,53 @@ private extension WriteFreelyModel {
         DispatchQueue.main.async {
             self.isProcessingRequest = false
         }
+        let request = WFAPost.createFetchRequest()
         do {
-            var postsToDelete = posts.userPosts.filter { $0.status != PostStatus.local.rawValue }
-            let fetchedPosts = try result.get()
-            for fetchedPost in fetchedPosts {
-                if let managedPost = posts.userPosts.first(where: { $0.postId == fetchedPost.postId }) {
-                    managedPost.wasDeletedFromServer = false
-                    if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
-                       let localPostUpdatedDate = managedPost.updatedDate {
-                        managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
+            let locallyCachedPosts = try LocalStorageManager.persistentContainer.viewContext.fetch(request)
+            do {
+                var postsToDelete = locallyCachedPosts.filter { $0.status != PostStatus.local.rawValue }
+                let fetchedPosts = try result.get()
+                for fetchedPost in fetchedPosts {
+                    if let managedPost = locallyCachedPosts.first(where: { $0.postId == fetchedPost.postId }) {
+                        DispatchQueue.main.async {
+                            managedPost.wasDeletedFromServer = false
+                            if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
+                               let localPostUpdatedDate = managedPost.updatedDate {
+                                managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
+                            } else {
+                                print("Error: could not determine which copy of post is newer")
+                            }
+                            postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
+                        }
                     } else {
-                        print("Error: could not determine which copy of post is newer")
+                        DispatchQueue.main.async {
+                            let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
+                            managedPost.postId = fetchedPost.postId
+                            managedPost.slug = fetchedPost.slug
+                            managedPost.appearance = fetchedPost.appearance
+                            managedPost.language = fetchedPost.language
+                            managedPost.rtl = fetchedPost.rtl ?? false
+                            managedPost.createdDate = fetchedPost.createdDate
+                            managedPost.updatedDate = fetchedPost.updatedDate
+                            managedPost.title = fetchedPost.title ?? ""
+                            managedPost.body = fetchedPost.body
+                            managedPost.collectionAlias = fetchedPost.collectionAlias
+                            managedPost.status = PostStatus.published.rawValue
+                            managedPost.wasDeletedFromServer = false
+                        }
                     }
-                    postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
-                } else {
-                    let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
-                    managedPost.postId = fetchedPost.postId
-                    managedPost.slug = fetchedPost.slug
-                    managedPost.appearance = fetchedPost.appearance
-                    managedPost.language = fetchedPost.language
-                    managedPost.rtl = fetchedPost.rtl ?? false
-                    managedPost.createdDate = fetchedPost.createdDate
-                    managedPost.updatedDate = fetchedPost.updatedDate
-                    managedPost.title = fetchedPost.title ?? ""
-                    managedPost.body = fetchedPost.body
-                    managedPost.collectionAlias = fetchedPost.collectionAlias
-                    managedPost.status = PostStatus.published.rawValue
-                    managedPost.wasDeletedFromServer = false
                 }
-            }
-            for post in postsToDelete {
-                post.wasDeletedFromServer = true
-            }
-            DispatchQueue.main.async {
-                LocalStorageManager().saveContext()
-                self.posts.loadCachedPosts()
+                DispatchQueue.main.async {
+                    for post in postsToDelete {
+                        post.wasDeletedFromServer = true
+                    }
+                    LocalStorageManager().saveContext()
+                }
+            } catch {
+                print(error)
             }
         } catch {
-            print(error)
+            print("Error: Failed to fetch cached posts")
         }
     }
 
@@ -387,23 +396,37 @@ private extension WriteFreelyModel {
         // See: https://github.com/writeas/writefreely-swift/issues/20
         do {
             let fetchedPost = try result.get()
-            let foundPostIndex = posts.userPosts.firstIndex(where: {
-                $0.title == fetchedPost.title && $0.body == fetchedPost.body
-            })
-            guard let index = foundPostIndex else { return }
-            let cachedPost = self.posts.userPosts[index]
-            cachedPost.appearance = fetchedPost.appearance
-            cachedPost.body = fetchedPost.body
-            cachedPost.createdDate = fetchedPost.createdDate
-            cachedPost.language = fetchedPost.language
-            cachedPost.postId = fetchedPost.postId
-            cachedPost.rtl = fetchedPost.rtl ?? false
-            cachedPost.slug = fetchedPost.slug
-            cachedPost.status = PostStatus.published.rawValue
-            cachedPost.title = fetchedPost.title ?? ""
-            cachedPost.updatedDate = fetchedPost.updatedDate
-            DispatchQueue.main.async {
-                LocalStorageManager().saveContext()
+            let request = WFAPost.createFetchRequest()
+            let matchBodyPredicate = NSPredicate(format: "body == %@", fetchedPost.body)
+            if let fetchedPostTitle = fetchedPost.title {
+                let matchTitlePredicate = NSPredicate(format: "title == %@", fetchedPostTitle)
+                request.predicate = NSCompoundPredicate(
+                    andPredicateWithSubpredicates: [
+                        matchTitlePredicate,
+                        matchBodyPredicate
+                    ]
+                )
+            } else {
+                request.predicate = matchBodyPredicate
+            }
+            do {
+                let cachedPostsResults = try LocalStorageManager.persistentContainer.viewContext.fetch(request)
+                guard let cachedPost = cachedPostsResults.first else { return }
+                cachedPost.appearance = fetchedPost.appearance
+                cachedPost.body = fetchedPost.body
+                cachedPost.createdDate = fetchedPost.createdDate
+                cachedPost.language = fetchedPost.language
+                cachedPost.postId = fetchedPost.postId
+                cachedPost.rtl = fetchedPost.rtl ?? false
+                cachedPost.slug = fetchedPost.slug
+                cachedPost.status = PostStatus.published.rawValue
+                cachedPost.title = fetchedPost.title ?? ""
+                cachedPost.updatedDate = fetchedPost.updatedDate
+                DispatchQueue.main.async {
+                    LocalStorageManager().saveContext()
+                }
+            } catch {
+                print("Error: Failed to fetch cached posts")
             }
         } catch {
             print(error)
@@ -435,7 +458,6 @@ private extension WriteFreelyModel {
             cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
                 LocalStorageManager().saveContext()
-                self.posts.loadCachedPosts()
             }
         } catch {
             print(error)

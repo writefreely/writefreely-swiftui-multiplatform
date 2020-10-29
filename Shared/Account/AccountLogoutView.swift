@@ -2,7 +2,6 @@ import SwiftUI
 
 struct AccountLogoutView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Environment(\.managedObjectContext) var moc
 
     @State private var isPresentingLogoutConfirmation: Bool = false
     @State private var editedPostsWarningString: String = ""

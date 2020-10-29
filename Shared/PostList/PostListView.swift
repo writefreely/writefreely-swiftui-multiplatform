@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Environment(\.managedObjectContext) var moc
+    @Environment(\.managedObjectContext) var managedObjectContext
 
     @State var selectedCollection: WFACollection?
     @State var showAllPosts: Bool = false
@@ -103,7 +103,7 @@ struct PostListView: View {
     }
 
     private func createNewLocalDraft() {
-        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
+        let managedPost = WFAPost(context: self.managedObjectContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
         managedPost.body = ""
