@@ -348,9 +348,7 @@ private extension WriteFreelyModel {
                             if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
                                let localPostUpdatedDate = managedPost.updatedDate {
                                 managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
-                            } else {
-                                print("Error: could not determine which copy of post is newer")
-                            }
+                            } else { print("Error: could not determine which copy of post is newer") }
                             postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
                         }
                     } else {
@@ -372,9 +370,7 @@ private extension WriteFreelyModel {
                     }
                 }
                 DispatchQueue.main.async {
-                    for post in postsToDelete {
-                        post.wasDeletedFromServer = true
-                    }
+                    for post in postsToDelete { post.wasDeletedFromServer = true }
                     LocalStorageManager().saveContext()
                 }
             } catch {
