@@ -137,6 +137,11 @@ struct PostEditorView: View {
         })
         .onAppear(perform: {
             self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
+            if post.status != PostStatus.published.rawValue {
+                self.model.editor.saveLastDraft(post)
+            } else {
+                self.model.editor.clearLastDraft()
+            }
         })
         .onDisappear(perform: {
             if post.title.count == 0
