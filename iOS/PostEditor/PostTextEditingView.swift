@@ -46,7 +46,8 @@ struct PostTextEditingView: View {
                     text: $post.title,
                     textStyle: $titleTextStyle,
                     height: $titleTextHeight,
-                    isFirstResponder: $titleIsFirstResponder
+                    isFirstResponder: $titleIsFirstResponder,
+                    lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
                 )
                 .frame(height: titleFieldHeight)
                 .onChange(of: post.title) { _ in

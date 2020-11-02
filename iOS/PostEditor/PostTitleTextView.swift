@@ -5,15 +5,22 @@ import SwiftUI
 class PostTitleCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
     @Binding var text: String
     @Binding var isFirstResponder: Bool
+    var lineSpacingMultiplier: CGFloat
     var didBecomeFirstResponder: Bool = false
     var postTitleTextView: PostTitleTextView
 
     weak var textView: UITextView?
 
-    init(_ textView: PostTitleTextView, text: Binding<String>, isFirstResponder: Binding<Bool>) {
+    init(
+        _ textView: PostTitleTextView,
+        text: Binding<String>,
+        isFirstResponder: Binding<Bool>,
+        lineSpacingMultiplier: CGFloat
+    ) {
         self.postTitleTextView = textView
         _text = text
         _isFirstResponder = isFirstResponder
+        self.lineSpacingMultiplier = lineSpacingMultiplier
     }
 
     func textViewDidChange(_ textView: UITextView) {
@@ -43,6 +50,27 @@ class PostTitleCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegat
             }
         }
     }
+
+    func layoutManager(
+        _ layoutManager: NSLayoutManager,
+        lineSpacingAfterGlyphAt glyphIndex: Int,
+        withProposedLineFragmentRect rect: CGRect
+    ) -> CGFloat {
+        // HACK: - This seems to be the only way to get line spacing to update dynamically on iPad
+        //         when switching between full-screen, split-screen, and slide-over views.
+        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
+            // Get the width of the window to determine the size class
+            if window.frame.width < 600 {
+                // Use 0.25 multiplier for compact size class
+                return 17 * 0.25
+            } else {
+                // Use 0.5 multiplier otherwise
+                return 17 * 0.5
+            }
+        } else {
+            return 17 * lineSpacingMultiplier
+        }
+    }
 }
 
 struct PostTitleTextView: UIViewRepresentable {
@@ -50,6 +78,7 @@ struct PostTitleTextView: UIViewRepresentable {
     @Binding var textStyle: UIFont
     @Binding var height: CGFloat
     @Binding var isFirstResponder: Bool
+    @State var lineSpacing: CGFloat
 
     func makeUIView(context: UIViewRepresentableContext<PostTitleTextView>) -> UITextView {
         let textView = UITextView()
@@ -73,7 +102,12 @@ struct PostTitleTextView: UIViewRepresentable {
     }
 
     func makeCoordinator() -> PostTitleCoordinator {
-        return Coordinator(self, text: $text, isFirstResponder: $isFirstResponder)
+        return Coordinator(
+            self,
+            text: $text,
+            isFirstResponder: $isFirstResponder,
+            lineSpacingMultiplier: lineSpacing
+        )
     }
 
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<PostTitleTextView>) {
