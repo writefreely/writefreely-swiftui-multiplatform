@@ -20,7 +20,7 @@ struct ContentView: View {
                 primaryButton: .destructive(Text("Delete"), action: {
                     if let postToDelete = model.postToDelete {
                         model.selectedPost = nil
-                        withAnimation {
+                        DispatchQueue.main.async {
                             model.posts.remove(postToDelete)
                         }
                         model.postToDelete = nil
