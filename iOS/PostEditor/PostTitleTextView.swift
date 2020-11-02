@@ -32,6 +32,7 @@ class PostTitleCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegat
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             self.isFirstResponder.toggle()
+            self.didBecomeFirstResponder = false
             return false
         }
         return true

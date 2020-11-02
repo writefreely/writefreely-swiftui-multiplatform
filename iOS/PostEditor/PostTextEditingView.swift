@@ -11,6 +11,7 @@ struct PostTextEditingView: View {
     @State private var titleIsFirstResponder: Bool = true
     @State private var bodyTextStyle: UIFont = UIFont(name: "Lora-Regular", size: 17)!
     @State private var bodyIsFirstResponder: Bool = false
+    @State private var bodyCursorPosition: UITextRange?
     private let lineSpacingMultiplier: CGFloat = 0.5
 
     init(
@@ -71,6 +72,7 @@ struct PostTextEditingView: View {
                     text: $post.body,
                     textStyle: $bodyTextStyle,
                     isFirstResponder: $bodyIsFirstResponder,
+                    currentTextPosition: $bodyCursorPosition,
                     lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
                 )
                 .onChange(of: post.body) { _ in
