@@ -145,6 +145,7 @@ struct PostEditorView: View {
             }
         })
         .onDisappear(perform: {
+            self.model.editor.clearLastDraft()
             if post.title.count == 0
                 && post.body.count == 0
                 && post.status == PostStatus.local.rawValue
