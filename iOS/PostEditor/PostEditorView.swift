@@ -142,6 +142,9 @@ struct PostEditorView: View {
             } else {
                 self.model.editor.clearLastDraft()
             }
+            DispatchQueue.main.async {
+                LocalStorageManager().saveContext()
+            }
         })
         .onAppear(perform: {
             self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
