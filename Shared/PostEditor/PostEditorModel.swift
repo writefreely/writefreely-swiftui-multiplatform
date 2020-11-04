@@ -3,8 +3,8 @@ import CoreData
 
 enum PostAppearance: String {
     case sans = "OpenSans-Regular"
-    case mono = "Hack"
-    case serif = "Lora"
+    case mono = "Hack-Regular"
+    case serif = "Lora-Regular"
 }
 
 struct PostEditorModel {

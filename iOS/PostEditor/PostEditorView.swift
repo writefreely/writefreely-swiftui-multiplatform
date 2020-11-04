@@ -3,6 +3,7 @@ import SwiftUI
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
 
     @ObservedObject var post: WFAPost

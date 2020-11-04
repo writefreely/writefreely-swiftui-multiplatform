@@ -10,10 +10,10 @@ struct CollectionListView: View {
 
     var body: some View {
         List {
-            NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: true)) {
-                Text("All Posts")
-            }
             if model.account.isLoggedIn {
+                NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: true)) {
+                    Text("All Posts")
+                }
                 NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
                     Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
                 }
@@ -25,6 +25,10 @@ struct CollectionListView: View {
                             Text(collection.title)
                         }
                     }
+                }
+            } else {
+                NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
+                    Text("Drafts")
                 }
             }
         }

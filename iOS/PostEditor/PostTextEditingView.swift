@@ -6,7 +6,13 @@ struct PostTextEditingView: View {
     @Binding var updatingTitleFromServer: Bool
     @Binding var updatingBodyFromServer: Bool
     @State private var appearance: PostAppearance = .serif
-    private let bodyLineSpacingMultiplier: CGFloat = 0.5
+    @State private var titleTextStyle: UIFont = UIFont(name: "Lora-Regular", size: 26)!
+    @State private var titleTextHeight: CGFloat = 50
+    @State private var titleIsFirstResponder: Bool = true
+    @State private var bodyTextStyle: UIFont = UIFont(name: "Lora-Regular", size: 17)!
+    @State private var bodyIsFirstResponder: Bool = false
+    @State private var bodyCursorPosition: UITextRange?
+    private let lineSpacingMultiplier: CGFloat = 0.5
 
     init(
         post: ObservedObject<WFAPost>,
@@ -19,41 +25,69 @@ struct PostTextEditingView: View {
         UITextView.appearance().backgroundColor = .clear
     }
 
+    var titleFieldHeight: CGFloat {
+        let minHeight: CGFloat = 50
+        if titleTextHeight < minHeight {
+            return minHeight
+        }
+        return titleTextHeight
+    }
+
     var body: some View {
         VStack {
-            TextField("Title (optional)", text: $post.title)
-                .font(.custom(appearance.rawValue, size: 26, relativeTo: .largeTitle))
-                .padding(.horizontal, 4)
-                .onChange(of: post.title) { _ in
-                    if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                        post.status = PostStatus.edited.rawValue
-                    }
-                }
             ZStack(alignment: .topLeading) {
-                if post.body.count == 0 {
-                    Text("Write…")
-                        .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
+                if post.title.count == 0 {
+                    Text("Title (optional)")
+                        .font(Font(titleTextStyle))
                         .foregroundColor(Color(UIColor.placeholderText))
                         .padding(.horizontal, 4)
                         .padding(.vertical, 8)
                 }
-                TextEditor(text: $post.body)
-                    .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
-                    .lineSpacing(
-                        17 * (
-                            horizontalSizeClass == .compact ? bodyLineSpacingMultiplier / 2 : bodyLineSpacingMultiplier
-                        )
-                    )
-                    .onChange(of: post.body) { _ in
-                        if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                            post.status = PostStatus.edited.rawValue
-                        }
-                        if updatingBodyFromServer {
-                            updatingBodyFromServer = false
-                        }
+                PostTitleTextView(
+                    text: $post.title,
+                    textStyle: $titleTextStyle,
+                    height: $titleTextHeight,
+                    isFirstResponder: $titleIsFirstResponder,
+                    lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
+                )
+                .frame(height: titleFieldHeight)
+                .onChange(of: post.title) { _ in
+                    if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
+                        post.status = PostStatus.edited.rawValue
                     }
+                    if updatingTitleFromServer {
+                        updatingTitleFromServer = false
+                    }
+                }
+            }
+            ZStack(alignment: .topLeading) {
+                if post.body.count == 0 {
+                    Text("Write…")
+                        .font(Font(bodyTextStyle))
+                        .foregroundColor(Color(UIColor.placeholderText))
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 8)
+                }
+                PostBodyTextView(
+                    text: $post.body,
+                    textStyle: $bodyTextStyle,
+                    isFirstResponder: $bodyIsFirstResponder,
+                    currentTextPosition: $bodyCursorPosition,
+                    lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
+                )
+                .onChange(of: post.body) { _ in
+                    if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
+                        post.status = PostStatus.edited.rawValue
+                    }
+                    if updatingBodyFromServer {
+                        updatingBodyFromServer = false
+                    }
+                }
             }
         }
+        .onChange(of: titleIsFirstResponder, perform: { _ in
+            self.bodyIsFirstResponder.toggle()
+        })
         .onAppear(perform: {
             switch post.appearance {
             case "sans":
@@ -63,6 +97,8 @@ struct PostTextEditingView: View {
             default:
                 self.appearance = .serif
             }
+            self.titleTextStyle = UIFont(name: appearance.rawValue, size: 26)!
+            self.bodyTextStyle = UIFont(name: appearance.rawValue, size: 17)!
         })
     }
 }
