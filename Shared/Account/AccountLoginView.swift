@@ -55,7 +55,9 @@ struct AccountLoginView: View {
                     .padding()
             } else {
                 Button(action: {
+                    #if os(iOS)
                     hideKeyboard()
+                    #endif
                     model.login(
                         to: URL(string: server)!,
                         as: username, password: password

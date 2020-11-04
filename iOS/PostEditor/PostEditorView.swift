@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
 
@@ -127,17 +128,6 @@ struct PostEditorView: View {
                 updatingBodyFromServer = true
             }
         })
-        .onChange(of: post.status, perform: { _ in
-            if post.status != PostStatus.published.rawValue {
-                DispatchQueue.main.async {
-                    model.editor.setLastDraft(post)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    model.editor.clearLastDraft()
-                }
-            }
-        })
         .onChange(of: selectedCollection, perform: { [selectedCollection] newCollection in
             if post.collectionAlias == newCollection?.alias {
                 return
@@ -148,6 +138,11 @@ struct PostEditorView: View {
         })
         .onAppear(perform: {
             self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
+            if post.status != PostStatus.published.rawValue {
+                self.model.editor.saveLastDraft(post)
+            } else {
+                self.model.editor.clearLastDraft()
+            }
         })
         .onDisappear(perform: {
             if post.title.count == 0
@@ -157,7 +152,6 @@ struct PostEditorView: View {
                 && post.postId == nil {
                 DispatchQueue.main.async {
                     model.posts.remove(post)
-                    model.posts.loadCachedPosts()
                 }
             } else if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
@@ -170,7 +164,6 @@ struct PostEditorView: View {
     private func publishPost() {
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
-            model.posts.loadCachedPosts()
             model.publish(post: post)
         }
         #if os(iOS)

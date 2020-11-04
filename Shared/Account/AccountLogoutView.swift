@@ -2,12 +2,12 @@ import SwiftUI
 
 struct AccountLogoutView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Environment(\.managedObjectContext) var moc
 
     @State private var isPresentingLogoutConfirmation: Bool = false
     @State private var editedPostsWarningString: String = ""
 
     var body: some View {
+        #if os(iOS)
         VStack {
             Spacer()
             VStack {
@@ -31,6 +31,36 @@ struct AccountLogoutView: View {
                 ]
             )
         })
+        #else
+        VStack {
+            Spacer()
+            VStack {
+                Text("Logged in as \(model.account.username)")
+                Text("on \(model.account.server)")
+            }
+            Spacer()
+            Button(action: logoutHandler, label: {
+                Text("Log Out")
+            })
+        }
+        .sheet(isPresented: $isPresentingLogoutConfirmation) {
+            VStack {
+                Text("Log Out?")
+                    .font(.title)
+                Text("\(editedPostsWarningString)You won't lose any local posts. Are you sure?")
+                HStack {
+                    Button(action: model.logout, label: {
+                        Text("Log Out")
+                    })
+                    Button(action: {
+                        self.isPresentingLogoutConfirmation = false
+                    }, label: {
+                        Text("Cancel")
+                    }).keyboardShortcut(.cancelAction)
+                }
+            }
+        }
+        #endif
     }
 
     func logoutHandler() {

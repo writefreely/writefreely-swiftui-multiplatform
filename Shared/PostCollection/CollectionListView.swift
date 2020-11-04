@@ -2,7 +2,6 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Environment(\.managedObjectContext) var moc
 
     @FetchRequest(
         entity: WFACollection.entity(),

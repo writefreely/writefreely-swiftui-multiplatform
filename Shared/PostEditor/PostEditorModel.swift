@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 import CoreData
 
 enum PostAppearance: String {
@@ -8,31 +8,25 @@ enum PostAppearance: String {
 }
 
 struct PostEditorModel {
-    let lastDraftObjectURLKey = "lastDraftObjectURLKey"
-    private(set) var lastDraft: WFAPost?
+    @AppStorage("lastDraftURL") private var lastDraftURL: URL?
 
-    mutating func setLastDraft(_ post: WFAPost) {
-        lastDraft = post
-        UserDefaults.standard.set(post.objectID.uriRepresentation(), forKey: lastDraftObjectURLKey)
+    func saveLastDraft(_ post: WFAPost) {
+        self.lastDraftURL = post.status != PostStatus.published.rawValue ? post.objectID.uriRepresentation() : nil
     }
 
-    mutating func fetchLastDraft() -> WFAPost? {
+    func clearLastDraft() {
+        self.lastDraftURL = nil
+    }
+
+    func fetchLastDraftFromUserDefaults() -> WFAPost? {
+        guard let postURL = lastDraftURL else { return nil }
+
         let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
+        guard let postManagedObjectID = coordinator.managedObjectID(forURIRepresentation: postURL) else { return nil }
+        guard let post = LocalStorageManager.persistentContainer.viewContext.object(
+                with: postManagedObjectID
+        ) as? WFAPost else { return nil }
 
-        // See if we have a lastDraftObjectURI
-        guard let lastDraftObjectURI = UserDefaults.standard.url(forKey: lastDraftObjectURLKey) else { return nil }
-
-        // See if we can get an ObjectID from the URI representation
-        guard let lastDraftObjectID = coordinator.managedObjectID(forURIRepresentation: lastDraftObjectURI) else {
-            return nil
-        }
-
-        lastDraft = LocalStorageManager.persistentContainer.viewContext.object(with: lastDraftObjectID) as? WFAPost
-        return lastDraft
-    }
-
-    mutating func clearLastDraft() {
-        lastDraft = nil
-        UserDefaults.standard.removeObject(forKey: lastDraftObjectURLKey)
+        return post
     }
 }

@@ -41,17 +41,6 @@ struct PostEditorView: View {
                 post.status = PostStatus.published.rawValue
             }
         })
-        .onChange(of: post.status, perform: { _ in
-            if post.status != PostStatus.published.rawValue {
-                DispatchQueue.main.async {
-                    model.editor.setLastDraft(post)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    model.editor.clearLastDraft()
-                }
-            }
-        })
         .onDisappear(perform: {
             if post.title.count == 0
                 && post.body.count == 0
@@ -60,7 +49,6 @@ struct PostEditorView: View {
                 && post.postId == nil {
                 DispatchQueue.main.async {
                     model.posts.remove(post)
-                    model.posts.loadCachedPosts()
                 }
             } else if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
@@ -73,7 +61,6 @@ struct PostEditorView: View {
     private func publishPost() {
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
-            model.posts.loadCachedPosts()
             model.publish(post: post)
         }
     }

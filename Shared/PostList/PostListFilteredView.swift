@@ -2,12 +2,12 @@ import SwiftUI
 
 struct PostListFilteredView: View {
     @EnvironmentObject var model: WriteFreelyModel
-
+    @Binding var postCount: Int
     @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
     var showAllPosts: Bool
 
-    init(filter: String?, showAllPosts: Bool) {
+    init(filter: String?, showAllPosts: Bool, postCount: Binding<Int>) {
         self.showAllPosts = showAllPosts
         if showAllPosts {
             fetchRequest = FetchRequest<WFAPost>(
@@ -29,6 +29,7 @@ struct PostListFilteredView: View {
                 )
             }
         }
+        _postCount = postCount
     }
 
     var body: some View {
@@ -60,6 +61,12 @@ struct PostListFilteredView: View {
                 }
             })
         }
+        .onAppear(perform: {
+            self.postCount = fetchRequest.wrappedValue.count
+        })
+        .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
+            self.postCount = value
+        })
         #else
         List {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
@@ -79,6 +86,12 @@ struct PostListFilteredView: View {
                 }
             })
         }
+        .onAppear(perform: {
+            self.postCount = fetchRequest.wrappedValue.count
+        })
+        .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
+            self.postCount = value
+        })
         .onDeleteCommand(perform: {
             guard let selectedPost = model.selectedPost else { return }
             if selectedPost.status == PostStatus.local.rawValue {
@@ -96,6 +109,6 @@ struct PostListFilteredView: View {
 
 struct PostListFilteredView_Previews: PreviewProvider {
     static var previews: some View {
-        return PostListFilteredView(filter: nil, showAllPosts: false)
+        return PostListFilteredView(filter: nil, showAllPosts: false, postCount: .constant(999))
     }
 }

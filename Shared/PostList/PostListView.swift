@@ -1,16 +1,18 @@
 import SwiftUI
+import Combine
 
 struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Environment(\.managedObjectContext) var moc
+    @Environment(\.managedObjectContext) var managedObjectContext
 
     @State var selectedCollection: WFACollection?
     @State var showAllPosts: Bool = false
+    @State private var postCount: Int = 0
 
     var body: some View {
         #if os(iOS)
         GeometryReader { geometry in
-            PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts)
+            PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts, postCount: $postCount)
             .navigationTitle(
                 showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                     model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
@@ -32,7 +34,7 @@ struct PostListView: View {
                             Image(systemName: "gear")
                         })
                         Spacer()
-                        Text(pluralizedPostCount(for: showPosts(for: selectedCollection)))
+                        Text(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
                             .foregroundColor(.secondary)
                         Spacer()
                         if model.isProcessingRequest {
@@ -52,47 +54,27 @@ struct PostListView: View {
             }
         }
         #else //if os(macOS)
-        PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts)
-        .navigationTitle(
-            showAllPosts ? "All Posts" : selectedCollection?.title ?? (
-                model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+        PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts, postCount: $postCount)
+            .navigationTitle(
+                showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                )
             )
-        )
-        .navigationSubtitle(pluralizedPostCount(for: showPosts(for: selectedCollection)))
-        .toolbar {
-            Button(action: {
-                createNewLocalDraft()
-            }, label: {
-                Image(systemName: "square.and.pencil")
-            })
-            Button(action: {
-                reloadFromServer()
-            }, label: {
-                Image(systemName: "arrow.clockwise")
-            })
-            .disabled(!model.account.isLoggedIn)
-        }
-        #endif
-    }
-
-    private func pluralizedPostCount(for posts: [WFAPost]) -> String {
-        if posts.count == 1 {
-            return "1 post"
-        } else {
-            return "\(posts.count) posts"
-        }
-    }
-
-    private func showPosts(for collection: WFACollection?) -> [WFAPost] {
-        if showAllPosts {
-            return model.posts.userPosts
-        } else {
-            if let selectedCollection = collection {
-                return model.posts.userPosts.filter { $0.collectionAlias == selectedCollection.alias }
-            } else {
-                return model.posts.userPosts.filter { $0.collectionAlias == nil }
+            .navigationSubtitle(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
+            .toolbar {
+                Button(action: {
+                    createNewLocalDraft()
+                }, label: {
+                    Image(systemName: "square.and.pencil")
+                })
+                Button(action: {
+                    reloadFromServer()
+                }, label: {
+                    Image(systemName: "arrow.clockwise")
+                })
+                .disabled(!model.account.isLoggedIn)
             }
-        }
+        #endif
     }
 
     private func reloadFromServer() {
@@ -103,7 +85,7 @@ struct PostListView: View {
     }
 
     private func createNewLocalDraft() {
-        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
+        let managedPost = WFAPost(context: self.managedObjectContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
         managedPost.body = ""
