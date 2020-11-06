@@ -38,7 +38,31 @@ class PostListModel: ObservableObject {
 private extension PostListModel {
 
     func stripMarkdown(from string: String) -> String {
-        return string
+        var strippedString = string
+        strippedString = stripHeadingOctothorpes(from: strippedString)
+        return strippedString
+    }
+
+    
+    func stripHeadingOctothorpes(from string: String) -> String {
+        let newLines = CharacterSet.newlines
+        var processedComponents: [String] = []
+        let components = string.components(separatedBy: newLines)
+        for component in components {
+            if component.isEmpty {
+                continue
+            }
+            var newString = component
+            while newString.first == "#" {
+                newString.removeFirst()
+            }
+            if newString.hasPrefix(" ") {
+                newString.removeFirst()
+            }
+            processedComponents.append(newString)
+        }
+        let headinglessString = processedComponents.joined(separator: "\n\n")
+        return headinglessString
     }
 
     func extractLede(from string: String) -> String {
