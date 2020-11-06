@@ -44,7 +44,6 @@ private extension PostListModel {
         return strippedString
     }
 
-    
     func stripHeadingOctothorpes(from string: String) -> String {
         let newLines = CharacterSet.newlines
         var processedComponents: [String] = []
@@ -102,19 +101,21 @@ private extension PostListModel {
     func extractLede(from string: String) -> String {
         let terminatingCharacters = CharacterSet(charactersIn: ".。?").union(.newlines)
 
-        var lede: String
+        var lede: String = ""
 
         let sentences = string.components(separatedBy: terminatingCharacters)
-        let firstSentence = sentences.filter { !$0.isEmpty }[0]
-
-        if firstSentence == string {
-            let endOfStringIndex = string.lastIndex(of: " ")
-            lede = String(string[..<(endOfStringIndex ?? string.index(string.endIndex, offsetBy: -2))]) + "…"
-        } else {
-            lede = firstSentence
+        if let firstSentence = sentences.filter({ !$0.isEmpty }).first {
+            if firstSentence == string {
+                if let endOfStringIndex = string.lastIndex(of: " ") {
+                    lede = String(string[..<(endOfStringIndex )]) + "…"
+                } else {
+                    lede = String(string[..<string.endIndex])
+                }
+            } else {
+                lede = firstSentence
+            }
         }
 
         return lede
     }
 }
- 
