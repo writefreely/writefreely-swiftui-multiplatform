@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostCellView: View {
+    @EnvironmentObject var model: WriteFreelyModel
     @ObservedObject var post: WFAPost
     var collectionName: String?
 
@@ -12,6 +13,13 @@ struct PostCellView: View {
         return formatter
     }()
 
+    var titleText: String {
+        if post.title.isEmpty {
+            return model.posts.getBodyPreview(of: post)
+        }
+        return post.title
+    }
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -22,7 +30,7 @@ struct PostCellView: View {
                         .padding(EdgeInsets(top: 3, leading: 4, bottom: 3, trailing: 4))
                         .overlay(RoundedRectangle(cornerRadius: 2).stroke(Color.secondary, lineWidth: 1))
                 }
-                Text(post.title)
+                Text(titleText)
                     .font(.headline)
                 Text(post.createdDate ?? Date(), formatter: Self.createdDateFormat)
                     .font(.caption)
@@ -54,6 +62,20 @@ struct PostCell_NormalPreviews: PreviewProvider {
         let context = LocalStorageManager.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = "Test Post Title"
+        testPost.body = "Here's some cool sample body text."
+        testPost.collectionAlias = "My Cool Blog"
+        testPost.createdDate = Date()
+
+        return PostCellView(post: testPost)
+            .environment(\.managedObjectContext, context)
+    }
+}
+
+struct PostCell_NoTitlePreviews: PreviewProvider {
+    static var previews: some View {
+        let context = LocalStorageManager.persistentContainer.viewContext
+        let testPost = WFAPost(context: context)
+        testPost.title = ""
         testPost.body = "Here's some cool sample body text."
         testPost.collectionAlias = "My Cool Blog"
         testPost.createdDate = Date()
