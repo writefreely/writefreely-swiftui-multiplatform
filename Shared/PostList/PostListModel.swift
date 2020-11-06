@@ -40,6 +40,7 @@ private extension PostListModel {
     func stripMarkdown(from string: String) -> String {
         var strippedString = string
         strippedString = stripHeadingOctothorpes(from: strippedString)
+        strippedString = stripImages(from: strippedString, keepAltText: true)
         return strippedString
     }
 
@@ -63,6 +64,39 @@ private extension PostListModel {
         }
         let headinglessString = processedComponents.joined(separator: "\n\n")
         return headinglessString
+    }
+
+    func stripImages(from string: String, keepAltText: Bool = false) -> String {
+        let pattern = #"!\[[\"]?(.*?)[\"|]?\]\(.*?\)"#
+        var processedComponents: [String] = []
+        let components = string.components(separatedBy: .newlines)
+        for component in components {
+            if component.isEmpty { continue }
+            var processedString: String = component
+            if keepAltText {
+                let regex = try? NSRegularExpression(pattern: pattern, options: [])
+                if let matches = regex?.matches(
+                    in: component, options: [], range: NSRange(location: 0, length: component.utf16.count)
+                ) {
+                    for match in matches {
+                        if let range = Range(match.range(at: 1), in: component) {
+                            processedString = "\(component[range])"
+                        }
+                    }
+                }
+            } else {
+                let range = component.startIndex..<component.endIndex
+                processedString = component.replacingOccurrences(
+                    of: pattern,
+                    with: "",
+                    options: .regularExpression,
+                    range: range
+                )
+            }
+            if processedString.isEmpty { continue }
+            processedComponents.append(processedString)
+        }
+        return processedComponents.joined(separator: "\n\n")
     }
 
     func extractLede(from string: String) -> String {
