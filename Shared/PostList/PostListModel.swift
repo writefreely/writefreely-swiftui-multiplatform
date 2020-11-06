@@ -25,11 +25,8 @@ class PostListModel: ObservableObject {
         // Strip any markdown from the post body.
         let strippedPostBody = stripMarkdown(from: post.body)
 
-        // Get the first 80 characters.
-        let firstEightyChars = String(strippedPostBody.prefix(80))
-
         // Extract lede from post.
-         elidedPostBody = extractLede(from: firstEightyChars)
+         elidedPostBody = extractLede(from: strippedPostBody)
 
         return elidedPostBody
     }
@@ -99,21 +96,26 @@ private extension PostListModel {
     }
 
     func extractLede(from string: String) -> String {
+        if string.utf16.count <= 80 {
+            return string
+        }
+
+        let truncatedString = string.prefix(80)
         let terminatingCharacters = CharacterSet(charactersIn: ".。?").union(.newlines)
 
-        var lede: String = ""
+        var lede: String
 
-        let sentences = string.components(separatedBy: terminatingCharacters)
-        if let firstSentence = sentences.filter({ !$0.isEmpty }).first {
-            if firstSentence == string {
-                if let endOfStringIndex = string.lastIndex(of: " ") {
-                    lede = String(string[..<(endOfStringIndex )]) + "…"
-                } else {
-                    lede = String(string[..<string.endIndex])
-                }
-            } else {
-                lede = firstSentence
-            }
+        // Extract the first sentence from the lede.
+        let sentences = truncatedString.components(separatedBy: terminatingCharacters)
+        let firstSentence = sentences.filter { !$0.isEmpty }[0]
+
+        if firstSentence == truncatedString {
+            let endOfStringIndex = truncatedString.lastIndex(of: " ")
+            lede = String(
+                truncatedString[..<(endOfStringIndex ?? truncatedString.index(truncatedString.endIndex, offsetBy: -2))]
+            ) + "…"
+        } else {
+            lede = firstSentence
         }
 
         return lede
