@@ -24,7 +24,7 @@ struct PostEditorModel {
         let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
         guard let postManagedObjectID = coordinator.managedObjectID(forURIRepresentation: postURL) else { return nil }
         guard let post = LocalStorageManager.persistentContainer.viewContext.object(
-                with: postManagedObjectID
+            with: postManagedObjectID
         ) as? WFAPost else { return nil }
 
         return post

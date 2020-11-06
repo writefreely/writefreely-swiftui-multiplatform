@@ -136,15 +136,28 @@ struct PostEditorView: View {
                 model.move(post: post, from: selectedCollection, to: newCollection)
             }
         })
+        .onChange(of: post.status, perform: { value in
+            if value != PostStatus.published.rawValue {
+                self.model.editor.saveLastDraft(post)
+            } else {
+                self.model.editor.clearLastDraft()
+            }
+            DispatchQueue.main.async {
+                LocalStorageManager().saveContext()
+            }
+        })
         .onAppear(perform: {
             self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
             if post.status != PostStatus.published.rawValue {
-                self.model.editor.saveLastDraft(post)
+                DispatchQueue.main.async {
+                    self.model.editor.saveLastDraft(post)
+                }
             } else {
                 self.model.editor.clearLastDraft()
             }
         })
         .onDisappear(perform: {
+            self.model.editor.clearLastDraft()
             if post.title.count == 0
                 && post.body.count == 0
                 && post.status == PostStatus.local.rawValue
