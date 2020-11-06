@@ -115,7 +115,7 @@ private extension PostListModel {
                 truncatedString[..<(endOfStringIndex ?? truncatedString.index(truncatedString.endIndex, offsetBy: -2))]
             ) + "…"
         } else {
-            lede = firstSentence
+            lede = String(truncatedString[...firstSentence.endIndex])
         }
 
         return lede
