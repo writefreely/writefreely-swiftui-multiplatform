@@ -5,20 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.1b1-ios] - 2020-11-09
 
 ### Added
 
+- A link in the Settings screen of the app now points to the How-To guide in the forum.
 - A link in the README to the App Store product page for the iOS app.
 - An alert now warns you if you try to perform a task that requires an internet connection when there is no network connection.
 
 ### Changed
 
+- Local posts are no longer deleted when logging out.
+- The app now requires you to confirm when logging out, and indicates how many local edits will be lost by doing so.
+- Various editor improvements:
+    - The cursor now focuses on the title field and brings up the keyboard when loading a post in the editor.
+    - The Return key navigates from the title field to the body field.
+    - The title field now automatically increases its height as the text wraps.
+    - Increased the line spacing in both the title and body fields.
+- When logged out, the app now only shows the "Drafts" list, rather than the "All Posts" list.
 - Buttons that handle network requests (e.g. publishing, reloading from server) now show a busy indicator while waiting to complete the task.
 
 ### Fixed
 
 - After moving a post from Drafts/Anonymous to a blog, the share link format retained the old single-post format. This is now fixed.
+- The placeholder text on new (empty) posts now shows reliably.
+- The title and body fields in the editor are better aligned. 
+- The app more consistently loads the last draft (or a new draft) on launch.
+- Fixed a crash on launch that was caused by the list of posts from local storage was being changed while being fetched. 
 
 ## [1.0.0] - 2020-10-20
 
@@ -141,6 +154,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Contributing guide
     - This changelog
 
+[1.0.1b1-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0...v1.0.1b1-ios
 [1.0.0]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0b1...v1.0.0
 [1.0.0b1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0a1...v1.0.0b1
 [1.0.0a1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v0.1.1...v1.0.0a1
