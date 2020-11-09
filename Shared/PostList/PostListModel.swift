@@ -96,26 +96,29 @@ private extension PostListModel {
     }
 
     func extractLede(from string: String) -> String {
-        if string.isEmpty { return string }
-
         let truncatedString = string.prefix(80)
-        let terminatingCharacters = CharacterSet(charactersIn: ".。?").union(.newlines)
+        let terminatingPunctuation = ".。?"
+        let terminatingCharacters = CharacterSet(charactersIn: terminatingPunctuation).union(.newlines)
 
-        var lede: String
-
-        // Extract the first sentence from the lede.
+        var lede: String = ""
         let sentences = truncatedString.components(separatedBy: terminatingCharacters)
         let firstSentence = sentences.filter { !$0.isEmpty }[0]
 
-        if firstSentence == truncatedString && string.utf16.count > 80 {
-            let endOfStringIndex = truncatedString.lastIndex(of: " ")
-            lede = String(
-                truncatedString[..<(endOfStringIndex ?? truncatedString.index(truncatedString.endIndex, offsetBy: -2))]
-            ) + "…"
-        } else {
-            lede = String(truncatedString[..<firstSentence.endIndex])
+        if truncatedString.count > firstSentence.count {
+            if terminatingPunctuation.contains(truncatedString[firstSentence.endIndex]) {
+                lede = String(truncatedString[...firstSentence.endIndex])
+            } else {
+                lede = firstSentence
+            }
+        } else if truncatedString.count == firstSentence.count {
+            if string.count > 80 {
+                if let endOfStringIndex = truncatedString.lastIndex(of: " ") {
+                    lede = truncatedString[..<endOfStringIndex] + "…"
+                }
+            } else {
+                lede = firstSentence
+            }
         }
-
         return lede
     }
 }
