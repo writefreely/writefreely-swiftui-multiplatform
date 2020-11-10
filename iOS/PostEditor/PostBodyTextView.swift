@@ -1,4 +1,4 @@
-// Based on https://stackoverflow.com/a/56508132/1234545 and https://stackoverflow.com/a/48360549/1234545
+// Based on https://stackoverflow.com/a/56508132 and https://stackoverflow.com/a/48360549
 
 import SwiftUI
 
