@@ -102,21 +102,21 @@ private extension PostListModel {
 
         var lede: String = ""
         let sentences = truncatedString.components(separatedBy: terminatingCharacters)
-        let firstSentence = sentences.filter { !$0.isEmpty }[0]
-
-        if truncatedString.count > firstSentence.count {
-            if terminatingPunctuation.contains(truncatedString[firstSentence.endIndex]) {
-                lede = String(truncatedString[...firstSentence.endIndex])
-            } else {
-                lede = firstSentence
-            }
-        } else if truncatedString.count == firstSentence.count {
-            if string.count > 80 {
-                if let endOfStringIndex = truncatedString.lastIndex(of: " ") {
-                    lede = truncatedString[..<endOfStringIndex] + "…"
+        if let firstSentence = (sentences.filter { !$0.isEmpty }).first {
+            if truncatedString.count > firstSentence.count {
+                if terminatingPunctuation.contains(truncatedString[firstSentence.endIndex]) {
+                    lede = String(truncatedString[...firstSentence.endIndex])
+                } else {
+                    lede = firstSentence
                 }
-            } else {
-                lede = firstSentence
+            } else if truncatedString.count == firstSentence.count {
+                if string.count > 80 {
+                    if let endOfStringIndex = truncatedString.lastIndex(of: " ") {
+                        lede = truncatedString[..<endOfStringIndex] + "…"
+                    }
+                } else {
+                    lede = firstSentence
+                }
             }
         }
         return lede
