@@ -5,7 +5,6 @@ import SwiftUI
 class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
     @Binding var text: String
     @Binding var isFirstResponder: Bool
-    @Binding var currentTextPosition: UITextRange?
     var lineSpacingMultiplier: CGFloat
     var didBecomeFirstResponder: Bool = false
     var postBodyTextView: PostBodyTextView
@@ -16,37 +15,22 @@ class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate
         _ textView: PostBodyTextView,
         text: Binding<String>,
         isFirstResponder: Binding<Bool>,
-        currentTextPosition: Binding<UITextRange?>,
         lineSpacingMultiplier: CGFloat
     ) {
         self.postBodyTextView = textView
         _text = text
         _isFirstResponder = isFirstResponder
         self.lineSpacingMultiplier = lineSpacingMultiplier
-        _currentTextPosition = currentTextPosition
-    }
-
-    func textViewDidChange(_ textView: UITextView) {
-        DispatchQueue.main.async {
-            self.postBodyTextView.text = textView.text ?? ""
-        }
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        self.currentTextPosition = textView.selectedTextRange
         return true
     }
 
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if let textPosition = currentTextPosition {
-            textView.selectedTextRange = textPosition
-        }
-    }
-
     func textViewDidEndEditing(_ textView: UITextView) {
+        self.postBodyTextView.text = textView.text ?? ""
         self.isFirstResponder = false
         self.didBecomeFirstResponder = false
-        self.currentTextPosition = textView.selectedTextRange
     }
 
     func layoutManager(
@@ -75,11 +59,10 @@ struct PostBodyTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var textStyle: UIFont
     @Binding var isFirstResponder: Bool
-    @Binding var currentTextPosition: UITextRange?
     @State var lineSpacing: CGFloat
 
     func makeUIView(context: UIViewRepresentableContext<PostBodyTextView>) -> UITextView {
-        let textView = UITextView(frame: .zero)
+        let textView = UITextView()
 
         textView.isEditable = true
         textView.isUserInteractionEnabled = true
@@ -93,6 +76,7 @@ struct PostBodyTextView: UIViewRepresentable {
         let font = textStyle
         let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
         textView.font = fontMetrics.scaledFont(for: font)
+
         textView.backgroundColor = UIColor.clear
 
         return textView
@@ -103,7 +87,6 @@ struct PostBodyTextView: UIViewRepresentable {
             self,
             text: $text,
             isFirstResponder: $isFirstResponder,
-            currentTextPosition: $currentTextPosition,
             lineSpacingMultiplier: lineSpacing
         )
     }
