@@ -325,6 +325,12 @@ private extension WriteFreelyModel {
             DispatchQueue.main.async {
                 LocalStorageManager().saveContext()
             }
+        } catch WFError.unauthorized {
+            DispatchQueue.main.async {
+                self.loginErrorMessage = "Something went wrong, please try logging in again."
+                self.isPresentingLoginErrorAlert = true
+            }
+            self.logout()
         } catch {
             print(error)
         }
@@ -376,6 +382,12 @@ private extension WriteFreelyModel {
             } catch {
                 print(error)
             }
+        } catch WFError.unauthorized {
+            DispatchQueue.main.async {
+                self.loginErrorMessage = "Something went wrong, please try logging in again."
+                self.isPresentingLoginErrorAlert = true
+            }
+            self.logout()
         } catch {
             print("Error: Failed to fetch cached posts")
         }
