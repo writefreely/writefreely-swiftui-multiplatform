@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1b2-ios] - 2020-11-11
+
+### Added
+
+- Added short extracts of the post body to the post list when the post has no title.
+
+### Fixed
+
+- Fixed a silent failure where the app would appear to login but could not get a valid access token from the server.
+- Fixed a bug that would jump the cursor to the end of the post when typing in the middle of the post body.
+
 ## [1.0.1b1-ios] - 2020-11-09
 
 ### Added
@@ -154,6 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Contributing guide
     - This changelog
 
+[1.0.1b2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1b1...v1.0.1b2-ios
 [1.0.1b1-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0...v1.0.1b1-ios
 [1.0.0]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0b1...v1.0.0
 [1.0.0b1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0a1...v1.0.0b1
