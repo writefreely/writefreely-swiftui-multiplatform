@@ -165,7 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Contributing guide
     - This changelog
 
-[1.0.1b2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1b1...v1.0.1b2-ios
+[1.0.1b2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1b1-ios...v1.0.1b2-ios
 [1.0.1b1-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0...v1.0.1b1-ios
 [1.0.0]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0b1...v1.0.0
 [1.0.0b1]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0a1...v1.0.0b1
