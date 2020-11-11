@@ -1,4 +1,4 @@
-// Based on https://lostmoa.com/blog/DynamicHeightForTextFieldInSwiftUI and https://stackoverflow.com/a/56508132/1234545
+// Based on https://lostmoa.com/blog/DynamicHeightForTextFieldInSwiftUI and https://stackoverflow.com/a/56508132
 
 import SwiftUI
 
