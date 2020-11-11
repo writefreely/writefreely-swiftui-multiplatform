@@ -23,12 +23,17 @@ class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate
         self.lineSpacingMultiplier = lineSpacingMultiplier
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        DispatchQueue.main.async {
+            self.postBodyTextView.text = textView.text ?? ""
+        }
+    }
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return true
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
-        self.postBodyTextView.text = textView.text ?? ""
         self.isFirstResponder = false
         self.didBecomeFirstResponder = false
     }
