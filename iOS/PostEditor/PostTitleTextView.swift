@@ -112,7 +112,9 @@ struct PostTitleTextView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<PostTitleTextView>) {
-        uiView.text = text
+        if uiView.text != text {
+            uiView.text = text
+        }
 
         let font = textStyle
         let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
