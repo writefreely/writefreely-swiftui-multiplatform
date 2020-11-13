@@ -29,10 +29,6 @@ class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate
         }
     }
 
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return true
-    }
-
     func textViewDidEndEditing(_ textView: UITextView) {
         self.isFirstResponder = false
         self.didBecomeFirstResponder = false
@@ -97,7 +93,9 @@ struct PostBodyTextView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<PostBodyTextView>) {
-        uiView.text = text
+        if uiView.text != text {
+            uiView.text = text
+        }
 
         let font = textStyle
         let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
