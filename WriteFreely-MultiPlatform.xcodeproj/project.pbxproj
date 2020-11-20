@@ -20,8 +20,10 @@
 		17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
+		171C057125657E05006AC54E /* PostTitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171C057025657E05006AC54E /* PostTitleTextView.swift */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
+		174665D42566FE9800629997 /* PostBodyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174665D32566FE9800629997 /* PostBodyTextView.swift */; };
 		17480CA5251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */; };
 		17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */; };
 		174D313224EC2831006CA9EE /* WriteFreelyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D313124EC2831006CA9EE /* WriteFreelyModel.swift */; };
@@ -121,8 +123,10 @@
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
 		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
+		171C057025657E05006AC54E /* PostTitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitleTextView.swift; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
+		174665D32566FE9800629997 /* PostBodyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBodyTextView.swift; sourceTree = "<group>"; };
 		17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppVersion.swift"; sourceTree = "<group>"; };
 		174D313124EC2831006CA9EE /* WriteFreelyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFreelyModel.swift; sourceTree = "<group>"; };
 		1753F6AB24E431CC00309365 /* MacPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPreferencesView.swift; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 			children = (
 				17A67CAE251A5DD7002F163D /* PostEditorView.swift */,
 				17E5DF892543610700DCDC9B /* PostTextEditingView.swift */,
+				171C057025657E05006AC54E /* PostTitleTextView.swift */,
+				174665D32566FE9800629997 /* PostBodyTextView.swift */,
 			);
 			path = PostEditor;
 			sourceTree = "<group>";
@@ -734,6 +740,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				174665D42566FE9800629997 /* PostBodyTextView.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756DBBB24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
@@ -760,6 +767,7 @@
 				1756AE6F24CB255B00FD7257 /* PostListModel.swift in Sources */,
 				1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				1756DBB424FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
+				171C057125657E05006AC54E /* PostTitleTextView.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
 				170DFA35251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */,

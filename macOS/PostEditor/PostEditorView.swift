@@ -1,21 +1,20 @@
 import SwiftUI
 
 struct PostEditorView: View {
-    private let bodyLineSpacing: CGFloat = 17 * 0.5
     @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: WFAPost
-    @State private var isHovering: Bool = false
     @State private var updatingTitleFromServer: Bool = false
     @State private var updatingBodyFromServer: Bool = false
 
     var body: some View {
         PostTextEditingView(
-            post: post,
+            post: _post,
             updatingTitleFromServer: $updatingTitleFromServer,
             updatingBodyFromServer: $updatingBodyFromServer
         )
         .padding()
+        .background(Color(NSColor.controlBackgroundColor))
         .toolbar {
             ToolbarItem(placement: .status) {
                 PostEditorStatusToolbarView(post: post)

@@ -1,5 +1,3 @@
-// Based on https://lostmoa.com/blog/DynamicHeightForTextFieldInSwiftUI and https://stackoverflow.com/a/56508132
-
 import SwiftUI
 
 class PostTitleCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate {
