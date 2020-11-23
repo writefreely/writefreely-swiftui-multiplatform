@@ -36,8 +36,8 @@ struct PostEditorView: View {
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
-            if post.status == PostStatus.edited.rawValue && !post.hasNewerRemoteCopy {
-                post.status = PostStatus.published.rawValue
+            if !post.hasNewerRemoteCopy {
+                self.updatingFromServer = true
             }
         })
         .onDisappear(perform: {
