@@ -60,7 +60,7 @@ struct PostTextEditingView: View {
             }
             MacEditorTextView(
                 text: $combinedText,
-                isFirstResponder: post.status == PostStatus.local.rawValue,
+                isFirstResponder: combinedText.isEmpty,
                 isEditable: true,
                 font: NSFont(name: appearance.rawValue, size: 17),
                 onEditingChanged: onEditingChanged,
