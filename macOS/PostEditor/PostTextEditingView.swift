@@ -19,7 +19,7 @@ struct PostTextEditingView: View {
                     text: $combinedText,
                     isFirstResponder: combinedText.isEmpty,
                     isEditable: true,
-                    font: NSFont(name: "OpenSans-Regular", size: 17),
+                    font: NSFont(name: PostAppearance.sans.rawValue, size: 17),
                     onEditingChanged: onEditingChanged,
                     onCommit: onCommit,
                     onTextChange: onTextChange
@@ -29,7 +29,7 @@ struct PostTextEditingView: View {
                     text: $combinedText,
                     isFirstResponder: combinedText.isEmpty,
                     isEditable: true,
-                    font: NSFont(name: "Hack-Regular", size: 17),
+                    font: NSFont(name: PostAppearance.mono.rawValue, size: 17),
                     onEditingChanged: onEditingChanged,
                     onCommit: onCommit,
                     onTextChange: onTextChange
@@ -39,7 +39,7 @@ struct PostTextEditingView: View {
                     text: $combinedText,
                     isFirstResponder: combinedText.isEmpty,
                     isEditable: true,
-                    font: NSFont(name: "Lora-Regular", size: 17),
+                    font: NSFont(name: PostAppearance.serif.rawValue, size: 17),
                     onEditingChanged: onEditingChanged,
                     onCommit: onCommit,
                     onTextChange: onTextChange
@@ -57,7 +57,7 @@ struct PostTextEditingView: View {
     }
 
     private func onEditingChanged() {
-        print("onEditingChanged fired")
+        // Add code here to take action when the user first starts typing.
     }
 
     private func onTextChange(_ text: String) {
@@ -73,7 +73,7 @@ struct PostTextEditingView: View {
     }
 
     private func onCommit() {
-        print("onCommit fired")
+        // Add code here to take action when the user navigates away from the post.
     }
 
     private func extractTitle(_ text: String) {
