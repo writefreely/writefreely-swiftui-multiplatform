@@ -2,9 +2,7 @@ import SwiftUI
 
 struct PostTextEditingView: View {
     @ObservedObject var post: WFAPost
-    @Binding var updatingTitleFromServer: Bool
-    @Binding var updatingBodyFromServer: Bool
-    @State private var isHovering: Bool = false
+    @Binding var updatingFromServer: Bool
     @State private var appearance: PostAppearance = .serif
     @State private var combinedText = ""
 
@@ -58,28 +56,40 @@ struct PostTextEditingView: View {
                     .padding(.horizontal, 5)
                     .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
             }
-            MacEditorTextView(
-                text: $combinedText,
-                isFirstResponder: combinedText.isEmpty,
-                isEditable: true,
-                font: NSFont(name: appearance.rawValue, size: 17),
-                onEditingChanged: onEditingChanged,
-                onCommit: onCommit,
-                onTextChange: onTextChange
-            )
+            if post.appearance == "sans" {
+                MacEditorTextView(
+                    text: $combinedText,
+                    isFirstResponder: combinedText.isEmpty,
+                    isEditable: true,
+                    font: NSFont(name: "OpenSans-Regular", size: 17),
+                    onEditingChanged: onEditingChanged,
+                    onCommit: onCommit,
+                    onTextChange: onTextChange
+                )
+            } else if post.appearance == "wrap" || post.appearance == "mono" || post.appearance == "code" {
+                MacEditorTextView(
+                    text: $combinedText,
+                    isFirstResponder: combinedText.isEmpty,
+                    isEditable: true,
+                    font: NSFont(name: "Hack-Regular", size: 17),
+                    onEditingChanged: onEditingChanged,
+                    onCommit: onCommit,
+                    onTextChange: onTextChange
+                )
+            } else {
+                MacEditorTextView(
+                    text: $combinedText,
+                    isFirstResponder: combinedText.isEmpty,
+                    isEditable: true,
+                    font: NSFont(name: "Lora-Regular", size: 17),
+                    onEditingChanged: onEditingChanged,
+                    onCommit: onCommit,
+                    onTextChange: onTextChange
+                )
+            }
         }
         .background(Color(NSColor.controlBackgroundColor))
         .onAppear(perform: {
-            switch post.appearance {
-            case "sans":
-                self.appearance = .sans
-            case "wrap", "mono", "code":
-                self.appearance = .mono
-            default:
-                self.appearance = .serif
-            }
-            print("Font: \(appearance.rawValue)")
-
             if post.title.isEmpty {
                 self.combinedText = post.body
             } else {
@@ -93,7 +103,6 @@ struct PostTextEditingView: View {
     }
 
     private func onTextChange(_ text: String) {
-        print("onTextChange fired")
         extractTitle(text)
     }
 

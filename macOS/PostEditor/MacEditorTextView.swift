@@ -15,7 +15,7 @@ struct MacEditorTextView: NSViewRepresentable {
     @Binding var text: String
     var isFirstResponder: Bool = false
     var isEditable: Bool = true
-    var font: NSFont?    = .systemFont(ofSize: 14, weight: .regular)
+    var font: NSFont? = NSFont(name: PostAppearance.serif.rawValue, size: 17)
 
     var onEditingChanged: () -> Void = {}
     var onCommit: () -> Void = {}
