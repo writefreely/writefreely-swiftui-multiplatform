@@ -51,15 +51,24 @@ struct PostTextEditingView: View {
 //            .padding(4)
 //            .background(Color(NSColor.controlBackgroundColor))
 //        }
-        MacEditorTextView(
-            text: $combinedText,
-            isFirstResponder: post.status == PostStatus.local.rawValue,
-            isEditable: true,
-            font: NSFont(name: appearance.rawValue, size: 17),
-            onEditingChanged: onEditingChanged,
-            onCommit: onCommit,
-            onTextChange: onTextChange
-        )
+        ZStack(alignment: .topLeading) {
+            if combinedText.count == 0 {
+                Text("Write…")
+                    .foregroundColor(Color(NSColor.placeholderTextColor))
+                    .padding(.horizontal, 5)
+                    .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
+            }
+            MacEditorTextView(
+                text: $combinedText,
+                isFirstResponder: post.status == PostStatus.local.rawValue,
+                isEditable: true,
+                font: NSFont(name: appearance.rawValue, size: 17),
+                onEditingChanged: onEditingChanged,
+                onCommit: onCommit,
+                onTextChange: onTextChange
+            )
+        }
+        .background(Color(NSColor.controlBackgroundColor))
         .onAppear(perform: {
             switch post.appearance {
             case "sans":
@@ -69,6 +78,7 @@ struct PostTextEditingView: View {
             default:
                 self.appearance = .serif
             }
+            print("Font: \(appearance.rawValue)")
 
             if post.title.isEmpty {
                 self.combinedText = post.body

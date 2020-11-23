@@ -16,6 +16,7 @@ struct PostEditorView: View {
             updatingBodyFromServer: $updatingBodyFromServer
         )
         .padding()
+        .background(Color(NSColor.controlBackgroundColor))
         .toolbar {
             ToolbarItem(placement: .status) {
                 PostEditorStatusToolbarView(post: post)
