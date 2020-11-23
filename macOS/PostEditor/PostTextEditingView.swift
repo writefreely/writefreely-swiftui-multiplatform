@@ -7,48 +7,6 @@ struct PostTextEditingView: View {
     @State private var combinedText = ""
 
     var body: some View {
-//        VStack {
-//            TextField("Title (optional)", text: $post.title)
-//                .textFieldStyle(PlainTextFieldStyle())
-//                .padding(.horizontal, 4)
-//                .font(.custom(appearance.rawValue, size: 26, relativeTo: .largeTitle))
-//                .onChange(of: post.title) { _ in
-//                    if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-//                        post.status = PostStatus.edited.rawValue
-//                    }
-//                    if updatingTitleFromServer {
-//                        updatingTitleFromServer = false
-//                    }
-//                }
-//                .padding(4)
-//                .background(Color(NSColor.controlBackgroundColor))
-//                .padding(.bottom)
-//            ZStack(alignment: .topLeading) {
-//                if post.body.count == 0 {
-//                    Text("Write…")
-//                        .foregroundColor(Color(NSColor.placeholderTextColor))
-//                        .padding(.horizontal, 4)
-//                        .padding(.vertical, 2)
-//                        .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
-//                }
-//                TextEditor(text: $post.body)
-//                    .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
-//                    .opacity(post.body.count == 0 && !isHovering ? 0.0 : 1.0)
-//                    .onChange(of: post.body) { _ in
-//                        if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-//                            post.status = PostStatus.edited.rawValue
-//                        }
-//                        if updatingBodyFromServer {
-//                            updatingBodyFromServer = false
-//                        }
-//                    }
-//                    .onHover(perform: { hovering in
-//                        self.isHovering = hovering
-//                    })
-//            }
-//            .padding(4)
-//            .background(Color(NSColor.controlBackgroundColor))
-//        }
         ZStack(alignment: .topLeading) {
             if combinedText.count == 0 {
                 Text("Write…")
@@ -104,6 +62,14 @@ struct PostTextEditingView: View {
 
     private func onTextChange(_ text: String) {
         extractTitle(text)
+
+        if post.status == PostStatus.published.rawValue && !updatingFromServer {
+            post.status = PostStatus.edited.rawValue
+        }
+
+        if updatingFromServer {
+            self.updatingFromServer = false
+        }
     }
 
     private func onCommit() {
