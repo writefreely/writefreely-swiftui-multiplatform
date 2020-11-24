@@ -139,11 +139,15 @@ final class CustomTextView: NSView {
 
         layoutManager.addTextContainer(textContainer)
 
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8.5
+
         let textView = NSTextView(frame: .zero, textContainer: textContainer)
         textView.autoresizingMask = .width
         textView.delegate = self.delegate
         textView.drawsBackground = false
         textView.font = self.font
+        textView.defaultParagraphStyle = paragraphStyle
         textView.isEditable = self.isEditable
         textView.isHorizontallyResizable = false
         textView.isVerticallyResizable = true
