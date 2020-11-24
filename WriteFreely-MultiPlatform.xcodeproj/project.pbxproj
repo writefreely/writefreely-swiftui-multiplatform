@@ -161,7 +161,7 @@
 		17DF328324C87D3500BCE2E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17DF328824C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WriteFreely-MultiPlatform.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DF328B24C87D3500BCE2E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17DF329024C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WriteFreely-MultiPlatform.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WriteFreely for Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DF329224C87D3500BCE2E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17DF329324C87D3500BCE2E3 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		17DF329824C87D3500BCE2E3 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,7 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				17DF328824C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */,
-				17DF329024C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */,
+				17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */,
 				17DF329824C87D3500BCE2E3 /* Tests iOS.xctest */,
 				17DF32A324C87D3500BCE2E3 /* Tests macOS.xctest */,
 			);
@@ -514,7 +514,7 @@
 				17DF32C224C87D8D00BCE2E3 /* WriteFreely */,
 			);
 			productName = "WriteFreely-MultiPlatform (macOS)";
-			productReference = 17DF329024C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */;
+			productReference = 17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 		17DF329724C87D3500BCE2E3 /* Tests iOS */ = {
@@ -980,7 +980,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
-				PRODUCT_NAME = "WriteFreely-MultiPlatform";
+				PRODUCT_NAME = "WriteFreely for Mac";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1006,7 +1006,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
-				PRODUCT_NAME = "WriteFreely-MultiPlatform";
+				PRODUCT_NAME = "WriteFreely for Mac";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
