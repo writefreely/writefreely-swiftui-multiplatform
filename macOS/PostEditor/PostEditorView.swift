@@ -6,16 +6,15 @@ struct PostEditorView: View {
 
     @ObservedObject var post: WFAPost
     @State private var isHovering: Bool = false
-    @State private var updatingTitleFromServer: Bool = false
-    @State private var updatingBodyFromServer: Bool = false
+    @State private var updatingFromServer: Bool = false
 
     var body: some View {
         PostTextEditingView(
             post: post,
-            updatingTitleFromServer: $updatingTitleFromServer,
-            updatingBodyFromServer: $updatingBodyFromServer
+            updatingFromServer: $updatingFromServer
         )
         .padding()
+        .background(Color(NSColor.controlBackgroundColor))
         .toolbar {
             ToolbarItem(placement: .status) {
                 PostEditorStatusToolbarView(post: post)
@@ -37,8 +36,8 @@ struct PostEditorView: View {
             }
         }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
-            if post.status == PostStatus.edited.rawValue && !post.hasNewerRemoteCopy {
-                post.status = PostStatus.published.rawValue
+            if !post.hasNewerRemoteCopy {
+                self.updatingFromServer = true
             }
         })
         .onDisappear(perform: {

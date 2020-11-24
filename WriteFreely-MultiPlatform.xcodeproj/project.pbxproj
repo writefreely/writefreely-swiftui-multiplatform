@@ -22,6 +22,7 @@
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
+		17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17466625256C0D0600629997 /* MacEditorTextView.swift */; };
 		17480CA5251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */; };
 		17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */; };
 		174D313224EC2831006CA9EE /* WriteFreelyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D313124EC2831006CA9EE /* WriteFreelyModel.swift */; };
@@ -123,6 +124,7 @@
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
+		17466625256C0D0600629997 /* MacEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorTextView.swift; sourceTree = "<group>"; };
 		17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppVersion.swift"; sourceTree = "<group>"; };
 		174D313124EC2831006CA9EE /* WriteFreelyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFreelyModel.swift; sourceTree = "<group>"; };
 		1753F6AB24E431CC00309365 /* MacPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPreferencesView.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			children = (
 				17A67CAE251A5DD7002F163D /* PostEditorView.swift */,
 				17E5DF892543610700DCDC9B /* PostTextEditingView.swift */,
+				17466625256C0D0600629997 /* MacEditorTextView.swift */,
 			);
 			path = PostEditor;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 				17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
+				17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */,
 				17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */,
 				17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
 				1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */,
