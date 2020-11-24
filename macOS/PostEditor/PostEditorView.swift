@@ -15,26 +15,6 @@ struct PostEditorView: View {
         )
         .padding()
         .background(Color(NSColor.controlBackgroundColor))
-        .toolbar {
-            ToolbarItem(placement: .status) {
-                PostEditorStatusToolbarView(post: post)
-            }
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    if model.account.isLoggedIn {
-                        publishPost()
-                    } else {
-                        let mainMenu = NSApplication.shared.mainMenu
-                        let appMenuItem = mainMenu?.item(withTitle: "WriteFreely")
-                        let prefsItem = appMenuItem?.submenu?.item(withTitle: "Preferences…")
-                        NSApplication.shared.sendAction(prefsItem!.action!, to: prefsItem?.target, from: nil)
-                    }
-                }, label: {
-                    Image(systemName: "paperplane")
-                })
-                .disabled(post.status == PostStatus.published.rawValue || post.body.count == 0)
-            }
-        }
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
             if !post.hasNewerRemoteCopy {
                 self.updatingFromServer = true
@@ -55,13 +35,6 @@ struct PostEditorView: View {
                 }
             }
         })
-    }
-
-    private func publishPost() {
-        DispatchQueue.main.async {
-            LocalStorageManager().saveContext()
-            model.publish(post: post)
-        }
     }
 }
 
