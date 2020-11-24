@@ -22,6 +22,9 @@ struct WriteFreely_MultiPlatformApp: App {
                 .environment(\.managedObjectContext, LocalStorageManager.persistentContainer.viewContext)
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
+        .commands {
+            SidebarCommands()
+        }
 
         #if os(macOS)
         Settings {
