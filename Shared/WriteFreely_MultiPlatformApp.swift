@@ -3,10 +3,10 @@ import SwiftUI
 @main
 struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel()
+    @State private var sidebarIsHidden: Bool = false
 
     #if os(macOS)
     @State private var selectedTab = 0
-    @State private var sidebarIsHidden: Bool = false
     #endif
 
     var body: some Scene {
@@ -24,6 +24,13 @@ struct WriteFreely_MultiPlatformApp: App {
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
         .commands {
+            CommandGroup(replacing: .newItem, addition: {
+                Button("New Local Draft") {
+                    createNewLocalPost()
+                }
+                .keyboardShortcut("n", modifiers: [.command])
+            })
+            #if os(macOS)
             CommandGroup(after: .sidebar) {
                 Button("Toggle Sidebar") {
                     NSApp.keyWindow?.contentViewController?.tryToPerform(
@@ -33,6 +40,7 @@ struct WriteFreely_MultiPlatformApp: App {
                 }
                 .keyboardShortcut("s", modifiers: [.command, .option])
             }
+            #endif
         }
 
         #if os(macOS)
@@ -60,6 +68,9 @@ struct WriteFreely_MultiPlatformApp: App {
     }
 
     private func createNewLocalPost() {
+        withAnimation {
+            self.model.selectedPost = nil
+        }
         let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
@@ -78,6 +89,8 @@ struct WriteFreely_MultiPlatformApp: App {
             managedPost.language = languageCode
             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
         }
-        self.model.selectedPost = managedPost
+        withAnimation {
+            self.model.selectedPost = managedPost
+        }
     }
 }

@@ -3,8 +3,10 @@ import CoreData
 
 class PostListModel: ObservableObject {
     func remove(_ post: WFAPost) {
-        LocalStorageManager.persistentContainer.viewContext.delete(post)
-        LocalStorageManager().saveContext()
+        withAnimation {
+            LocalStorageManager.persistentContainer.viewContext.delete(post)
+            LocalStorageManager().saveContext()
+        }
     }
 
     func purgePublishedPosts() {

@@ -21,7 +21,29 @@ struct PostListView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        createNewLocalDraft()
+                        let managedPost = WFAPost(context: self.managedObjectContext)
+                        managedPost.createdDate = Date()
+                        managedPost.title = ""
+                        managedPost.body = ""
+                        managedPost.status = PostStatus.local.rawValue
+                        managedPost.collectionAlias = nil
+                        switch model.preferences.font {
+                        case 1:
+                            managedPost.appearance = "sans"
+                        case 2:
+                            managedPost.appearance = "wrap"
+                        default:
+                            managedPost.appearance = "serif"
+                        }
+                        if let languageCode = Locale.current.languageCode {
+                            managedPost.language = languageCode
+                            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+                        }
+                        withAnimation {
+                            self.selectedCollection = nil
+                            self.showAllPosts = false
+                            self.model.selectedPost = managedPost
+                        }
                     }, label: {
                         Image(systemName: "square.and.pencil")
                     })
@@ -41,7 +63,10 @@ struct PostListView: View {
                             ProgressView()
                         } else {
                             Button(action: {
-                                reloadFromServer()
+                                DispatchQueue.main.async {
+                                    model.fetchUserCollections()
+                                    model.fetchUserPosts()
+                                }
                             }, label: {
                                 Image(systemName: "arrow.clockwise")
                             })
