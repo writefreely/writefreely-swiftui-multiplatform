@@ -6,11 +6,12 @@ struct WriteFreely_MultiPlatformApp: App {
 
     #if os(macOS)
     @State private var selectedTab = 0
+    @State private var sidebarIsHidden: Bool = false
     #endif
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(sidebarIsHidden: $sidebarIsHidden)
                 .onAppear(perform: {
                     if let lastDraft = model.editor.fetchLastDraftFromUserDefaults() {
                         self.model.selectedPost = lastDraft
@@ -23,7 +24,15 @@ struct WriteFreely_MultiPlatformApp: App {
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
         .commands {
-            SidebarCommands()
+            CommandGroup(after: .sidebar) {
+                Button("Toggle Sidebar") {
+                    NSApp.keyWindow?.contentViewController?.tryToPerform(
+                        #selector(NSSplitViewController.toggleSidebar(_:)), with: nil
+                    )
+                    withAnimation { self.sidebarIsHidden.toggle() }
+                }
+                .keyboardShortcut("s", modifiers: [.command, .option])
+            }
         }
 
         #if os(macOS)
