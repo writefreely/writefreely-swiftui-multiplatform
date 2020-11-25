@@ -30,6 +30,15 @@ struct WriteFreely_MultiPlatformApp: App {
                 }
                 .keyboardShortcut("n", modifiers: [.command])
             })
+            CommandGroup(after: .newItem) {
+                Button("Reload From Server") {
+                    DispatchQueue.main.async {
+                        model.fetchUserCollections()
+                        model.fetchUserPosts()
+                    }
+                }
+                .keyboardShortcut("r", modifiers: [.command])
+            }
             #if os(macOS)
             CommandGroup(after: .sidebar) {
                 Button("Toggle Sidebar") {

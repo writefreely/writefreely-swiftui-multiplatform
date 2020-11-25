@@ -54,7 +54,12 @@ struct ContentView: View {
             PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
                 .toolbar {
                     ToolbarItem(placement: .navigation) {
-                        Button(action: {}, label: { Image(systemName: "arrow.clockwise") })
+                        Button(action: {
+                            DispatchQueue.main.async {
+                                model.fetchUserCollections()
+                                model.fetchUserPosts()
+                            }
+                        }, label: { Image(systemName: "arrow.clockwise") })
                             .padding(.leading, sidebarIsHidden ? 8 : 0)
                             .animation(.linear)
                     }
