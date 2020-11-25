@@ -70,8 +70,13 @@ struct ContentView: View {
                     }
                     ToolbarItemGroup(placement: .primaryAction) {
                         if let selectedPost = model.selectedPost {
-                            Button(action: {}, label: { Image(systemName: "paperplane") })
-                                .disabled(selectedPost.body.isEmpty)
+                            Button(action: {
+                                DispatchQueue.main.async {
+                                    LocalStorageManager().saveContext()
+                                    model.publish(post: selectedPost)
+                                }
+                            }, label: { Image(systemName: "paperplane") })
+                            .disabled(selectedPost.body.isEmpty || selectedPost.status == PostStatus.published.rawValue)
                             Button(action: {}, label: { Image(systemName: "square.and.arrow.up") })
                                 .disabled(selectedPost.status == PostStatus.local.rawValue)
                         }
