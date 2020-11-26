@@ -86,6 +86,12 @@ struct PostListView: View {
                 )
             )
             .navigationSubtitle(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
+            .onChange(of: selectedCollection, perform: { _ in
+                DispatchQueue.main.async {
+                    self.model.selectedPost = nil
+                    self.model.editor.clearLastDraft()
+                }
+            })
         #endif
     }
 }

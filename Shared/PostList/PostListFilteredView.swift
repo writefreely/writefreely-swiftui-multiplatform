@@ -94,6 +94,7 @@ struct PostListFilteredView: View {
                     if let postToDelete = model.postToDelete {
                         model.selectedPost = nil
                         DispatchQueue.main.async {
+                            model.editor.clearLastDraft()
                             model.posts.remove(postToDelete)
                         }
                         model.postToDelete = nil
@@ -122,7 +123,10 @@ struct PostListFilteredView: View {
 
     func delete(_ post: WFAPost) {
         DispatchQueue.main.async {
-            model.selectedPost = nil
+            if post == model.selectedPost {
+                model.selectedPost = nil
+                model.editor.clearLastDraft()
+            }
             model.posts.remove(post)
         }
     }
