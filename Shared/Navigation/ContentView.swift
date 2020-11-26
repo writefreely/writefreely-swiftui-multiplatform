@@ -42,7 +42,9 @@ struct ContentView: View {
                             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
                         }
                         withAnimation {
-                            self.model.selectedPost = managedPost
+                            DispatchQueue.main.async {
+                                self.model.selectedPost = managedPost
+                            }
                         }
                     }, label: { Image(systemName: "square.and.pencil") })
                 }

@@ -103,7 +103,9 @@ struct PostListFilteredView: View {
     }
 
     func delete(_ post: WFAPost) {
-        model.posts.remove(post)
+        DispatchQueue.main.async {
+            model.posts.remove(post)
+        }
     }
 }
 
