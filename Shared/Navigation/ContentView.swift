@@ -66,7 +66,7 @@ struct ContentView: View {
                     }
                     ToolbarItem(placement: .status) {
                         if let selectedPost = model.selectedPost {
-                            PostStatusBadgeView(post: selectedPost)
+                            PostEditorStatusToolbarView(post: selectedPost)
                         }
                     }
                     ToolbarItemGroup(placement: .primaryAction) {
