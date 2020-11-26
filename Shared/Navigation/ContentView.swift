@@ -65,6 +65,17 @@ struct ContentView: View {
                         .disabled(!model.account.isLoggedIn)
                         .padding(.leading, sidebarIsHidden ? 8 : 0)
                         .animation(.linear)
+                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                            Alert(
+                                title: Text("Connection Error"),
+                                message: Text("""
+                                    There is no internet connection at the moment. Please reconnect or try again later.
+                                    """),
+                                dismissButton: .default(Text("OK"), action: {
+                                    model.isPresentingNetworkErrorAlert = false
+                                })
+                            )
+                        })
                     }
                     ToolbarItem(placement: .status) {
                         if let selectedPost = model.selectedPost {
@@ -93,33 +104,6 @@ struct ContentView: View {
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
-        .alert(isPresented: $model.isPresentingDeleteAlert) {
-            Alert(
-                title: Text("Delete Post?"),
-                message: Text("This action cannot be undone."),
-                primaryButton: .destructive(Text("Delete"), action: {
-                    if let postToDelete = model.postToDelete {
-                        model.selectedPost = nil
-                        DispatchQueue.main.async {
-                            model.posts.remove(postToDelete)
-                        }
-                        model.postToDelete = nil
-                    }
-                }),
-                secondaryButton: .cancel() {
-                    model.postToDelete = nil
-                }
-            )
-        }
-        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-            Alert(
-                title: Text("Connection Error"),
-                message: Text("There is no internet connection at the moment. Please reconnect or try again later"),
-                dismissButton: .default(Text("OK"), action: {
-                    model.isPresentingNetworkErrorAlert = false
-                })
-            )
-        })
 
         #if os(iOS)
         EmptyView()
@@ -131,6 +115,15 @@ struct ContentView: View {
                         .environmentObject(model)
                 }
             )
+            .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                Alert(
+                    title: Text("Connection Error"),
+                    message: Text("There is no internet connection at the moment. Please reconnect or try again later."),
+                    dismissButton: .default(Text("OK"), action: {
+                        model.isPresentingNetworkErrorAlert = false
+                    })
+                )
+            })
         #endif
     }
 }
