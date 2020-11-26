@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 import WriteFreely
 
 enum AccountError: Error {
@@ -30,8 +30,8 @@ extension AccountError: LocalizedError {
 }
 
 struct AccountModel {
+    @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
     private let defaults = UserDefaults.standard
-    let isLoggedInFlag = "isLoggedInFlag"
     let usernameStringKey = "usernameStringKey"
     let serverStringKey = "serverStringKey"
 
@@ -39,13 +39,11 @@ struct AccountModel {
     var username: String = ""
 
     private(set) var user: WFUser?
-    private(set) var isLoggedIn: Bool = false
 
     mutating func login(_ user: WFUser) {
         self.user = user
         self.username = user.username ?? ""
         self.isLoggedIn = true
-        defaults.set(true, forKey: isLoggedInFlag)
         defaults.set(user.username, forKey: usernameStringKey)
         defaults.set(server, forKey: serverStringKey)
     }
@@ -53,13 +51,11 @@ struct AccountModel {
     mutating func logout() {
         self.user = nil
         self.isLoggedIn = false
-        defaults.set(false, forKey: isLoggedInFlag)
         defaults.removeObject(forKey: usernameStringKey)
         defaults.removeObject(forKey: serverStringKey)
     }
 
     mutating func restoreState() {
-        isLoggedIn = defaults.bool(forKey: isLoggedInFlag)
         server = defaults.string(forKey: serverStringKey) ?? ""
         username = defaults.string(forKey: usernameStringKey) ?? ""
     }

@@ -37,6 +37,7 @@ struct WriteFreely_MultiPlatformApp: App {
                         model.fetchUserPosts()
                     }
                 }
+                .disabled(!model.account.isLoggedIn)
                 .keyboardShortcut("r", modifiers: [.command])
             }
             #if os(macOS)

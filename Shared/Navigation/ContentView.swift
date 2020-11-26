@@ -60,8 +60,9 @@ struct ContentView: View {
                                 model.fetchUserPosts()
                             }
                         }, label: { Image(systemName: "arrow.clockwise") })
-                            .padding(.leading, sidebarIsHidden ? 8 : 0)
-                            .animation(.linear)
+                        .disabled(!model.account.isLoggedIn)
+                        .padding(.leading, sidebarIsHidden ? 8 : 0)
+                        .animation(.linear)
                     }
                     ToolbarItem(placement: .status) {
                         if let selectedPost = model.selectedPost {
