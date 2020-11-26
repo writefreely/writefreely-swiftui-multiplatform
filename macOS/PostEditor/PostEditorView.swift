@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct PostEditorView: View {
-    private let bodyLineSpacing: CGFloat = 17 * 0.5
     @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: WFAPost
@@ -15,9 +14,28 @@ struct PostEditorView: View {
         )
         .padding()
         .background(Color(NSColor.controlBackgroundColor))
+        .onAppear(perform: {
+            if post.status != PostStatus.published.rawValue {
+                DispatchQueue.main.async {
+                    self.model.editor.saveLastDraft(post)
+                }
+            } else {
+                self.model.editor.clearLastDraft()
+            }
+        })
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
             if !post.hasNewerRemoteCopy {
                 self.updatingFromServer = true
+            }
+        })
+        .onChange(of: post.status, perform: { value in
+            if value != PostStatus.published.rawValue {
+                self.model.editor.saveLastDraft(post)
+            } else {
+                self.model.editor.clearLastDraft()
+            }
+            DispatchQueue.main.async {
+                LocalStorageManager().saveContext()
             }
         })
         .onDisappear(perform: {
