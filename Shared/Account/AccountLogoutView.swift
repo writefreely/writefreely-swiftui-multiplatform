@@ -43,22 +43,13 @@ struct AccountLogoutView: View {
                 Text("Log Out")
             })
         }
-        .sheet(isPresented: $isPresentingLogoutConfirmation) {
-            VStack {
-                Text("Log Out?")
-                    .font(.title)
-                Text("\(editedPostsWarningString)You won't lose any local posts. Are you sure?")
-                HStack {
-                    Button(action: model.logout, label: {
-                        Text("Log Out")
-                    })
-                    Button(action: {
-                        self.isPresentingLogoutConfirmation = false
-                    }, label: {
-                        Text("Cancel")
-                    }).keyboardShortcut(.cancelAction)
-                }
-            }
+        .alert(isPresented: $isPresentingLogoutConfirmation) {
+            Alert(
+                title: Text("Log Out?"),
+                message: Text("\(editedPostsWarningString)You won't lose any local posts. Are you sure?"),
+                primaryButton: .cancel(Text("Cancel"), action: { self.isPresentingLogoutConfirmation = false }),
+                secondaryButton: .destructive(Text("Log Out"), action: model.logout )
+            )
         }
         #endif
     }
