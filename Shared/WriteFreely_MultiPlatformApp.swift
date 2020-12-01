@@ -40,15 +40,7 @@ struct WriteFreely_MultiPlatformApp: App {
                 .keyboardShortcut("r", modifiers: [.command])
             }
             #if os(macOS)
-            CommandGroup(after: .sidebar) {
-                Button("Toggle Sidebar") {
-                    NSApp.keyWindow?.contentViewController?.tryToPerform(
-                        #selector(NSSplitViewController.toggleSidebar(_:)), with: nil
-                    )
-                    withAnimation { self.sidebarIsHidden.toggle() }
-                }
-                .keyboardShortcut("s", modifiers: [.command, .option])
-            }
+            SidebarCommands()
             #endif
         }
 
