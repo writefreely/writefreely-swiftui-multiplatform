@@ -25,7 +25,7 @@ struct WriteFreely_MultiPlatformApp: App {
         }
         .commands {
             CommandGroup(replacing: .newItem, addition: {
-                Button("New Local Draft") {
+                Button("New Post") {
                     createNewLocalPost()
                 }
                 .keyboardShortcut("n", modifiers: [.command])
