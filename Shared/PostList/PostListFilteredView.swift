@@ -90,7 +90,10 @@ struct PostListFilteredView: View {
             Alert(
                 title: Text("Delete Post?"),
                 message: Text("This action cannot be undone."),
-                primaryButton: .destructive(Text("Delete"), action: {
+                primaryButton: .cancel() {
+                    model.postToDelete = nil
+                },
+                secondaryButton: .destructive(Text("Delete"), action: {
                     if let postToDelete = model.postToDelete {
                         model.selectedPost = nil
                         DispatchQueue.main.async {
@@ -99,10 +102,7 @@ struct PostListFilteredView: View {
                         }
                         model.postToDelete = nil
                     }
-                }),
-                secondaryButton: .cancel() {
-                    model.postToDelete = nil
-                }
+                })
             )
         }
         .onAppear(perform: {
