@@ -30,7 +30,7 @@ struct WriteFreely_MultiPlatformApp: App {
                 .keyboardShortcut("n", modifiers: [.command])
             })
             CommandGroup(after: .newItem) {
-                Button("Reload From Server") {
+                Button("Refresh Posts") {
                     DispatchQueue.main.async {
                         model.fetchUserCollections()
                         model.fetchUserPosts()
