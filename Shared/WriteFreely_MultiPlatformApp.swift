@@ -22,6 +22,27 @@ struct WriteFreely_MultiPlatformApp: App {
                 .environment(\.managedObjectContext, LocalStorageManager.persistentContainer.viewContext)
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
+        .commands {
+            CommandGroup(replacing: .newItem, addition: {
+                Button("New Post") {
+                    createNewLocalPost()
+                }
+                .keyboardShortcut("n", modifiers: [.command])
+            })
+            CommandGroup(after: .newItem) {
+                Button("Refresh Posts") {
+                    DispatchQueue.main.async {
+                        model.fetchUserCollections()
+                        model.fetchUserPosts()
+                    }
+                }
+                .disabled(!model.account.isLoggedIn)
+                .keyboardShortcut("r", modifiers: [.command])
+            }
+            #if os(macOS)
+            SidebarCommands()
+            #endif
+        }
 
         #if os(macOS)
         Settings {
@@ -48,6 +69,9 @@ struct WriteFreely_MultiPlatformApp: App {
     }
 
     private func createNewLocalPost() {
+        withAnimation {
+            self.model.selectedPost = nil
+        }
         let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
@@ -66,6 +90,8 @@ struct WriteFreely_MultiPlatformApp: App {
             managedPost.language = languageCode
             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
         }
-        self.model.selectedPost = managedPost
+        withAnimation {
+            self.model.selectedPost = managedPost
+        }
     }
 }

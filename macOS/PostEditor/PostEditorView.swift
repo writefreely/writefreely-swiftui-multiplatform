@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct PostEditorView: View {
-    private let bodyLineSpacing: CGFloat = 17 * 0.5
     @EnvironmentObject var model: WriteFreelyModel
 
     @ObservedObject var post: WFAPost
@@ -15,32 +14,34 @@ struct PostEditorView: View {
         )
         .padding()
         .background(Color(NSColor.controlBackgroundColor))
-        .toolbar {
-            ToolbarItem(placement: .status) {
-                PostEditorStatusToolbarView(post: post)
+        .onAppear(perform: {
+            if post.status != PostStatus.published.rawValue {
+                DispatchQueue.main.async {
+                    self.model.editor.saveLastDraft(post)
+                }
+            } else {
+                self.model.editor.clearLastDraft()
             }
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: {
-                    if model.account.isLoggedIn {
-                        publishPost()
-                    } else {
-                        let mainMenu = NSApplication.shared.mainMenu
-                        let appMenuItem = mainMenu?.item(withTitle: "WriteFreely")
-                        let prefsItem = appMenuItem?.submenu?.item(withTitle: "Preferences…")
-                        NSApplication.shared.sendAction(prefsItem!.action!, to: prefsItem?.target, from: nil)
-                    }
-                }, label: {
-                    Image(systemName: "paperplane")
-                })
-                .disabled(post.status == PostStatus.published.rawValue || post.body.count == 0)
-            }
-        }
+        })
         .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
             if !post.hasNewerRemoteCopy {
                 self.updatingFromServer = true
             }
         })
+        .onChange(of: post.status, perform: { value in
+            if value != PostStatus.published.rawValue {
+                self.model.editor.saveLastDraft(post)
+            } else {
+                self.model.editor.clearLastDraft()
+            }
+            DispatchQueue.main.async {
+                LocalStorageManager().saveContext()
+            }
+        })
         .onDisappear(perform: {
+            DispatchQueue.main.async {
+                model.editor.clearLastDraft()
+            }
             if post.title.count == 0
                 && post.body.count == 0
                 && post.status == PostStatus.local.rawValue
@@ -55,13 +56,6 @@ struct PostEditorView: View {
                 }
             }
         })
-    }
-
-    private func publishPost() {
-        DispatchQueue.main.async {
-            LocalStorageManager().saveContext()
-            model.publish(post: post)
-        }
     }
 }
 

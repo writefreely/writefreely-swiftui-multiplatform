@@ -11,16 +11,21 @@ struct PostEditorStatusToolbarView: View {
             PostStatusBadgeView(post: post)
             #else
             HStack {
+                HStack {
+                    Text("⚠️ Newer copy on server. Replace local copy?")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                    Button(action: {
+                        model.updateFromServer(post: post)
+                    }, label: {
+                        Image(systemName: "square.and.arrow.down")
+                    })
+                }
+                .padding(.horizontal)
+                .background(Color.primary.opacity(0.1))
+                .clipShape(Capsule())
+                .padding(.trailing)
                 PostStatusBadgeView(post: post)
-                    .padding(.trailing)
-                Text("⚠️ Newer copy on server. Replace local copy?")
-                    .font(.callout)
-                    .foregroundColor(.secondary)
-                Button(action: {
-                    model.updateFromServer(post: post)
-                }, label: {
-                    Image(systemName: "square.and.arrow.down")
-                })
             }
             #endif
         } else if post.wasDeletedFromServer && post.status != PostStatus.local.rawValue {
@@ -28,19 +33,24 @@ struct PostEditorStatusToolbarView: View {
             PostStatusBadgeView(post: post)
             #else
             HStack {
+                HStack {
+                    Text("⚠️ Post deleted from server. Delete local copy?")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                    Button(action: {
+                        model.selectedPost = nil
+                        DispatchQueue.main.async {
+                            model.posts.remove(post)
+                        }
+                    }, label: {
+                        Image(systemName: "trash")
+                    })
+                }
+                .padding(.horizontal)
+                .background(Color.primary.opacity(0.1))
+                .clipShape(Capsule())
+                .padding(.trailing)
                 PostStatusBadgeView(post: post)
-                    .padding(.trailing)
-                Text("⚠️ Post deleted from server. Delete local copy?")
-                    .font(.callout)
-                    .foregroundColor(.secondary)
-                Button(action: {
-                    model.selectedPost = nil
-                    DispatchQueue.main.async {
-                        model.posts.remove(post)
-                    }
-                }, label: {
-                    Image(systemName: "trash")
-                })
             }
             #endif
         } else {

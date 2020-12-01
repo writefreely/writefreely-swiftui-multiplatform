@@ -86,6 +86,25 @@ struct PostListFilteredView: View {
                 }
             })
         }
+        .alert(isPresented: $model.isPresentingDeleteAlert) {
+            Alert(
+                title: Text("Delete Post?"),
+                message: Text("This action cannot be undone."),
+                primaryButton: .cancel() {
+                    model.postToDelete = nil
+                },
+                secondaryButton: .destructive(Text("Delete"), action: {
+                    if let postToDelete = model.postToDelete {
+                        model.selectedPost = nil
+                        DispatchQueue.main.async {
+                            model.editor.clearLastDraft()
+                            model.posts.remove(postToDelete)
+                        }
+                        model.postToDelete = nil
+                    }
+                })
+            )
+        }
         .onAppear(perform: {
             self.postCount = fetchRequest.wrappedValue.count
         })
@@ -103,7 +122,13 @@ struct PostListFilteredView: View {
     }
 
     func delete(_ post: WFAPost) {
-        model.posts.remove(post)
+        DispatchQueue.main.async {
+            if post == model.selectedPost {
+                model.selectedPost = nil
+                model.editor.clearLastDraft()
+            }
+            model.posts.remove(post)
+        }
     }
 }
 
