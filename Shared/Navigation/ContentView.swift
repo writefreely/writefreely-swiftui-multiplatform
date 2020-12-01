@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @Binding var sidebarIsHidden: Bool
 
     var body: some View {
         NavigationView {
@@ -14,7 +13,6 @@ struct ContentView: View {
                             NSApp.keyWindow?.contentViewController?.tryToPerform(
                                 #selector(NSSplitViewController.toggleSidebar(_:)), with: nil
                             )
-                            withAnimation { self.sidebarIsHidden.toggle() }
                         },
                         label: { Image(systemName: "sidebar.left") }
                     )
@@ -55,31 +53,20 @@ struct ContentView: View {
             #if os(macOS)
             PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
                 .toolbar {
-                    ToolbarItem(placement: .navigation) {
-                        Button(action: {
-                            DispatchQueue.main.async {
-                                model.fetchUserCollections()
-                                model.fetchUserPosts()
-                            }
-                        }, label: { Image(systemName: "arrow.clockwise") })
-                        .disabled(!model.account.isLoggedIn)
-                        .padding(.leading, sidebarIsHidden ? 8 : 0)
-                        .animation(.linear)
-                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                            Alert(
-                                title: Text("Connection Error"),
-                                message: Text("""
-                                    There is no internet connection at the moment. Please reconnect or try again later.
-                                    """),
-                                dismissButton: .default(Text("OK"), action: {
-                                    model.isPresentingNetworkErrorAlert = false
-                                })
-                            )
-                        })
-                    }
                     ToolbarItemGroup(placement: .primaryAction) {
                         if let selectedPost = model.selectedPost {
                             ActivePostToolbarView(activePost: selectedPost)
+                                .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                                    Alert(
+                                        title: Text("Connection Error"),
+                                        message: Text("""
+                                            There is no internet connection at the moment. Please reconnect or try again later.
+                                            """),
+                                        dismissButton: .default(Text("OK"), action: {
+                                            model.isPresentingNetworkErrorAlert = false
+                                        })
+                                    )
+                                })
                         }
                     }
                 }
@@ -122,7 +109,7 @@ struct ContentView_Previews: PreviewProvider {
         let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
 
-        return ContentView(sidebarIsHidden: .constant(false))
+        return ContentView()
             .environment(\.managedObjectContext, context)
             .environmentObject(model)
     }

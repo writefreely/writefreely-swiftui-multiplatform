@@ -3,7 +3,6 @@ import SwiftUI
 @main
 struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel()
-    @State private var sidebarIsHidden: Bool = false
 
     #if os(macOS)
     @State private var selectedTab = 0
@@ -11,7 +10,7 @@ struct WriteFreely_MultiPlatformApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(sidebarIsHidden: $sidebarIsHidden)
+            ContentView()
                 .onAppear(perform: {
                     if let lastDraft = model.editor.fetchLastDraftFromUserDefaults() {
                         self.model.selectedPost = lastDraft
