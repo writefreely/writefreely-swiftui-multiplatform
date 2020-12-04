@@ -12,7 +12,7 @@ struct PostListView: View {
     var body: some View {
         #if os(iOS)
         GeometryReader { geometry in
-            PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts, postCount: $postCount)
+            PostListFilteredView(collection: selectedCollection, showAllPosts: showAllPosts, postCount: $postCount)
             .navigationTitle(
                 showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                     model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
@@ -79,13 +79,39 @@ struct PostListView: View {
             }
         }
         #else //if os(macOS)
-        PostListFilteredView(filter: selectedCollection?.alias, showAllPosts: showAllPosts, postCount: $postCount)
-            .navigationTitle(
-                showAllPosts ? "All Posts" : selectedCollection?.title ?? (
-                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
-                )
+        PostListFilteredView(
+            collection: selectedCollection,
+            showAllPosts: showAllPosts,
+            postCount: $postCount
+        )
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+                if let selectedPost = model.selectedPost {
+                    ActivePostToolbarView(activePost: selectedPost)
+                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                            Alert(
+                                title: Text("Connection Error"),
+                                message: Text("""
+                                    There is no internet connection at the moment. Please reconnect or try again later.
+                                    """),
+                                dismissButton: .default(Text("OK"), action: {
+                                    model.isPresentingNetworkErrorAlert = false
+                                })
+                            )
+                        })
+                }
+            }
+        }
+        .onDisappear {
+            DispatchQueue.main.async {
+                model.selectedPost = nil
+            }
+        }
+        .navigationTitle(
+            showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
             )
-            .navigationSubtitle(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
+        )
         #endif
     }
 }
