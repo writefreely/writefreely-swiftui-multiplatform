@@ -51,26 +51,34 @@ struct ContentView: View {
             #endif
 
             #if os(macOS)
-            PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
-                .toolbar {
-                    ToolbarItemGroup(placement: .primaryAction) {
-                        if let selectedPost = model.selectedPost {
-                            ActivePostToolbarView(activePost: selectedPost)
-                                .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                                    Alert(
-                                        title: Text("Connection Error"),
-                                        message: Text("""
-                                            There is no internet connection at the moment. \
-                                            Please reconnect or try again later.
-                                            """),
-                                        dismissButton: .default(Text("OK"), action: {
-                                            model.isPresentingNetworkErrorAlert = false
-                                        })
-                                    )
-                                })
+            ZStack {
+                PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .primaryAction) {
+                            if let selectedPost = model.selectedPost {
+                                ActivePostToolbarView(activePost: selectedPost)
+                                    .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                                        Alert(
+                                            title: Text("Connection Error"),
+                                            message: Text("""
+                                                There is no internet connection at the moment. \
+                                                Please reconnect or try again later.
+                                                """),
+                                            dismissButton: .default(Text("OK"), action: {
+                                                model.isPresentingNetworkErrorAlert = false
+                                            })
+                                        )
+                                    })
+                            }
                         }
+                }
+                if model.isProcessingRequest {
+                    ZStack {
+                        Color(NSColor.controlBackgroundColor).opacity(0.75)
+                        ProgressView()
                     }
                 }
+            }
             #else
             PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
             #endif
