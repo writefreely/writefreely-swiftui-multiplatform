@@ -104,6 +104,8 @@ struct PostListView: View {
         }
         .onDisappear {
             DispatchQueue.main.async {
+                model.selectedCollection = nil
+                model.showAllPosts = true
                 model.selectedPost = nil
             }
         }
