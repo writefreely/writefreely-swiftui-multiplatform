@@ -14,6 +14,8 @@ class WriteFreelyModel: ObservableObject {
     @Published var isProcessingRequest: Bool = false
     @Published var hasNetworkConnection: Bool = true
     @Published var selectedPost: WFAPost?
+    @Published var selectedCollection: WFACollection?
+    @Published var showAllPosts: Bool = true
     @Published var isPresentingDeleteAlert: Bool = false
     @Published var isPresentingLoginErrorAlert: Bool = false
     @Published var isPresentingNetworkErrorAlert: Bool = false
