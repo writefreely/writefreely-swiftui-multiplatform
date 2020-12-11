@@ -10,8 +10,10 @@ struct ActivePostToolbarView: View {
             HStack(spacing: 4) {
                 Button(action: {}, label: { Image(systemName: "square.and.arrow.up") })
                     .disabled(activePost.status == PostStatus.local.rawValue)
+                    .help("Copy the post's URL to your Mac's pasteboard.")
                 Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                     .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
+                    .help("Publish the post to the web. You must be logged in to do this.")
             }
         }
     }
