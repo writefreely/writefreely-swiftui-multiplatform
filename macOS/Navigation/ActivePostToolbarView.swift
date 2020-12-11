@@ -10,15 +10,14 @@ struct ActivePostToolbarView: View {
             PostEditorStatusToolbarView(post: activePost)
             HStack(spacing: 4) {
                 Button(
-                    action: { self.isPresentingSharingServicePicker = true },
+                    action: {
+                        self.isPresentingSharingServicePicker = true
+                    },
                     label: { Image(systemName: "square.and.arrow.up") }
                 )
                 .disabled(activePost.status == PostStatus.local.rawValue)
                 .popover(isPresented: $isPresentingSharingServicePicker) {
-                    PostEditorSharingPicker(
-                        isPresented: $isPresentingSharingServicePicker,
-                        sharingItems: createPostUrl()
-                    )
+                    PostEditorSharingPicker(sharingItems: createPostUrl())
                 }
                 Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                     .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
