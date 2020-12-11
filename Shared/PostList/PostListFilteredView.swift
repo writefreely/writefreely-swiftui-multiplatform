@@ -87,7 +87,16 @@ struct PostListFilteredView: View {
                     tag: post,
                     selection: $model.selectedPost
                 ) {
-                    PostCellView(post: post)
+                    if showAllPosts {
+                        if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                            PostCellView(post: post, collectionName: collection.title)
+                        } else {
+                            let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                            PostCellView(post: post, collectionName: collectionName)
+                        }
+                    } else {
+                        PostCellView(post: post)
+                    }
                 }
                 .deleteDisabled(post.status != PostStatus.local.rawValue)
             }

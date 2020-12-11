@@ -104,9 +104,9 @@ struct PostListView: View {
         }
         .onDisappear {
             DispatchQueue.main.async {
-                model.selectedCollection = nil
-                model.showAllPosts = true
-                model.selectedPost = nil
+                self.model.selectedCollection = nil
+                self.model.showAllPosts = true
+                self.model.selectedPost = nil
             }
         }
         .navigationTitle(
