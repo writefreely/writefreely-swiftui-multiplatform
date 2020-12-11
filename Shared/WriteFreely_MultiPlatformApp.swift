@@ -1,6 +1,21 @@
 import SwiftUI
 
 @main
+struct CheckForDebugModifier {
+    static func main() {
+        #if os(macOS)
+            if NSEvent.modifierFlags.contains(.shift) {
+                print("Debug launch detected")
+                // Run debug-mode launch code here
+            } else {
+                print("Normal launch detected")
+                // Don't do anything
+            }
+        #endif
+        WriteFreely_MultiPlatformApp.main()
+    }
+}
+
 struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel()
 
