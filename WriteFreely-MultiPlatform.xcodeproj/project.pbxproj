@@ -313,10 +313,10 @@
 		17A67CAC251A5D8D002F163D /* PostEditor */ = {
 			isa = PBXGroup;
 			children = (
+				17479F142583D8E40072B7FB /* PostEditorSharingPicker.swift */,
 				17A67CAE251A5DD7002F163D /* PostEditorView.swift */,
 				17E5DF892543610700DCDC9B /* PostTextEditingView.swift */,
 				17466625256C0D0600629997 /* MacEditorTextView.swift */,
-				17479F142583D8E40072B7FB /* PostEditorSharingPicker.swift */,
 			);
 			path = PostEditor;
 			sourceTree = "<group>";
