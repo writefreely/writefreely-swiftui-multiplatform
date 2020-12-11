@@ -5,21 +5,33 @@ struct PostListFilteredView: View {
     @Binding var postCount: Int
     @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
-    var showAllPosts: Bool
 
-    init(filter: String?, showAllPosts: Bool, postCount: Binding<Int>) {
+    var showAllPosts: Bool {
+        didSet {
+            model.showAllPosts = showAllPosts
+        }
+    }
+
+    var selectedCollection: WFACollection? {
+        didSet {
+            model.selectedCollection = selectedCollection
+        }
+    }
+
+    init(collection: WFACollection?, showAllPosts: Bool, postCount: Binding<Int>) {
         self.showAllPosts = showAllPosts
+        self.selectedCollection = collection
         if showAllPosts {
             fetchRequest = FetchRequest<WFAPost>(
                 entity: WFAPost.entity(),
                 sortDescriptors: [NSSortDescriptor(key: "createdDate", ascending: false)]
             )
         } else {
-            if let filter = filter {
+            if let collectionAlias = collection?.alias {
                 fetchRequest = FetchRequest<WFAPost>(
                     entity: WFAPost.entity(),
                     sortDescriptors: [NSSortDescriptor(key: "createdDate", ascending: false)],
-                    predicate: NSPredicate(format: "collectionAlias == %@", filter)
+                    predicate: NSPredicate(format: "collectionAlias == %@", collectionAlias)
                 )
             } else {
                 fetchRequest = FetchRequest<WFAPost>(
@@ -75,7 +87,16 @@ struct PostListFilteredView: View {
                     tag: post,
                     selection: $model.selectedPost
                 ) {
-                    PostCellView(post: post)
+                    if showAllPosts {
+                        if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                            PostCellView(post: post, collectionName: collection.title)
+                        } else {
+                            let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                            PostCellView(post: post, collectionName: collectionName)
+                        }
+                    } else {
+                        PostCellView(post: post)
+                    }
                 }
                 .deleteDisabled(post.status != PostStatus.local.rawValue)
             }
@@ -105,12 +126,6 @@ struct PostListFilteredView: View {
                 })
             )
         }
-        .onAppear(perform: {
-            self.postCount = fetchRequest.wrappedValue.count
-        })
-        .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
-            self.postCount = value
-        })
         .onDeleteCommand(perform: {
             guard let selectedPost = model.selectedPost else { return }
             if selectedPost.status == PostStatus.local.rawValue {
@@ -134,6 +149,6 @@ struct PostListFilteredView: View {
 
 struct PostListFilteredView_Previews: PreviewProvider {
     static var previews: some View {
-        return PostListFilteredView(filter: nil, showAllPosts: false, postCount: .constant(999))
+        return PostListFilteredView(collection: nil, showAllPosts: false, postCount: .constant(999))
     }
 }

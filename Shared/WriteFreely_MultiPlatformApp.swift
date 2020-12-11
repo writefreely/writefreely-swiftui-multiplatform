@@ -54,9 +54,16 @@ struct WriteFreely_MultiPlatformApp: App {
                 .disabled(!model.account.isLoggedIn)
                 .keyboardShortcut("r", modifiers: [.command])
             }
-            #if os(macOS)
             SidebarCommands()
-            #endif
+            CommandGroup(after: .help) {
+                Button("Visit Support Forum") {
+                    #if os(macOS)
+                    NSWorkspace().open(model.helpURL)
+                    #else
+                    UIApplication.shared.open(model.helpURL)
+                    #endif
+                }
+            }
         }
 
         #if os(macOS)
