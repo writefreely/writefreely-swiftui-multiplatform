@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostEditorSharingPicker: NSViewRepresentable {
+    @Binding var isPresented: Bool
     var sharingItems: [Any] = []
 
     func makeNSView(context: Context) -> some NSView {
@@ -32,6 +33,7 @@ struct PostEditorSharingPicker: NSViewRepresentable {
             didChoose service: NSSharingService?
         ) {
             sharingServicePicker.delegate = nil
+            self.owner.isPresented = false
         }
     }
 }

@@ -17,7 +17,10 @@ struct ActivePostToolbarView: View {
                 )
                 .disabled(activePost.status == PostStatus.local.rawValue)
                 .popover(isPresented: $isPresentingSharingServicePicker) {
-                    PostEditorSharingPicker(sharingItems: createPostUrl())
+                    PostEditorSharingPicker(
+                        isPresented: $isPresentingSharingServicePicker,
+                        sharingItems: createPostUrl()
+                    )
                 }
                 Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                     .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
