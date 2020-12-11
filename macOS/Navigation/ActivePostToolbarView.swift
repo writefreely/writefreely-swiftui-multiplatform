@@ -21,6 +21,7 @@ struct ActivePostToolbarView: View {
                         isPresented: $isPresentingSharingServicePicker,
                         sharingItems: createPostUrl()
                     )
+                    .frame(width: .zero, height: .zero)
                 }
                 Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                     .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
