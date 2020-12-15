@@ -42,7 +42,7 @@ struct ActivePostToolbarView: View {
                                 publishPost(activePost)
                             }
                         } else {
-                            // present login screen
+                            openSettingsWindow()
                         }
                     }, label: {
                         Text("\(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")")
@@ -55,7 +55,7 @@ struct ActivePostToolbarView: View {
                                     publishPost(activePost)
                                 }
                             } else {
-                                // present login screen
+                                openSettingsWindow()
                             }
                         }, label: {
                             Text("\(collection.title)")
@@ -94,5 +94,10 @@ struct ActivePostToolbarView: View {
             LocalStorageManager().saveContext()
             model.publish(post: post)
         }
+    }
+
+    private func openSettingsWindow() {
+        guard let menuItem = NSApplication.shared.mainMenu?.item(at: 0)?.submenu?.item(at: 2) else { return }
+        NSApplication.shared.sendAction(menuItem.action!, to: menuItem.target, from: nil)
     }
 }
