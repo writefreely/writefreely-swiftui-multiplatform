@@ -12,7 +12,7 @@ struct ActivePostToolbarView: View {
     ) var collections: FetchedResults<WFACollection>
 
     var body: some View {
-        HStack {
+        HStack(spacing: 4) {
             if model.account.isLoggedIn && activePost.status != PostStatus.local.rawValue {
                 Section(header: Text("Move To:")) {
                     Picker(selection: $selectedCollection, label: Text("Move To…"), content: {
@@ -27,12 +27,11 @@ struct ActivePostToolbarView: View {
             }
             PostEditorStatusToolbarView(post: activePost)
                 .layoutPriority(1)
-            HStack(spacing: 4) {
-                Button(action: {}, label: { Image(systemName: "square.and.arrow.up") })
-                    .disabled(activePost.status == PostStatus.local.rawValue)
-                Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
-                    .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
-            }
+                .padding(.horizontal)
+            Button(action: {}, label: { Image(systemName: "square.and.arrow.up") })
+                .disabled(activePost.status == PostStatus.local.rawValue)
+            Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
+                .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
         }
         .onAppear(perform: {
             self.selectedCollection = collections.first { $0.alias == activePost.collectionAlias }
