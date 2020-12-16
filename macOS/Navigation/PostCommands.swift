@@ -1,19 +1,38 @@
 import SwiftUI
 
 struct PostCommands: Commands {
-    @State var post: WFAPost?
+    @ObservedObject var model: WriteFreelyModel
+
+    @FetchRequest(
+        entity: WFACollection.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \WFACollection.title, ascending: true)]
+    ) var collections: FetchedResults<WFACollection>
 
     var body: some Commands {
         CommandMenu("Post") {
-            Button("Publish…") {
-                print("Published active post (not really): '\(post?.title ?? "untitled")'")
+            Group {
+                Button("Publish…") {
+                    print("Clicked 'Publish…' for post '\(model.selectedPost?.title ?? "untitled")'")
+                }
+                .disabled(true)
+                Button("Move…") {
+                    print("Clicked 'Move…' for post '\(model.selectedPost?.title ?? "untitled")'")
+                }
+                .disabled(true)
+                Button(action: sendPostUrlToPasteboard, label: { Text("Copy Link To Published Post") })
+                    .disabled(model.selectedPost?.status == PostStatus.local.rawValue)
             }
-            Button("Move…") {
-                print("Moved active post (not really): '\(post?.title ?? "untitled")'")
-            }
-            Button("Copy Link To Post") {
-                print("Copied URL to post (not really): '\(post?.title ?? "untitled")'")
-            }
+            .disabled(model.selectedPost == nil || !model.account.isLoggedIn)
         }
+    }
+
+    private func sendPostUrlToPasteboard() {
+        guard let activePost = model.selectedPost else { return }
+        guard let postId = activePost.postId else { return }
+        guard let urlString = activePost.slug != nil ?
+                "\(model.account.server)/\((activePost.collectionAlias)!)/\((activePost.slug)!)" :
+                "\(model.account.server)/\((postId))" else { return }
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(urlString, forType: .string)
     }
 }
