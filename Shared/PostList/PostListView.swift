@@ -84,24 +84,6 @@ struct PostListView: View {
             showAllPosts: showAllPosts,
             postCount: $postCount
         )
-        .toolbar {
-            ToolbarItemGroup(placement: .primaryAction) {
-                if let selectedPost = model.selectedPost {
-                    ActivePostToolbarView(activePost: selectedPost)
-                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                            Alert(
-                                title: Text("Connection Error"),
-                                message: Text("""
-                                    There is no internet connection at the moment. Please reconnect or try again later.
-                                    """),
-                                dismissButton: .default(Text("OK"), action: {
-                                    model.isPresentingNetworkErrorAlert = false
-                                })
-                            )
-                        })
-                }
-            }
-        }
         .onDisappear {
             DispatchQueue.main.async {
                 self.model.selectedCollection = nil
