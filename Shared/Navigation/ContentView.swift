@@ -16,6 +16,7 @@ struct ContentView: View {
                         },
                         label: { Image(systemName: "sidebar.left") }
                     )
+                    .help("Toggle the sidebar's visibility.")
                     Spacer()
                     Button(action: {
                         withAnimation {
@@ -45,6 +46,7 @@ struct ContentView: View {
                             }
                         }
                     }, label: { Image(systemName: "square.and.pencil") })
+                    .help("Create a new local draft.")
                 }
             #else
             SidebarView()

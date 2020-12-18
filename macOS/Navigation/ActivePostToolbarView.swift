@@ -66,6 +66,7 @@ struct ActivePostToolbarView: View {
                     Label("Publish…", systemImage: "paperplane")
                 })
                 .disabled(activePost.body.isEmpty)
+                .help("Publish the post to the web.\(model.account.isLoggedIn ? "" : " You must be logged in to do this.")") // swiftlint:disable:this line_length
             } else {
                 HStack(spacing: 4) {
                     Button(
@@ -75,6 +76,7 @@ struct ActivePostToolbarView: View {
                         label: { Image(systemName: "square.and.arrow.up") }
                     )
                     .disabled(activePost.status == PostStatus.local.rawValue)
+                    .help("Copy the post's URL to your Mac's pasteboard.")
                     .popover(isPresented: $isPresentingSharingServicePicker) {
                         PostEditorSharingPicker(
                             isPresented: $isPresentingSharingServicePicker,
@@ -84,6 +86,7 @@ struct ActivePostToolbarView: View {
                     }
                     Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                         .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
+                        .help("Publish the post to the web.\(model.account.isLoggedIn ? "" : " You must be logged in to do this.")") // swiftlint:disable:this line_length
                 }
             }
         }
