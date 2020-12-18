@@ -92,7 +92,8 @@ struct PostListView: View {
                             Alert(
                                 title: Text("Connection Error"),
                                 message: Text("""
-                                    There is no internet connection at the moment. Please reconnect or try again later.
+                                    There is no internet connection at the moment. \
+                                    Please reconnect or try again later.
                                     """),
                                 dismissButton: .default(Text("OK"), action: {
                                     model.isPresentingNetworkErrorAlert = false
