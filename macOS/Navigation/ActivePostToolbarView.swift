@@ -3,6 +3,7 @@ import SwiftUI
 struct ActivePostToolbarView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @ObservedObject var activePost: WFAPost
+    @State private var isPresentingSharingServicePicker: Bool = false
 
     @State private var selectedCollection: WFACollection?
 
@@ -67,8 +68,20 @@ struct ActivePostToolbarView: View {
                 .disabled(activePost.body.isEmpty)
             } else {
                 HStack(spacing: 4) {
-                    Button(action: {}, label: { Image(systemName: "square.and.arrow.up") })
-                        .disabled(activePost.status == PostStatus.local.rawValue)
+                    Button(
+                        action: {
+                            self.isPresentingSharingServicePicker = true
+                        },
+                        label: { Image(systemName: "square.and.arrow.up") }
+                    )
+                    .disabled(activePost.status == PostStatus.local.rawValue)
+                    .popover(isPresented: $isPresentingSharingServicePicker) {
+                        PostEditorSharingPicker(
+                            isPresented: $isPresentingSharingServicePicker,
+                            sharingItems: createPostUrl()
+                        )
+                        .frame(width: .zero, height: .zero)
+                    }
                     Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                         .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
                 }
@@ -87,6 +100,15 @@ struct ActivePostToolbarView: View {
                 }
             }
         })
+    }
+
+    private func createPostUrl() -> [Any] {
+        guard let postId = activePost.postId else { return [] }
+        guard let urlString = activePost.slug != nil ?
+                "\(model.account.server)/\((activePost.collectionAlias)!)/\((activePost.slug)!)" :
+                "\(model.account.server)/\((postId))" else { return [] }
+        guard let data = URL(string: urlString) else { return [] }
+        return [data as NSURL]
     }
 
     private func publishPost(_ post: WFAPost) {
