@@ -157,6 +157,7 @@ final class CustomTextView: NSView {
         )
         textView.minSize = NSSize(width: 0, height: contentSize.height)
         textView.textColor = NSColor.labelColor
+        textView.allowsUndo = true
 
         return textView
     }()
