@@ -13,7 +13,7 @@ struct ActivePostToolbarView: View {
                     .help("Copy the post's URL to your Mac's pasteboard.")
                 Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                     .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
-                    .help("Publish the post to the web. You must be logged in to do this.")
+                    .help("Publish the post to the web.\(model.account.isLoggedIn ? "" : "You must be logged in to do this.")") // swiftlint:disable:this line_length
             }
         }
     }
