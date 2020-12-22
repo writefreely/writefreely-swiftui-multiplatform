@@ -20,6 +20,8 @@ struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel()
 
     #if os(macOS)
+    // swiftlint:disable:next weak_delegate
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var selectedTab = 0
     #endif
 
