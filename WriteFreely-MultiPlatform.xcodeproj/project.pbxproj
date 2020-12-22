@@ -51,6 +51,7 @@
 		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		17681E412519410E00D394AE /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17681E402519410E00D394AE /* UINavigationController+Appearance.swift */; };
 		1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1780F6EE25895EDB00FE45FF /* PostCommands.swift */; };
+		17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17A4FED925924AF70037E96B /* Sparkle */; };
 		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
@@ -204,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17DF32C324C87D8D00BCE2E3 /* WriteFreely in Frameworks */,
+				17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +534,7 @@
 			name = "WriteFreely-MultiPlatform (macOS)";
 			packageProductDependencies = (
 				17DF32C224C87D8D00BCE2E3 /* WriteFreely */,
+				17A4FED925924AF70037E96B /* Sparkle */,
 			);
 			productName = "WriteFreely-MultiPlatform (macOS)";
 			productReference = 17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */;
@@ -609,6 +612,7 @@
 			mainGroup = 17DF327B24C87D3300BCE2E3;
 			packageReferences = (
 				17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */,
+				17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 17DF328924C87D3500BCE2E3 /* Products */;
 			projectDirPath = "";
@@ -1176,6 +1180,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/writefreely/Sparkle";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:writeas/writefreely-swift.git";
@@ -1187,6 +1199,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		17A4FED925924AF70037E96B /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
 		17DF32BF24C87D7B00BCE2E3 /* WriteFreely */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */;
