@@ -1,7 +1,7 @@
 import SwiftUI
 import Sparkle
 
-private enum AppcastFeedUrl: String {
+enum AppcastFeedUrl: String {
     case release = "https://files.writefreely.org/apps/mac/appcast.xml"
     case beta = "https://files.writefreely.org/apps/mac/appcast-beta.xml"
 }
