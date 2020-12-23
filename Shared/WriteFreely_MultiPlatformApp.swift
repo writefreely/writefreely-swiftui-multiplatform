@@ -47,7 +47,6 @@ struct WriteFreely_MultiPlatformApp: App {
             #if os(macOS)
             CommandGroup(after: .appInfo, addition: {
                 Button("Check For Updates") {
-                    print("Checking for updates!")
                     SUUpdater.shared()?.checkForUpdates(self)
                 }
             })
@@ -97,6 +96,12 @@ struct WriteFreely_MultiPlatformApp: App {
                         Text("Preferences")
                     }
                     .tag(1)
+                MacUpdatesView()
+                    .tabItem {
+                        Image(systemName: "arrow.down.circle")
+                        Text("Updates")
+                    }
+                    .tag(2)
             }
             .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
             .padding()

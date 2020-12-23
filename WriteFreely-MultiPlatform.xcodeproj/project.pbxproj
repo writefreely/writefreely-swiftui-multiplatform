@@ -20,6 +20,7 @@
 		17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
+		172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172C492D2593981900E20ADF /* MacUpdatesView.swift */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
 		17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17466625256C0D0600629997 /* MacEditorTextView.swift */; };
@@ -127,6 +128,7 @@
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
 		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
+		172C492D2593981900E20ADF /* MacUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesView.swift; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		17466625256C0D0600629997 /* MacEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorTextView.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			children = (
 				17A5388724DDA31F00DEFF9A /* MacAccountView.swift */,
 				1753F6AB24E431CC00309365 /* MacPreferencesView.swift */,
+				172C492D2593981900E20ADF /* MacUpdatesView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				17120DAA24E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
+				172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */,
 				17479F152583D8E40072B7FB /* PostEditorSharingPicker.swift in Sources */,
 				17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
