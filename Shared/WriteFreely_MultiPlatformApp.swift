@@ -1,5 +1,9 @@
 import SwiftUI
 
+#if os(macOS)
+import Sparkle
+#endif
+
 @main
 struct CheckForDebugModifier {
     static func main() {
@@ -40,6 +44,14 @@ struct WriteFreely_MultiPlatformApp: App {
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
         .commands {
+            #if os(macOS)
+            CommandGroup(after: .appInfo, addition: {
+                Button("Check For Updates") {
+                    print("Checking for updates!")
+                    SUUpdater.shared()?.checkForUpdates(self)
+                }
+            })
+            #endif
             CommandGroup(replacing: .newItem, addition: {
                 Button("New Post") {
                     createNewLocalPost()
