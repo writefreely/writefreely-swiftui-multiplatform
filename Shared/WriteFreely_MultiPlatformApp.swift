@@ -103,7 +103,7 @@ struct WriteFreely_MultiPlatformApp: App {
                     }
                     .tag(2)
             }
-            .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
+            .frame(minWidth: 500, maxWidth: 500, minHeight: 200)
             .padding()
 //            .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }

@@ -1,14 +1,19 @@
 import SwiftUI
 import Sparkle
 
+private enum AppcastFeedUrl: String {
+    case release = "https://files.writefreely.org/apps/mac/appcast.xml"
+    case beta = "https://files.writefreely.org/apps/mac/appcast-beta.xml"
+}
+
 struct MacUpdatesView: View {
-    @AppStorage("downloadUpdatesAutomatically") var downloadUpdatesAutomatically: Bool = false
+    @AppStorage("automaticallyChecksForUpdates") var automaticallyChecksForUpdates: Bool = false
     @AppStorage("subscribeToBetaUpdates") var subscribeToBetaUpdates: Bool = false
     @State private var lastUpdateCheck: Date?
 
     private let betaWarningString = """
-Choose release versions to update to the next stable version of WriteFreely. \
-Test versions may have bugs that can cause crashes and data loss.
+To get brand new features before each official release, choose "Test versions." Note that test versions may have bugs \
+that can cause crashes and data loss.
 """
 
     static let lastUpdateFormatter: DateFormatter = {
@@ -20,49 +25,63 @@ Test versions may have bugs that can cause crashes and data loss.
     }()
 
     var body: some View {
-        VStack(spacing: 32) {
-            VStack {
-                Text(betaWarningString)
-                    .frame(width: 400)
-                    .foregroundColor(Color(NSColor.placeholderTextColor))
-
-                Picker(selection: $subscribeToBetaUpdates, label: Text("Download:"), content: {
-                    Text("Release versions").tag(false)
-                    Text("Test versions").tag(true)
-                })
-                .pickerStyle(RadioGroupPickerStyle())
-            }
-
-            Button(action: {
-                SUUpdater.shared()?.checkForUpdates(self)
-                DispatchQueue.main.async {
-                    lastUpdateCheck = SUUpdater.shared()?.lastUpdateCheckDate
-                }
-            }, label: {
-                Text("Check For Updates")
+        VStack(spacing: 24) {
+            Toggle(isOn: $automaticallyChecksForUpdates, label: {
+                Text("Check for updates automatically")
             })
 
             VStack {
-                Toggle(isOn: $downloadUpdatesAutomatically, label: {
-                    Text("Check for updates automatically")
+                Button(action: {
+                    SUUpdater.shared()?.checkForUpdates(self)
+                    DispatchQueue.main.async {
+                        lastUpdateCheck = SUUpdater.shared()?.lastUpdateCheckDate
+                    }
+                }, label: {
+                    Text("Check For Updates")
                 })
 
-            HStack {
-                Text("Last check for updates:")
-                    .font(.caption)
-                if let lastUpdateCheck = lastUpdateCheck {
-                    Text(lastUpdateCheck, formatter: Self.lastUpdateFormatter)
+                HStack {
+                    Text("Last checked:")
                         .font(.caption)
-                } else {
-                    Text("Never")
-                        .font(.caption)
+                    if let lastUpdateCheck = lastUpdateCheck {
+                        Text(lastUpdateCheck, formatter: Self.lastUpdateFormatter)
+                            .font(.caption)
+                    } else {
+                        Text("Never")
+                            .font(.caption)
+                    }
                 }
             }
+
+            VStack(spacing: 16) {
+                HStack(alignment: .top) {
+                    Text("Download:")
+                    Picker(selection: $subscribeToBetaUpdates, label: Text("Download:"), content: {
+                        Text("Release versions").tag(false)
+                        Text("Test versions").tag(true)
+                    })
+                    .pickerStyle(RadioGroupPickerStyle())
+                    .labelsHidden()
+                }
+
+                Text(betaWarningString)
+                    .frame(width: 350)
+                    .foregroundColor(.secondary)
             }
         }
         .padding()
         .onAppear {
             lastUpdateCheck = SUUpdater.shared()?.lastUpdateCheckDate
+        }
+        .onChange(of: automaticallyChecksForUpdates) { value in
+            SUUpdater.shared()?.automaticallyChecksForUpdates = value
+        }
+        .onChange(of: subscribeToBetaUpdates) { value in
+            if value {
+                SUUpdater.shared()?.feedURL = URL(string: AppcastFeedUrl.beta.rawValue)
+            } else {
+                SUUpdater.shared()?.feedURL = URL(string: AppcastFeedUrl.release.rawValue)
+            }
         }
     }
 }
