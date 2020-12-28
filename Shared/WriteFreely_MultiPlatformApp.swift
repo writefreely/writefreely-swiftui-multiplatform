@@ -55,7 +55,9 @@ struct WriteFreely_MultiPlatformApp: App {
                 .keyboardShortcut("r", modifiers: [.command])
             }
             SidebarCommands()
+            #if os(macOS)
             PostCommands(model: model)
+            #endif
             CommandGroup(after: .help) {
                 Button("Visit Support Forum") {
                     #if os(macOS)
