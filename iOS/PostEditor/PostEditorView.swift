@@ -80,6 +80,8 @@ struct PostEditorView: View {
                         }, label: {
                             Label("Publish…", systemImage: "paperplane")
                         })
+                        .accessibilityHint(Text("Choose the blog you want to publish this post to"))
+                        .disabled(post.body.count == 0)
                     } else {
                         Button(action: {
                             if model.account.isLoggedIn {
@@ -97,6 +99,7 @@ struct PostEditorView: View {
                     }, label: {
                         Label("Share", systemImage: "square.and.arrow.up")
                     })
+                    .accessibilityHint(Text("Open the system share sheet to share a link to this post"))
                     .disabled(post.postId == nil)
 //                    Button(action: {
 //                        print("Tapped 'Delete...' button")
@@ -130,6 +133,7 @@ struct PostEditorView: View {
                     .onTapGesture {
                         hideKeyboard()
                     }
+                    .disabled(post.body.count == 0)
                 }
             }
         }
