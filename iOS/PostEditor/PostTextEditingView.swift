@@ -49,6 +49,8 @@ struct PostTextEditingView: View {
                     isFirstResponder: $titleIsFirstResponder,
                     lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
                 )
+                .accessibilityLabel(Text("Title (optional)"))
+                .accessibilityHint(Text("Add or edit the title for your post; use the Return key to skip to the body"))
                 .frame(height: titleFieldHeight)
                 .onChange(of: post.title) { _ in
                     if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
@@ -73,6 +75,8 @@ struct PostTextEditingView: View {
                     isFirstResponder: $bodyIsFirstResponder,
                     lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
                 )
+                .accessibilityLabel(Text("Body"))
+                .accessibilityHint(Text("Add or edit the body of your post"))
                 .onChange(of: post.body) { _ in
                     if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                         post.status = PostStatus.edited.rawValue
