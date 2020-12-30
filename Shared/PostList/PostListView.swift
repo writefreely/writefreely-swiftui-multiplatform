@@ -49,11 +49,17 @@ struct PostListView: View {
                                 self.model.selectedPost = managedPost
                             }
                         }, label: {
-                            Image(systemName: "square.and.pencil")
-                                .scaleEffect(1.25)          // These modifiers compensate for the resizing
-                                .padding(.vertical, 12)     // done to the Image (and the button tap target)
-                                .padding(.leading, 12)      // by the SwiftUI layout system from adding a
-                                .padding(.trailing, 8)      // Spacer in this ZStack (FB8956392).
+                            ZStack {
+                                Image("does.not.exist")
+                                    .accessibilityHidden(true)
+                                Image(systemName: "square.and.pencil")
+                                    .accessibilityHidden(true)
+                                    .imageScale(.large)         // These modifiers compensate for the resizing
+                                    .padding(.vertical, 12)     // done to the Image (and the button tap target)
+                                    .padding(.leading, 12)      // by the SwiftUI layout system from adding a
+                                    .padding(.trailing, 8)      // Spacer in this ZStack (FB8956392).
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                         })
                         .accessibilityLabel(Text("Compose"))
                         .accessibilityHint(Text("Compose a new local draft"))
@@ -65,6 +71,10 @@ struct PostListView: View {
                             model.isPresentingSettingsView = true
                         }, label: {
                             Image(systemName: "gear")
+                                .imageScale(.large)
+                                .padding(.vertical, 12)
+                                .padding(.leading, 8)
+                                .padding(.trailing, 12)
                         })
                         .accessibilityLabel(Text("Settings"))
                         .accessibilityHint(Text("Open the Settings sheet"))
@@ -82,6 +92,10 @@ struct PostListView: View {
                                 }
                             }, label: {
                                 Image(systemName: "arrow.clockwise")
+                                    .imageScale(.large)
+                                    .padding(.vertical, 12)
+                                    .padding(.leading, 12)
+                                    .padding(.trailing, 8)
                             })
                             .accessibilityLabel(Text("Refresh Posts"))
                             .accessibilityHint(Text("Fetch changes from the server"))
