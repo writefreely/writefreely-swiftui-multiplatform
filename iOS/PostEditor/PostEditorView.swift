@@ -117,8 +117,19 @@ struct PostEditorView: View {
                         }
                     }
                 }, label: {
-                    Image(systemName: "ellipsis.circle")
+                    ZStack {
+                        Image("does.not.exist")
+                            .accessibilityHidden(true)
+                        Image(systemName: "ellipsis.circle")
+                            .imageScale(.large)
+                            .accessibilityHidden(true)
+                    }
                 })
+                    .accessibilityLabel(Text("Menu"))
+                    .accessibilityHint(Text("Opens a context menu to publish, share, or move the post"))
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
                 }
             }
         }
