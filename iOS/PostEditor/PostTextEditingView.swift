@@ -41,6 +41,7 @@ struct PostTextEditingView: View {
                         .foregroundColor(Color(UIColor.placeholderText))
                         .padding(.horizontal, 4)
                         .padding(.vertical, 8)
+                        .accessibilityHidden(true)
                 }
                 PostTitleTextView(
                     text: $post.title,
@@ -68,6 +69,7 @@ struct PostTextEditingView: View {
                         .foregroundColor(Color(UIColor.placeholderText))
                         .padding(.horizontal, 4)
                         .padding(.vertical, 8)
+                        .accessibilityHidden(true)
                 }
                 PostBodyTextView(
                     text: $post.body,
