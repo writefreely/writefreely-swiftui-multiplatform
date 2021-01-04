@@ -4,6 +4,13 @@ struct PostListBottomBarView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Binding var postCount: Int
 
+    private var frameHeight: CGFloat {
+        var height: CGFloat = 50
+        let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
+        height += bottom
+        return height
+    }
+
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -33,7 +40,7 @@ struct PostListBottomBarView: View {
             .padding()
             Spacer()
         }
-        .frame(height: 100)
+        .frame(height: frameHeight)
         .background(Color(UIColor.systemGray5))
         .overlay(Divider(), alignment: .top)
     }
