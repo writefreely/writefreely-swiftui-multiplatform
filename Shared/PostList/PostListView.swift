@@ -9,6 +9,15 @@ struct PostListView: View {
     @State var showAllPosts: Bool = false
     @State private var postCount: Int = 0
 
+    #if os(iOS)
+    private var frameHeight: CGFloat {
+        var height: CGFloat = 50
+        let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
+        height += bottom
+        return height
+    }
+    #endif
+
     var body: some View {
         #if os(iOS)
         ZStack(alignment: .bottom) {
@@ -49,7 +58,37 @@ struct PostListView: View {
                         })
                     }
                 }
-            PostListBottomBarView(postCount: $postCount)
+            VStack {
+                HStack(spacing: 0) {
+                    Button(action: {
+                        model.isPresentingSettingsView = true
+                    }, label: {
+                        Image(systemName: "gear")
+                    })
+                    Spacer()
+                    Text(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    if model.isProcessingRequest {
+                        ProgressView()
+                    } else {
+                        Button(action: {
+                            DispatchQueue.main.async {
+                                model.fetchUserCollections()
+                                model.fetchUserPosts()
+                            }
+                        }, label: {
+                            Image(systemName: "arrow.clockwise")
+                        })
+                        .disabled(!model.account.isLoggedIn)
+                    }
+                }
+                .padding()
+                Spacer()
+            }
+            .frame(height: frameHeight)
+            .background(Color(UIColor.systemGray5))
+            .overlay(Divider(), alignment: .top)
         }
         .ignoresSafeArea()
         #else //if os(macOS)
