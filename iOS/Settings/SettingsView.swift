@@ -13,7 +13,7 @@ struct SettingsView: View {
                 Section(header: Text("Appearance")) {
                     PreferencesView(preferences: model.preferences)
                 }
-                Section(header: Text("Support Links")) {
+                Section(header: Text("External Links")) {
                     HStack {
                         Spacer()
                         Link("View the Guide", destination: model.howToURL)
@@ -22,6 +22,11 @@ struct SettingsView: View {
                     HStack {
                         Spacer()
                         Link("Visit the Help Forum", destination: model.helpURL)
+                        Spacer()
+                    }
+                    HStack {
+                        Spacer()
+                        Link("Write a Review on the App Store", destination: model.reviewURL)
                         Spacer()
                     }
                 }
