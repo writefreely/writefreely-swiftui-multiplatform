@@ -11,73 +11,47 @@ struct PostListView: View {
 
     var body: some View {
         #if os(iOS)
-        GeometryReader { geometry in
+        ZStack(alignment: .bottom) {
             PostListFilteredView(collection: selectedCollection, showAllPosts: showAllPosts, postCount: $postCount)
-            .navigationTitle(
-                showAllPosts ? "All Posts" : selectedCollection?.title ?? (
-                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                .navigationTitle(
+                    showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                        model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                    )
                 )
-            )
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: {
-                        let managedPost = WFAPost(context: self.managedObjectContext)
-                        managedPost.createdDate = Date()
-                        managedPost.title = ""
-                        managedPost.body = ""
-                        managedPost.status = PostStatus.local.rawValue
-                        managedPost.collectionAlias = nil
-                        switch model.preferences.font {
-                        case 1:
-                            managedPost.appearance = "sans"
-                        case 2:
-                            managedPost.appearance = "wrap"
-                        default:
-                            managedPost.appearance = "serif"
-                        }
-                        if let languageCode = Locale.current.languageCode {
-                            managedPost.language = languageCode
-                            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
-                        }
-                        withAnimation {
-                            self.selectedCollection = nil
-                            self.showAllPosts = false
-                            self.model.selectedPost = managedPost
-                        }
-                    }, label: {
-                        Image(systemName: "square.and.pencil")
-                    })
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    HStack {
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
                         Button(action: {
-                            model.isPresentingSettingsView = true
+                            let managedPost = WFAPost(context: self.managedObjectContext)
+                            managedPost.createdDate = Date()
+                            managedPost.title = ""
+                            managedPost.body = ""
+                            managedPost.status = PostStatus.local.rawValue
+                            managedPost.collectionAlias = nil
+                            switch model.preferences.font {
+                            case 1:
+                                managedPost.appearance = "sans"
+                            case 2:
+                                managedPost.appearance = "wrap"
+                            default:
+                                managedPost.appearance = "serif"
+                            }
+                            if let languageCode = Locale.current.languageCode {
+                                managedPost.language = languageCode
+                                managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+                            }
+                            withAnimation {
+                                self.selectedCollection = nil
+                                self.showAllPosts = false
+                                self.model.selectedPost = managedPost
+                            }
                         }, label: {
-                            Image(systemName: "gear")
+                            Image(systemName: "square.and.pencil")
                         })
-                        Spacer()
-                        Text(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
-                            .foregroundColor(.secondary)
-                        Spacer()
-                        if model.isProcessingRequest {
-                            ProgressView()
-                        } else {
-                            Button(action: {
-                                DispatchQueue.main.async {
-                                    model.fetchUserCollections()
-                                    model.fetchUserPosts()
-                                }
-                            }, label: {
-                                Image(systemName: "arrow.clockwise")
-                            })
-                            .disabled(!model.account.isLoggedIn)
-                        }
                     }
-                    .padding()
-                    .frame(width: geometry.size.width)
                 }
-            }
+            PostListBottomBarView(postCount: $postCount)
         }
+        .ignoresSafeArea()
         #else //if os(macOS)
         PostListFilteredView(
             collection: selectedCollection,

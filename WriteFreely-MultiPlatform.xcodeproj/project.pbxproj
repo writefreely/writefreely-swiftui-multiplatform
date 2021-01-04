@@ -79,6 +79,7 @@
 		17D4F39F2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */; };
 		17D4F3A52514F1E900517CE6 /* Hack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */; };
 		17D4F3A62514F1E900517CE6 /* Hack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */; };
+		17DB9C7D25A3582F0030ECC0 /* PostListBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB9C7C25A3582F0030ECC0 /* PostListBottomBarView.swift */; };
 		17DF329D24C87D3500BCE2E3 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF329C24C87D3500BCE2E3 /* Tests_iOS.swift */; };
 		17DF32A824C87D3500BCE2E3 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF32A724C87D3500BCE2E3 /* Tests_macOS.swift */; };
 		17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF328124C87D3300BCE2E3 /* WriteFreely_MultiPlatformApp.swift */; };
@@ -164,6 +165,7 @@
 		17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoraGX.ttf; sourceTree = "<group>"; };
 		17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hack-Regular.ttf"; sourceTree = "<group>"; };
+		17DB9C7C25A3582F0030ECC0 /* PostListBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListBottomBarView.swift; sourceTree = "<group>"; };
 		17DF328124C87D3300BCE2E3 /* WriteFreely_MultiPlatformApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFreely_MultiPlatformApp.swift; sourceTree = "<group>"; };
 		17DF328224C87D3300BCE2E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		17DF328324C87D3500BCE2E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -343,6 +345,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		17DB9C7B25A358000030ECC0 /* PostList */ = {
+			isa = PBXGroup;
+			children = (
+				17DB9C7C25A3582F0030ECC0 /* PostListBottomBarView.swift */,
+			);
+			path = PostList;
+			sourceTree = "<group>";
+		};
 		17DF327B24C87D3300BCE2E3 = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +409,7 @@
 				17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */,
 				17681E3F251940F200D394AE /* Extensions */,
 				17A67CAB251A5D7E002F163D /* PostEditor */,
+				17DB9C7B25A358000030ECC0 /* PostList */,
 				17120DA624E19CE2002B9F6C /* Settings */,
 			);
 			path = iOS;
@@ -711,6 +722,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17DB9C7D25A3582F0030ECC0 /* PostListBottomBarView.swift in Sources */,
 				17DF32AC24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */,
 				17C42E622507D8E600072984 /* PostStatus.swift in Sources */,
