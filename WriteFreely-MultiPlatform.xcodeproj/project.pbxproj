@@ -160,6 +160,7 @@
 		17AD0A6325489E900057D763 /* PostBodyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBodyTextView.swift; sourceTree = "<group>"; };
 		17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B5103A2515448D00E9631F /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		17B68D4F25A4FED2005ED37C /* Sparkle-License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Sparkle-License.txt"; sourceTree = "<group>"; };
 		17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17BC617825715068003363CA /* ActivePostToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePostToolbarView.swift; sourceTree = "<group>"; };
@@ -495,6 +496,7 @@
 		17DFDE83251D309400A25F31 /* Licenses */ = {
 			isa = PBXGroup;
 			children = (
+				17B68D4F25A4FED2005ED37C /* Sparkle-License.txt */,
 				17DFDE84251D309400A25F31 /* Hack-License.txt */,
 				17DFDE85251D309400A25F31 /* Lora-Cyrillic-OFL.txt */,
 				17DFDE86251D309400A25F31 /* OpenSans-License.txt */,
