@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SUFeedURL</key>
-	<string>https://files.writefreely.org/apps/mac/appcast.xml</string>
-	<key>SUPublicEDKey</key>
-	<string>xLenuurDaQb2/dj2ScylLmJx0gSnBmacUsOAgUjErUc=</string>
 	<key>ATSApplicationFontsPath</key>
 	<string>.</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -32,5 +28,9 @@
 	<string>public.app-category.social-networking</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>SUFeedURL</key>
+	<string>https://writefreely-files.s3.amazonaws.com/apps/mac/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>xLenuurDaQb2/dj2ScylLmJx0gSnBmacUsOAgUjErUc=</string>
 </dict>
 </plist>

@@ -2,8 +2,8 @@ import SwiftUI
 import Sparkle
 
 enum AppcastFeedUrl: String {
-    case release = "https://files.writefreely.org/apps/mac/appcast.xml"
-    case beta = "https://files.writefreely.org/apps/mac/appcast-beta.xml"
+    case release = "https://writefreely-files.s3.amazonaws.com/apps/mac/appcast.xml"
+    case beta = "https://writefreely-files.s3.amazonaws.com/apps/mac/appcast-beta.xml"
 }
 
 struct MacUpdatesView: View {
