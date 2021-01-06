@@ -6,7 +6,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             #if os(macOS)
-            SidebarView()
+            CollectionListView()
                 .toolbar {
                     Button(
                         action: {
@@ -49,12 +49,12 @@ struct ContentView: View {
                     .help("Create a new local draft.")
                 }
             #else
-            SidebarView()
+            CollectionListView()
             #endif
 
             #if os(macOS)
             ZStack {
-                PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
+                PostListView(selectedCollection: nil, showAllPosts: false) //model.account.isLoggedIn)
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)
