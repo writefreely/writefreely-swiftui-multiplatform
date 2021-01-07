@@ -20,6 +20,7 @@
 		17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
+		172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172C492D2593981900E20ADF /* MacUpdatesView.swift */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
 		17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17466625256C0D0600629997 /* MacEditorTextView.swift */; };
@@ -51,6 +52,8 @@
 		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		17681E412519410E00D394AE /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17681E402519410E00D394AE /* UINavigationController+Appearance.swift */; };
 		1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1780F6EE25895EDB00FE45FF /* PostCommands.swift */; };
+		17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17A4FED925924AF70037E96B /* Sparkle */; };
+		17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4FEEC25927E730037E96B /* AppDelegate.swift */; };
 		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
 		17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
@@ -125,6 +128,7 @@
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
 		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
+		172C492D2593981900E20ADF /* MacUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesView.swift; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		17466625256C0D0600629997 /* MacEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorTextView.swift; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		17681E402519410E00D394AE /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
 		1780F6EE25895EDB00FE45FF /* PostCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommands.swift; sourceTree = "<group>"; };
+		17A4FEDF25924E810037E96B /* MacSoftwareUpdater.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MacSoftwareUpdater.md; sourceTree = "<group>"; };
+		17A4FEEC25927E730037E96B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17A5388724DDA31F00DEFF9A /* MacAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAccountView.swift; sourceTree = "<group>"; };
 		17A5388B24DDC83F00DEFF9A /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		17A5388D24DDEC7400DEFF9A /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 		17AD0A6325489E900057D763 /* PostBodyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBodyTextView.swift; sourceTree = "<group>"; };
 		17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B5103A2515448D00E9631F /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		17B68D4F25A4FED2005ED37C /* Sparkle-License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Sparkle-License.txt"; sourceTree = "<group>"; };
 		17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFAPost+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17BC617825715068003363CA /* ActivePostToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePostToolbarView.swift; sourceTree = "<group>"; };
@@ -204,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17DF32C324C87D8D00BCE2E3 /* WriteFreely in Frameworks */,
+				17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */,
+				17A4FEDF25924E810037E96B /* MacSoftwareUpdater.md */,
 			);
 			path = Technotes;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 			children = (
 				17A5388724DDA31F00DEFF9A /* MacAccountView.swift */,
 				1753F6AB24E431CC00309365 /* MacPreferencesView.swift */,
+				172C492D2593981900E20ADF /* MacUpdatesView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -409,6 +419,7 @@
 			children = (
 				17DF329224C87D3500BCE2E3 /* Info.plist */,
 				17DF329324C87D3500BCE2E3 /* macOS.entitlements */,
+				17A4FEEC25927E730037E96B /* AppDelegate.swift */,
 				17BC617725715042003363CA /* Navigation */,
 				17A67CAC251A5D8D002F163D /* PostEditor */,
 				17A5388924DDA50500DEFF9A /* Settings */,
@@ -485,6 +496,7 @@
 		17DFDE83251D309400A25F31 /* Licenses */ = {
 			isa = PBXGroup;
 			children = (
+				17B68D4F25A4FED2005ED37C /* Sparkle-License.txt */,
 				17DFDE84251D309400A25F31 /* Hack-License.txt */,
 				17DFDE85251D309400A25F31 /* Lora-Cyrillic-OFL.txt */,
 				17DFDE86251D309400A25F31 /* OpenSans-License.txt */,
@@ -532,6 +544,7 @@
 			name = "WriteFreely-MultiPlatform (macOS)";
 			packageProductDependencies = (
 				17DF32C224C87D8D00BCE2E3 /* WriteFreely */,
+				17A4FED925924AF70037E96B /* Sparkle */,
 			);
 			productName = "WriteFreely-MultiPlatform (macOS)";
 			productReference = 17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */;
@@ -609,6 +622,7 @@
 			mainGroup = 17DF327B24C87D3300BCE2E3;
 			packageReferences = (
 				17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */,
+				17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 17DF328924C87D3500BCE2E3 /* Products */;
 			projectDirPath = "";
@@ -757,10 +771,12 @@
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756DBBB24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
+				17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */,
 				174D313324EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,
 				17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				17120DAA24E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
+				172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */,
 				17479F152583D8E40072B7FB /* PostEditorSharingPicker.swift in Sources */,
 				17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
@@ -1176,6 +1192,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/writefreely/Sparkle";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:writeas/writefreely-swift.git";
@@ -1187,6 +1211,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		17A4FED925924AF70037E96B /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
 		17DF32BF24C87D7B00BCE2E3 /* WriteFreely */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */;
