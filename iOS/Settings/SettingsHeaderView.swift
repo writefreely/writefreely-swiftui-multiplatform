@@ -15,6 +15,8 @@ struct SettingsHeaderView: View {
                 }, label: {
                     Image(systemName: "xmark.circle")
                 })
+                .accessibilityLabel(Text("Close"))
+                .accessibilityHint(Text("Dismiss the Settings sheet"))
             }
             Text("WriteFreely v\(Bundle.main.appMarketingVersion) (build \(Bundle.main.appBuildVersion))")
                 .font(.caption)

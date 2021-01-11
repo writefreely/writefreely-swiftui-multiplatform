@@ -1,5 +1,9 @@
 import SwiftUI
 
+#if os(macOS)
+import Sparkle
+#endif
+
 @main
 struct CheckForDebugModifier {
     static func main() {
@@ -20,6 +24,8 @@ struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel()
 
     #if os(macOS)
+    // swiftlint:disable:next weak_delegate
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var selectedTab = 0
     #endif
 
@@ -38,6 +44,13 @@ struct WriteFreely_MultiPlatformApp: App {
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
         .commands {
+            #if os(macOS)
+            CommandGroup(after: .appInfo, addition: {
+                Button("Check For Updates") {
+                    SUUpdater.shared()?.checkForUpdates(self)
+                }
+            })
+            #endif
             CommandGroup(replacing: .newItem, addition: {
                 Button("New Post") {
                     createNewLocalPost()
@@ -85,8 +98,14 @@ struct WriteFreely_MultiPlatformApp: App {
                         Text("Preferences")
                     }
                     .tag(1)
+                MacUpdatesView()
+                    .tabItem {
+                        Image(systemName: "arrow.down.circle")
+                        Text("Updates")
+                    }
+                    .tag(2)
             }
-            .frame(minWidth: 300, maxWidth: 300, minHeight: 200, maxHeight: 200)
+            .frame(minWidth: 500, maxWidth: 500, minHeight: 200)
             .padding()
 //            .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }

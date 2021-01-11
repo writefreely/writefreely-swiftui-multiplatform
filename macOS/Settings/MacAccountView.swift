@@ -5,9 +5,7 @@ struct MacAccountView: View {
 
     var body: some View {
             Form {
-                Section(header: Text("Login Details")) {
                     AccountView()
-                }
             }
     }
 }
