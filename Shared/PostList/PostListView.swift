@@ -82,6 +82,8 @@ struct PostListView: View {
                         model.isPresentingSettingsView = true
                     }, label: {
                         Image(systemName: "gear")
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
                     })
                     .accessibilityLabel(Text("Settings"))
                     .accessibilityHint(Text("Open the Settings sheet"))
@@ -91,6 +93,8 @@ struct PostListView: View {
                     Spacer()
                     if model.isProcessingRequest {
                         ProgressView()
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
                     } else {
                         Button(action: {
                             DispatchQueue.main.async {
@@ -99,13 +103,16 @@ struct PostListView: View {
                             }
                         }, label: {
                             Image(systemName: "arrow.clockwise")
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 8)
                         })
                         .accessibilityLabel(Text("Refresh Posts"))
                         .accessibilityHint(Text("Fetch changes from the server"))
                         .disabled(!model.account.isLoggedIn)
                     }
                 }
-                .padding()
+                .padding(.top, 8)
+                .padding(.horizontal, 8)
                 Spacer()
             }
             .frame(height: frameHeight)
