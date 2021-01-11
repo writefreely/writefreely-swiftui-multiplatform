@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- [iOS] A link has been added to the the Settings sheet to review the app on the App Store.
+
+### Fixed
+
+- [iOS] Multiple accessibility issues with VoiceOver text were fixed.
+- [iOS] Navigating through the app now animates properly.
+- [iOS] Fixed a bug on iPhone where leaving the post editor would sometimes send you right back to the editor. 
+
 ## [1.0.1-ios] - 2020-11-18
 
 This version rolls up the iOS beta releases for publishing on the App Store. From this point forward, tags will use the `-ios` and `-mac`
@@ -176,6 +188,7 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1-ios...HEAD
 [1.0.1-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0...v1.0.1-ios
 [1.0.1b3-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1b2-ios...v1.0.1b3-ios
 [1.0.1b2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1b1-ios...v1.0.1b2-ios
