@@ -29,6 +29,7 @@ class WriteFreelyModel: ObservableObject {
     // swiftlint:disable line_length
     let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
     let howToURL = URL(string: "https://discuss.write.as/t/using-the-writefreely-ios-app/1946")!
+    let reviewURL = URL(string: "https://apps.apple.com/app/id1531530896?action=write-review")!
     let licensesURL = URL(string: "https://github.com/writeas/writefreely-swiftui-multiplatform/tree/main/Shared/Resources/Licenses")!
     // swiftlint:enable line_length
 
