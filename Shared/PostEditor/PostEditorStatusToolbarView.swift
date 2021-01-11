@@ -20,6 +20,8 @@ struct PostEditorStatusToolbarView: View {
                     }, label: {
                         Image(systemName: "square.and.arrow.down")
                     })
+                    .accessibilityLabel(Text("Update post"))
+                    .accessibilityHint(Text("Replace this post with the server version"))
                 }
                 .padding(.horizontal)
                 .background(Color.primary.opacity(0.1))
@@ -45,6 +47,8 @@ struct PostEditorStatusToolbarView: View {
                     }, label: {
                         Image(systemName: "trash")
                     })
+                    .accessibilityLabel(Text("Delete"))
+                    .accessibilityHint(Text("Delete this post from your Mac"))
                 }
                 .padding(.horizontal)
                 .background(Color.primary.opacity(0.1))
