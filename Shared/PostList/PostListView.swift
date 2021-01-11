@@ -9,104 +9,110 @@ struct PostListView: View {
     @State var showAllPosts: Bool = false
     @State private var postCount: Int = 0
 
+    #if os(iOS)
+    private var frameHeight: CGFloat {
+        var height: CGFloat = 50
+        let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
+        height += bottom
+        return height
+    }
+    #endif
+
     var body: some View {
         #if os(iOS)
-        GeometryReader { geometry in
+        ZStack(alignment: .bottom) {
             PostListFilteredView(collection: selectedCollection, showAllPosts: showAllPosts, postCount: $postCount)
-            .navigationTitle(
-                showAllPosts ? "All Posts" : selectedCollection?.title ?? (
-                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                .navigationTitle(
+                    showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                        model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                    )
                 )
-            )
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    // We have to add a Spacer as a sibling view to the Button in some kind of Stack, so that any a11y
-                    // modifiers are applied as expected: bug report filed as FB8956392.
-                    ZStack {
-                        Spacer()
-                        Button(action: {
-                            let managedPost = WFAPost(context: self.managedObjectContext)
-                            managedPost.createdDate = Date()
-                            managedPost.title = ""
-                            managedPost.body = ""
-                            managedPost.status = PostStatus.local.rawValue
-                            managedPost.collectionAlias = nil
-                            switch model.preferences.font {
-                            case 1:
-                                managedPost.appearance = "sans"
-                            case 2:
-                                managedPost.appearance = "wrap"
-                            default:
-                                managedPost.appearance = "serif"
-                            }
-                            if let languageCode = Locale.current.languageCode {
-                                managedPost.language = languageCode
-                                managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
-                            }
-                            withAnimation {
-                                self.selectedCollection = nil
-                                self.showAllPosts = false
-                                self.model.selectedPost = managedPost
-                            }
-                        }, label: {
-                            ZStack {
-                                Image("does.not.exist")
-                                    .accessibilityHidden(true)
-                                Image(systemName: "square.and.pencil")
-                                    .accessibilityHidden(true)
-                                    .imageScale(.large)         // These modifiers compensate for the resizing
-                                    .padding(.vertical, 12)     // done to the Image (and the button tap target)
-                                    .padding(.leading, 12)      // by the SwiftUI layout system from adding a
-                                    .padding(.trailing, 8)      // Spacer in this ZStack (FB8956392).
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        })
-                        .accessibilityLabel(Text("Compose"))
-                        .accessibilityHint(Text("Compose a new local draft"))
-                    }
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    HStack {
-                        Button(action: {
-                            model.isPresentingSettingsView = true
-                        }, label: {
-                            Image(systemName: "gear")
-                                .imageScale(.large)
-                                .padding(.vertical, 12)
-                                .padding(.leading, 8)
-                                .padding(.trailing, 12)
-                        })
-                        .accessibilityLabel(Text("Settings"))
-                        .accessibilityHint(Text("Open the Settings sheet"))
-                        Spacer()
-                        Text(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
-                            .foregroundColor(.secondary)
-                        Spacer()
-                        if model.isProcessingRequest {
-                            ProgressView()
-                        } else {
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        // We have to add a Spacer as a sibling view to the Button in some kind of Stack, so that any
+                        // a11y modifiers are applied as expected: bug report filed as FB8956392.
+                        ZStack {
+                            Spacer()
                             Button(action: {
-                                DispatchQueue.main.async {
-                                    model.fetchUserCollections()
-                                    model.fetchUserPosts()
+                                let managedPost = WFAPost(context: self.managedObjectContext)
+                                managedPost.createdDate = Date()
+                                managedPost.title = ""
+                                managedPost.body = ""
+                                managedPost.status = PostStatus.local.rawValue
+                                managedPost.collectionAlias = nil
+                                switch model.preferences.font {
+                                case 1:
+                                    managedPost.appearance = "sans"
+                                case 2:
+                                    managedPost.appearance = "wrap"
+                                default:
+                                    managedPost.appearance = "serif"
+                                }
+                                if let languageCode = Locale.current.languageCode {
+                                    managedPost.language = languageCode
+                                    //swiftlint:disable:next line_length
+                                    managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+                                }
+                                withAnimation {
+                                    self.selectedCollection = nil
+                                    self.showAllPosts = false
+                                    self.model.selectedPost = managedPost
                                 }
                             }, label: {
-                                Image(systemName: "arrow.clockwise")
-                                    .imageScale(.large)
-                                    .padding(.vertical, 12)
-                                    .padding(.leading, 12)
-                                    .padding(.trailing, 8)
+                                ZStack {
+                                    Image("does.not.exist")
+                                        .accessibilityHidden(true)
+                                    Image(systemName: "square.and.pencil")
+                                        .accessibilityHidden(true)
+                                        .imageScale(.large)         // These modifiers compensate for the resizing
+                                        .padding(.vertical, 12)     // done to the Image (and the button tap target)
+                                        .padding(.leading, 12)      // by the SwiftUI layout system from adding a
+                                        .padding(.trailing, 8)      // Spacer in this ZStack (FB8956392).
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                             })
-                            .accessibilityLabel(Text("Refresh Posts"))
-                            .accessibilityHint(Text("Fetch changes from the server"))
-                            .disabled(!model.account.isLoggedIn)
+                            .accessibilityLabel(Text("Compose"))
+                            .accessibilityHint(Text("Compose a new local draft"))
                         }
                     }
-                    .padding()
-                    .frame(width: geometry.size.width)
                 }
+            VStack {
+                HStack(spacing: 0) {
+                    Button(action: {
+                        model.isPresentingSettingsView = true
+                    }, label: {
+                        Image(systemName: "gear")
+                    })
+                    .accessibilityLabel(Text("Settings"))
+                    .accessibilityHint(Text("Open the Settings sheet"))
+                    Spacer()
+                    Text(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    if model.isProcessingRequest {
+                        ProgressView()
+                    } else {
+                        Button(action: {
+                            DispatchQueue.main.async {
+                                model.fetchUserCollections()
+                                model.fetchUserPosts()
+                            }
+                        }, label: {
+                            Image(systemName: "arrow.clockwise")
+                        })
+                        .accessibilityLabel(Text("Refresh Posts"))
+                        .accessibilityHint(Text("Fetch changes from the server"))
+                        .disabled(!model.account.isLoggedIn)
+                    }
+                }
+                .padding()
+                Spacer()
             }
+            .frame(height: frameHeight)
+            .background(Color(UIColor.systemGray5))
+            .overlay(Divider(), alignment: .top)
         }
+        .ignoresSafeArea()
         #else //if os(macOS)
         PostListFilteredView(
             collection: selectedCollection,
