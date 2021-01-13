@@ -5,8 +5,6 @@ struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.managedObjectContext) var managedObjectContext
 
-    @State var selectedCollection: WFACollection?
-    @State var showAllPosts: Bool = false
     @State private var postCount: Int = 0
 
     #if os(iOS)
@@ -21,9 +19,13 @@ struct PostListView: View {
     var body: some View {
         #if os(iOS)
         ZStack(alignment: .bottom) {
-            PostListFilteredView(collection: selectedCollection, showAllPosts: showAllPosts, postCount: $postCount)
+            PostListFilteredView(
+                collection: model.selectedCollection,
+                showAllPosts: model.showAllPosts,
+                postCount: $postCount
+            )
                 .navigationTitle(
-                    showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                    model.showAllPosts ? "All Posts" : model.selectedCollection?.title ?? (
                         model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
                     )
                 )
@@ -54,8 +56,8 @@ struct PostListView: View {
                                     managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
                                 }
                                 withAnimation {
-                                    self.selectedCollection = nil
-                                    self.showAllPosts = false
+                                    self.model.showAllPosts = false
+                                    self.model.selectedCollection = nil
                                     self.model.selectedPost = managedPost
                                 }
                             }, label: {
@@ -122,8 +124,8 @@ struct PostListView: View {
         .ignoresSafeArea()
         #else //if os(macOS)
         PostListFilteredView(
-            collection: selectedCollection,
-            showAllPosts: showAllPosts,
+            collection: model.selectedCollection,
+            showAllPosts: model.showAllPosts,
             postCount: $postCount
         )
         .toolbar {
@@ -145,15 +147,8 @@ struct PostListView: View {
                 }
             }
         }
-        .onDisappear {
-            DispatchQueue.main.async {
-                self.model.selectedCollection = nil
-                self.model.showAllPosts = true
-                self.model.selectedPost = nil
-            }
-        }
         .navigationTitle(
-            showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+            model.showAllPosts ? "All Posts" : model.selectedCollection?.title ?? (
                 model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
             )
         )

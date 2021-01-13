@@ -42,6 +42,8 @@ struct ContentView: View {
                         }
                         withAnimation {
                             DispatchQueue.main.async {
+                                self.model.showAllPosts = false
+                                self.model.selectedCollection = nil
                                 self.model.selectedPost = managedPost
                             }
                         }
@@ -54,7 +56,7 @@ struct ContentView: View {
 
             #if os(macOS)
             ZStack {
-                PostListView(selectedCollection: nil, showAllPosts: false) //model.account.isLoggedIn)
+                PostListView()
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)
@@ -63,7 +65,7 @@ struct ContentView: View {
                 }
             }
             #else
-            PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
+            PostListView()
             #endif
 
             Text("Select a post, or create a new local draft.")

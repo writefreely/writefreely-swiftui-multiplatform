@@ -6,21 +6,7 @@ struct PostListFilteredView: View {
     @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
 
-    var showAllPosts: Bool {
-        didSet {
-            model.showAllPosts = showAllPosts
-        }
-    }
-
-    var selectedCollection: WFACollection? {
-        didSet {
-            model.selectedCollection = selectedCollection
-        }
-    }
-
     init(collection: WFACollection?, showAllPosts: Bool, postCount: Binding<Int>) {
-        self.showAllPosts = showAllPosts
-        self.selectedCollection = collection
         if showAllPosts {
             fetchRequest = FetchRequest<WFAPost>(
                 entity: WFAPost.entity(),
@@ -51,20 +37,20 @@ struct PostListFilteredView: View {
                 NavigationLink(
                     destination: PostEditorView(post: post),
                     tag: post,
-                    selection: $model.selectedPost
-                ) {
-                    if showAllPosts {
-                        if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
-                            PostCellView(post: post, collectionName: collection.title)
+                    selection: $model.selectedPost,
+                    label: {
+                        if model.showAllPosts {
+                            if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                                PostCellView(post: post, collectionName: collection.title)
+                            } else {
+                                let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                                PostCellView(post: post, collectionName: collectionName)
+                            }
                         } else {
-                            let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
-                            PostCellView(post: post, collectionName: collectionName)
+                            PostCellView(post: post)
                         }
-                    } else {
-                        PostCellView(post: post)
-                    }
-                }
-                .deleteDisabled(post.status != PostStatus.local.rawValue)
+                    })
+                    .deleteDisabled(post.status != PostStatus.local.rawValue)
             }
             .onDelete(perform: { indexSet in
                 for index in indexSet {
@@ -85,20 +71,20 @@ struct PostListFilteredView: View {
                 NavigationLink(
                     destination: PostEditorView(post: post),
                     tag: post,
-                    selection: $model.selectedPost
-                ) {
-                    if showAllPosts {
-                        if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
-                            PostCellView(post: post, collectionName: collection.title)
+                    selection: $model.selectedPost,
+                    label: {
+                        if model.showAllPosts {
+                            if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                                PostCellView(post: post, collectionName: collection.title)
+                            } else {
+                                let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                                PostCellView(post: post, collectionName: collectionName)
+                            }
                         } else {
-                            let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
-                            PostCellView(post: post, collectionName: collectionName)
+                            PostCellView(post: post)
                         }
-                    } else {
-                        PostCellView(post: post)
-                    }
-                }
-                .deleteDisabled(post.status != PostStatus.local.rawValue)
+                    })
+                    .deleteDisabled(post.status != PostStatus.local.rawValue)
             }
             .onDelete(perform: { indexSet in
                 for index in indexSet {
