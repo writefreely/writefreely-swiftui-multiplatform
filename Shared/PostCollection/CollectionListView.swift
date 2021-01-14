@@ -18,15 +18,16 @@ struct CollectionListView: View {
                             model.selectedCollection == nil && model.showAllPosts
                         }, set: { newValue in
                             if newValue {
-                                self.model.selectedCollection = nil
                                 self.model.showAllPosts = true
+                                self.model.selectedCollection = nil
                             } else {
                                 // No-op
                             }
                         }
-                    )) {
+                    ),
+                    label: {
                     Text("All Posts")
-                }
+                })
                 NavigationLink(
                     destination: PostListView(),
                     isActive: Binding<Bool>(
@@ -34,27 +35,38 @@ struct CollectionListView: View {
                             model.selectedCollection == nil && !model.showAllPosts
                         }, set: { newValue in
                             if newValue {
-                                self.model.selectedCollection = nil
                                 self.model.showAllPosts = false
+                                self.model.selectedCollection = nil
                             } else {
                                 // No-op
                             }
                         }
-                    )) {
+                    ),
+                    label: {
                     Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
-                }
+                })
                 Section(header: Text("Your Blogs")) {
                     ForEach(collections, id: \.alias) { collection in
                         NavigationLink(
-                            collection.title,
                             destination: PostListView(),
-                            tag: collection,
-                            selection: $model.selectedCollection
+                            isActive: Binding<Bool>(
+                                get: { () -> Bool in
+                                    model.selectedCollection == collection && !model.showAllPosts
+                                }, set: { newValue in
+                                    if newValue {
+                                        self.model.showAllPosts = false
+                                        self.model.selectedCollection = collection
+                                    } else {
+                                        // No-op
+                                    }
+                                }
+                            ),
+                            label: { Text(collection.title) }
                         )
                     }
                 }
             } else {
-                NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
+                NavigationLink(destination: PostListView()) {
                     Text("Drafts")
                 }
             }
