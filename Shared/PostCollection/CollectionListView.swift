@@ -2,6 +2,8 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @AppStorage("showAllPostsFlag") var showAllPostsFlag: Bool = false
+    @AppStorage("selectedCollectionURL") var selectedCollectionURL: URL?
 
     @FetchRequest(
         entity: WFACollection.entity(),
@@ -75,6 +77,9 @@ struct CollectionListView: View {
             model.account.isLoggedIn ? "\(URL(string: model.account.server)?.host ?? "WriteFreely")" : "WriteFreely"
         )
         .listStyle(SidebarListStyle())
+        .onChange(of: model.selectedCollection) { collection in
+            self.selectedCollectionURL = collection?.objectID.uriRepresentation()
+        }
     }
 }
 

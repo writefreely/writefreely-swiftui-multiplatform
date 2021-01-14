@@ -22,6 +22,9 @@ struct CheckForDebugModifier {
 
 struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel()
+    @AppStorage("showAllPostsFlag") var showAllPostsFlag: Bool = false
+    @AppStorage("selectedCollectionURL") var selectedCollectionURL: URL?
+    @AppStorage("selectedPostURL") var selectedPostURL: URL?
 
     #if os(macOS)
     // swiftlint:disable:next weak_delegate
@@ -33,10 +36,12 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .onAppear(perform: {
-                    if let lastDraft = model.editor.fetchLastDraftFromUserDefaults() {
-                        self.model.selectedPost = lastDraft
-                    } else {
-                        createNewLocalPost()
+                    DispatchQueue.main.async {
+                        self.model.showAllPosts = showAllPostsFlag
+                        self.model.selectedCollection = fetchSelectedCollectionFromAppStorage()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                        self.model.selectedPost = fetchSelectedPostFromAppStorage()
                     }
                 })
                 .environmentObject(model)
@@ -145,5 +150,25 @@ struct WriteFreely_MultiPlatformApp: App {
                 self.model.selectedPost = managedPost
             }
         }
+    }
+
+    private func fetchSelectedPostFromAppStorage() -> WFAPost? {
+        guard let objectURL = selectedPostURL else { return nil }
+        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
+        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
+        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
+                with: managedObjectID
+        ) as? WFAPost else { return nil }
+        return object
+    }
+
+    private func fetchSelectedCollectionFromAppStorage() -> WFACollection? {
+        guard let objectURL = selectedCollectionURL else { return nil }
+        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
+        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
+        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
+                with: managedObjectID
+        ) as? WFACollection else { return nil }
+        return object
     }
 }

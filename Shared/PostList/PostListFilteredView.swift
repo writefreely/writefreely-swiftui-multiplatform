@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PostListFilteredView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @AppStorage("selectedPostURL") var selectedPostURL: URL?
     @Binding var postCount: Int
     @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
@@ -65,6 +66,9 @@ struct PostListFilteredView: View {
         .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
             self.postCount = value
         })
+        .onChange(of: model.selectedPost) { post in
+            saveSelectedPostURL(post)
+        }
         #else
         List {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
@@ -119,7 +123,14 @@ struct PostListFilteredView: View {
                 model.isPresentingDeleteAlert = true
             }
         })
+        .onChange(of: model.selectedPost) { post in
+            saveSelectedPostURL(post)
+        }
         #endif
+    }
+
+    private func saveSelectedPostURL(_ post: WFAPost?) {
+        self.selectedPostURL = post?.objectID.uriRepresentation()
     }
 
     func delete(_ post: WFAPost) {
