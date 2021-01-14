@@ -114,8 +114,14 @@ struct WriteFreely_MultiPlatformApp: App {
 
     private func createNewLocalPost() {
         withAnimation {
+            // Un-set the currently selected post
             self.model.selectedPost = nil
+
+            // Navigate to the Drafts list
+            self.model.showAllPosts = false
+            self.model.selectedCollection = nil
         }
+        // Create the new-post managed object
         let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
@@ -135,7 +141,9 @@ struct WriteFreely_MultiPlatformApp: App {
             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
         }
         withAnimation {
-            self.model.selectedPost = managedPost
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self.model.selectedPost = managedPost
+            }
         }
     }
 }

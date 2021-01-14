@@ -20,8 +20,14 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         withAnimation {
+                            // Un-set the currently selected post
                             self.model.selectedPost = nil
+
+                            // Navigate to the Drafts list
+                            self.model.showAllPosts = false
+                            self.model.selectedCollection = nil
                         }
+                        // Create the new-post managed object
                         let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
                         managedPost.createdDate = Date()
                         managedPost.title = ""
@@ -40,10 +46,10 @@ struct ContentView: View {
                             managedPost.language = languageCode
                             managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
                         }
+
                         withAnimation {
-                            DispatchQueue.main.async {
-                                self.model.showAllPosts = false
-                                self.model.selectedCollection = nil
+                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                // Load the new post in the editor
                                 self.model.selectedPost = managedPost
                             }
                         }
