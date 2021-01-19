@@ -78,11 +78,25 @@ struct CollectionListView: View {
         )
         .listStyle(SidebarListStyle())
         .onChange(of: model.selectedCollection) { collection in
-            self.selectedCollectionURL = collection?.objectID.uriRepresentation()
+            if collection != fetchSelectedCollectionFromAppStorage() {
+                self.selectedCollectionURL = collection?.objectID.uriRepresentation()
+            }
         }
         .onChange(of: model.showAllPosts) { value in
-            self.showAllPostsFlag = model.showAllPosts
+            if value != showAllPostsFlag {
+                self.showAllPostsFlag = model.showAllPosts
+            }
         }
+    }
+
+    private func fetchSelectedCollectionFromAppStorage() -> WFACollection? {
+        guard let objectURL = selectedCollectionURL else { return nil }
+        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
+        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
+        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
+                with: managedObjectID
+        ) as? WFACollection else { return nil }
+        return object
     }
 }
 
