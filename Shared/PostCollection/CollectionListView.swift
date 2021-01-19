@@ -80,6 +80,9 @@ struct CollectionListView: View {
         .onChange(of: model.selectedCollection) { collection in
             self.selectedCollectionURL = collection?.objectID.uriRepresentation()
         }
+        .onChange(of: model.showAllPosts) { value in
+            self.showAllPostsFlag = model.showAllPosts
+        }
     }
 }
 
