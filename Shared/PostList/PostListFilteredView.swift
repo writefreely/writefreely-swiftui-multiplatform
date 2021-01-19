@@ -33,7 +33,7 @@ struct PostListFilteredView: View {
 
     var body: some View {
         #if os(iOS)
-        List {
+        List(selection: $model.selectedPost) {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
                 NavigationLink(
                     destination: PostEditorView(post: post),
@@ -67,10 +67,12 @@ struct PostListFilteredView: View {
             self.postCount = value
         })
         .onChange(of: model.selectedPost) { post in
-            saveSelectedPostURL(post)
+            if post != fetchSelectedPostFromAppStorage() {
+                saveSelectedPostURL(post)
+            }
         }
         #else
-        List {
+        List(selection: $model.selectedPost) {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
                 NavigationLink(
                     destination: PostEditorView(post: post),
@@ -124,13 +126,25 @@ struct PostListFilteredView: View {
             }
         })
         .onChange(of: model.selectedPost) { post in
-            saveSelectedPostURL(post)
+            if post != fetchSelectedPostFromAppStorage() {
+                saveSelectedPostURL(post)
+            }
         }
         #endif
     }
 
     private func saveSelectedPostURL(_ post: WFAPost?) {
         self.selectedPostURL = post?.objectID.uriRepresentation()
+    }
+
+    private func fetchSelectedPostFromAppStorage() -> WFAPost? {
+        guard let objectURL = selectedPostURL else { return nil }
+        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
+        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
+        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
+                with: managedObjectID
+        ) as? WFAPost else { return nil }
+        return object
     }
 
     func delete(_ post: WFAPost) {

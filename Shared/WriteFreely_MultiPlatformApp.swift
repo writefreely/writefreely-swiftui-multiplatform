@@ -36,10 +36,8 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .onAppear(perform: {
-                    DispatchQueue.main.async {
-                        self.model.showAllPosts = showAllPostsFlag
-                        self.model.selectedCollection = fetchSelectedCollectionFromAppStorage()
-                    }
+                    self.model.showAllPosts = showAllPostsFlag
+                    self.model.selectedCollection = fetchSelectedCollectionFromAppStorage()
                     DispatchQueue.main.asyncAfter(deadline: .now()) {
                         self.model.selectedPost = fetchSelectedPostFromAppStorage()
                     }
