@@ -36,11 +36,11 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .onAppear(perform: {
+                    #if os(macOS)
                     self.model.showAllPosts = showAllPostsFlag
                     self.model.selectedCollection = fetchSelectedCollectionFromAppStorage()
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        self.model.selectedPost = fetchSelectedPostFromAppStorage()
-                    }
+                    self.model.selectedPost = fetchSelectedPostFromAppStorage()
+                    #endif
                 })
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.persistentContainer.viewContext)

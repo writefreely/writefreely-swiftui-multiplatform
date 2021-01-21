@@ -48,7 +48,7 @@ struct CollectionListView: View {
                     Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
                 })
                 Section(header: Text("Your Blogs")) {
-                    ForEach(collections, id: \.alias) { collection in
+                    ForEach(collections, id: \.self) { collection in
                         NavigationLink(
                             destination: PostListView(),
                             isActive: Binding<Bool>(
@@ -77,6 +77,14 @@ struct CollectionListView: View {
             model.account.isLoggedIn ? "\(URL(string: model.account.server)?.host ?? "WriteFreely")" : "WriteFreely"
         )
         .listStyle(SidebarListStyle())
+        .onAppear(perform: {
+            #if os(iOS)
+            DispatchQueue.main.async {
+                self.model.showAllPosts = showAllPostsFlag
+                self.model.selectedCollection = fetchSelectedCollectionFromAppStorage()
+            }
+            #endif
+        })
         .onChange(of: model.selectedCollection) { collection in
             if collection != fetchSelectedCollectionFromAppStorage() {
                 self.selectedCollectionURL = collection?.objectID.uriRepresentation()

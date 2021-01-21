@@ -62,6 +62,9 @@ struct PostListFilteredView: View {
         }
         .onAppear(perform: {
             self.postCount = fetchRequest.wrappedValue.count
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.model.selectedPost = fetchSelectedPostFromAppStorage()
+            }
         })
         .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
             self.postCount = value
