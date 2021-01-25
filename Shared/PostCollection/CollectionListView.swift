@@ -2,8 +2,6 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @AppStorage("showAllPostsFlag") var showAllPostsFlag: Bool = false
-    @AppStorage("selectedCollectionURL") var selectedCollectionURL: URL?
 
     @FetchRequest(
         entity: WFACollection.entity(),
@@ -79,32 +77,29 @@ struct CollectionListView: View {
         .listStyle(SidebarListStyle())
         .onAppear(perform: {
             #if os(iOS)
-            DispatchQueue.main.async {
-                self.model.showAllPosts = showAllPostsFlag
-                self.model.selectedCollection = fetchSelectedCollectionFromAppStorage()
+            if model.editor.showAllPostsFlag {
+                DispatchQueue.main.async {
+                    self.model.selectedCollection = nil
+                    self.model.showAllPosts = true
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
+                    self.model.showAllPosts = false
+                }
             }
             #endif
         })
         .onChange(of: model.selectedCollection) { collection in
-            if collection != fetchSelectedCollectionFromAppStorage() {
-                self.selectedCollectionURL = collection?.objectID.uriRepresentation()
+            if collection != model.editor.fetchSelectedCollectionFromAppStorage() {
+                self.model.editor.selectedCollectionURL = collection?.objectID.uriRepresentation()
             }
         }
         .onChange(of: model.showAllPosts) { value in
-            if value != showAllPostsFlag {
-                self.showAllPostsFlag = model.showAllPosts
+            if value != model.editor.showAllPostsFlag {
+                self.model.editor.showAllPostsFlag = model.showAllPosts
             }
         }
-    }
-
-    private func fetchSelectedCollectionFromAppStorage() -> WFACollection? {
-        guard let objectURL = selectedCollectionURL else { return nil }
-        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
-        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
-        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
-                with: managedObjectID
-        ) as? WFACollection else { return nil }
-        return object
     }
 }
 

@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PostListFilteredView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @AppStorage("selectedPostURL") var selectedPostURL: URL?
     @Binding var postCount: Int
     @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
@@ -63,14 +62,14 @@ struct PostListFilteredView: View {
         .onAppear(perform: {
             self.postCount = fetchRequest.wrappedValue.count
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.model.selectedPost = fetchSelectedPostFromAppStorage()
+                self.model.selectedPost = model.editor.fetchSelectedPostFromAppStorage()
             }
         })
         .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
             self.postCount = value
         })
         .onChange(of: model.selectedPost) { post in
-            if post != fetchSelectedPostFromAppStorage() {
+            if post != model.editor.fetchSelectedPostFromAppStorage() {
                 saveSelectedPostURL(post)
             }
         }
@@ -137,17 +136,7 @@ struct PostListFilteredView: View {
     }
 
     private func saveSelectedPostURL(_ post: WFAPost?) {
-        self.selectedPostURL = post?.objectID.uriRepresentation()
-    }
-
-    private func fetchSelectedPostFromAppStorage() -> WFAPost? {
-        guard let objectURL = selectedPostURL else { return nil }
-        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
-        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
-        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
-                with: managedObjectID
-        ) as? WFAPost else { return nil }
-        return object
+        self.model.editor.selectedPostURL = post?.objectID.uriRepresentation()
     }
 
     func delete(_ post: WFAPost) {
