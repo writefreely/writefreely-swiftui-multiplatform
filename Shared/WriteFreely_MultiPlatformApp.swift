@@ -133,7 +133,7 @@ struct WriteFreely_MultiPlatformApp: App {
             self.model.selectedCollection = nil
         }
         // Create the new-post managed object
-        let managedPost = model.editor.generateNewLocalPost(withAppearance: model.preferences.font)
+        let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
         withAnimation {
             // Set it as the selectedPost
             DispatchQueue.main.asyncAfter(deadline: .now()) {

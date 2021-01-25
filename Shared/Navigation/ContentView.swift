@@ -28,25 +28,7 @@ struct ContentView: View {
                             self.model.selectedCollection = nil
                         }
                         // Create the new-post managed object
-                        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
-                        managedPost.createdDate = Date()
-                        managedPost.title = ""
-                        managedPost.body = ""
-                        managedPost.status = PostStatus.local.rawValue
-                        managedPost.collectionAlias = nil
-                        switch model.preferences.font {
-                        case 1:
-                            managedPost.appearance = "sans"
-                        case 2:
-                            managedPost.appearance = "wrap"
-                        default:
-                            managedPost.appearance = "serif"
-                        }
-                        if let languageCode = Locale.current.languageCode {
-                            managedPost.language = languageCode
-                            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
-                        }
-
+                        let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                         withAnimation {
                             DispatchQueue.main.asyncAfter(deadline: .now()) {
                                 // Load the new post in the editor

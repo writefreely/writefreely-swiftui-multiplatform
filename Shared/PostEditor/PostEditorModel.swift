@@ -33,7 +33,7 @@ struct PostEditorModel {
         return post
     }
 
-    func generateNewLocalPost(withAppearance appearance: Int) -> WFAPost {
+    func generateNewLocalPost(withFont appearance: Int) -> WFAPost {
         let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
