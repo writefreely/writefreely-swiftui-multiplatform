@@ -22,9 +22,6 @@ struct CheckForDebugModifier {
 
 struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel()
-    @AppStorage("showAllPostsFlag") var showAllPostsFlag: Bool = false
-    @AppStorage("selectedCollectionURL") var selectedCollectionURL: URL?
-    @AppStorage("selectedPostURL") var selectedPostURL: URL?
 
     #if os(macOS)
     // swiftlint:disable:next weak_delegate
@@ -37,9 +34,20 @@ struct WriteFreely_MultiPlatformApp: App {
             ContentView()
                 .onAppear(perform: {
                     #if os(macOS)
-                    self.model.showAllPosts = showAllPostsFlag
-                    self.model.selectedCollection = fetchSelectedCollectionFromAppStorage()
-                    self.model.selectedPost = fetchSelectedPostFromAppStorage()
+                    if model.editor.showAllPostsFlag {
+                        DispatchQueue.main.async {
+                            self.model.selectedCollection = nil
+                            self.model.showAllPosts = true
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
+                            self.model.showAllPosts = false
+                        }
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.model.selectedPost = model.editor.fetchSelectedPostFromAppStorage()
+                    }
                     #endif
                 })
                 .environmentObject(model)
@@ -125,48 +133,12 @@ struct WriteFreely_MultiPlatformApp: App {
             self.model.selectedCollection = nil
         }
         // Create the new-post managed object
-        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
-        managedPost.createdDate = Date()
-        managedPost.title = ""
-        managedPost.body = ""
-        managedPost.status = PostStatus.local.rawValue
-        managedPost.collectionAlias = nil
-        switch model.preferences.font {
-        case 1:
-            managedPost.appearance = "sans"
-        case 2:
-            managedPost.appearance = "wrap"
-        default:
-            managedPost.appearance = "serif"
-        }
-        if let languageCode = Locale.current.languageCode {
-            managedPost.language = languageCode
-            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
-        }
+        let managedPost = model.editor.generateNewLocalPost(withAppearance: model.preferences.font)
         withAnimation {
+            // Set it as the selectedPost
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 self.model.selectedPost = managedPost
             }
         }
-    }
-
-    private func fetchSelectedPostFromAppStorage() -> WFAPost? {
-        guard let objectURL = selectedPostURL else { return nil }
-        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
-        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
-        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
-                with: managedObjectID
-        ) as? WFAPost else { return nil }
-        return object
-    }
-
-    private func fetchSelectedCollectionFromAppStorage() -> WFACollection? {
-        guard let objectURL = selectedCollectionURL else { return nil }
-        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
-        guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
-        guard let object = LocalStorageManager.persistentContainer.viewContext.object(
-                with: managedObjectID
-        ) as? WFACollection else { return nil }
-        return object
     }
 }
