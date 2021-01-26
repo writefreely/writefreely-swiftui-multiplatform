@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- [Mac] Added the launch-to-last-draft functionality in the Editor Launching Policy.
+- [Mac] Holding the Shift key when launching clears the app's "last draft" state and instead loads a new blank draft. 
+
+### Fixed
+
+- [iOS] Restored the launch-to-last-draft functionality in the Editor Launching Policy.
+- [Mac] Improved reliability of the toolbar when a post is selected.
+
 ## [1.0.2-ios] - 2021-01-20
 
 ### Added
@@ -188,6 +200,7 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.2-ios...HEAD 
 [1.0.2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1-ios...v1.0.2-ios
 [1.0.1-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0...v1.0.1-ios
 [1.0.1b3-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1b2-ios...v1.0.1b3-ios
