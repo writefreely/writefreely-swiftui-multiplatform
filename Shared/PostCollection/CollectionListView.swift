@@ -75,21 +75,6 @@ struct CollectionListView: View {
             model.account.isLoggedIn ? "\(URL(string: model.account.server)?.host ?? "WriteFreely")" : "WriteFreely"
         )
         .listStyle(SidebarListStyle())
-        .onAppear(perform: {
-            #if os(iOS)
-            if model.editor.showAllPostsFlag {
-                DispatchQueue.main.async {
-                    self.model.selectedCollection = nil
-                    self.model.showAllPosts = true
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
-                    self.model.showAllPosts = false
-                }
-            }
-            #endif
-        })
         .onChange(of: model.selectedCollection) { collection in
             if collection != model.editor.fetchSelectedCollectionFromAppStorage() {
                 self.model.editor.selectedCollectionURL = collection?.objectID.uriRepresentation()

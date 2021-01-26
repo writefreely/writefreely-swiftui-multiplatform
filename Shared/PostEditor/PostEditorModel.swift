@@ -10,8 +10,7 @@ enum PostAppearance: String {
 struct PostEditorModel {
     @AppStorage("showAllPostsFlag") var showAllPostsFlag: Bool = false
     @AppStorage("selectedCollectionURL") var selectedCollectionURL: URL?
-    @AppStorage("selectedPostURL") var selectedPostURL: URL?
-    @AppStorage("lastDraftURL") private var lastDraftURL: URL?
+    @AppStorage("lastDraftURL") var lastDraftURL: URL?
 
     func saveLastDraft(_ post: WFAPost) {
         self.lastDraftURL = post.status != PostStatus.published.rawValue ? post.objectID.uriRepresentation() : nil
@@ -21,15 +20,9 @@ struct PostEditorModel {
         self.lastDraftURL = nil
     }
 
-    func fetchLastDraftFromUserDefaults() -> WFAPost? {
+    func fetchLastDraftFromAppStorage() -> WFAPost? {
         guard let postURL = lastDraftURL else { return nil }
-
-        let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
-        guard let postManagedObjectID = coordinator.managedObjectID(forURIRepresentation: postURL) else { return nil }
-        guard let post = LocalStorageManager.persistentContainer.viewContext.object(
-            with: postManagedObjectID
-        ) as? WFAPost else { return nil }
-
+        guard let post = fetchManagedObject(from: postURL) as? WFAPost else { return nil }
         return post
     }
 
@@ -55,22 +48,16 @@ struct PostEditorModel {
         return managedPost
     }
 
+    func fetchSelectedCollectionFromAppStorage() -> WFACollection? {
+        guard let collectionURL = selectedCollectionURL else { return nil }
+        guard let collection = fetchManagedObject(from: collectionURL) as? WFACollection else { return nil }
+        return collection
+    }
+
     private func fetchManagedObject(from objectURL: URL) -> NSManagedObject? {
         let coordinator = LocalStorageManager.persistentContainer.persistentStoreCoordinator
         guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
         let object = LocalStorageManager.persistentContainer.viewContext.object(with: managedObjectID)
         return object
-    }
-
-    func fetchSelectedPostFromAppStorage() -> WFAPost? {
-        guard let postURL = selectedPostURL else { return nil }
-        guard let post = fetchManagedObject(from: postURL) as? WFAPost else { return nil }
-        return post
-    }
-
-    func fetchSelectedCollectionFromAppStorage() -> WFACollection? {
-        guard let collectionURL = selectedCollectionURL else { return nil }
-        guard let collection = fetchManagedObject(from: collectionURL) as? WFACollection else { return nil }
-        return collection
     }
 }

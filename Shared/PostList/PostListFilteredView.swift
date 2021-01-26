@@ -61,18 +61,10 @@ struct PostListFilteredView: View {
         }
         .onAppear(perform: {
             self.postCount = fetchRequest.wrappedValue.count
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.model.selectedPost = model.editor.fetchSelectedPostFromAppStorage()
-            }
         })
         .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
             self.postCount = value
         })
-        .onChange(of: model.selectedPost) { post in
-            if post != model.editor.fetchSelectedPostFromAppStorage() {
-                saveSelectedPostURL(post)
-            }
-        }
         #else
         List(selection: $model.selectedPost) {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
@@ -127,16 +119,7 @@ struct PostListFilteredView: View {
                 model.isPresentingDeleteAlert = true
             }
         })
-        .onChange(of: model.selectedPost) { post in
-            if post != fetchSelectedPostFromAppStorage() {
-                saveSelectedPostURL(post)
-            }
-        }
         #endif
-    }
-
-    private func saveSelectedPostURL(_ post: WFAPost?) {
-        self.model.editor.selectedPostURL = post?.objectID.uriRepresentation()
     }
 
     func delete(_ post: WFAPost) {

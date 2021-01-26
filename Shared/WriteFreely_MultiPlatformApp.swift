@@ -33,7 +33,6 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .onAppear(perform: {
-                    #if os(macOS)
                     if model.editor.showAllPostsFlag {
                         DispatchQueue.main.async {
                             self.model.selectedCollection = nil
@@ -46,9 +45,12 @@ struct WriteFreely_MultiPlatformApp: App {
                         }
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        self.model.selectedPost = model.editor.fetchSelectedPostFromAppStorage()
+                        if model.editor.lastDraftURL != nil {
+                            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
+                        } else {
+                            createNewLocalPost()
+                        }
                     }
-                    #endif
                 })
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.persistentContainer.viewContext)
