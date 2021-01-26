@@ -5,8 +5,6 @@ struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Environment(\.managedObjectContext) var managedObjectContext
 
-    @State var selectedCollection: WFACollection?
-    @State var showAllPosts: Bool = false
     @State private var postCount: Int = 0
 
     #if os(iOS)
@@ -21,9 +19,13 @@ struct PostListView: View {
     var body: some View {
         #if os(iOS)
         ZStack(alignment: .bottom) {
-            PostListFilteredView(collection: selectedCollection, showAllPosts: showAllPosts, postCount: $postCount)
+            PostListFilteredView(
+                collection: model.selectedCollection,
+                showAllPosts: model.showAllPosts,
+                postCount: $postCount
+            )
                 .navigationTitle(
-                    showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+                    model.showAllPosts ? "All Posts" : model.selectedCollection?.title ?? (
                         model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
                     )
                 )
@@ -34,28 +36,10 @@ struct PostListView: View {
                         ZStack {
                             Spacer()
                             Button(action: {
-                                let managedPost = WFAPost(context: self.managedObjectContext)
-                                managedPost.createdDate = Date()
-                                managedPost.title = ""
-                                managedPost.body = ""
-                                managedPost.status = PostStatus.local.rawValue
-                                managedPost.collectionAlias = nil
-                                switch model.preferences.font {
-                                case 1:
-                                    managedPost.appearance = "sans"
-                                case 2:
-                                    managedPost.appearance = "wrap"
-                                default:
-                                    managedPost.appearance = "serif"
-                                }
-                                if let languageCode = Locale.current.languageCode {
-                                    managedPost.language = languageCode
-                                    //swiftlint:disable:next line_length
-                                    managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
-                                }
+                                let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                                 withAnimation {
-                                    self.selectedCollection = nil
-                                    self.showAllPosts = false
+                                    self.model.showAllPosts = false
+                                    self.model.selectedCollection = nil
                                     self.model.selectedPost = managedPost
                                 }
                             }, label: {
@@ -122,38 +106,29 @@ struct PostListView: View {
         .ignoresSafeArea()
         #else //if os(macOS)
         PostListFilteredView(
-            collection: selectedCollection,
-            showAllPosts: showAllPosts,
+            collection: model.selectedCollection,
+            showAllPosts: model.showAllPosts,
             postCount: $postCount
         )
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                if let selectedPost = model.selectedPost {
-                    ActivePostToolbarView(activePost: selectedPost)
-                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                            Alert(
-                                title: Text("Connection Error"),
-                                message: Text("""
+                ActivePostToolbarView()
+                    .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                        Alert(
+                            title: Text("Connection Error"),
+                            message: Text("""
                                     There is no internet connection at the moment. \
                                     Please reconnect or try again later.
                                     """),
-                                dismissButton: .default(Text("OK"), action: {
-                                    model.isPresentingNetworkErrorAlert = false
-                                })
-                            )
-                        })
-                }
-            }
-        }
-        .onDisappear {
-            DispatchQueue.main.async {
-                self.model.selectedCollection = nil
-                self.model.showAllPosts = true
-                self.model.selectedPost = nil
+                            dismissButton: .default(Text("OK"), action: {
+                                model.isPresentingNetworkErrorAlert = false
+                            })
+                        )
+                    })
             }
         }
         .navigationTitle(
-            showAllPosts ? "All Posts" : selectedCollection?.title ?? (
+            model.showAllPosts ? "All Posts" : model.selectedCollection?.title ?? (
                 model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
             )
         )

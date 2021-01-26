@@ -6,7 +6,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             #if os(macOS)
-            SidebarView()
+            CollectionListView()
                 .toolbar {
                     Button(
                         action: {
@@ -20,28 +20,18 @@ struct ContentView: View {
                     Spacer()
                     Button(action: {
                         withAnimation {
+                            // Un-set the currently selected post
                             self.model.selectedPost = nil
+
+                            // Navigate to the Drafts list
+                            self.model.showAllPosts = false
+                            self.model.selectedCollection = nil
                         }
-                        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
-                        managedPost.createdDate = Date()
-                        managedPost.title = ""
-                        managedPost.body = ""
-                        managedPost.status = PostStatus.local.rawValue
-                        managedPost.collectionAlias = nil
-                        switch model.preferences.font {
-                        case 1:
-                            managedPost.appearance = "sans"
-                        case 2:
-                            managedPost.appearance = "wrap"
-                        default:
-                            managedPost.appearance = "serif"
-                        }
-                        if let languageCode = Locale.current.languageCode {
-                            managedPost.language = languageCode
-                            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
-                        }
+                        // Create the new-post managed object
+                        let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                         withAnimation {
-                            DispatchQueue.main.async {
+                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                // Load the new post in the editor
                                 self.model.selectedPost = managedPost
                             }
                         }
@@ -49,12 +39,12 @@ struct ContentView: View {
                     .help("Create a new local draft.")
                 }
             #else
-            SidebarView()
+            CollectionListView()
             #endif
 
             #if os(macOS)
             ZStack {
-                PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
+                PostListView()
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)
@@ -63,7 +53,7 @@ struct ContentView: View {
                 }
             }
             #else
-            PostListView(selectedCollection: nil, showAllPosts: model.account.isLoggedIn)
+            PostListView()
             #endif
 
             Text("Select a post, or create a new local draft.")

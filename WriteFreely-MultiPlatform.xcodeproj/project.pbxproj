@@ -48,8 +48,6 @@
 		1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */; };
 		1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
 		1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
-		1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
-		1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765F62924E18EA200C9EBF0 /* SidebarView.swift */; };
 		17681E412519410E00D394AE /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17681E402519410E00D394AE /* UINavigationController+Appearance.swift */; };
 		1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1780F6EE25895EDB00FE45FF /* PostCommands.swift */; };
 		17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17A4FED925924AF70037E96B /* Sparkle */; };
@@ -146,7 +144,6 @@
 		1756DBB924FED45500207AB8 /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
 		1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		1765F62924E18EA200C9EBF0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		17681E402519410E00D394AE /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
 		1780F6EE25895EDB00FE45FF /* PostCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommands.swift; sourceTree = "<group>"; };
 		17A4FEDF25924E810037E96B /* MacSoftwareUpdater.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MacSoftwareUpdater.md; sourceTree = "<group>"; };
@@ -457,7 +454,6 @@
 			isa = PBXGroup;
 			children = (
 				17DF328224C87D3300BCE2E3 /* ContentView.swift */,
-				1765F62924E18EA200C9EBF0 /* SidebarView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -745,7 +741,6 @@
 				1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
 				17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */,
-				1765F62A24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
 				1756DC0124FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
@@ -769,7 +764,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
-				1765F62B24E18EA200C9EBF0 /* SidebarView.swift in Sources */,
 				1756DBBB24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
 				17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */,
 				174D313324EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,

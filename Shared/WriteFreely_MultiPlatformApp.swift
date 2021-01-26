@@ -9,11 +9,12 @@ struct CheckForDebugModifier {
     static func main() {
         #if os(macOS)
             if NSEvent.modifierFlags.contains(.shift) {
-                print("Debug launch detected")
-                // Run debug-mode launch code here
+                // Clear the launch-to-last-draft values to load a new draft.
+                UserDefaults.standard.setValue(false, forKey: "showAllPostsFlag")
+                UserDefaults.standard.setValue(nil, forKey: "selectedCollectionURL")
+                UserDefaults.standard.setValue(nil, forKey: "lastDraftURL")
             } else {
-                print("Normal launch detected")
-                // Don't do anything
+                // No-op
             }
         #endif
         WriteFreely_MultiPlatformApp.main()
@@ -33,10 +34,23 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .onAppear(perform: {
-                    if let lastDraft = model.editor.fetchLastDraftFromUserDefaults() {
-                        self.model.selectedPost = lastDraft
+                    if model.editor.showAllPostsFlag {
+                        DispatchQueue.main.async {
+                            self.model.selectedCollection = nil
+                            self.model.showAllPosts = true
+                        }
                     } else {
-                        createNewLocalPost()
+                        DispatchQueue.main.async {
+                            self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
+                            self.model.showAllPosts = false
+                        }
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if model.editor.lastDraftURL != nil {
+                            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
+                        } else {
+                            createNewLocalPost()
+                        }
                     }
                 })
                 .environmentObject(model)
@@ -114,28 +128,20 @@ struct WriteFreely_MultiPlatformApp: App {
 
     private func createNewLocalPost() {
         withAnimation {
+            // Un-set the currently selected post
             self.model.selectedPost = nil
+
+            // Navigate to the Drafts list
+            self.model.showAllPosts = false
+            self.model.selectedCollection = nil
         }
-        let managedPost = WFAPost(context: LocalStorageManager.persistentContainer.viewContext)
-        managedPost.createdDate = Date()
-        managedPost.title = ""
-        managedPost.body = ""
-        managedPost.status = PostStatus.local.rawValue
-        managedPost.collectionAlias = nil
-        switch model.preferences.font {
-        case 1:
-            managedPost.appearance = "sans"
-        case 2:
-            managedPost.appearance = "wrap"
-        default:
-            managedPost.appearance = "serif"
-        }
-        if let languageCode = Locale.current.languageCode {
-            managedPost.language = languageCode
-            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
-        }
+        // Create the new-post managed object
+        let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
         withAnimation {
-            self.model.selectedPost = managedPost
+            // Set it as the selectedPost
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self.model.selectedPost = managedPost
+            }
         }
     }
 }
