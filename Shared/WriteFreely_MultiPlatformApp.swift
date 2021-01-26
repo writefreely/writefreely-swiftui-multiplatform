@@ -9,11 +9,12 @@ struct CheckForDebugModifier {
     static func main() {
         #if os(macOS)
             if NSEvent.modifierFlags.contains(.shift) {
-                print("Debug launch detected")
-                // Run debug-mode launch code here
+                // Clear the launch-to-last-draft values to load a new draft.
+                UserDefaults.standard.setValue(false, forKey: "showAllPostsFlag")
+                UserDefaults.standard.setValue(nil, forKey: "selectedCollectionURL")
+                UserDefaults.standard.setValue(nil, forKey: "lastDraftURL")
             } else {
-                print("Normal launch detected")
-                // Don't do anything
+                // No-op
             }
         #endif
         WriteFreely_MultiPlatformApp.main()
