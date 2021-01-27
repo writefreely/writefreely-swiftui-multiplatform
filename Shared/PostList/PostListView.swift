@@ -112,19 +112,21 @@ struct PostListView: View {
         )
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                ActivePostToolbarView()
-                    .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                        Alert(
-                            title: Text("Connection Error"),
-                            message: Text("""
+                if model.selectedPost != nil {
+                    ActivePostToolbarView(activePost: model.selectedPost!)
+                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                            Alert(
+                                title: Text("Connection Error"),
+                                message: Text("""
                                     There is no internet connection at the moment. \
                                     Please reconnect or try again later.
                                     """),
-                            dismissButton: .default(Text("OK"), action: {
-                                model.isPresentingNetworkErrorAlert = false
-                            })
-                        )
-                    })
+                                dismissButton: .default(Text("OK"), action: {
+                                    model.isPresentingNetworkErrorAlert = false
+                                })
+                            )
+                        })
+                }
             }
         }
         .navigationTitle(
