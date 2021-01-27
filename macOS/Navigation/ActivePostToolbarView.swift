@@ -64,7 +64,7 @@ struct ActivePostToolbarView: View {
                 }, label: {
                     Label("Publish…", systemImage: "paperplane")
                 })
-                .disabled(model.selectedPost!.body.isEmpty)
+                .disabled(model.selectedPost?.body.isEmpty ?? true)
                 .help("Publish the post to the web.\(model.account.isLoggedIn ? "" : " You must be logged in to do this.")") // swiftlint:disable:this line_length
             } else {
                 HStack(spacing: 4) {
@@ -114,6 +114,9 @@ struct ActivePostToolbarView: View {
     }
 
     private func publishPost(_ post: WFAPost) {
+        if post != model.selectedPost {
+            return
+        }
         DispatchQueue.main.async {
             LocalStorageManager().saveContext()
             model.publish(post: post)
