@@ -94,6 +94,8 @@ struct WriteFreely_MultiPlatformApp: App {
                     #endif
                 }
             }
+            ToolbarCommands()
+            TextEditingCommands()
         }
 
         #if os(macOS)
