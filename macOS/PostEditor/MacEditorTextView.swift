@@ -140,7 +140,8 @@ final class CustomTextView: NSView {
         layoutManager.addTextContainer(textContainer)
 
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 8.5
+        let lineHeightMultiple: CGFloat = 1.5
+        paragraphStyle.lineHeightMultiple = lineHeightMultiple
 
         let textView = NSTextView(frame: .zero, textContainer: textContainer)
         textView.autoresizingMask = .width
@@ -158,6 +159,9 @@ final class CustomTextView: NSView {
         textView.minSize = NSSize(width: 0, height: contentSize.height)
         textView.textColor = NSColor.labelColor
         textView.allowsUndo = true
+        textView.usesFindPanel = true
+        textView.isAutomaticDashSubstitutionEnabled = false
+        textView.isRichText = false
 
         return textView
     }()
