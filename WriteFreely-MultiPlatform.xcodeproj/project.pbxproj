@@ -268,8 +268,8 @@
 		1756AE7F24CB841200FD7257 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */,
 				17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */,
+				17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */,
 				17B37C5525C8679800FE75E9 /* WriteFreelyModel+API.swift */,
 				17B37C5C25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift */,
 				17B37C4A25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift */,

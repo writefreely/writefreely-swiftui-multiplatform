@@ -58,15 +58,22 @@ struct AccountLoginView: View {
                     #if os(iOS)
                     hideKeyboard()
                     #endif
-                    // If logging in to Write.as, trim any path in the hostname.
-                    if server.hasPrefix("https://write.as") ||
-                        server.hasPrefix("http://write.as") ||
-                        server.hasPrefix("write.as") {
-                        server = "https://write.as"
+                    // If the server string is not prefixed with a scheme, prepend "https://" to it.
+                    if !(server.hasPrefix("https://") || server.hasPrefix("http://")) {
+                        server = "https://\(server)"
                     }
-                    // Trim any trailing slashes that would cause the request to fail.
-                    if server.hasSuffix("/") {
-                        server = String(server.dropLast(1))
+                    print(server)
+                    // We only need the protocol and host from the URL, so drop anything else.
+                    let url = URLComponents(string: server)
+                    if let validURL = url {
+                        let scheme = validURL.scheme
+                        let host = validURL.host
+                        var hostURL = URLComponents()
+                        hostURL.scheme = scheme
+                        hostURL.host = host
+                        server = hostURL.string ?? server
+                    } else {
+                        // TODO: - throw an error if this is an invalid URL.
                     }
                     model.login(
                         to: URL(string: server)!,
