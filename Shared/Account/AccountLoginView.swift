@@ -58,6 +58,9 @@ struct AccountLoginView: View {
                     #if os(iOS)
                     hideKeyboard()
                     #endif
+                    if server.hasSuffix("/") {
+                        server = String(server.dropLast(1))
+                    }
                     model.login(
                         to: URL(string: server)!,
                         as: username, password: password
