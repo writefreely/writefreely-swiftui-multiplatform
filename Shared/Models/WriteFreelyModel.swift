@@ -5,7 +5,7 @@ import Network
 
 // MARK: - WriteFreelyModel
 
-class WriteFreelyModel: ObservableObject {
+final class WriteFreelyModel: ObservableObject {
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
     @Published var posts = PostListModel()
