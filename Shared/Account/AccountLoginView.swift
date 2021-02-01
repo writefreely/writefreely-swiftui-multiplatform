@@ -58,6 +58,13 @@ struct AccountLoginView: View {
                     #if os(iOS)
                     hideKeyboard()
                     #endif
+                    // If logging in to Write.as, trim any path in the hostname.
+                    if server.hasPrefix("https://write.as") ||
+                        server.hasPrefix("http://write.as") ||
+                        server.hasPrefix("write.as") {
+                        server = "https://write.as"
+                    }
+                    // Trim any trailing slashes that would cause the request to fail.
                     if server.hasSuffix("/") {
                         server = String(server.dropLast(1))
                     }
