@@ -59,6 +59,12 @@
 		17A67CAF251A5DD7002F163D /* PostEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A67CAE251A5DD7002F163D /* PostEditorView.swift */; };
 		17AD0A5E25489E810057D763 /* PostTitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD0A5D25489E810057D763 /* PostTitleTextView.swift */; };
 		17AD0A6425489E900057D763 /* PostBodyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AD0A6325489E900057D763 /* PostBodyTextView.swift */; };
+		17B37C4B25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B37C4A25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift */; };
+		17B37C4C25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B37C4A25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift */; };
+		17B37C5625C8679800FE75E9 /* WriteFreelyModel+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B37C5525C8679800FE75E9 /* WriteFreelyModel+API.swift */; };
+		17B37C5725C8679800FE75E9 /* WriteFreelyModel+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B37C5525C8679800FE75E9 /* WriteFreelyModel+API.swift */; };
+		17B37C5D25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B37C5C25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift */; };
+		17B37C5E25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B37C5C25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift */; };
 		17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */; };
 		17B5103B2515448D00E9631F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 17B5103A2515448D00E9631F /* Credits.rtf */; };
 		17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
@@ -155,6 +161,9 @@
 		17A67CAE251A5DD7002F163D /* PostEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorView.swift; sourceTree = "<group>"; };
 		17AD0A5D25489E810057D763 /* PostTitleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitleTextView.swift; sourceTree = "<group>"; };
 		17AD0A6325489E900057D763 /* PostBodyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBodyTextView.swift; sourceTree = "<group>"; };
+		17B37C4A25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteFreelyModel+Keychain.swift"; sourceTree = "<group>"; };
+		17B37C5525C8679800FE75E9 /* WriteFreelyModel+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteFreelyModel+API.swift"; sourceTree = "<group>"; };
+		17B37C5C25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteFreelyModel+APIHandlers.swift"; sourceTree = "<group>"; };
 		17B3E964250FAA9000EE9748 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B5103A2515448D00E9631F /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		17B68D4F25A4FED2005ED37C /* Sparkle-License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Sparkle-License.txt"; sourceTree = "<group>"; };
@@ -261,6 +270,9 @@
 			children = (
 				17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */,
 				17480CA4251272EE00EB7765 /* Bundle+AppVersion.swift */,
+				17B37C5525C8679800FE75E9 /* WriteFreelyModel+API.swift */,
+				17B37C5C25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift */,
+				17B37C4A25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -723,14 +735,17 @@
 			files = (
 				17DF32AC24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */,
+				17B37C5625C8679800FE75E9 /* WriteFreelyModel+API.swift in Sources */,
 				17C42E622507D8E600072984 /* PostStatus.swift in Sources */,
 				1756DBBA24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
 				1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */,
 				17C42E652509237800072984 /* PostListFilteredView.swift in Sources */,
 				170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
+				17B37C4B25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift in Sources */,
 				17480CA5251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17AD0A6425489E900057D763 /* PostBodyTextView.swift in Sources */,
+				17B37C5D25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift in Sources */,
 				17AD0A5E25489E810057D763 /* PostTitleTextView.swift in Sources */,
 				17120DA924E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */,
@@ -786,15 +801,18 @@
 				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				17A67CAF251A5DD7002F163D /* PostEditorView.swift in Sources */,
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
+				17B37C5725C8679800FE75E9 /* WriteFreelyModel+API.swift in Sources */,
 				17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */,
 				17B996D92502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
 				1756DBB824FED3A400207AB8 /* LocalStorageModel.xcdatamodeld in Sources */,
+				17B37C4C25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift in Sources */,
 				17A5389324DDED0000DEFF9A /* PreferencesView.swift in Sources */,
 				1756AE6F24CB255B00FD7257 /* PostListModel.swift in Sources */,
 				1756DC0224FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				1756DBB424FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
 				1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */,
+				17B37C5E25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift in Sources */,
 				170DFA35251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */,
 				17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */,
