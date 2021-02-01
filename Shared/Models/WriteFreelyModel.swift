@@ -37,6 +37,7 @@ class WriteFreelyModel: ObservableObject {
     private let defaults = UserDefaults.standard
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "NetworkMonitor")
+    private var postToUpdate: WFAPost?
 
     init() {
         DispatchQueue.main.async {
@@ -145,6 +146,8 @@ extension WriteFreelyModel {
     }
 
     func publish(post: WFAPost) {
+        postToUpdate = nil
+
         if !hasNetworkConnection {
             DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
             return
@@ -173,10 +176,8 @@ extension WriteFreelyModel {
 
         if let existingPostId = post.postId {
             // This is an existing post.
+            postToUpdate = post
             wfPost.postId = post.postId
-            wfPost.slug = post.slug
-            wfPost.updatedDate = post.updatedDate
-            wfPost.collectionAlias = post.collectionAlias
 
             loggedInClient.updatePost(
                 postId: existingPostId,
@@ -407,37 +408,55 @@ private extension WriteFreelyModel {
         // See: https://github.com/writeas/writefreely-swift/issues/20
         do {
             let fetchedPost = try result.get()
-            let request = WFAPost.createFetchRequest()
-            let matchBodyPredicate = NSPredicate(format: "body == %@", fetchedPost.body)
-            if let fetchedPostTitle = fetchedPost.title {
-                let matchTitlePredicate = NSPredicate(format: "title == %@", fetchedPostTitle)
-                request.predicate = NSCompoundPredicate(
-                    andPredicateWithSubpredicates: [
-                        matchTitlePredicate,
-                        matchBodyPredicate
-                    ]
-                )
-            } else {
-                request.predicate = matchBodyPredicate
-            }
-            do {
-                let cachedPostsResults = try LocalStorageManager.persistentContainer.viewContext.fetch(request)
-                guard let cachedPost = cachedPostsResults.first else { return }
-                cachedPost.appearance = fetchedPost.appearance
-                cachedPost.body = fetchedPost.body
-                cachedPost.createdDate = fetchedPost.createdDate
-                cachedPost.language = fetchedPost.language
-                cachedPost.postId = fetchedPost.postId
-                cachedPost.rtl = fetchedPost.rtl ?? false
-                cachedPost.slug = fetchedPost.slug
-                cachedPost.status = PostStatus.published.rawValue
-                cachedPost.title = fetchedPost.title ?? ""
-                cachedPost.updatedDate = fetchedPost.updatedDate
+            // If this is an updated post, check it against postToUpdate.
+            if let updatingPost = self.postToUpdate {
+                updatingPost.appearance = fetchedPost.appearance
+                updatingPost.body = fetchedPost.body
+                updatingPost.createdDate = fetchedPost.createdDate
+                updatingPost.language = fetchedPost.language
+                updatingPost.postId = fetchedPost.postId
+                updatingPost.rtl = fetchedPost.rtl ?? false
+                updatingPost.slug = fetchedPost.slug
+                updatingPost.status = PostStatus.published.rawValue
+                updatingPost.title = fetchedPost.title ?? ""
+                updatingPost.updatedDate = fetchedPost.updatedDate
                 DispatchQueue.main.async {
                     LocalStorageManager().saveContext()
                 }
-            } catch {
-                print("Error: Failed to fetch cached posts")
+            } else {
+                // Otherwise if it's a newly-published post, find it in the local store.
+                let request = WFAPost.createFetchRequest()
+                let matchBodyPredicate = NSPredicate(format: "body == %@", fetchedPost.body)
+                if let fetchedPostTitle = fetchedPost.title {
+                    let matchTitlePredicate = NSPredicate(format: "title == %@", fetchedPostTitle)
+                    request.predicate = NSCompoundPredicate(
+                        andPredicateWithSubpredicates: [
+                            matchTitlePredicate,
+                            matchBodyPredicate
+                        ]
+                    )
+                } else {
+                    request.predicate = matchBodyPredicate
+                }
+                do {
+                    let cachedPostsResults = try LocalStorageManager.persistentContainer.viewContext.fetch(request)
+                    guard let cachedPost = cachedPostsResults.first else { return }
+                    cachedPost.appearance = fetchedPost.appearance
+                    cachedPost.body = fetchedPost.body
+                    cachedPost.createdDate = fetchedPost.createdDate
+                    cachedPost.language = fetchedPost.language
+                    cachedPost.postId = fetchedPost.postId
+                    cachedPost.rtl = fetchedPost.rtl ?? false
+                    cachedPost.slug = fetchedPost.slug
+                    cachedPost.status = PostStatus.published.rawValue
+                    cachedPost.title = fetchedPost.title ?? ""
+                    cachedPost.updatedDate = fetchedPost.updatedDate
+                    DispatchQueue.main.async {
+                        LocalStorageManager().saveContext()
+                    }
+                } catch {
+                    print("Error: Failed to fetch cached posts")
+                }
             }
         } catch {
             print(error)
