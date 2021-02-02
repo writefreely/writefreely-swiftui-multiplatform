@@ -10,12 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - [Mac] Added the launch-to-last-draft functionality in the Editor Launching Policy.
-- [Mac] Holding the Shift key when launching clears the app's "last draft" state and instead loads a new blank draft. 
+- [Mac] Holding the Shift key when launching clears the app's "last draft" state and instead loads a new blank draft.
+- [Mac] Added a menu item for toggling the toolbar.
 
 ### Fixed
 
 - [iOS] Restored the launch-to-last-draft functionality in the Editor Launching Policy.
 - [Mac] Improved reliability of the toolbar when a post is selected.
+- [Mac] Find and replace now works as expected in the post editor.
+- [Mac] Formatting is stripped from text that is pasted into the post editor.
+- [Mac] New posts use proper linespacing.
+- [iOS, Mac] The post status updates correctly after publishing local changes to an existing post.
+- [iOS, Mac] The server URL field is better validated when logging in to a WriteFreely instance/Write.as.
 
 ## [1.0.2-ios] - 2021-01-20
 
