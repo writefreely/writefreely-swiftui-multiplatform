@@ -28,7 +28,7 @@ extension AccountError: LocalizedError {
             )
         case .invalidServerURL:
             return NSLocalizedString(
-                "The server entered doesn't appear to be a valid URL. Please check what you've entered and try again.",
+                "Please enter a valid instance domain name. It should look like \"https://example.com\" or \"write.as\".",  // swiftlint:disable:this line_length
                 comment: ""
             )
         }
