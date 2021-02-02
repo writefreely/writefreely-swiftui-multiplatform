@@ -71,14 +71,14 @@ struct AccountLoginView: View {
                         hostURL.scheme = scheme
                         hostURL.host = host
                         server = hostURL.string ?? server
+                        model.login(
+                            to: URL(string: server)!,
+                            as: username, password: password
+                        )
                     } else {
                         model.loginErrorMessage = AccountError.invalidServerURL.localizedDescription
                         model.isPresentingLoginErrorAlert = true
                     }
-                    model.login(
-                        to: URL(string: server)!,
-                        as: username, password: password
-                    )
                 }, label: {
                     Text("Log In")
                 })
