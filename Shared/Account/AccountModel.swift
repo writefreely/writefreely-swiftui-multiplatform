@@ -5,6 +5,7 @@ enum AccountError: Error {
     case invalidPassword
     case usernameNotFound
     case serverNotFound
+    case invalidServerURL
 }
 
 extension AccountError: LocalizedError {
@@ -23,6 +24,11 @@ extension AccountError: LocalizedError {
         case .usernameNotFound:
             return NSLocalizedString(
                 "Username not found. Did you use your email address by mistake?",
+                comment: ""
+            )
+        case .invalidServerURL:
+            return NSLocalizedString(
+                "The server entered doesn't appear to be a valid URL. Please check what you've entered and try again.",
                 comment: ""
             )
         }

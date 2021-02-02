@@ -62,7 +62,6 @@ struct AccountLoginView: View {
                     if !(server.hasPrefix("https://") || server.hasPrefix("http://")) {
                         server = "https://\(server)"
                     }
-                    print(server)
                     // We only need the protocol and host from the URL, so drop anything else.
                     let url = URLComponents(string: server)
                     if let validURL = url {
@@ -73,7 +72,8 @@ struct AccountLoginView: View {
                         hostURL.host = host
                         server = hostURL.string ?? server
                     } else {
-                        // TODO: - throw an error if this is an invalid URL.
+                        model.loginErrorMessage = AccountError.invalidServerURL.localizedDescription
+                        model.isPresentingLoginErrorAlert = true
                     }
                     model.login(
                         to: URL(string: server)!,
