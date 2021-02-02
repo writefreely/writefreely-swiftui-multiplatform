@@ -58,10 +58,27 @@ struct AccountLoginView: View {
                     #if os(iOS)
                     hideKeyboard()
                     #endif
-                    model.login(
-                        to: URL(string: server)!,
-                        as: username, password: password
-                    )
+                    // If the server string is not prefixed with a scheme, prepend "https://" to it.
+                    if !(server.hasPrefix("https://") || server.hasPrefix("http://")) {
+                        server = "https://\(server)"
+                    }
+                    // We only need the protocol and host from the URL, so drop anything else.
+                    let url = URLComponents(string: server)
+                    if let validURL = url {
+                        let scheme = validURL.scheme
+                        let host = validURL.host
+                        var hostURL = URLComponents()
+                        hostURL.scheme = scheme
+                        hostURL.host = host
+                        server = hostURL.string ?? server
+                        model.login(
+                            to: URL(string: server)!,
+                            as: username, password: password
+                        )
+                    } else {
+                        model.loginErrorMessage = AccountError.invalidServerURL.localizedDescription
+                        model.isPresentingLoginErrorAlert = true
+                    }
                 }, label: {
                     Text("Log In")
                 })

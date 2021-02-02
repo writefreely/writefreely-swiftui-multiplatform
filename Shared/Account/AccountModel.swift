@@ -5,6 +5,7 @@ enum AccountError: Error {
     case invalidPassword
     case usernameNotFound
     case serverNotFound
+    case invalidServerURL
 }
 
 extension AccountError: LocalizedError {
@@ -23,6 +24,11 @@ extension AccountError: LocalizedError {
         case .usernameNotFound:
             return NSLocalizedString(
                 "Username not found. Did you use your email address by mistake?",
+                comment: ""
+            )
+        case .invalidServerURL:
+            return NSLocalizedString(
+                "Please enter a valid instance domain name. It should look like \"https://example.com\" or \"write.as\".",  // swiftlint:disable:this line_length
                 comment: ""
             )
         }

@@ -69,6 +69,7 @@ struct PostBodyTextView: UIViewRepresentable {
         textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = true
         textView.alwaysBounceVertical = false
+        textView.smartDashesType = .no
 
         context.coordinator.textView = textView
         textView.delegate = context.coordinator
