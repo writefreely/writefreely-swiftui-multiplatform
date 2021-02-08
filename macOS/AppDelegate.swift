@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // If enabled, check for updates.
         if automaticallyChecksForUpdates {
-            SUUpdater.shared()?.checkForUpdates(self)
+            SUUpdater.shared()?.checkForUpdatesInBackground()
         }
     }
 }
