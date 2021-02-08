@@ -97,7 +97,7 @@ extension WriteFreelyModel {
             appearance: post.appearance,
             language: post.language,
             rtl: post.rtl,
-            createdDate: post.createdDate
+            createdDate: post.status == PostStatus.local.rawValue ? Date() : post.createdDate
         )
 
         if let existingPostId = post.postId {
