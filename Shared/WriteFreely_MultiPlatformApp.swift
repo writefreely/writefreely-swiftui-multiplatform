@@ -22,7 +22,7 @@ struct CheckForDebugModifier {
 }
 
 struct WriteFreely_MultiPlatformApp: App {
-    @StateObject private var model = WriteFreelyModel()
+    @StateObject private var model = WriteFreelyModel.shared
 
     #if os(macOS)
     // swiftlint:disable:next weak_delegate
