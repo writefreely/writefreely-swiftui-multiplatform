@@ -162,7 +162,11 @@ final class CustomTextView: NSView {
         textView.usesFindPanel = true
         textView.isAutomaticDashSubstitutionEnabled = false
         textView.isRichText = false
-        textView.typingAttributes = [.paragraphStyle: paragraphStyle, .font: font]  // H/T Daniel Jalkut
+        textView.typingAttributes = [
+            .paragraphStyle: paragraphStyle,    // H/T Daniel Jalkut
+            .font: font,
+            .foregroundColor: NSColor.labelColor
+        ]
 
         return textView
     }()
