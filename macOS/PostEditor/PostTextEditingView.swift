@@ -5,6 +5,9 @@ struct PostTextEditingView: View {
     @Binding var updatingFromServer: Bool
     @State private var appearance: PostAppearance = .serif
     @State private var combinedText = ""
+    @State private var hasBeenEdited: Bool = false
+
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -54,10 +57,18 @@ struct PostTextEditingView: View {
                 self.combinedText = "# \(post.title)\n\n\(post.body)"
             }
         })
+        .onReceive(timer) { _ in
+            if !post.body.isEmpty && hasBeenEdited {
+                DispatchQueue.main.async {
+                    LocalStorageManager().saveContext()
+                    hasBeenEdited = false
+                }
+            }
+        }
     }
 
     private func onEditingChanged() {
-        // Add code here to take action when the user first starts typing.
+        hasBeenEdited = true
     }
 
     private func onTextChange(_ text: String) {
@@ -70,10 +81,16 @@ struct PostTextEditingView: View {
         if updatingFromServer {
             self.updatingFromServer = false
         }
+        hasBeenEdited = true
     }
 
     private func onCommit() {
-        // Add code here to take action when the user navigates away from the post.
+        if !post.body.isEmpty && hasBeenEdited {
+            DispatchQueue.main.async {
+                LocalStorageManager().saveContext()
+            }
+        }
+        hasBeenEdited = false
     }
 
     private func extractTitle(_ text: String) {
@@ -95,5 +112,4 @@ struct PostTextEditingView: View {
             self.post.body = text
         }
     }
-
 }

@@ -32,7 +32,7 @@ struct PostEditorModel {
         managedPost.title = ""
         managedPost.body = ""
         managedPost.status = PostStatus.local.rawValue
-        managedPost.collectionAlias = nil
+        managedPost.collectionAlias = WriteFreelyModel.shared.selectedCollection?.alias
         switch appearance {
         case 1:
             managedPost.appearance = "sans"

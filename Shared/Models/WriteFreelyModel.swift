@@ -24,6 +24,8 @@ final class WriteFreelyModel: ObservableObject {
     @Published var isPresentingSettingsView: Bool = false
     #endif
 
+    static var shared = WriteFreelyModel()
+
     var loginErrorMessage: String?
 
     // swiftlint:disable line_length

@@ -22,7 +22,7 @@ struct CheckForDebugModifier {
 }
 
 struct WriteFreely_MultiPlatformApp: App {
-    @StateObject private var model = WriteFreelyModel()
+    @StateObject private var model = WriteFreelyModel.shared
 
     #if os(macOS)
     // swiftlint:disable:next weak_delegate
@@ -132,10 +132,6 @@ struct WriteFreely_MultiPlatformApp: App {
         withAnimation {
             // Un-set the currently selected post
             self.model.selectedPost = nil
-
-            // Navigate to the Drafts list
-            self.model.showAllPosts = false
-            self.model.selectedCollection = nil
         }
         // Create the new-post managed object
         let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
