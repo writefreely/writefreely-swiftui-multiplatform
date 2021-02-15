@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] The server URL field is better validated when logging in to a WriteFreely instance/Write.as.
 - [Mac] Fixed a regression where text color did not adapt to dark mode correctly.
 
-## [1.0.4-ios] - 2021-02-11
+## [1.0.4-ios] - 2021-02-15
 
 ### Changed
 
@@ -225,7 +225,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.2-ios...HEAD 
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.4-ios...HEAD 
+[1.0.4-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.2-ios...v1.0.4-ios
 [1.0.2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1-ios...v1.0.2-ios
 [1.0.1-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0...v1.0.1-ios
 [1.0.1b3-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1b2-ios...v1.0.1b3-ios
