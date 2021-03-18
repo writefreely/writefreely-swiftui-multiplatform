@@ -39,7 +39,6 @@ struct PostListView: View {
                                 let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                                 withAnimation {
                                     self.model.showAllPosts = false
-                                    self.model.selectedCollection = nil
                                     self.model.selectedPost = managedPost
                                 }
                             }, label: {
