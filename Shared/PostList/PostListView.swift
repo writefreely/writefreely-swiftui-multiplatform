@@ -104,7 +104,7 @@ struct PostListView: View {
             .overlay(Divider(), alignment: .top)
         }
         .ignoresSafeArea()
-        #else //if os(macOS)
+        #else
         PostListFilteredView(
             collection: model.selectedCollection,
             showAllPosts: model.showAllPosts,
