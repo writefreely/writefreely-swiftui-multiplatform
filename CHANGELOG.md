@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] The published date now reflects the time a post was published, not created.
 - [Mac] If the option is set, the app now silently checks for updates on launch.
 - [Mac] New drafts are created in the currently-selected blog, rather than being created in Drafts (or "Anonymous" for Write.as accounts).
+- [iOS, Mac] Updated the URL of the WriteFreely Swift package.
 
 ### Fixed
 
@@ -29,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] The post status updates correctly after publishing local changes to an existing post.
 - [Mac] The server URL field is better validated when logging in to a WriteFreely instance/Write.as.
 - [Mac] Fixed a regression where text color did not adapt to dark mode correctly.
+- [iOS, Mac] Sharing a post now uses the custom domain (if any).
+- [iOS] Creating a new post no longer navigates away from the currently selected blog to the Drafts list.
 
 ## [1.0.4-ios] - 2021-02-15
 
