@@ -18,6 +18,8 @@
 		17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
 		17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
 		17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */; };
+		1714DD65260BAC14000C0DFF /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1714DD64260BAC14000C0DFF /* WriteFreely */; };
+		1714DD6B260BAC2C000C0DFF /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1714DD6A260BAC2C000C0DFF /* WriteFreely */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172C492D2593981900E20ADF /* MacUpdatesView.swift */; };
@@ -94,8 +96,6 @@
 		17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF328224C87D3300BCE2E3 /* ContentView.swift */; };
 		17DF32AE24C87D3500BCE2E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DF328324C87D3500BCE2E3 /* Assets.xcassets */; };
 		17DF32AF24C87D3500BCE2E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17DF328324C87D3500BCE2E3 /* Assets.xcassets */; };
-		17DF32C024C87D7B00BCE2E3 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 17DF32BF24C87D7B00BCE2E3 /* WriteFreely */; };
-		17DF32C324C87D8D00BCE2E3 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 17DF32C224C87D8D00BCE2E3 /* WriteFreely */; };
 		17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */; };
 		17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */; };
 		17DFDE87251D309400A25F31 /* Hack-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE84251D309400A25F31 /* Hack-License.txt */; };
@@ -208,7 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17DF32C024C87D7B00BCE2E3 /* WriteFreely in Frameworks */,
+				1714DD65260BAC14000C0DFF /* WriteFreely in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +216,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17DF32C324C87D8D00BCE2E3 /* WriteFreely in Frameworks */,
 				17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */,
+				1714DD6B260BAC2C000C0DFF /* WriteFreely in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,7 +530,7 @@
 			);
 			name = "WriteFreely-MultiPlatform (iOS)";
 			packageProductDependencies = (
-				17DF32BF24C87D7B00BCE2E3 /* WriteFreely */,
+				1714DD64260BAC14000C0DFF /* WriteFreely */,
 			);
 			productName = "WriteFreely-MultiPlatform (iOS)";
 			productReference = 17DF328824C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */;
@@ -551,8 +551,8 @@
 			);
 			name = "WriteFreely-MultiPlatform (macOS)";
 			packageProductDependencies = (
-				17DF32C224C87D8D00BCE2E3 /* WriteFreely */,
 				17A4FED925924AF70037E96B /* Sparkle */,
+				1714DD6A260BAC2C000C0DFF /* WriteFreely */,
 			);
 			productName = "WriteFreely-MultiPlatform (macOS)";
 			productReference = 17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */;
@@ -629,8 +629,8 @@
 			);
 			mainGroup = 17DF327B24C87D3300BCE2E3;
 			packageReferences = (
-				17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */,
 				17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */,
+				1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */,
 			);
 			productRefGroup = 17DF328924C87D3500BCE2E3 /* Products */;
 			projectDirPath = "";
@@ -1204,6 +1204,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:writefreely/writefreely-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 		17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/writefreely/Sparkle";
@@ -1212,31 +1220,23 @@
 				kind = branch;
 			};
 		};
-		17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:writeas/writefreely-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1714DD64260BAC14000C0DFF /* WriteFreely */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			productName = WriteFreely;
+		};
+		1714DD6A260BAC2C000C0DFF /* WriteFreely */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			productName = WriteFreely;
+		};
 		17A4FED925924AF70037E96B /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
-		};
-		17DF32BF24C87D7B00BCE2E3 /* WriteFreely */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */;
-			productName = WriteFreely;
-		};
-		17DF32C224C87D8D00BCE2E3 /* WriteFreely */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17DF32BE24C87D7B00BCE2E3 /* XCRemoteSwiftPackageReference "writefreely-swift" */;
-			productName = WriteFreely;
 		};
 /* End XCSwiftPackageProductDependency section */
 
