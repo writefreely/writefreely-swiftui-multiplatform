@@ -106,9 +106,20 @@ struct ActivePostToolbarView: View {
 
     private func createPostUrl() -> [Any] {
         guard let postId = model.selectedPost?.postId else { return [] }
-        guard let urlString = model.selectedPost?.slug != nil ?
-                "\(model.account.server)/\((model.selectedPost?.collectionAlias)!)/\((model.selectedPost?.slug)!)" :
-                "\(model.account.server)/\((postId))" else { return [] }
+
+        var urlString: String
+
+        if let postSlug = model.selectedPost?.slug,
+           let postCollectionAlias = model.selectedPost?.collectionAlias {
+            // This post is in a collection, so share the URL as baseURL/postSlug
+            let urls = collections.filter { $0.alias == postCollectionAlias }
+            let baseURL = urls.first?.url ?? "\(model.account.server)/\(postCollectionAlias)/"
+            urlString = "\(baseURL)\(postSlug)"
+        } else {
+            // This is a draft post, sho share the URL as server/postID
+            urlString = "\(model.account.server)/\(postId)"
+        }
+
         guard let data = URL(string: urlString) else { return [] }
         return [data as NSURL]
     }

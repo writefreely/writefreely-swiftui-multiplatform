@@ -207,11 +207,13 @@ struct PostEditorView: View {
 
         if let postSlug = post.slug,
            let postCollectionAlias = post.collectionAlias {
-            // This post is in a collection, so share the URL as server/collectionAlias/postSlug.
-            urlString = "\(model.account.server)/\((postCollectionAlias))/\((postSlug))"
+            // This post is in a collection, so share the URL as baseURL/postSlug.
+            let urls = collections.filter { $0.alias == postCollectionAlias }
+            let baseURL = urls.first?.url ?? "\(model.account.server)/\(postCollectionAlias)/"
+            urlString = "\(baseURL)\(postSlug)"
         } else {
             // This is a draft post, so share the URL as server/postID
-            urlString = "\(model.account.server)/\((postId))"
+            urlString = "\(model.account.server)/\(postId)"
         }
 
         guard let data = URL(string: urlString) else { return }
