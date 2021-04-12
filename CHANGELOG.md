@@ -30,7 +30,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] The post status updates correctly after publishing local changes to an existing post.
 - [Mac] The server URL field is better validated when logging in to a WriteFreely instance/Write.as.
 - [Mac] Fixed a regression where text color did not adapt to dark mode correctly.
-- [iOS, Mac] Sharing a post now uses the custom domain (if any).
+- [Mac] Sharing a post now uses the custom domain (if any).
+
+## [1.0.5-ios] - 2021-04-12
+
+### Fixed
+
+- [iOS] Sharing a post now uses the custom domain (if any).
 - [iOS] Creating a new post no longer navigates away from the currently selected blog to the Drafts list.
 
 ## [1.0.4-ios] - 2021-02-15
@@ -228,7 +234,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.4-ios...HEAD 
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.5-ios...HEAD
+[1.0.5-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.4-ios...v1.0.5-ios
 [1.0.4-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.2-ios...v1.0.4-ios
 [1.0.2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1-ios...v1.0.2-ios
 [1.0.1-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.0...v1.0.1-ios
