@@ -14,7 +14,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-⚠️ Building and testing the iOS targets will work on any version of macOS that supports Xcode 12, but building and testing the macOS target requires macOS 11 (Big Sur) beta 9.
+⚠️ Building and testing the iOS targets will work on any version of macOS that supports Xcode 12, but building and testing the macOS target requires macOS 11 (Big Sur).
 
 - Xcode 12
 - [SwiftLint](https://github.com/realm/SwiftLint)
@@ -28,6 +28,8 @@ To run the tests, select the scheme you want to test (iOS or macOS) and choose *
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+Need help getting started? Find out more about the project's [office hours](https://discuss.write.as/t/office-hours-for-writefreely-swift-projects/2788).
 
 ## Versioning
 
