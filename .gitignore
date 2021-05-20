@@ -104,3 +104,4 @@ xcuserdata
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+/WriteFreely-MultiPlatform.xcodeproj/xcuserdata/angelo.xcuserdatad/xcschemes/xcschememanagement.plist
