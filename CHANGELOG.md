@@ -240,7 +240,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.5-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.6-ios...HEAD
+[1.0.6-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.5-ios...v1.0.6-ios
 [1.0.5-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.4-ios...v1.0.5-ios
 [1.0.4-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.2-ios...v1.0.4-ios
 [1.0.2-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.1-ios...v1.0.2-ios
