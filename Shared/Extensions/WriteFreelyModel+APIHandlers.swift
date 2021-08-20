@@ -10,9 +10,16 @@ extension WriteFreelyModel {
             let user = try result.get()
             fetchUserCollections()
             fetchUserPosts()
-            saveTokenToKeychain(user.token, username: user.username, server: account.server)
-            DispatchQueue.main.async {
-                self.account.login(user)
+            do {
+                try saveTokenToKeychain(user.token, username: user.username, server: account.server)
+                DispatchQueue.main.async {
+                    self.account.login(user)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.loginErrorMessage = "There was a problem storing your access token to the Keychain."
+                    self.isPresentingLoginErrorAlert = true
+                }
             }
         } catch WFError.notFound {
             DispatchQueue.main.async {
