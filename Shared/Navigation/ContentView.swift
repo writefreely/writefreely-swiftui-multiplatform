@@ -35,7 +35,22 @@ struct ContentView: View {
                     .help("Create a new local draft.")
                 }
             #else
-            CollectionListView()
+            if #available(iOS 15.0, *) {
+                CollectionListView()
+                    .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                        Alert(
+                            title: Text("Connection Error"),
+                            message: Text("""
+                            There is no internet connection at the moment. Please reconnect or try again later.
+                            """),
+                            dismissButton: .default(Text("OK"), action: {
+                                model.isPresentingNetworkErrorAlert = false
+                            })
+                        )
+                    })
+            } else {
+                CollectionListView()
+            }
             #endif
 
             #if os(macOS)
@@ -49,15 +64,29 @@ struct ContentView: View {
                 }
             }
             #else
-            PostListView()
+            if #available(iOS 15.0, *) {
+                PostListView()
+                    .sheet(
+                        isPresented: $model.isPresentingSettingsView,
+                        onDismiss: { model.isPresentingSettingsView = false },
+                        content: {
+                            SettingsView()
+                                .environmentObject(model)
+                        }
+                    )
+            } else {
+                PostListView()
+            }
             #endif
 
             Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
-
-        #if os(iOS)
+        // For iOS 14
+        if #available(iOS 15.0, *) {
+            // Do nothing.
+        } else {
         EmptyView()
             .sheet(
                 isPresented: $model.isPresentingSettingsView,
@@ -78,7 +107,7 @@ struct ContentView: View {
                     })
                 )
             })
-        #endif
+        }
     }
 }
 
