@@ -1,7 +1,14 @@
 import Foundation
 
 extension WriteFreelyModel {
-    func saveTokenToKeychain(_ token: String, username: String?, server: String) {
+
+    enum WFKeychainError: Error {
+        case saveToKeychainFailed
+        case purgeFromKeychainFailed
+        case fetchFromKeychainFailed
+    }
+
+    func saveTokenToKeychain(_ token: String, username: String?, server: String) throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecValueData as String: token.data(using: .utf8)!,
@@ -10,7 +17,7 @@ extension WriteFreelyModel {
         ]
         let status = SecItemAdd(query as CFDictionary, nil)
         guard status == errSecDuplicateItem || status == errSecSuccess else {
-            fatalError("Error storing in Keychain with OSStatus: \(status)")
+            throw WFKeychainError.saveToKeychainFailed
         }
     }
 
@@ -22,11 +29,11 @@ extension WriteFreelyModel {
         ]
         let status = SecItemDelete(query as CFDictionary)
         guard status == errSecSuccess || status == errSecItemNotFound else {
-            fatalError("Error deleting from Keychain with OSStatus: \(status)")
+            throw WFKeychainError.purgeFromKeychainFailed
         }
     }
 
-    func fetchTokenFromKeychain(username: String?, server: String) -> String? {
+    func fetchTokenFromKeychain(username: String?, server: String) throws -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: username ?? "anonymous",
@@ -41,7 +48,7 @@ extension WriteFreelyModel {
             return nil
         }
         guard status == errSecSuccess else {
-            fatalError("Error fetching from Keychain with OSStatus: \(status)")
+            throw WFKeychainError.fetchFromKeychainFailed
         }
         guard let existingSecItem = secItem as? [String: Any],
               let tokenData = existingSecItem[kSecValueData as String] as? Data,
@@ -50,4 +57,5 @@ extension WriteFreelyModel {
         }
         return token
     }
+
 }

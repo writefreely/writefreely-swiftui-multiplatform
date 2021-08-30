@@ -51,18 +51,25 @@ final class WriteFreelyModel: ObservableObject {
                     print("Server URL not found")
                     return
                 }
-                guard let token = self.fetchTokenFromKeychain(
-                        username: self.account.username,
-                        server: self.account.server
-                ) else {
-                    print("Could not fetch token from Keychain")
-                    return
+                do {
+                    guard let token = try self.fetchTokenFromKeychain(
+                            username: self.account.username,
+                            server: self.account.server
+                    ) else {
+                        self.loginErrorMessage = AccountError.couldNotFetchTokenFromKeychain.localizedDescription
+                        self.isPresentingLoginErrorAlert = true
+                        return
+                    }
+
+                    self.account.login(WFUser(token: token, username: self.account.username))
+                    self.client = WFClient(for: serverURL)
+                    self.client?.user = self.account.user
+                    self.fetchUserCollections()
+                    self.fetchUserPosts()
+                } catch {
+                    self.loginErrorMessage = AccountError.couldNotFetchTokenFromKeychain.localizedDescription
+                    self.isPresentingLoginErrorAlert = true
                 }
-                self.account.login(WFUser(token: token, username: self.account.username))
-                self.client = WFClient(for: serverURL)
-                self.client?.user = self.account.user
-                self.fetchUserCollections()
-                self.fetchUserPosts()
             }
         }
 
