@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] The server URL field is better validated when logging in to a WriteFreely instance/Write.as.
 - [Mac] Fixed a regression where text color did not adapt to dark mode correctly.
 - [Mac] Sharing a post now uses the custom domain (if any).
+- [Mac] The window is now restored when clicking on the app icon in the dock.
+- [iOS, Mac] Fixed a potential crash if the system keychain wasn't available at app launch.  
 
 ## [1.0.6-ios] - 2021-06-10
 
@@ -42,32 +44,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- [iOS] Sharing a post now uses the custom domain (if any).
-- [iOS] Creating a new post no longer navigates away from the currently selected blog to the Drafts list.
+- Sharing a post now uses the custom domain (if any).
+- Creating a new post no longer navigates away from the currently selected blog to the Drafts list.
 
 ## [1.0.4-ios] - 2021-02-15
 
 ### Changed
 
-- [iOS] The published date now reflects the time a post was published, not created.
+- The published date now reflects the time a post was published, not created.
 
 ### Fixed
 
-- [iOS] Restored the launch-to-last-draft functionality in the Editor Launching Policy.
-- [iOS] The post status updates correctly after publishing local changes to an existing post.
-- [iOS] The server URL field is better validated when logging in to a WriteFreely instance/Write.as.
+- Restored the launch-to-last-draft functionality in the Editor Launching Policy.
+- The post status updates correctly after publishing local changes to an existing post.
+- The server URL field is better validated when logging in to a WriteFreely instance/Write.as.
 
 ## [1.0.2-ios] - 2021-01-20
 
 ### Added
 
-- [iOS] A link has been added to the the Settings sheet to review the app on the App Store.
+- A link has been added to the the Settings sheet to review the app on the App Store.
 
 ### Fixed
 
-- [iOS] Multiple accessibility issues with VoiceOver text were fixed.
-- [iOS] Navigating through the app now animates properly.
-- [iOS] Fixed a bug on iPhone where leaving the post editor would sometimes send you right back to the editor. 
+- Multiple accessibility issues with VoiceOver text were fixed.
+- Navigating through the app now animates properly.
+- Fixed a bug on iPhone where leaving the post editor would sometimes send you right back to the editor. 
 
 ## [1.0.1-ios] - 2020-11-18
 
