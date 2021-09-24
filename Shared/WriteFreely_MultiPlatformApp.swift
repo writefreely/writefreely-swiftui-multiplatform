@@ -34,24 +34,24 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .onAppear(perform: {
-                    if model.editor.showAllPostsFlag {
-                        DispatchQueue.main.async {
-                            self.model.selectedCollection = nil
-                            self.model.showAllPosts = true
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
-                            self.model.showAllPosts = false
-                        }
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        if model.editor.lastDraftURL != nil {
-                            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
-                        } else {
-                            createNewLocalPost()
-                        }
-                    }
+//                    if model.editor.showAllPostsFlag {
+//                        DispatchQueue.main.async {
+//                            self.model.selectedCollection = nil
+//                            self.model.showAllPosts = true
+//                        }
+//                    } else {
+//                        DispatchQueue.main.async {
+//                            self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
+//                            self.model.showAllPosts = false
+//                        }
+//                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                        if model.editor.lastDraftURL != nil {
+//                            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
+//                        } else {
+//                            createNewLocalPost()
+//                        }
+//                    }
                 })
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.persistentContainer.viewContext)

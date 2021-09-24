@@ -97,7 +97,7 @@ struct PostListFilteredView: View {
             Alert(
                 title: Text("Delete Post?"),
                 message: Text("This action cannot be undone."),
-                primaryButton: .cancel() {
+                primaryButton: .cancel {
                     model.postToDelete = nil
                 },
                 secondaryButton: .destructive(Text("Delete"), action: {

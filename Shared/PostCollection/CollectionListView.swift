@@ -2,71 +2,24 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-
-    @FetchRequest(
-        entity: WFACollection.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \WFACollection.title, ascending: true)]
-    ) var collections: FetchedResults<WFACollection>
+    @ObservedObject var collections = CollectionListModel(managedObjectContext: LocalStorageManager.persistentContainer.viewContext)
+    @State var selectedCollection: WFACollection?
 
     var body: some View {
-        List(selection: $model.selectedCollection) {
+        List(selection: $selectedCollection) {
             if model.account.isLoggedIn {
-                NavigationLink(
-                    destination: PostListView(),
-                    isActive: Binding<Bool>(
-                        get: { () -> Bool in
-                            model.selectedCollection == nil && model.showAllPosts
-                        }, set: { newValue in
-                            if newValue {
-                                self.model.showAllPosts = true
-                                self.model.selectedCollection = nil
-                            } else {
-                                // No-op
-                            }
-                        }
-                    ),
-                    label: {
-                    Text("All Posts")
-                })
-                NavigationLink(
-                    destination: PostListView(),
-                    isActive: Binding<Bool>(
-                        get: { () -> Bool in
-                            model.selectedCollection == nil && !model.showAllPosts
-                        }, set: { newValue in
-                            if newValue {
-                                self.model.showAllPosts = false
-                                self.model.selectedCollection = nil
-                            } else {
-                                // No-op
-                            }
-                        }
-                    ),
-                    label: {
-                    Text(model.account.server == "https://write.as" ? "Anonymous" : "Drafts")
-                })
+                NavigationLink("All Posts", destination: PostListView(selectedCollection: nil, showAllPosts: true))
+                NavigationLink("Drafts", destination: PostListView(selectedCollection: nil, showAllPosts: false))
                 Section(header: Text("Your Blogs")) {
-                    ForEach(collections, id: \.self) { collection in
-                        NavigationLink(
-                            destination: PostListView(),
-                            isActive: Binding<Bool>(
-                                get: { () -> Bool in
-                                    model.selectedCollection == collection && !model.showAllPosts
-                                }, set: { newValue in
-                                    if newValue {
-                                        self.model.showAllPosts = false
-                                        self.model.selectedCollection = collection
-                                    } else {
-                                        // No-op
-                                    }
-                                }
-                            ),
-                            label: { Text(collection.title) }
-                        )
+                    ForEach(collections.list, id: \.self) { collection in
+                        NavigationLink(destination: PostListView(selectedCollection: collection, showAllPosts: false),
+                                       tag: collection,
+                                       selection: $selectedCollection,
+                                       label: { Text("\(collection.title)") })
                     }
                 }
             } else {
-                NavigationLink(destination: PostListView()) {
+                NavigationLink(destination: PostListView(selectedCollection: nil, showAllPosts: false)) {
                     Text("Drafts")
                 }
             }

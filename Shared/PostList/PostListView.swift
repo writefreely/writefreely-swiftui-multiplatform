@@ -7,6 +7,9 @@ struct PostListView: View {
 
     @State private var postCount: Int = 0
 
+    var selectedCollection: WFACollection?
+    var showAllPosts: Bool
+
     #if os(iOS)
     private var frameHeight: CGFloat {
         var height: CGFloat = 50
@@ -20,12 +23,12 @@ struct PostListView: View {
         #if os(iOS)
         ZStack(alignment: .bottom) {
             PostListFilteredView(
-                collection: model.selectedCollection,
-                showAllPosts: model.showAllPosts,
+                collection: selectedCollection,
+                showAllPosts: showAllPosts,
                 postCount: $postCount
             )
                 .navigationTitle(
-                    model.showAllPosts ? "All Posts" : model.selectedCollection?.title ?? (
+                    showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                         model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
                     )
                 )
@@ -70,9 +73,28 @@ struct PostListView: View {
                     })
                     .accessibilityLabel(Text("Settings"))
                     .accessibilityHint(Text("Open the Settings sheet"))
+                    .sheet(
+                        isPresented: $model.isPresentingSettingsView,
+                        onDismiss: { model.isPresentingSettingsView = false },
+                        content: {
+                            SettingsView()
+                                .environmentObject(model)
+                        }
+                    )
                     Spacer()
                     Text(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
                         .foregroundColor(.secondary)
+                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
+                            Alert(
+                                title: Text("Connection Error"),
+                                message: Text("""
+                                There is no internet connection at the moment. Please reconnect or try again later.
+                                """),
+                                dismissButton: .default(Text("OK"), action: {
+                                    model.isPresentingNetworkErrorAlert = false
+                                })
+                            )
+                        })
                     Spacer()
                     if model.isProcessingRequest {
                         ProgressView()
@@ -105,8 +127,8 @@ struct PostListView: View {
         .ignoresSafeArea()
         #else
         PostListFilteredView(
-            collection: model.selectedCollection,
-            showAllPosts: model.showAllPosts,
+            collection: selectedCollection,
+            showAllPosts: showAllPosts,
             postCount: $postCount
         )
         .toolbar {
@@ -129,7 +151,7 @@ struct PostListView: View {
             }
         }
         .navigationTitle(
-            model.showAllPosts ? "All Posts" : model.selectedCollection?.title ?? (
+            showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                 model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
             )
         )
@@ -142,7 +164,7 @@ struct PostListView_Previews: PreviewProvider {
         let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
 
-        return PostListView()
+        return PostListView(showAllPosts: true)
             .environment(\.managedObjectContext, context)
             .environmentObject(model)
     }
