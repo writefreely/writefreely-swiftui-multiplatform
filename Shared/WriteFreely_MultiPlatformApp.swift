@@ -34,17 +34,19 @@ struct WriteFreely_MultiPlatformApp: App {
         WindowGroup {
             ContentView()
                 .onAppear(perform: {
-//                    if model.editor.showAllPostsFlag {
-//                        DispatchQueue.main.async {
-//                            self.model.selectedCollection = nil
-//                            self.model.showAllPosts = true
-//                        }
-//                    } else {
-//                        DispatchQueue.main.async {
-//                            self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
-//                            self.model.showAllPosts = false
-//                        }
-//                    }
+                    if model.editor.showAllPostsFlag {
+                        DispatchQueue.main.async {
+                            self.model.selectedCollection = nil
+                            self.model.showAllPosts = true
+                            showLastDraftOrCreateNewLocalPost()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
+                            self.model.showAllPosts = false
+                            showLastDraftOrCreateNewLocalPost()
+                        }
+                    }
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 //                        if model.editor.lastDraftURL != nil {
 //                            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
@@ -126,6 +128,14 @@ struct WriteFreely_MultiPlatformApp: App {
 //            .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }
         #endif
+    }
+
+    private func showLastDraftOrCreateNewLocalPost() {
+        if model.editor.lastDraftURL != nil {
+            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
+        } else {
+            createNewLocalPost()
+        }
     }
 
     private func createNewLocalPost() {

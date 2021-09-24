@@ -49,7 +49,7 @@ struct ContentView: View {
                 }
             }
             #else
-            PostListView(selectedCollection: nil, showAllPosts: false)
+            PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
             #endif
 
             Text("Select a post, or create a new local draft.")
