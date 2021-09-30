@@ -35,7 +35,7 @@ struct ContentView: View {
                     .help("Create a new local draft.")
                 }
             #else
-            CollectionListView()
+            CollectionListView(selectedCollection: model.selectedCollection)
             #endif
 
             #if os(macOS)
@@ -49,36 +49,13 @@ struct ContentView: View {
                 }
             }
             #else
-            PostListView()
+            PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
             #endif
 
             Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
-
-        #if os(iOS)
-        EmptyView()
-            .sheet(
-                isPresented: $model.isPresentingSettingsView,
-                onDismiss: { model.isPresentingSettingsView = false },
-                content: {
-                    SettingsView()
-                        .environmentObject(model)
-                }
-            )
-            .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                Alert(
-                    title: Text("Connection Error"),
-                    message: Text("""
-                        There is no internet connection at the moment. Please reconnect or try again later.
-                        """),
-                    dismissButton: .default(Text("OK"), action: {
-                        model.isPresentingNetworkErrorAlert = false
-                    })
-                )
-            })
-        #endif
     }
 }
 
