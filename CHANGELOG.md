@@ -32,7 +32,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a regression where text color did not adapt to dark mode correctly.
 - [Mac] Sharing a post now uses the custom domain (if any).
 - [Mac] The window is now restored when clicking on the app icon in the dock.
-- [iOS, Mac] Fixed a potential crash if the system keychain wasn't available at app launch.  
+- [Mac] Fixed a potential crash if the system keychain wasn't available at app launch.  
+
+## [1.0.7-ios] - 2021-10-01
+
+### Fixed
+
+- Fixed a bug that would cause the app to cancel navigation from the post list to the blog list on iPhone.
+- Fixed a potential crash if the system keychain wasn't available at app launch.
+- Fixed a bug that prevented navigation to the post list when selecting a blog on iPhone on iOS 15.
+- Fixed a bug that prevented the Settings sheet from displaying on iOS 15.
 
 ## [1.0.6-ios] - 2021-06-10
 
@@ -242,7 +251,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.6-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.7-ios...HEAD
+[1.0.7-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.6-ios...v1.0.7-ios
 [1.0.6-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.5-ios...v1.0.6-ios
 [1.0.5-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.4-ios...v1.0.5-ios
 [1.0.4-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.2-ios...v1.0.4-ios
