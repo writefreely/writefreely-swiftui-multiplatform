@@ -129,7 +129,7 @@ struct ActivePostToolbarView: View {
             return
         }
         DispatchQueue.main.async {
-            LocalStorageManager().saveContext()
+            LocalStorageManager.standard.saveContext()
             model.publish(post: post)
         }
     }

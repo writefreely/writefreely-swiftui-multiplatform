@@ -6,19 +6,20 @@ import UIKit
 import AppKit
 #endif
 
-class LocalStorageManager {
-    static let persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "LocalStorageModel")
-        container.loadPersistentStores { _, error in
-            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            if let error = error {
-                fatalError("Unresolved error loading persistent store: \(error)")
-            }
-        }
-        return container
-    }()
+final class LocalStorageManager {
+    public static var standard = LocalStorageManager()
+    public let persistentContainer: NSPersistentContainer
 
     init() {
+        // Set up the persistent container.
+        persistentContainer = NSPersistentContainer(name: "LocalStorageModel")
+        persistentContainer.loadPersistentStores { description, error in
+            if let error = error {
+                fatalError("Core Data store failed to load with error: \(error)")
+            }
+        }
+        persistentContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
         let center = NotificationCenter.default
 
         #if os(iOS)
@@ -36,9 +37,9 @@ class LocalStorageManager {
     }
 
     func saveContext() {
-        if LocalStorageManager.persistentContainer.viewContext.hasChanges {
+        if persistentContainer.viewContext.hasChanges {
             do {
-                try LocalStorageManager.persistentContainer.viewContext.save()
+                try persistentContainer.viewContext.save()
             } catch {
                 print("Error saving context: \(error)")
             }
@@ -50,7 +51,7 @@ class LocalStorageManager {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try LocalStorageManager.persistentContainer.viewContext.executeAndMergeChanges(using: deleteRequest)
+            try persistentContainer.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
             print("Error: Failed to purge cached collections.")
         }

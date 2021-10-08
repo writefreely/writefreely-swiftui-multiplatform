@@ -6,6 +6,7 @@ struct PostListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
 
     @State private var postCount: Int = 0
+    @State private var filteredListViewId: Int = 0
 
     var selectedCollection: WFACollection?
     var showAllPosts: Bool
@@ -27,41 +28,49 @@ struct PostListView: View {
                 showAllPosts: showAllPosts,
                 postCount: $postCount
             )
+<<<<<<< HEAD
                 .navigationTitle(
                     showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                         model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
                     )
+=======
+            .id(self.filteredListViewId)
+            .navigationTitle(
+                model.showAllPosts ? "All Posts" : model.selectedCollection?.title ?? (
+                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+>>>>>>> c9322d1 (Invalidate PostListView on didBecomeActive)
                 )
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        // We have to add a Spacer as a sibling view to the Button in some kind of Stack, so that any
-                        // a11y modifiers are applied as expected: bug report filed as FB8956392.
-                        ZStack {
-                            Spacer()
-                            Button(action: {
-                                let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
-                                withAnimation {
-                                    self.model.showAllPosts = false
-                                    self.model.selectedPost = managedPost
-                                }
-                            }, label: {
-                                ZStack {
-                                    Image("does.not.exist")
-                                        .accessibilityHidden(true)
-                                    Image(systemName: "square.and.pencil")
-                                        .accessibilityHidden(true)
-                                        .imageScale(.large)         // These modifiers compensate for the resizing
-                                        .padding(.vertical, 12)     // done to the Image (and the button tap target)
-                                        .padding(.leading, 12)      // by the SwiftUI layout system from adding a
-                                        .padding(.trailing, 8)      // Spacer in this ZStack (FB8956392).
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            })
-                            .accessibilityLabel(Text("Compose"))
-                            .accessibilityHint(Text("Compose a new local draft"))
-                        }
+            )
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    // We have to add a Spacer as a sibling view to the Button in some kind of Stack, so that any
+                    // a11y modifiers are applied as expected: bug report filed as FB8956392.
+                    ZStack {
+                        Spacer()
+                        Button(action: {
+                            let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
+                            withAnimation {
+                                self.model.showAllPosts = false
+                                self.model.selectedPost = managedPost
+                            }
+                        }, label: {
+                            ZStack {
+                                Image("does.not.exist")
+                                    .accessibilityHidden(true)
+                                Image(systemName: "square.and.pencil")
+                                    .accessibilityHidden(true)
+                                    .imageScale(.large)         // These modifiers compensate for the resizing
+                                    .padding(.vertical, 12)     // done to the Image (and the button tap target)
+                                    .padding(.leading, 12)      // by the SwiftUI layout system from adding a
+                                    .padding(.trailing, 8)      // Spacer in this ZStack (FB8956392).
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        })
+                        .accessibilityLabel(Text("Compose"))
+                        .accessibilityHint(Text("Compose a new local draft"))
                     }
                 }
+            }
             VStack {
                 HStack(spacing: 0) {
                     Button(action: {
@@ -124,6 +133,13 @@ struct PostListView: View {
             .background(Color(UIColor.systemGray5))
             .overlay(Divider(), alignment: .top)
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            // We use this to invalidate and refresh the view, to make sure we show any new posts that were created
+            // in an extension, for example.
+            withAnimation {
+                self.filteredListViewId += 1
+            }
+        }
         .ignoresSafeArea()
         .onAppear {
             model.selectedCollection = selectedCollection
@@ -165,7 +181,7 @@ struct PostListView: View {
 
 struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.persistentContainer.viewContext
         let model = WriteFreelyModel()
 
         return PostListView(showAllPosts: true)

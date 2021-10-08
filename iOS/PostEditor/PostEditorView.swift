@@ -158,7 +158,7 @@ struct PostEditorView: View {
                 self.model.editor.clearLastDraft()
             }
             DispatchQueue.main.async {
-                LocalStorageManager().saveContext()
+                LocalStorageManager.standard.saveContext()
             }
         })
         .onAppear(perform: {
@@ -183,7 +183,7 @@ struct PostEditorView: View {
                 }
             } else if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
-                    LocalStorageManager().saveContext()
+                    LocalStorageManager.standard.saveContext()
                 }
             }
         })
@@ -191,7 +191,7 @@ struct PostEditorView: View {
 
     private func publishPost() {
         DispatchQueue.main.async {
-            LocalStorageManager().saveContext()
+            LocalStorageManager.standard.saveContext()
             model.publish(post: post)
         }
         #if os(iOS)
@@ -236,7 +236,7 @@ struct PostEditorView: View {
 
 struct PostEditorView_EmptyPostPreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.createdDate = Date()
         testPost.appearance = "norm"
@@ -251,7 +251,7 @@ struct PostEditorView_EmptyPostPreviews: PreviewProvider {
 
 struct PostEditorView_ExistingPostPreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.persistentContainer.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = "Test Post Title"
         testPost.body = "Here's some cool sample body text."

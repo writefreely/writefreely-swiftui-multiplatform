@@ -60,7 +60,7 @@ struct PostTextEditingView: View {
         .onReceive(timer) { _ in
             if !post.body.isEmpty && hasBeenEdited {
                 DispatchQueue.main.async {
-                    LocalStorageManager().saveContext()
+                    LocalStorageManager.standard.saveContext()
                     hasBeenEdited = false
                 }
             }
@@ -87,7 +87,7 @@ struct PostTextEditingView: View {
     private func onCommit() {
         if !post.body.isEmpty && hasBeenEdited {
             DispatchQueue.main.async {
-                LocalStorageManager().saveContext()
+                LocalStorageManager.standard.saveContext()
             }
         }
         hasBeenEdited = false
