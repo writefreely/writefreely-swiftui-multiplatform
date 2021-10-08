@@ -46,7 +46,7 @@ struct PostCellView: View {
 
 struct PostCell_AllPostsPreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = "Test Post Title"
         testPost.body = "Here's some cool sample body text."
@@ -59,7 +59,7 @@ struct PostCell_AllPostsPreviews: PreviewProvider {
 
 struct PostCell_NormalPreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = "Test Post Title"
         testPost.body = "Here's some cool sample body text."
@@ -73,7 +73,7 @@ struct PostCell_NormalPreviews: PreviewProvider {
 
 struct PostCell_NoTitlePreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = ""
         testPost.body = "Here's some cool sample body text."

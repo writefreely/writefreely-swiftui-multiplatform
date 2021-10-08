@@ -4,7 +4,7 @@ import CoreData
 class PostListModel: ObservableObject {
     func remove(_ post: WFAPost) {
         withAnimation {
-            LocalStorageManager.standard.persistentContainer.viewContext.delete(post)
+            LocalStorageManager.standard.container.viewContext.delete(post)
             LocalStorageManager.standard.saveContext()
         }
     }
@@ -15,7 +15,7 @@ class PostListModel: ObservableObject {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try LocalStorageManager.standard.persistentContainer.viewContext.executeAndMergeChanges(using: deleteRequest)
+            try LocalStorageManager.standard.container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
             print("Error: Failed to purge cached posts.")
         }

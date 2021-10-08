@@ -27,7 +27,7 @@ struct PostEditorModel {
     }
 
     func generateNewLocalPost(withFont appearance: Int) -> WFAPost {
-        let managedPost = WFAPost(context: LocalStorageManager.standard.persistentContainer.viewContext)
+        let managedPost = WFAPost(context: LocalStorageManager.standard.container.viewContext)
         managedPost.createdDate = Date()
         managedPost.title = ""
         managedPost.body = ""
@@ -55,9 +55,9 @@ struct PostEditorModel {
     }
 
     private func fetchManagedObject(from objectURL: URL) -> NSManagedObject? {
-        let coordinator = LocalStorageManager.standard.persistentContainer.persistentStoreCoordinator
+        let coordinator = LocalStorageManager.standard.container.persistentStoreCoordinator
         guard let managedObjectID = coordinator.managedObjectID(forURIRepresentation: objectURL) else { return nil }
-        let object = LocalStorageManager.standard.persistentContainer.viewContext.object(with: managedObjectID)
+        let object = LocalStorageManager.standard.container.viewContext.object(with: managedObjectID)
         return object
     }
 }

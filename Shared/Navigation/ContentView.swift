@@ -61,7 +61,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let model = WriteFreelyModel()
 
         return ContentView()

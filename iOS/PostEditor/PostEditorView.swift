@@ -236,7 +236,7 @@ struct PostEditorView: View {
 
 struct PostEditorView_EmptyPostPreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let testPost = WFAPost(context: context)
         testPost.createdDate = Date()
         testPost.appearance = "norm"
@@ -251,7 +251,7 @@ struct PostEditorView_EmptyPostPreviews: PreviewProvider {
 
 struct PostEditorView_ExistingPostPreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let testPost = WFAPost(context: context)
         testPost.title = "Test Post Title"
         testPost.body = "Here's some cool sample body text."

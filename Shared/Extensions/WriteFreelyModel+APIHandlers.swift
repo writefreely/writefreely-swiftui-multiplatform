@@ -99,7 +99,7 @@ extension WriteFreelyModel {
             let fetchedCollections = try result.get()
             for fetchedCollection in fetchedCollections {
                 DispatchQueue.main.async {
-                    let localCollection = WFACollection(context: LocalStorageManager.standard.persistentContainer.viewContext)
+                    let localCollection = WFACollection(context: LocalStorageManager.standard.container.viewContext)
                     localCollection.alias = fetchedCollection.alias
                     localCollection.blogDescription = fetchedCollection.description
                     localCollection.email = fetchedCollection.email
@@ -130,7 +130,7 @@ extension WriteFreelyModel {
         }
         let request = WFAPost.createFetchRequest()
         do {
-            let locallyCachedPosts = try LocalStorageManager.standard.persistentContainer.viewContext.fetch(request)
+            let locallyCachedPosts = try LocalStorageManager.standard.container.viewContext.fetch(request)
             do {
                 var postsToDelete = locallyCachedPosts.filter { $0.status != PostStatus.local.rawValue }
                 let fetchedPosts = try result.get()
@@ -146,7 +146,7 @@ extension WriteFreelyModel {
                         }
                     } else {
                         DispatchQueue.main.async {
-                            let managedPost = WFAPost(context: LocalStorageManager.standard.persistentContainer.viewContext)
+                            let managedPost = WFAPost(context: LocalStorageManager.standard.container.viewContext)
                             managedPost.postId = fetchedPost.postId
                             managedPost.slug = fetchedPost.slug
                             managedPost.appearance = fetchedPost.appearance
@@ -222,7 +222,7 @@ extension WriteFreelyModel {
                     request.predicate = matchBodyPredicate
                 }
                 do {
-                    let cachedPostsResults = try LocalStorageManager.standard.persistentContainer.viewContext.fetch(request)
+                    let cachedPostsResults = try LocalStorageManager.standard.container.viewContext.fetch(request)
                     guard let cachedPost = cachedPostsResults.first else { return }
                     cachedPost.appearance = fetchedPost.appearance
                     cachedPost.body = fetchedPost.body
@@ -293,7 +293,7 @@ extension WriteFreelyModel {
             }
         } catch {
             DispatchQueue.main.async {
-                LocalStorageManager.standard.persistentContainer.viewContext.rollback()
+                LocalStorageManager.standard.container.viewContext.rollback()
             }
             print(error)
         }

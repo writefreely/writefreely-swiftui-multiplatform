@@ -58,7 +58,7 @@ struct AccountLogoutView: View {
         let request = WFAPost.createFetchRequest()
         request.predicate = NSPredicate(format: "status == %i", 1)
         do {
-            let editedPosts = try LocalStorageManager.standard.persistentContainer.viewContext.fetch(request)
+            let editedPosts = try LocalStorageManager.standard.container.viewContext.fetch(request)
             if editedPosts.count == 1 {
                 editedPostsWarningString = "You'll lose unpublished changes to \(editedPosts.count) edited post. "
             }

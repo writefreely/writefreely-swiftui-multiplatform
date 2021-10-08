@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @ObservedObject var collections = CollectionListModel(managedObjectContext: LocalStorageManager.standard.persistentContainer.viewContext)
+    @ObservedObject var collections = CollectionListModel(managedObjectContext: LocalStorageManager.standard.container.viewContext)
     @State var selectedCollection: WFACollection?
 
     var body: some View {
@@ -43,7 +43,7 @@ struct CollectionListView: View {
 
 struct CollectionListView_LoggedOutPreviews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.standard.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let model = WriteFreelyModel()
 
         return CollectionListView()

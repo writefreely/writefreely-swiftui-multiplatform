@@ -8,17 +8,17 @@ import AppKit
 
 final class LocalStorageManager {
     public static var standard = LocalStorageManager()
-    public let persistentContainer: NSPersistentContainer
+    public let container: NSPersistentContainer
 
     init() {
         // Set up the persistent container.
-        persistentContainer = NSPersistentContainer(name: "LocalStorageModel")
-        persistentContainer.loadPersistentStores { description, error in
+        container = NSPersistentContainer(name: "LocalStorageModel")
+        container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Core Data store failed to load with error: \(error)")
             }
         }
-        persistentContainer.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 
         let center = NotificationCenter.default
 
@@ -37,9 +37,9 @@ final class LocalStorageManager {
     }
 
     func saveContext() {
-        if persistentContainer.viewContext.hasChanges {
+        if container.viewContext.hasChanges {
             do {
-                try persistentContainer.viewContext.save()
+                try container.viewContext.save()
             } catch {
                 print("Error saving context: \(error)")
             }
@@ -51,7 +51,7 @@ final class LocalStorageManager {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            try persistentContainer.viewContext.executeAndMergeChanges(using: deleteRequest)
+            try container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
             print("Error: Failed to purge cached collections.")
         }
