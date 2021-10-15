@@ -978,7 +978,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 625;
+				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -987,7 +987,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -1003,7 +1003,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 625;
+				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1012,7 +1012,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
