@@ -159,6 +159,10 @@ struct PostListView: View {
                 model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
             )
         )
+        .onAppear {
+            model.selectedCollection = selectedCollection
+            model.showAllPosts = showAllPosts
+        }
         #endif
     }
 }

@@ -35,12 +35,12 @@ struct ContentView: View {
                     .help("Create a new local draft.")
                 }
             #else
-            CollectionListView(selectedCollection: model.selectedCollection)
+            CollectionListView()
             #endif
 
             #if os(macOS)
             ZStack {
-                PostListView()
+                PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)
