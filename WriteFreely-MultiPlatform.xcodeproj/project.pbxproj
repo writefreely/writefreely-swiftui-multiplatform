@@ -155,6 +155,7 @@
 		1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17681E402519410E00D394AE /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
 		1780F6EE25895EDB00FE45FF /* PostCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommands.swift; sourceTree = "<group>"; };
+		17A355D3271A052C007C7A47 /* WriteFreely-MultiPlatform (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WriteFreely-MultiPlatform (iOS).entitlements"; sourceTree = "<group>"; };
 		17A4FEDF25924E810037E96B /* MacSoftwareUpdater.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MacSoftwareUpdater.md; sourceTree = "<group>"; };
 		17A4FEEC25927E730037E96B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17A5388724DDA31F00DEFF9A /* MacAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAccountView.swift; sourceTree = "<group>"; };
@@ -368,6 +369,7 @@
 		17DF327B24C87D3300BCE2E3 = {
 			isa = PBXGroup;
 			children = (
+				17A355D3271A052C007C7A47 /* WriteFreely-MultiPlatform (iOS).entitlements */,
 				17DF32C624C884FF00BCE2E3 /* README.md */,
 				17DF32C924C8855E00BCE2E3 /* LICENSE.md */,
 				17DF32CA24C8856C00BCE2E3 /* CHANGELOG.md */,
@@ -974,8 +976,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 625;
+				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -984,7 +987,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -998,8 +1001,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 625;
+				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1008,7 +1012,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;

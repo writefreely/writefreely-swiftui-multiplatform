@@ -169,7 +169,7 @@ struct PostListView: View {
 
 struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = LocalStorageManager.persistentContainer.viewContext
+        let context = LocalStorageManager.standard.container.viewContext
         let model = WriteFreelyModel()
 
         return PostListView(showAllPosts: true)
