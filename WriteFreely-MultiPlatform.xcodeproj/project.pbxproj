@@ -27,6 +27,11 @@
 		171DC677272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
 		171DC678272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
 		172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172C492D2593981900E20ADF /* MacUpdatesView.swift */; };
+		172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */; platformFilter = maccatalyst; };
+		172E10042735B83E00061372 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172E10032735B83E00061372 /* Media.xcassets */; };
+		172E10062735B83E00061372 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10052735B83E00061372 /* ActionViewController.swift */; };
+		172E10092735B83E00061372 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172E10072735B83E00061372 /* MainInterface.storyboard */; };
+		172E100D2735B83E00061372 /* ActionExtension-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
 		17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17466625256C0D0600629997 /* MacEditorTextView.swift */; };
@@ -112,6 +117,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		172E100B2735B83E00061372 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17DF327C24C87D3300BCE2E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 172E0FFE2735B83E00061372;
+			remoteInfo = "ActionExtension-iOS";
+		};
 		17DF329924C87D3500BCE2E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 17DF327C24C87D3300BCE2E3 /* Project object */;
@@ -128,6 +140,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		172E100E2735B83E00061372 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				172E100D2735B83E00061372 /* ActionExtension-iOS.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = EditorLaunchingPolicy.md; sourceTree = "<group>"; };
 		170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListModel.swift; sourceTree = "<group>"; };
@@ -139,6 +165,12 @@
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		172C492D2593981900E20ADF /* MacUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesView.swift; sourceTree = "<group>"; };
+		172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ActionExtension-iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		172E10032735B83E00061372 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		172E10052735B83E00061372 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		172E10082735B83E00061372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		172E100A2735B83E00061372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		17466625256C0D0600629997 /* MacEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorTextView.swift; sourceTree = "<group>"; };
@@ -211,6 +243,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		172E0FFC2735B83E00061372 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17DF328524C87D3500BCE2E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,6 +301,17 @@
 				17120DA424E19CBF002B9F6C /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		172E10022735B83E00061372 /* ActionExtension-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				172E10032735B83E00061372 /* Media.xcassets */,
+				172E10052735B83E00061372 /* ActionViewController.swift */,
+				172E10072735B83E00061372 /* MainInterface.storyboard */,
+				172E100A2735B83E00061372 /* Info.plist */,
+			);
+			path = "ActionExtension-iOS";
 			sourceTree = "<group>";
 		};
 		1739B8D324EAFAB700DA7421 /* PostEditor */ = {
@@ -385,6 +436,7 @@
 				17DF329124C87D3500BCE2E3 /* macOS */,
 				17DF329B24C87D3500BCE2E3 /* Tests iOS */,
 				17DF32A624C87D3500BCE2E3 /* Tests macOS */,
+				172E10022735B83E00061372 /* ActionExtension-iOS */,
 				17DF328924C87D3500BCE2E3 /* Products */,
 				17DF32C124C87D8D00BCE2E3 /* Frameworks */,
 			);
@@ -416,6 +468,7 @@
 				17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */,
 				17DF329824C87D3500BCE2E3 /* Tests iOS.xctest */,
 				17DF32A324C87D3500BCE2E3 /* Tests macOS.xctest */,
+				172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -467,6 +520,7 @@
 		17DF32C124C87D8D00BCE2E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -525,6 +579,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		172E0FFE2735B83E00061372 /* ActionExtension-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 172E10112735B83E00061372 /* Build configuration list for PBXNativeTarget "ActionExtension-iOS" */;
+			buildPhases = (
+				172E0FFB2735B83E00061372 /* Sources */,
+				172E0FFC2735B83E00061372 /* Frameworks */,
+				172E0FFD2735B83E00061372 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ActionExtension-iOS";
+			productName = "ActionExtension-iOS";
+			productReference = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		17DF328724C87D3500BCE2E3 /* WriteFreely-MultiPlatform (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17DF32B224C87D3500BCE2E3 /* Build configuration list for PBXNativeTarget "WriteFreely-MultiPlatform (iOS)" */;
@@ -533,10 +604,12 @@
 				17DF328524C87D3500BCE2E3 /* Frameworks */,
 				17DF328624C87D3500BCE2E3 /* Resources */,
 				17DF32C424C87E6700BCE2E3 /* ShellScript */,
+				172E100E2735B83E00061372 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				172E100C2735B83E00061372 /* PBXTargetDependency */,
 			);
 			name = "WriteFreely-MultiPlatform (iOS)";
 			packageProductDependencies = (
@@ -610,9 +683,12 @@
 		17DF327C24C87D3300BCE2E3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
+					172E0FFE2735B83E00061372 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					17DF328724C87D3500BCE2E3 = {
 						CreatedOnToolsVersion = 12.0;
 					};
@@ -650,11 +726,21 @@
 				17DF328F24C87D3500BCE2E3 /* WriteFreely-MultiPlatform (macOS) */,
 				17DF329724C87D3500BCE2E3 /* Tests iOS */,
 				17DF32A224C87D3500BCE2E3 /* Tests macOS */,
+				172E0FFE2735B83E00061372 /* ActionExtension-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		172E0FFD2735B83E00061372 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172E10042735B83E00061372 /* Media.xcassets in Resources */,
+				172E10092735B83E00061372 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17DF328624C87D3500BCE2E3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -739,6 +825,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		172E0FFB2735B83E00061372 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172E10062735B83E00061372 /* ActionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17DF328424C87D3500BCE2E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -853,6 +947,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		172E100C2735B83E00061372 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 172E0FFE2735B83E00061372 /* ActionExtension-iOS */;
+			targetProxy = 172E100B2735B83E00061372 /* PBXContainerItemProxy */;
+		};
 		17DF329A24C87D3500BCE2E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 17DF328724C87D3500BCE2E3 /* WriteFreely-MultiPlatform (iOS) */;
@@ -865,7 +964,75 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		172E10072735B83E00061372 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				172E10082735B83E00061372 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		172E100F2735B83E00061372 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TPPAB4YBA6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ActionExtension-iOS";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform.ActionExtension-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		172E10102735B83E00061372 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TPPAB4YBA6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ActionExtension-iOS";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform.ActionExtension-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		17DF32B024C87D3500BCE2E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -980,6 +1147,7 @@
 		17DF32B324C87D3500BCE2E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
@@ -1005,6 +1173,7 @@
 		17DF32B424C87D3500BCE2E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
@@ -1172,6 +1341,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		172E10112735B83E00061372 /* Build configuration list for PBXNativeTarget "ActionExtension-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				172E100F2735B83E00061372 /* Debug */,
+				172E10102735B83E00061372 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		17DF327F24C87D3300BCE2E3 /* Build configuration list for PBXProject "WriteFreely-MultiPlatform" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
