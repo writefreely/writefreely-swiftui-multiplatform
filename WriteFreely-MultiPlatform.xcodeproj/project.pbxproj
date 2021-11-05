@@ -32,6 +32,7 @@
 		172E10062735B83E00061372 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10052735B83E00061372 /* ActionViewController.swift */; };
 		172E10092735B83E00061372 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172E10072735B83E00061372 /* MainInterface.storyboard */; };
 		172E100D2735B83E00061372 /* ActionExtension-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		172E10132735BB6200061372 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = 172E10122735BB6200061372 /* Action.js */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
 		17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17466625256C0D0600629997 /* MacEditorTextView.swift */; };
@@ -171,6 +172,7 @@
 		172E10052735B83E00061372 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		172E10082735B83E00061372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		172E100A2735B83E00061372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		172E10122735BB6200061372 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		17466625256C0D0600629997 /* MacEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorTextView.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				172E10052735B83E00061372 /* ActionViewController.swift */,
 				172E10072735B83E00061372 /* MainInterface.storyboard */,
 				172E100A2735B83E00061372 /* Info.plist */,
+				172E10122735BB6200061372 /* Action.js */,
 			);
 			path = "ActionExtension-iOS";
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172E10132735BB6200061372 /* Action.js in Resources */,
 				172E10042735B83E00061372 /* Media.xcassets in Resources */,
 				172E10092735B83E00061372 /* MainInterface.storyboard in Resources */,
 			);
