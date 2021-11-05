@@ -6,8 +6,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
         // Check UserDefaults for values; if the key doesn't exist (e.g., if MacUpdatesView hasn't ever been shown),
         // bool(forKey:) returns false, so set SUUpdater.shared() appropriately.
-        let automaticallyChecksForUpdates = UserDefaults.standard.bool(forKey: "automaticallyChecksForUpdates")
-        let subscribeToBetaUpdates = UserDefaults.standard.bool(forKey: "subscribeToBetaUpdates")
+        let automaticallyChecksForUpdates = UserDefaults.shared.bool(forKey: WFDefaults.automaticallyChecksForUpdates)
+        let subscribeToBetaUpdates = UserDefaults.shared.bool(forKey: WFDefaults.subscribeToBetaUpdates)
 
         // Set Sparkle properties.
         SUUpdater.shared()?.automaticallyChecksForUpdates = automaticallyChecksForUpdates

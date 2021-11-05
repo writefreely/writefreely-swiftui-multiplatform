@@ -1,7 +1,7 @@
 import SwiftUI
 
 class PreferencesModel: ObservableObject {
-    private let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.shared
     let colorSchemeIntegerKey = "colorSchemeIntegerKey"
     let defaultFontIntegerKey = "defaultFontIntegerKey"
 

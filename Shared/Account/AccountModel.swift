@@ -54,8 +54,8 @@ extension AccountError: LocalizedError {
 }
 
 struct AccountModel {
-    @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
-    private let defaults = UserDefaults.standard
+    @AppStorage(WFDefaults.isLoggedIn, store: UserDefaults.shared) var isLoggedIn: Bool = false
+    private let defaults = UserDefaults.shared
     let usernameStringKey = "usernameStringKey"
     let serverStringKey = "serverStringKey"
 
