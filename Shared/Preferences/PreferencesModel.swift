@@ -2,8 +2,6 @@ import SwiftUI
 
 class PreferencesModel: ObservableObject {
     private let defaults = UserDefaults.shared
-    let colorSchemeIntegerKey = "colorSchemeIntegerKey"
-    let defaultFontIntegerKey = "defaultFontIntegerKey"
 
     /* We're stuck dropping into AppKit/UIKit to set light/dark schemes for now,
      * because setting the .preferredColorScheme modifier on views in SwiftUI is
@@ -17,6 +15,7 @@ class PreferencesModel: ObservableObject {
      */
 
     #if os(iOS)
+    @available(iOSApplicationExtension, unavailable)
     var window: UIWindow? {
         guard let scene = UIApplication.shared.connectedScenes.first,
               let windowSceneDelegate = scene.delegate as? UIWindowSceneDelegate,
@@ -27,7 +26,10 @@ class PreferencesModel: ObservableObject {
     }
     #endif
 
+    @available(iOSApplicationExtension, unavailable)
     @Published var selectedColorScheme: ColorScheme?
+
+    @available(iOSApplicationExtension, unavailable)
     @Published var appearance: Int = 0 {
         didSet {
             switch appearance {
@@ -54,12 +56,12 @@ class PreferencesModel: ObservableObject {
                 #endif
             }
 
-            defaults.set(appearance, forKey: colorSchemeIntegerKey)
+            defaults.set(appearance, forKey: WFDefaults.colorSchemeIntegerKey)
         }
     }
     @Published var font: Int = 0 {
         didSet {
-            defaults.set(font, forKey: defaultFontIntegerKey)
+            defaults.set(font, forKey: WFDefaults.defaultFontIntegerKey)
         }
     }
 }

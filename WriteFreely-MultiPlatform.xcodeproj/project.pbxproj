@@ -30,9 +30,21 @@
 		172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */; platformFilter = maccatalyst; };
 		172E10042735B83E00061372 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172E10032735B83E00061372 /* Media.xcassets */; };
 		172E10062735B83E00061372 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10052735B83E00061372 /* ActionViewController.swift */; };
-		172E10092735B83E00061372 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172E10072735B83E00061372 /* MainInterface.storyboard */; };
 		172E100D2735B83E00061372 /* ActionExtension-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		172E10132735BB6200061372 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = 172E10122735BB6200061372 /* Action.js */; };
+		172E10152735C2BD00061372 /* UIHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10142735C2BD00061372 /* UIHostingView.swift */; };
+		172E10172735C2DF00061372 /* EnvironmentValues+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10162735C2DF00061372 /* EnvironmentValues+Extensions.swift */; };
+		172E10192735C3DB00061372 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10182735C3DB00061372 /* ContentView.swift */; };
+		172E101B2735C54400061372 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 172E101A2735C54400061372 /* WriteFreely */; };
+		172E101C2735C57400061372 /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB924FED45500207AB8 /* LocalStorageManager.swift */; };
+		172E101D2735C5AB00061372 /* LocalStorageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB524FED3A400207AB8 /* LocalStorageModel.xcdatamodeld */; };
+		172E101E2735C62F00061372 /* PostStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E612507D8E600072984 /* PostStatus.swift */; };
+		172E101F2735C64600061372 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
+		172E10202735C64600061372 /* WFACollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */; };
+		172E10212735C64600061372 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
+		172E10222735C64600061372 /* WFAPost+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */; };
+		172E10232735C6FF00061372 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */; };
+		172E10242735C72500061372 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
 		17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17466625256C0D0600629997 /* MacEditorTextView.swift */; };
@@ -62,6 +74,10 @@
 		1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
 		17681E412519410E00D394AE /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17681E402519410E00D394AE /* UINavigationController+Appearance.swift */; };
 		1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1780F6EE25895EDB00FE45FF /* PostCommands.swift */; };
+		17836C14273EFB870047AF61 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
+		17836C15273F0FBB0047AF61 /* Hack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */; };
+		17836C16273F0FBB0047AF61 /* LoraGX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */; };
+		17836C17273F0FBB0047AF61 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */; };
 		17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17A4FED925924AF70037E96B /* Sparkle */; };
 		17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4FEEC25927E730037E96B /* AppDelegate.swift */; };
 		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
@@ -170,9 +186,11 @@
 		172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		172E10032735B83E00061372 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		172E10052735B83E00061372 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
-		172E10082735B83E00061372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		172E100A2735B83E00061372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		172E100A2735B83E00061372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; usesTabs = 1; };
 		172E10122735BB6200061372 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
+		172E10142735C2BD00061372 /* UIHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHostingView.swift; sourceTree = "<group>"; };
+		172E10162735C2DF00061372 /* EnvironmentValues+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+Extensions.swift"; sourceTree = "<group>"; };
+		172E10182735C3DB00061372 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		17466625256C0D0600629997 /* MacEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorTextView.swift; sourceTree = "<group>"; };
@@ -192,6 +210,7 @@
 		1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17681E402519410E00D394AE /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
 		1780F6EE25895EDB00FE45FF /* PostCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommands.swift; sourceTree = "<group>"; };
+		17836C18273F10C40047AF61 /* ActionExtension-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ActionExtension-iOS.entitlements"; sourceTree = "<group>"; };
 		17A355D3271A052C007C7A47 /* WriteFreely-MultiPlatform (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WriteFreely-MultiPlatform (iOS).entitlements"; sourceTree = "<group>"; };
 		17A4FEDF25924E810037E96B /* MacSoftwareUpdater.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MacSoftwareUpdater.md; sourceTree = "<group>"; };
 		17A4FEEC25927E730037E96B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -250,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */,
+				172E101B2735C54400061372 /* WriteFreely in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,9 +328,10 @@
 		172E10022735B83E00061372 /* ActionExtension-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				17836C18273F10C40047AF61 /* ActionExtension-iOS.entitlements */,
 				172E10032735B83E00061372 /* Media.xcassets */,
+				172E10182735C3DB00061372 /* ContentView.swift */,
 				172E10052735B83E00061372 /* ActionViewController.swift */,
-				172E10072735B83E00061372 /* MainInterface.storyboard */,
 				172E100A2735B83E00061372 /* Info.plist */,
 				172E10122735BB6200061372 /* Action.js */,
 			);
@@ -367,6 +388,8 @@
 			children = (
 				1756AE8024CB844500FD7257 /* View+Keyboard.swift */,
 				17681E402519410E00D394AE /* UINavigationController+Appearance.swift */,
+				172E10142735C2BD00061372 /* UIHostingView.swift */,
+				172E10162735C2DF00061372 /* EnvironmentValues+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -595,6 +618,9 @@
 			dependencies = (
 			);
 			name = "ActionExtension-iOS";
+			packageProductDependencies = (
+				172E101A2735C54400061372 /* WriteFreely */,
+			);
 			productName = "ActionExtension-iOS";
 			productReference = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -739,9 +765,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17836C17273F0FBB0047AF61 /* OpenSans-Regular.ttf in Resources */,
 				172E10132735BB6200061372 /* Action.js in Resources */,
 				172E10042735B83E00061372 /* Media.xcassets in Resources */,
-				172E10092735B83E00061372 /* MainInterface.storyboard in Resources */,
+				17836C15273F0FBB0047AF61 /* Hack-Regular.ttf in Resources */,
+				17836C16273F0FBB0047AF61 /* LoraGX.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +862,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				172E10062735B83E00061372 /* ActionViewController.swift in Sources */,
+				172E10202735C64600061372 /* WFACollection+CoreDataClass.swift in Sources */,
+				172E10222735C64600061372 /* WFAPost+CoreDataProperties.swift in Sources */,
+				172E101D2735C5AB00061372 /* LocalStorageModel.xcdatamodeld in Sources */,
+				17836C14273EFB870047AF61 /* UserDefaults+Extensions.swift in Sources */,
+				172E10242735C72500061372 /* PreferencesModel.swift in Sources */,
+				172E10172735C2DF00061372 /* EnvironmentValues+Extensions.swift in Sources */,
+				172E10212735C64600061372 /* WFACollection+CoreDataProperties.swift in Sources */,
+				172E101C2735C57400061372 /* LocalStorageManager.swift in Sources */,
+				172E10192735C3DB00061372 /* ContentView.swift in Sources */,
+				172E10152735C2BD00061372 /* UIHostingView.swift in Sources */,
+				172E101F2735C64600061372 /* WFAPost+CoreDataClass.swift in Sources */,
+				172E10232735C6FF00061372 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
+				172E101E2735C62F00061372 /* PostStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,22 +1009,14 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		172E10072735B83E00061372 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				172E10082735B83E00061372 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		172E100F2735B83E00061372 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconExtension;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
@@ -991,7 +1024,7 @@
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "ActionExtension-iOS";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1011,7 +1044,10 @@
 		172E10102735B83E00061372 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconExtension;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
@@ -1019,7 +1055,7 @@
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "ActionExtension-iOS";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1427,6 +1463,11 @@
 			productName = WriteFreely;
 		};
 		1714DD6A260BAC2C000C0DFF /* WriteFreely */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			productName = WriteFreely;
+		};
+		172E101A2735C54400061372 /* WriteFreely */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
 			productName = WriteFreely;

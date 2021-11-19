@@ -43,8 +43,8 @@ final class WriteFreelyModel: ObservableObject {
 
     init() {
         DispatchQueue.main.async {
-            self.preferences.appearance = self.defaults.integer(forKey: self.preferences.colorSchemeIntegerKey)
-            self.preferences.font = self.defaults.integer(forKey: self.preferences.defaultFontIntegerKey)
+            self.preferences.appearance = self.defaults.integer(forKey: WFDefaults.colorSchemeIntegerKey)
+            self.preferences.font = self.defaults.integer(forKey: WFDefaults.defaultFontIntegerKey)
             self.account.restoreState()
             if self.account.isLoggedIn {
                 guard let serverURL = URL(string: self.account.server) else {

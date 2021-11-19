@@ -5,6 +5,10 @@ enum WFDefaults {
     static let showAllPostsFlag = "showAllPostsFlag"
     static let selectedCollectionURL = "selectedCollectionURL"
     static let lastDraftURL = "lastDraftURL"
+    static let colorSchemeIntegerKey = "colorSchemeIntegerKey"
+    static let defaultFontIntegerKey = "defaultFontIntegerKey"
+    static let usernameStringKey = "usernameStringKey"
+    static let serverStringKey = "serverStringKey"
     #if os(macOS)
     static let automaticallyChecksForUpdates = "automaticallyChecksForUpdates"
     static let subscribeToBetaUpdates = "subscribeToBetaUpdates"
