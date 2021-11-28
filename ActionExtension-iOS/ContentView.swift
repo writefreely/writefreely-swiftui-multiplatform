@@ -106,6 +106,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .padding(.bottom, 24)
         }
         .alert(isPresented: $isShowingAlert, content: {
             Alert(
