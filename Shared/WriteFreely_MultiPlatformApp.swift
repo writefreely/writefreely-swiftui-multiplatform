@@ -10,9 +10,9 @@ struct CheckForDebugModifier {
         #if os(macOS)
             if NSEvent.modifierFlags.contains(.shift) {
                 // Clear the launch-to-last-draft values to load a new draft.
-                UserDefaults.standard.setValue(false, forKey: "showAllPostsFlag")
-                UserDefaults.standard.setValue(nil, forKey: "selectedCollectionURL")
-                UserDefaults.standard.setValue(nil, forKey: "lastDraftURL")
+                UserDefaults.shared.setValue(false, forKey: WFDefaults.showAllPostsFlag)
+                UserDefaults.shared.setValue(nil, forKey: WFDefaults.selectedCollectionURL)
+                UserDefaults.shared.setValue(nil, forKey: WFDefaults.lastDraftURL)
             } else {
                 // No-op
             }

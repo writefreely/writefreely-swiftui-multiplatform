@@ -36,7 +36,7 @@ final class WriteFreelyModel: ObservableObject {
     // swiftlint:enable line_length
 
     internal var client: WFClient?
-    private let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.shared
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "NetworkMonitor")
     internal var postToUpdate: WFAPost?

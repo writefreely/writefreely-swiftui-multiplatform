@@ -7,8 +7,10 @@ enum AppcastFeedUrl: String {
 }
 
 struct MacUpdatesView: View {
-    @AppStorage("automaticallyChecksForUpdates") var automaticallyChecksForUpdates: Bool = false
-    @AppStorage("subscribeToBetaUpdates") var subscribeToBetaUpdates: Bool = false
+    @AppStorage(WFDefaults.automaticallyChecksForUpdates, store: UserDefaults.shared)
+    var automaticallyChecksForUpdates: Bool = false
+    @AppStorage(WFDefaults.subscribeToBetaUpdates, store: UserDefaults.shared)
+    var subscribeToBetaUpdates: Bool = false
     @State private var lastUpdateCheck: Date?
 
     private let betaWarningString = """

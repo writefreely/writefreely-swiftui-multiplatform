@@ -8,9 +8,9 @@ enum PostAppearance: String {
 }
 
 struct PostEditorModel {
-    @AppStorage("showAllPostsFlag") var showAllPostsFlag: Bool = false
-    @AppStorage("selectedCollectionURL") var selectedCollectionURL: URL?
-    @AppStorage("lastDraftURL") var lastDraftURL: URL?
+    @AppStorage(WFDefaults.showAllPostsFlag, store: UserDefaults.shared) var showAllPostsFlag: Bool = false
+    @AppStorage(WFDefaults.selectedCollectionURL, store: UserDefaults.shared) var selectedCollectionURL: URL?
+    @AppStorage(WFDefaults.lastDraftURL, store: UserDefaults.shared) var lastDraftURL: URL?
 
     func saveLastDraft(_ post: WFAPost) {
         self.lastDraftURL = post.status != PostStatus.published.rawValue ? post.objectID.uriRepresentation() : nil

@@ -24,6 +24,8 @@
 		1714DD6B260BAC2C000C0DFF /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1714DD6A260BAC2C000C0DFF /* WriteFreely */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
+		171DC677272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
+		171DC678272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
 		172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172C492D2593981900E20ADF /* MacUpdatesView.swift */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
@@ -135,6 +137,7 @@
 		17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLoginView.swift; sourceTree = "<group>"; };
 		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
+		171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		172C492D2593981900E20ADF /* MacUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesView.swift; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
@@ -277,6 +280,7 @@
 				17B37C5525C8679800FE75E9 /* WriteFreelyModel+API.swift */,
 				17B37C5C25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift */,
 				17B37C4A25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift */,
+				171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -757,6 +761,7 @@
 				171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				1756DBB324FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
 				17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */,
+				171DC677272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */,
 				1756DBB724FED3A400207AB8 /* LocalStorageModel.xcdatamodeld in Sources */,
 				17B996DA2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */,
 				1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
@@ -785,6 +790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				171DC678272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
 				1756DBBB24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
 				17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */,
