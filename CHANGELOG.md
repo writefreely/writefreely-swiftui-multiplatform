@@ -32,7 +32,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a regression where text color did not adapt to dark mode correctly.
 - [Mac] Sharing a post now uses the custom domain (if any).
 - [Mac] The window is now restored when clicking on the app icon in the dock.
-- [Mac] Fixed a potential crash if the system keychain wasn't available at app launch.  
+- [Mac] Fixed a potential crash if the system keychain wasn't available at app launch. 
+
+## [1.0.8-ios] - 2021-12-03
+
+### Added
+
+- The app now includes an action extension; activate it in Safari by tapping the Share button, and choosing "Create WriteFreely draft" from the available actions.
+
+### Changes
+
+- To enable sharing of data between the app and the action extension, both the Core Data local store and User Defaults have been moved to an App Group.
 
 ## [1.0.7-ios] - 2021-10-01
 
@@ -252,6 +262,7 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - This changelog
 
 [Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.7-ios...HEAD
+[1.0.8-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.7-ios...v1.0.8-ios
 [1.0.7-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.6-ios...v1.0.7-ios
 [1.0.6-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.5-ios...v1.0.6-ios
 [1.0.5-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.4-ios...v1.0.5-ios
