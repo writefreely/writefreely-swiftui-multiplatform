@@ -6,6 +6,7 @@ struct PostListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
 
     @State private var postCount: Int = 0
+    @State private var filteredListViewId: Int = 0
 
     var selectedCollection: WFACollection?
     var showAllPosts: Bool
@@ -27,6 +28,7 @@ struct PostListView: View {
                 showAllPosts: showAllPosts,
                 postCount: $postCount
             )
+                .id(self.filteredListViewId)
                 .navigationTitle(
                     showAllPosts ? "All Posts" : selectedCollection?.title ?? (
                         model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
@@ -123,6 +125,13 @@ struct PostListView: View {
             .frame(height: frameHeight)
             .background(Color(UIColor.systemGray5))
             .overlay(Divider(), alignment: .top)
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                // We use this to invalidate and refresh the view, so that new posts created outside of the app (e.g.,
+                // in the action extension) show up.
+                withAnimation {
+                    self.filteredListViewId += 1
+                }
+            }
         }
         .ignoresSafeArea()
         .onAppear {

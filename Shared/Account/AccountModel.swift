@@ -56,8 +56,6 @@ extension AccountError: LocalizedError {
 struct AccountModel {
     @AppStorage(WFDefaults.isLoggedIn, store: UserDefaults.shared) var isLoggedIn: Bool = false
     private let defaults = UserDefaults.shared
-    let usernameStringKey = "usernameStringKey"
-    let serverStringKey = "serverStringKey"
 
     var server: String = ""
     var username: String = ""
@@ -68,19 +66,19 @@ struct AccountModel {
         self.user = user
         self.username = user.username ?? ""
         self.isLoggedIn = true
-        defaults.set(user.username, forKey: usernameStringKey)
-        defaults.set(server, forKey: serverStringKey)
+        defaults.set(user.username, forKey: WFDefaults.usernameStringKey)
+        defaults.set(server, forKey: WFDefaults.serverStringKey)
     }
 
     mutating func logout() {
         self.user = nil
         self.isLoggedIn = false
-        defaults.removeObject(forKey: usernameStringKey)
-        defaults.removeObject(forKey: serverStringKey)
+        defaults.removeObject(forKey: WFDefaults.usernameStringKey)
+        defaults.removeObject(forKey: WFDefaults.serverStringKey)
     }
 
     mutating func restoreState() {
-        server = defaults.string(forKey: serverStringKey) ?? ""
-        username = defaults.string(forKey: usernameStringKey) ?? ""
+        server = defaults.string(forKey: WFDefaults.serverStringKey) ?? ""
+        username = defaults.string(forKey: WFDefaults.usernameStringKey) ?? ""
     }
 }

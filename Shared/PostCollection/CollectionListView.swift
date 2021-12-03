@@ -2,7 +2,9 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @ObservedObject var collections = CollectionListModel(managedObjectContext: LocalStorageManager.standard.container.viewContext)
+    @ObservedObject var collections = CollectionListModel(
+        managedObjectContext: LocalStorageManager.standard.container.viewContext
+    )
     @State var selectedCollection: WFACollection?
 
     var body: some View {

@@ -27,6 +27,24 @@
 		171DC677272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
 		171DC678272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
 		172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172C492D2593981900E20ADF /* MacUpdatesView.swift */; };
+		172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */; platformFilter = maccatalyst; };
+		172E10042735B83E00061372 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172E10032735B83E00061372 /* Media.xcassets */; };
+		172E10062735B83E00061372 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10052735B83E00061372 /* ActionViewController.swift */; };
+		172E100D2735B83E00061372 /* ActionExtension-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		172E10132735BB6200061372 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = 172E10122735BB6200061372 /* Action.js */; };
+		172E10152735C2BD00061372 /* UIHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10142735C2BD00061372 /* UIHostingView.swift */; };
+		172E10172735C2DF00061372 /* EnvironmentValues+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10162735C2DF00061372 /* EnvironmentValues+Extensions.swift */; };
+		172E10192735C3DB00061372 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10182735C3DB00061372 /* ContentView.swift */; };
+		172E101B2735C54400061372 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 172E101A2735C54400061372 /* WriteFreely */; };
+		172E101C2735C57400061372 /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB924FED45500207AB8 /* LocalStorageManager.swift */; };
+		172E101D2735C5AB00061372 /* LocalStorageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB524FED3A400207AB8 /* LocalStorageModel.xcdatamodeld */; };
+		172E101E2735C62F00061372 /* PostStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E612507D8E600072984 /* PostStatus.swift */; };
+		172E101F2735C64600061372 /* WFAPost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D62502D23E0017B536 /* WFAPost+CoreDataClass.swift */; };
+		172E10202735C64600061372 /* WFACollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */; };
+		172E10212735C64600061372 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
+		172E10222735C64600061372 /* WFAPost+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B996D72502D23E0017B536 /* WFAPost+CoreDataProperties.swift */; };
+		172E10232735C6FF00061372 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */; };
+		172E10242735C72500061372 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
 		173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19D0254318F600440F0F /* RemoteChangePromptView.swift */; };
 		173E19E3254329CC00440F0F /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173E19E2254329CC00440F0F /* PostTextEditingView.swift */; };
 		17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17466625256C0D0600629997 /* MacEditorTextView.swift */; };
@@ -56,6 +74,10 @@
 		1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
 		17681E412519410E00D394AE /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17681E402519410E00D394AE /* UINavigationController+Appearance.swift */; };
 		1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1780F6EE25895EDB00FE45FF /* PostCommands.swift */; };
+		17836C14273EFB870047AF61 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
+		17836C15273F0FBB0047AF61 /* Hack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */; };
+		17836C16273F0FBB0047AF61 /* LoraGX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */; };
+		17836C17273F0FBB0047AF61 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */; };
 		17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17A4FED925924AF70037E96B /* Sparkle */; };
 		17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4FEEC25927E730037E96B /* AppDelegate.swift */; };
 		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
@@ -112,6 +134,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		172E100B2735B83E00061372 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17DF327C24C87D3300BCE2E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 172E0FFE2735B83E00061372;
+			remoteInfo = "ActionExtension-iOS";
+		};
 		17DF329924C87D3500BCE2E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 17DF327C24C87D3300BCE2E3 /* Project object */;
@@ -128,6 +157,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		172E100E2735B83E00061372 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				172E100D2735B83E00061372 /* ActionExtension-iOS.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = EditorLaunchingPolicy.md; sourceTree = "<group>"; };
 		170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListModel.swift; sourceTree = "<group>"; };
@@ -139,6 +182,15 @@
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		172C492D2593981900E20ADF /* MacUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesView.swift; sourceTree = "<group>"; };
+		172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ActionExtension-iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		172E10032735B83E00061372 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		172E10052735B83E00061372 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		172E100A2735B83E00061372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; usesTabs = 1; };
+		172E10122735BB6200061372 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
+		172E10142735C2BD00061372 /* UIHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHostingView.swift; sourceTree = "<group>"; };
+		172E10162735C2DF00061372 /* EnvironmentValues+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+Extensions.swift"; sourceTree = "<group>"; };
+		172E10182735C3DB00061372 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		173E19D0254318F600440F0F /* RemoteChangePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChangePromptView.swift; sourceTree = "<group>"; };
 		173E19E2254329CC00440F0F /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		17466625256C0D0600629997 /* MacEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEditorTextView.swift; sourceTree = "<group>"; };
@@ -158,6 +210,7 @@
 		1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17681E402519410E00D394AE /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
 		1780F6EE25895EDB00FE45FF /* PostCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommands.swift; sourceTree = "<group>"; };
+		17836C18273F10C40047AF61 /* ActionExtension-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ActionExtension-iOS.entitlements"; sourceTree = "<group>"; };
 		17A355D3271A052C007C7A47 /* WriteFreely-MultiPlatform (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WriteFreely-MultiPlatform (iOS).entitlements"; sourceTree = "<group>"; };
 		17A4FEDF25924E810037E96B /* MacSoftwareUpdater.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MacSoftwareUpdater.md; sourceTree = "<group>"; };
 		17A4FEEC25927E730037E96B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +264,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		172E0FFC2735B83E00061372 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */,
+				172E101B2735C54400061372 /* WriteFreely in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17DF328524C87D3500BCE2E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,6 +325,19 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		172E10022735B83E00061372 /* ActionExtension-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				17836C18273F10C40047AF61 /* ActionExtension-iOS.entitlements */,
+				172E10032735B83E00061372 /* Media.xcassets */,
+				172E10182735C3DB00061372 /* ContentView.swift */,
+				172E10052735B83E00061372 /* ActionViewController.swift */,
+				172E100A2735B83E00061372 /* Info.plist */,
+				172E10122735BB6200061372 /* Action.js */,
+			);
+			path = "ActionExtension-iOS";
+			sourceTree = "<group>";
+		};
 		1739B8D324EAFAB700DA7421 /* PostEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +388,8 @@
 			children = (
 				1756AE8024CB844500FD7257 /* View+Keyboard.swift */,
 				17681E402519410E00D394AE /* UINavigationController+Appearance.swift */,
+				172E10142735C2BD00061372 /* UIHostingView.swift */,
+				172E10162735C2DF00061372 /* EnvironmentValues+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -385,6 +462,7 @@
 				17DF329124C87D3500BCE2E3 /* macOS */,
 				17DF329B24C87D3500BCE2E3 /* Tests iOS */,
 				17DF32A624C87D3500BCE2E3 /* Tests macOS */,
+				172E10022735B83E00061372 /* ActionExtension-iOS */,
 				17DF328924C87D3500BCE2E3 /* Products */,
 				17DF32C124C87D8D00BCE2E3 /* Frameworks */,
 			);
@@ -416,6 +494,7 @@
 				17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */,
 				17DF329824C87D3500BCE2E3 /* Tests iOS.xctest */,
 				17DF32A324C87D3500BCE2E3 /* Tests macOS.xctest */,
+				172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -467,6 +546,7 @@
 		17DF32C124C87D8D00BCE2E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -525,6 +605,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		172E0FFE2735B83E00061372 /* ActionExtension-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 172E10112735B83E00061372 /* Build configuration list for PBXNativeTarget "ActionExtension-iOS" */;
+			buildPhases = (
+				172E0FFB2735B83E00061372 /* Sources */,
+				172E0FFC2735B83E00061372 /* Frameworks */,
+				172E0FFD2735B83E00061372 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ActionExtension-iOS";
+			packageProductDependencies = (
+				172E101A2735C54400061372 /* WriteFreely */,
+			);
+			productName = "ActionExtension-iOS";
+			productReference = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		17DF328724C87D3500BCE2E3 /* WriteFreely-MultiPlatform (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17DF32B224C87D3500BCE2E3 /* Build configuration list for PBXNativeTarget "WriteFreely-MultiPlatform (iOS)" */;
@@ -533,10 +633,12 @@
 				17DF328524C87D3500BCE2E3 /* Frameworks */,
 				17DF328624C87D3500BCE2E3 /* Resources */,
 				17DF32C424C87E6700BCE2E3 /* ShellScript */,
+				172E100E2735B83E00061372 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				172E100C2735B83E00061372 /* PBXTargetDependency */,
 			);
 			name = "WriteFreely-MultiPlatform (iOS)";
 			packageProductDependencies = (
@@ -610,9 +712,12 @@
 		17DF327C24C87D3300BCE2E3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
+					172E0FFE2735B83E00061372 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 					17DF328724C87D3500BCE2E3 = {
 						CreatedOnToolsVersion = 12.0;
 					};
@@ -650,11 +755,24 @@
 				17DF328F24C87D3500BCE2E3 /* WriteFreely-MultiPlatform (macOS) */,
 				17DF329724C87D3500BCE2E3 /* Tests iOS */,
 				17DF32A224C87D3500BCE2E3 /* Tests macOS */,
+				172E0FFE2735B83E00061372 /* ActionExtension-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		172E0FFD2735B83E00061372 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17836C17273F0FBB0047AF61 /* OpenSans-Regular.ttf in Resources */,
+				172E10132735BB6200061372 /* Action.js in Resources */,
+				172E10042735B83E00061372 /* Media.xcassets in Resources */,
+				17836C15273F0FBB0047AF61 /* Hack-Regular.ttf in Resources */,
+				17836C16273F0FBB0047AF61 /* LoraGX.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17DF328624C87D3500BCE2E3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -739,6 +857,27 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		172E0FFB2735B83E00061372 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				172E10062735B83E00061372 /* ActionViewController.swift in Sources */,
+				172E10202735C64600061372 /* WFACollection+CoreDataClass.swift in Sources */,
+				172E10222735C64600061372 /* WFAPost+CoreDataProperties.swift in Sources */,
+				172E101D2735C5AB00061372 /* LocalStorageModel.xcdatamodeld in Sources */,
+				17836C14273EFB870047AF61 /* UserDefaults+Extensions.swift in Sources */,
+				172E10242735C72500061372 /* PreferencesModel.swift in Sources */,
+				172E10172735C2DF00061372 /* EnvironmentValues+Extensions.swift in Sources */,
+				172E10212735C64600061372 /* WFACollection+CoreDataProperties.swift in Sources */,
+				172E101C2735C57400061372 /* LocalStorageManager.swift in Sources */,
+				172E10192735C3DB00061372 /* ContentView.swift in Sources */,
+				172E10152735C2BD00061372 /* UIHostingView.swift in Sources */,
+				172E101F2735C64600061372 /* WFAPost+CoreDataClass.swift in Sources */,
+				172E10232735C6FF00061372 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
+				172E101E2735C62F00061372 /* PostStatus.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17DF328424C87D3500BCE2E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -853,6 +992,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		172E100C2735B83E00061372 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 172E0FFE2735B83E00061372 /* ActionExtension-iOS */;
+			targetProxy = 172E100B2735B83E00061372 /* PBXContainerItemProxy */;
+		};
 		17DF329A24C87D3500BCE2E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 17DF328724C87D3500BCE2E3 /* WriteFreely-MultiPlatform (iOS) */;
@@ -866,6 +1010,69 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		172E100F2735B83E00061372 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconExtension;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 639;
+				DEVELOPMENT_TEAM = TPPAB4YBA6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Create WriteFreely draft";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform.ActionExtension-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		172E10102735B83E00061372 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconExtension;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 639;
+				DEVELOPMENT_TEAM = TPPAB4YBA6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Create WriteFreely draft";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform.ActionExtension-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		17DF32B024C87D3500BCE2E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -980,11 +1187,12 @@
 		17DF32B324C87D3500BCE2E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 631;
+				CURRENT_PROJECT_VERSION = 639;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1005,11 +1213,12 @@
 		17DF32B424C87D3500BCE2E3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 631;
+				CURRENT_PROJECT_VERSION = 639;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1172,6 +1381,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		172E10112735B83E00061372 /* Build configuration list for PBXNativeTarget "ActionExtension-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				172E100F2735B83E00061372 /* Debug */,
+				172E10102735B83E00061372 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		17DF327F24C87D3300BCE2E3 /* Build configuration list for PBXProject "WriteFreely-MultiPlatform" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1245,6 +1463,11 @@
 			productName = WriteFreely;
 		};
 		1714DD6A260BAC2C000C0DFF /* WriteFreely */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			productName = WriteFreely;
+		};
+		172E101A2735C54400061372 /* WriteFreely */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
 			productName = WriteFreely;
