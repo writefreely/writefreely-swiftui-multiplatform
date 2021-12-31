@@ -163,8 +163,8 @@ final class CustomTextView: NSView {
         textView.isAutomaticDashSubstitutionEnabled = false
         textView.isRichText = false
         textView.typingAttributes = [
-            .paragraphStyle: paragraphStyle,    // H/T Daniel Jalkut
-            .font: font,
+            .paragraphStyle: paragraphStyle,                // H/T Daniel Jalkut
+            .font: font ?? NSFont.systemFont(ofSize: 17),   // Fall back to system font if we can't unwrap font argument
             .foregroundColor: NSColor.labelColor
         ]
 
