@@ -147,17 +147,8 @@ extension WriteFreelyModel {
                     } else {
                         DispatchQueue.main.async {
                             let managedPost = WFAPost(context: LocalStorageManager.standard.container.viewContext)
-                            managedPost.postId = fetchedPost.postId
-                            managedPost.slug = fetchedPost.slug
-                            managedPost.appearance = fetchedPost.appearance
-                            managedPost.language = fetchedPost.language
-                            managedPost.rtl = fetchedPost.rtl ?? false
-                            managedPost.createdDate = fetchedPost.createdDate
-                            managedPost.updatedDate = fetchedPost.updatedDate
-                            managedPost.title = fetchedPost.title ?? ""
-                            managedPost.body = fetchedPost.body
+                            self.importData(from: fetchedPost, into: managedPost)
                             managedPost.collectionAlias = fetchedPost.collectionAlias
-                            managedPost.status = PostStatus.published.rawValue
                             managedPost.wasDeletedFromServer = false
                         }
                     }
@@ -193,16 +184,7 @@ extension WriteFreelyModel {
             let fetchedPost = try result.get()
             // If this is an updated post, check it against postToUpdate.
             if let updatingPost = self.postToUpdate {
-                updatingPost.appearance = fetchedPost.appearance
-                updatingPost.body = fetchedPost.body
-                updatingPost.createdDate = fetchedPost.createdDate
-                updatingPost.language = fetchedPost.language
-                updatingPost.postId = fetchedPost.postId
-                updatingPost.rtl = fetchedPost.rtl ?? false
-                updatingPost.slug = fetchedPost.slug
-                updatingPost.status = PostStatus.published.rawValue
-                updatingPost.title = fetchedPost.title ?? ""
-                updatingPost.updatedDate = fetchedPost.updatedDate
+                importData(from: fetchedPost, into: updatingPost)
                 DispatchQueue.main.async {
                     LocalStorageManager.standard.saveContext()
                 }
@@ -224,16 +206,7 @@ extension WriteFreelyModel {
                 do {
                     let cachedPostsResults = try LocalStorageManager.standard.container.viewContext.fetch(request)
                     guard let cachedPost = cachedPostsResults.first else { return }
-                    cachedPost.appearance = fetchedPost.appearance
-                    cachedPost.body = fetchedPost.body
-                    cachedPost.createdDate = fetchedPost.createdDate
-                    cachedPost.language = fetchedPost.language
-                    cachedPost.postId = fetchedPost.postId
-                    cachedPost.rtl = fetchedPost.rtl ?? false
-                    cachedPost.slug = fetchedPost.slug
-                    cachedPost.status = PostStatus.published.rawValue
-                    cachedPost.title = fetchedPost.title ?? ""
-                    cachedPost.updatedDate = fetchedPost.updatedDate
+                    importData(from: fetchedPost, into: cachedPost)
                     DispatchQueue.main.async {
                         LocalStorageManager.standard.saveContext()
                     }
@@ -258,16 +231,7 @@ extension WriteFreelyModel {
         do {
             let fetchedPost = try result.get()
             guard let cachedPost = self.selectedPost else { return }
-            cachedPost.appearance = fetchedPost.appearance
-            cachedPost.body = fetchedPost.body
-            cachedPost.createdDate = fetchedPost.createdDate
-            cachedPost.language = fetchedPost.language
-            cachedPost.postId = fetchedPost.postId
-            cachedPost.rtl = fetchedPost.rtl ?? false
-            cachedPost.slug = fetchedPost.slug
-            cachedPost.status = PostStatus.published.rawValue
-            cachedPost.title = fetchedPost.title ?? ""
-            cachedPost.updatedDate = fetchedPost.updatedDate
+            importData(from: fetchedPost, into: cachedPost)
             cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
                 LocalStorageManager.standard.saveContext()
@@ -297,5 +261,18 @@ extension WriteFreelyModel {
             }
             print(error)
         }
+    }
+
+    private func importData(from fetchedPost: WFPost, into cachedPost: WFAPost) {
+        cachedPost.appearance = fetchedPost.appearance
+        cachedPost.body = fetchedPost.body
+        cachedPost.createdDate = fetchedPost.createdDate
+        cachedPost.language = fetchedPost.language
+        cachedPost.postId = fetchedPost.postId
+        cachedPost.rtl = fetchedPost.rtl ?? false
+        cachedPost.slug = fetchedPost.slug
+        cachedPost.status = PostStatus.published.rawValue
+        cachedPost.title = fetchedPost.title ?? ""
+        cachedPost.updatedDate = fetchedPost.updatedDate
     }
 }
