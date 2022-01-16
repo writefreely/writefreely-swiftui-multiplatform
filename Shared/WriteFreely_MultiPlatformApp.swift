@@ -27,6 +27,7 @@ struct WriteFreely_MultiPlatformApp: App {
     #if os(macOS)
     // swiftlint:disable:next weak_delegate
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var updaterViewModel = MacUpdatesViewModel()
     @State private var selectedTab = 0
     #endif
 
@@ -61,11 +62,9 @@ struct WriteFreely_MultiPlatformApp: App {
         }
         .commands {
             #if os(macOS)
-            CommandGroup(after: .appInfo, addition: {
-                Button("Check For Updates") {
-                    SUUpdater.shared()?.checkForUpdates(self)
-                }
-            })
+            CommandGroup(after: .appInfo) {
+                CheckForUpdatesView(updaterViewModel: updaterViewModel)
+            }
             #endif
             CommandGroup(replacing: .newItem, addition: {
                 Button("New Post") {

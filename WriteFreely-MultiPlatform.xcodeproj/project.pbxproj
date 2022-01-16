@@ -108,6 +108,7 @@
 		17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
 		17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
 		17D4926527947B4D0035BD7E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17D4926427947B4D0035BD7E /* Sparkle */; };
+		17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4926627947D780035BD7E /* MacUpdatesViewModel.swift */; };
 		17D4F36C2514EE2F00517CE6 /* LoraGX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */; };
 		17D4F36D2514EE2F00517CE6 /* LoraGX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */; };
 		17D4F39E2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */; };
@@ -234,6 +235,7 @@
 		17C42E642509237800072984 /* PostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListFilteredView.swift; sourceTree = "<group>"; };
 		17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+ExecuteAndMergeChanges.swift"; sourceTree = "<group>"; };
 		17D435E724E3128F0036B539 /* PreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesModel.swift; sourceTree = "<group>"; };
+		17D4926627947D780035BD7E /* MacUpdatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesViewModel.swift; sourceTree = "<group>"; };
 		17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoraGX.ttf; sourceTree = "<group>"; };
 		17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hack-Regular.ttf"; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				17A5388724DDA31F00DEFF9A /* MacAccountView.swift */,
 				1753F6AB24E431CC00309365 /* MacPreferencesView.swift */,
 				172C492D2593981900E20ADF /* MacUpdatesView.swift */,
+				17D4926627947D780035BD7E /* MacUpdatesViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
+				17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */,
 				17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */,
 				170A7EC226F5186A00F1CBD4 /* CollectionListModel.swift in Sources */,
 				17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */,
