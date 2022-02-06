@@ -25,7 +25,6 @@ struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel.shared
 
     #if os(macOS)
-    // swiftlint:disable:next weak_delegate
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var updaterViewModel = MacUpdatesViewModel()
     @State private var selectedTab = 0
@@ -48,13 +47,6 @@ struct WriteFreely_MultiPlatformApp: App {
                             showLastDraftOrCreateNewLocalPost()
                         }
                     }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                        if model.editor.lastDraftURL != nil {
-//                            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
-//                        } else {
-//                            createNewLocalPost()
-//                        }
-//                    }
                 })
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.standard.container.viewContext)
@@ -115,7 +107,7 @@ struct WriteFreely_MultiPlatformApp: App {
                         Text("Preferences")
                     }
                     .tag(1)
-                MacUpdatesView()
+                MacUpdatesView(updaterViewModel: updaterViewModel)
                     .tabItem {
                         Image(systemName: "arrow.down.circle")
                         Text("Updates")

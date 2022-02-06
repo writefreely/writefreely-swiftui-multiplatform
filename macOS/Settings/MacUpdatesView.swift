@@ -1,16 +1,14 @@
 import SwiftUI
 import Sparkle
 
-enum AppcastFeedUrl: String {
-    case release = "https://writefreely-files.s3.amazonaws.com/apps/mac/appcast.xml"
-    case beta = "https://writefreely-files.s3.amazonaws.com/apps/mac/appcast-beta.xml"
-}
-
 struct MacUpdatesView: View {
+    @ObservedObject var updaterViewModel: MacUpdatesViewModel
+
     @AppStorage(WFDefaults.automaticallyChecksForUpdates, store: UserDefaults.shared)
     var automaticallyChecksForUpdates: Bool = false
     @AppStorage(WFDefaults.subscribeToBetaUpdates, store: UserDefaults.shared)
     var subscribeToBetaUpdates: Bool = false
+
     @State private var lastUpdateCheck: Date?
 
     private let betaWarningString = """
@@ -34,9 +32,11 @@ that can cause crashes and data loss.
 
             VStack {
                 Button(action: {
-                    SUUpdater.shared()?.checkForUpdates(self)
-                    DispatchQueue.main.async {
-                        lastUpdateCheck = SUUpdater.shared()?.lastUpdateCheckDate
+                    updaterViewModel.checkForUpdates()
+                    // There's a delay between requesting an update, and the timestamp for that update request being
+                    // written to user defaults; we therefore delay updating the "Last checked" UI for one second.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        lastUpdateCheck = updaterViewModel.getLastUpdateCheckDate()
                     }
                 }, label: {
                     Text("Check For Updates")
@@ -73,23 +73,19 @@ that can cause crashes and data loss.
         }
         .padding()
         .onAppear {
-            lastUpdateCheck = SUUpdater.shared()?.lastUpdateCheckDate
+            lastUpdateCheck = updaterViewModel.getLastUpdateCheckDate()
         }
         .onChange(of: automaticallyChecksForUpdates) { value in
-            SUUpdater.shared()?.automaticallyChecksForUpdates = value
+            updaterViewModel.automaticallyCheckForUpdates = value
         }
-        .onChange(of: subscribeToBetaUpdates) { value in
-            if value {
-                SUUpdater.shared()?.feedURL = URL(string: AppcastFeedUrl.beta.rawValue)
-            } else {
-                SUUpdater.shared()?.feedURL = URL(string: AppcastFeedUrl.release.rawValue)
-            }
+        .onChange(of: subscribeToBetaUpdates) { _ in
+            updaterViewModel.toggleAllowedChannels()
         }
     }
 }
 
 struct MacUpdatesView_Previews: PreviewProvider {
     static var previews: some View {
-        MacUpdatesView()
+        MacUpdatesView(updaterViewModel: MacUpdatesViewModel())
     }
 }

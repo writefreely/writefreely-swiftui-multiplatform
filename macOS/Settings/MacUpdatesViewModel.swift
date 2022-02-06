@@ -8,18 +8,53 @@ final class MacUpdatesViewModel: ObservableObject {
 
     @Published var canCheckForUpdates = false
     private let updaterController: SPUStandardUpdaterController
+    private let updaterDelegate = MacUpdatesViewModelDelegate()
+
+    var automaticallyCheckForUpdates: Bool {
+        get {
+            return updaterController.updater.automaticallyChecksForUpdates
+        }
+        set(newValue) {
+            updaterController.updater.automaticallyChecksForUpdates = newValue
+        }
+    }
 
     init() {
         updaterController = SPUStandardUpdaterController(startingUpdater: true,
-                                                         updaterDelegate: nil,
+                                                         updaterDelegate: updaterDelegate,
                                                          userDriverDelegate: nil)
 
         updaterController.updater.publisher(for: \.canCheckForUpdates)
             .assign(to: &$canCheckForUpdates)
+
+        if automaticallyCheckForUpdates {
+            updaterController.updater.checkForUpdatesInBackground()
+        }
     }
 
     func checkForUpdates() {
         updaterController.checkForUpdates(nil)
+    }
+
+    func getLastUpdateCheckDate() -> Date? {
+        return updaterController.updater.lastUpdateCheckDate
+    }
+
+    @discardableResult
+    func toggleAllowedChannels() -> Set<String> {
+        return updaterDelegate.allowedChannels(for: updaterController.updater)
+    }
+
+}
+
+final class MacUpdatesViewModelDelegate: NSObject, SPUUpdaterDelegate {
+
+    @AppStorage(WFDefaults.subscribeToBetaUpdates, store: UserDefaults.shared)
+    var subscribeToBetaUpdates: Bool = false
+
+    func allowedChannels(for updater: SPUUpdater) -> Set<String> {
+        let allowedChannels = Set(subscribeToBetaUpdates ? ["beta"] : [])
+        return allowedChannels
     }
 
 }
