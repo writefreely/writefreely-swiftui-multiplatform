@@ -66,7 +66,7 @@ struct AccountLogoutView: View {
                 editedPostsWarningString = "You'll lose unpublished changes to \(editedPosts.count) edited posts. "
             }
         } catch {
-            print("Error: failed to fetch cached posts")
+            fatalError("Error: failed to fetch cached posts")
         }
         self.isPresentingLogoutConfirmation = true
     }

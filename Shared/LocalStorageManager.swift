@@ -23,7 +23,7 @@ final class LocalStorageManager {
             do {
                 try container.viewContext.save()
             } catch {
-                print("Error saving context: \(error)")
+                fatalError("Error saving context: \(error)")
             }
         }
     }
@@ -35,7 +35,7 @@ final class LocalStorageManager {
         do {
             try container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
-            print("Error: Failed to purge cached collections.")
+            fatalError("Error: Failed to purge cached collections.")
         }
     }
 

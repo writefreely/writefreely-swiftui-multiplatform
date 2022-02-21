@@ -17,7 +17,7 @@ class PostListModel: ObservableObject {
         do {
             try LocalStorageManager.standard.container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
-            print("Error: Failed to purge cached posts.")
+            fatalError("Error: Failed to purge cached posts.")
         }
     }
 

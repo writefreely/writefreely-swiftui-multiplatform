@@ -19,7 +19,7 @@ class CollectionListModel: NSObject, ObservableObject {
             try collectionsController.performFetch()
             list = collectionsController.fetchedObjects ?? []
         } catch {
-            print("Failed to fetch collections!")
+            fatalError("Failed to fetch collections!")
         }
     }
 }
