@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AccountLoginView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @EnvironmentObject var errorHandling: ErrorHandling
 
     @State private var alertMessage: String = ""
     @State private var username: String = ""
@@ -76,8 +77,7 @@ struct AccountLoginView: View {
                             as: username, password: password
                         )
                     } else {
-                        model.loginErrorMessage = AccountError.invalidServerURL.localizedDescription
-                        model.isPresentingLoginErrorAlert = true
+                        self.errorHandling.handle(error: AccountError.invalidServerURL)
                     }
                 }, label: {
                     Text("Log In")
