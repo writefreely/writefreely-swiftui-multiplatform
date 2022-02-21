@@ -327,8 +327,8 @@
 		170E17DE27B95044008F5959 /* ErrorHandling */ = {
 			isa = PBXGroup;
 			children = (
-				176CA3FB27C3C591005B0515 /* ErrorHandling.swift */,
 				176CA3FF27C3DA6B005B0515 /* ErrorConstants.swift */,
+				176CA3FB27C3C591005B0515 /* ErrorHandling.swift */,
 			);
 			path = ErrorHandling;
 			sourceTree = "<group>";

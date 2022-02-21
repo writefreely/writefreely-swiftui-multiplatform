@@ -7,7 +7,7 @@ enum NetworkError: Error {
 }
 
 extension NetworkError: LocalizedError {
-    public var localizedDescription: String {
+    public var errorDescription: String? {
         switch self {
         case .noConnectionError:
             return NSLocalizedString(
@@ -31,7 +31,7 @@ enum AccountError: Error {
 }
 
 extension AccountError: LocalizedError {
-    public var localizedDescription: String {
+    public var errorDescription: String? {
         switch self {
         case .serverNotFound:
             return NSLocalizedString(
