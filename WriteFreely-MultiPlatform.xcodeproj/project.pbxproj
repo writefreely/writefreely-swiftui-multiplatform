@@ -70,6 +70,10 @@
 		1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
 		1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */; };
 		17681E412519410E00D394AE /* UINavigationController+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17681E402519410E00D394AE /* UINavigationController+Appearance.swift */; };
+		176CA3FC27C3C591005B0515 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CA3FB27C3C591005B0515 /* ErrorHandling.swift */; };
+		176CA3FD27C3C591005B0515 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CA3FB27C3C591005B0515 /* ErrorHandling.swift */; };
+		176CA40027C3DA6B005B0515 /* ErrorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CA3FF27C3DA6B005B0515 /* ErrorConstants.swift */; };
+		176CA40127C3DA6B005B0515 /* ErrorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CA3FF27C3DA6B005B0515 /* ErrorConstants.swift */; };
 		1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1780F6EE25895EDB00FE45FF /* PostCommands.swift */; };
 		17836C14273EFB870047AF61 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
 		17836C15273F0FBB0047AF61 /* Hack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */; };
@@ -210,6 +214,8 @@
 		1756DBFF24FEE18400207AB8 /* WFACollection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1756DC0024FEE18400207AB8 /* WFACollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WFACollection+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		17681E402519410E00D394AE /* UINavigationController+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Appearance.swift"; sourceTree = "<group>"; };
+		176CA3FB27C3C591005B0515 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
+		176CA3FF27C3DA6B005B0515 /* ErrorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorConstants.swift; sourceTree = "<group>"; };
 		1780F6EE25895EDB00FE45FF /* PostCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommands.swift; sourceTree = "<group>"; };
 		17836C18273F10C40047AF61 /* ActionExtension-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ActionExtension-iOS.entitlements"; sourceTree = "<group>"; };
 		17A355D3271A052C007C7A47 /* WriteFreely-MultiPlatform (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WriteFreely-MultiPlatform (iOS).entitlements"; sourceTree = "<group>"; };
@@ -316,6 +322,15 @@
 				17A4FEDF25924E810037E96B /* MacSoftwareUpdater.md */,
 			);
 			path = Technotes;
+			sourceTree = "<group>";
+		};
+		170E17DE27B95044008F5959 /* ErrorHandling */ = {
+			isa = PBXGroup;
+			children = (
+				176CA3FB27C3C591005B0515 /* ErrorHandling.swift */,
+				176CA3FF27C3DA6B005B0515 /* ErrorConstants.swift */,
+			);
+			path = ErrorHandling;
 			sourceTree = "<group>";
 		};
 		17120DA624E19CE2002B9F6C /* Settings */ = {
@@ -478,6 +493,7 @@
 				1756DBB924FED45500207AB8 /* LocalStorageManager.swift */,
 				17DF328324C87D3500BCE2E3 /* Assets.xcassets */,
 				17DF32D024C8B75C00BCE2E3 /* Account */,
+				170E17DE27B95044008F5959 /* ErrorHandling */,
 				1756AE7F24CB841200FD7257 /* Extensions */,
 				1762DCB124EB07680019C4EB /* Models */,
 				17DF32CC24C8B72300BCE2E3 /* Navigation */,
@@ -894,12 +910,14 @@
 				17C42E652509237800072984 /* PostListFilteredView.swift in Sources */,
 				170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
+				176CA3FC27C3C591005B0515 /* ErrorHandling.swift in Sources */,
 				17B37C4B25C8661300FE75E9 /* WriteFreelyModel+Keychain.swift in Sources */,
 				17480CA5251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17AD0A6425489E900057D763 /* PostBodyTextView.swift in Sources */,
 				17B37C5D25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift in Sources */,
 				17AD0A5E25489E810057D763 /* PostTitleTextView.swift in Sources */,
 				17120DA924E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
+				176CA40027C3DA6B005B0515 /* ErrorConstants.swift in Sources */,
 				171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				1756DBB324FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
 				17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */,
@@ -955,6 +973,7 @@
 				1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
 				17B996DB2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */,
 				17BC618A25715318003363CA /* ActivePostToolbarView.swift in Sources */,
+				176CA3FD27C3C591005B0515 /* ErrorHandling.swift in Sources */,
 				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
 				17A67CAF251A5DD7002F163D /* PostEditorView.swift in Sources */,
 				17DF32AB24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
@@ -969,6 +988,7 @@
 				1756DBB424FECDBB00207AB8 /* PostEditorStatusToolbarView.swift in Sources */,
 				17A5388F24DDEC7400DEFF9A /* AccountView.swift in Sources */,
 				1780F6EF25895EDB00FE45FF /* PostCommands.swift in Sources */,
+				176CA40127C3DA6B005B0515 /* ErrorConstants.swift in Sources */,
 				17B37C5E25C8698900FE75E9 /* WriteFreelyModel+APIHandlers.swift in Sources */,
 				170DFA35251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
 				1756AE7524CB26FA00FD7257 /* PostCellView.swift in Sources */,

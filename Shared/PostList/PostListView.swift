@@ -89,9 +89,7 @@ struct PostListView: View {
                         .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
                             Alert(
                                 title: Text("Connection Error"),
-                                message: Text("""
-                                There is no internet connection at the moment. Please reconnect or try again later.
-                                """),
+                                message: Text(NetworkError.noConnectionError.localizedDescription),
                                 dismissButton: .default(Text("OK"), action: {
                                     model.isPresentingNetworkErrorAlert = false
                                 })
@@ -151,10 +149,7 @@ struct PostListView: View {
                         .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
                             Alert(
                                 title: Text("Connection Error"),
-                                message: Text("""
-                                    There is no internet connection at the moment. \
-                                    Please reconnect or try again later.
-                                    """),
+                                message: Text(NetworkError.noConnectionError.localizedDescription),
                                 dismissButton: .default(Text("OK"), action: {
                                     model.isPresentingNetworkErrorAlert = false
                                 })
