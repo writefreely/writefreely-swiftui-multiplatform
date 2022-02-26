@@ -18,6 +18,24 @@ extension NetworkError: LocalizedError {
     }
 }
 
+// MARK: - Keychain Errors
+
+enum KeychainError: Error {
+    case couldNotStoreAccessToken
+    case couldNotPurgeAccessToken
+}
+
+extension KeychainError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .couldNotStoreAccessToken:
+            return NSLocalizedString("There was a problem storing your access token in the Keychain.", comment: "")
+        case .couldNotPurgeAccessToken:
+            return NSLocalizedString("Something went wrong purging the token from the Keychain.", comment: "")
+        }
+    }
+}
+
 // MARK: - Account Errors
 
 enum AccountError: Error {
@@ -28,6 +46,8 @@ enum AccountError: Error {
     case couldNotSaveTokenToKeychain
     case couldNotFetchTokenFromKeychain
     case couldNotDeleteTokenFromKeychain
+    case unknownLoginError
+    case genericAuthError
 }
 
 extension AccountError: LocalizedError {
@@ -68,6 +88,29 @@ extension AccountError: LocalizedError {
                 "There was a problem trying to delete your access token from the device, please try logging out again.",
                 comment: ""
             )
+        case .genericAuthError:
+            return NSLocalizedString("Something went wrong, please try logging in again.", comment: "")
+        case .unknownLoginError:
+            return NSLocalizedString("An unknown error occurred while trying to login", comment: "")
+        }
+    }
+}
+
+// MARK: - Local Store Errors
+
+enum LocalStoreError: Error {
+    case couldNotFetchPosts(String)
+}
+
+extension LocalStoreError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .couldNotFetchPosts(let postFilter):
+            if postFilter.isEmpty {
+                return NSLocalizedString("Failed to fetch posts from local store", comment: "")
+            } else {
+            return NSLocalizedString("Failed to fetch \(postFilter) posts from local store", comment: "")
+            }
         }
     }
 }

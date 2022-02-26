@@ -17,7 +17,7 @@ final class WriteFreelyModel: ObservableObject {
     @Published var selectedCollection: WFACollection?
     @Published var showAllPosts: Bool = true
     @Published var isPresentingDeleteAlert: Bool = false
-    @Published var isPresentingLoginErrorAlert: Bool = false
+    @Published var shouldHandleError: Bool = false
     @Published var isPresentingNetworkErrorAlert: Bool = false
     @Published var postToDelete: WFAPost?
     #if os(iOS)
@@ -26,7 +26,11 @@ final class WriteFreelyModel: ObservableObject {
 
     static var shared = WriteFreelyModel()
 
-    var loginErrorMessage: String?
+    var currentError: Error? {
+        didSet {
+            self.shouldHandleError = currentError != nil
+        }
+    }
 
     // swiftlint:disable line_length
     let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
@@ -56,8 +60,7 @@ final class WriteFreelyModel: ObservableObject {
                             username: self.account.username,
                             server: self.account.server
                     ) else {
-                        self.loginErrorMessage = AccountError.couldNotFetchTokenFromKeychain.localizedDescription
-                        self.isPresentingLoginErrorAlert = true
+                        self.currentError = AccountError.couldNotFetchTokenFromKeychain
                         return
                     }
 
@@ -67,8 +70,7 @@ final class WriteFreelyModel: ObservableObject {
                     self.fetchUserCollections()
                     self.fetchUserPosts()
                 } catch {
-                    self.loginErrorMessage = AccountError.couldNotFetchTokenFromKeychain.localizedDescription
-                    self.isPresentingLoginErrorAlert = true
+                    self.currentError = AccountError.couldNotFetchTokenFromKeychain
                 }
             }
         }

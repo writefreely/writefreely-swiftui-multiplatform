@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AccountLogoutView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @EnvironmentObject var errorHandling: ErrorHandling
 
     @State private var isPresentingLogoutConfirmation: Bool = false
     @State private var editedPostsWarningString: String = ""
@@ -66,7 +67,7 @@ struct AccountLogoutView: View {
                 editedPostsWarningString = "You'll lose unpublished changes to \(editedPosts.count) edited posts. "
             }
         } catch {
-            fatalError("Error: failed to fetch cached posts")
+            self.errorHandling.handle(error: LocalStoreError.couldNotFetchPosts("edited"))
         }
         self.isPresentingLogoutConfirmation = true
     }

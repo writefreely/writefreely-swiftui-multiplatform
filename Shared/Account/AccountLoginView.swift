@@ -88,12 +88,10 @@ struct AccountLoginView: View {
                 .padding()
             }
         }
-        .alert(isPresented: $model.isPresentingLoginErrorAlert) {
-            Alert(
-                title: Text("Error Logging In"),
-                message: Text(model.loginErrorMessage ?? "An unknown error occurred while trying to login."),
-                dismissButton: .default(Text("OK"))
-            )
+        .onChange(of: model.shouldHandleError) { _ in
+            guard let error = model.currentError else { return }
+            self.errorHandling.handle(error: error)
+            model.currentError = nil
         }
     }
 }
