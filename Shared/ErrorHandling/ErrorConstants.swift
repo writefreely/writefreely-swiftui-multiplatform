@@ -91,7 +91,7 @@ extension AccountError: LocalizedError {
         case .genericAuthError:
             return NSLocalizedString("Something went wrong, please try logging in again.", comment: "")
         case .unknownLoginError:
-            return NSLocalizedString("An unknown error occurred while trying to login", comment: "")
+            return NSLocalizedString("An unknown error occurred while trying to login.", comment: "")
         }
     }
 }
@@ -99,18 +99,42 @@ extension AccountError: LocalizedError {
 // MARK: - Local Store Errors
 
 enum LocalStoreError: Error {
+    case couldNotFetchCollections
     case couldNotFetchPosts(String)
+    case couldNotPurgePublishedPosts
 }
 
 extension LocalStoreError: LocalizedError {
     public var errorDescription: String? {
         switch self {
+        case .couldNotFetchCollections:
+            return NSLocalizedString("Failed to fetch blogs from local store.", comment: "")
         case .couldNotFetchPosts(let postFilter):
             if postFilter.isEmpty {
-                return NSLocalizedString("Failed to fetch posts from local store", comment: "")
+                return NSLocalizedString("Failed to fetch posts from local store.", comment: "")
             } else {
-            return NSLocalizedString("Failed to fetch \(postFilter) posts from local store", comment: "")
+            return NSLocalizedString("Failed to fetch \(postFilter) posts from local store.", comment: "")
             }
+        case .couldNotPurgePublishedPosts:
+            return NSLocalizedString("Failed to purge published posts from local store.", comment: "")
+        }
+    }
+}
+
+// MARK: - Application Errors
+
+enum AppError: Error {
+    case couldNotGetLoggedInClient
+    case couldNotGetPostId
+}
+
+extension AppError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .couldNotGetLoggedInClient:
+            return NSLocalizedString("Something went wrong trying to access the WriteFreely client.", comment: "")
+        case .couldNotGetPostId:
+            return NSLocalizedString("Something went wrong trying to get the post's unique ID.", comment: "")
         }
     }
 }

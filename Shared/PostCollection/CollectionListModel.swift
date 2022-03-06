@@ -5,7 +5,7 @@ class CollectionListModel: NSObject, ObservableObject {
     @Published var list: [WFACollection] = []
     private let collectionsController: NSFetchedResultsController<WFACollection>
 
-    init(managedObjectContext: NSManagedObjectContext) {
+    init(managedObjectContext: NSManagedObjectContext) throws {
         collectionsController = NSFetchedResultsController(fetchRequest: WFACollection.collectionsFetchRequest,
                                                            managedObjectContext: managedObjectContext,
                                                            sectionNameKeyPath: nil,
@@ -19,7 +19,7 @@ class CollectionListModel: NSObject, ObservableObject {
             try collectionsController.performFetch()
             list = collectionsController.fetchedObjects ?? []
         } catch {
-            fatalError("Failed to fetch collections!")
+            throw LocalStoreError.couldNotFetchCollections
         }
     }
 }

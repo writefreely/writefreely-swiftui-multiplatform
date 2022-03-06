@@ -38,7 +38,7 @@ extension WriteFreelyModel {
                 try purgeTokenFromKeychain(username: account.username, server: account.server)
                 account.logout()
             } catch {
-                fatalError("Failed to log out persisted state")
+                self.currentError = KeychainError.couldNotPurgeAccessToken
             }
             return
         }
@@ -51,7 +51,8 @@ extension WriteFreelyModel {
             return
         }
         guard let loggedInClient = client else {
-            fatalError("Could not get logged in client")
+            self.currentError = AppError.couldNotGetLoggedInClient
+            return
         }
         // We're starting the network request.
         DispatchQueue.main.async {
@@ -66,7 +67,8 @@ extension WriteFreelyModel {
             return
         }
         guard let loggedInClient = client else {
-            fatalError("Could not get logged in client")
+            self.currentError = AppError.couldNotGetLoggedInClient
+            return
         }
         // We're starting the network request.
         DispatchQueue.main.async {
@@ -83,7 +85,8 @@ extension WriteFreelyModel {
             return
         }
         guard let loggedInClient = client else {
-            fatalError("Could not get logged in client")
+            self.currentError = AppError.couldNotGetLoggedInClient
+            return
         }
         // We're starting the network request.
         DispatchQueue.main.async {
@@ -130,10 +133,12 @@ extension WriteFreelyModel {
             return
         }
         guard let loggedInClient = client else {
-            fatalError("Could not get logged in client")
+            self.currentError = AppError.couldNotGetLoggedInClient
+            return
         }
         guard let postId = post.postId else {
-            fatalError("Could not get post ID")
+            self.currentError = AppError.couldNotGetPostId
+            return
         }
         // We're starting the network request.
         DispatchQueue.main.async {
@@ -148,10 +153,14 @@ extension WriteFreelyModel {
             DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
             return
         }
-        guard let loggedInClient = client,
-              let postId = post.postId else {
-                  fatalError("Could not get post ID")
-              }
+        guard let loggedInClient = client else {
+            self.currentError = AppError.couldNotGetLoggedInClient
+            return
+        }
+        guard let postId = post.postId else {
+            self.currentError = AppError.couldNotGetPostId
+            return
+        }
         // We're starting the network request.
         DispatchQueue.main.async {
             self.isProcessingRequest = true

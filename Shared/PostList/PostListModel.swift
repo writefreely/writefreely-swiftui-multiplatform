@@ -9,7 +9,7 @@ class PostListModel: ObservableObject {
         }
     }
 
-    func purgePublishedPosts() {
+    func purgePublishedPosts() throws {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFAPost")
         fetchRequest.predicate = NSPredicate(format: "status != %i", 0)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -17,7 +17,7 @@ class PostListModel: ObservableObject {
         do {
             try LocalStorageManager.standard.container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
-            fatalError("Error: Failed to purge cached posts.")
+            throw LocalStoreError.couldNotPurgePublishedPosts
         }
     }
 
