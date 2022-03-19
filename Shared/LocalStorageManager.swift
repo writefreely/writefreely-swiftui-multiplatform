@@ -28,14 +28,14 @@ final class LocalStorageManager {
         }
     }
 
-    func purgeUserCollections() {
+    func purgeUserCollections() throws {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFACollection")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
             try container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
-            fatalError("Error: Failed to purge cached collections.")
+            throw LocalStoreError.couldNotPurgeCollections
         }
     }
 

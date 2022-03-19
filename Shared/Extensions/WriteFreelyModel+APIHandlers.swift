@@ -16,28 +16,18 @@ extension WriteFreelyModel {
                     self.account.login(user)
                 }
             } catch {
-                DispatchQueue.main.async {
-                    self.currentError = KeychainError.couldNotStoreAccessToken
-                }
+                setCurrentError(to: KeychainError.couldNotStoreAccessToken)
             }
         } catch WFError.notFound {
-            DispatchQueue.main.async {
-                self.currentError = AccountError.usernameNotFound
-            }
+            setCurrentError(to: AccountError.usernameNotFound)
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.currentError = AccountError.invalidPassword
-            }
+            setCurrentError(to: AccountError.invalidPassword)
         } catch {
             if (error as NSError).domain == NSURLErrorDomain,
                (error as NSError).code == -1003 {
-                DispatchQueue.main.async {
-                    self.currentError = AccountError.serverNotFound
-                }
+                setCurrentError(to: AccountError.serverNotFound)
             } else {
-                DispatchQueue.main.async {
-                    self.currentError = error
-                }
+                setCurrentError(to: error)
             }
         }
     }
@@ -50,11 +40,19 @@ extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    LocalStorageManager.standard.purgeUserCollections()
-                    self.posts.purgePublishedPosts()
+                    do {
+                        try LocalStorageManager.standard.purgeUserCollections()
+                    } catch {
+                        self.currentError = error
+                    }
+                    do {
+                        try self.posts.purgePublishedPosts()
+                    } catch {
+                        self.currentError = error
+                    }
                 }
             } catch {
-                self.currentError = KeychainError.couldNotPurgeAccessToken
+                setCurrentError(to: KeychainError.couldNotPurgeAccessToken)
             }
         } catch WFError.notFound {
             // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
@@ -65,11 +63,15 @@ extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    LocalStorageManager.standard.purgeUserCollections()
-                    self.posts.purgePublishedPosts()
+                    do {
+                        try LocalStorageManager.standard.purgeUserCollections()
+                    } catch {
+                        self.currentError = error
+                    }
+                    do { try self.posts.purgePublishedPosts() } catch { self.currentError = error }
                 }
             } catch {
-                self.currentError = KeychainError.couldNotPurgeAccessToken
+                setCurrentError(to: KeychainError.couldNotPurgeAccessToken)
             }
         } catch {
             // We get a 'cannot parse response' (similar to what we were seeing in the Swift package) NSURLError here,
@@ -108,12 +110,10 @@ extension WriteFreelyModel {
                 LocalStorageManager.standard.saveContext()
             }
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.currentError = AccountError.genericAuthError
-            }
+            setCurrentError(to: AccountError.genericAuthError)
             self.logout()
         } catch {
-            fatalError(error.localizedDescription)
+            setCurrentError(to: error)
         }
     }
 
@@ -136,7 +136,9 @@ extension WriteFreelyModel {
                                let localPostUpdatedDate = managedPost.updatedDate {
                                 managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
                             } else {
-                                fatalError("Error: could not determine which copy of post is newer")
+                                self.setCurrentError(
+                                    to: LocalStoreError.genericError("Could not determine which copy of post is newer")
+                                )
                             }
                             postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
                         }
@@ -154,15 +156,13 @@ extension WriteFreelyModel {
                     LocalStorageManager.standard.saveContext()
                 }
             } catch {
-                fatalError(error.localizedDescription)
+                setCurrentError(to: error)
             }
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.currentError = AccountError.genericAuthError
-            }
+            setCurrentError(to: AccountError.genericAuthError)
             self.logout()
         } catch {
-            fatalError("Error: Failed to fetch cached posts")
+            setCurrentError(to: LocalStoreError.couldNotFetchPosts("cached"))
         }
     }
 
@@ -201,18 +201,19 @@ extension WriteFreelyModel {
                 do {
                     let cachedPostsResults = try LocalStorageManager.standard.container.viewContext.fetch(request)
                     guard let cachedPost = cachedPostsResults.first else {
-                        fatalError("Could not get cached post from results")
+                        setCurrentError(to: LocalStoreError.genericError("Could not get cached post from results"))
+                        return
                     }
                     importData(from: fetchedPost, into: cachedPost)
                     DispatchQueue.main.async {
                         LocalStorageManager.standard.saveContext()
                     }
                 } catch {
-                    fatalError("Error: Failed to fetch cached posts")
+                    setCurrentError(to: LocalStoreError.couldNotFetchPosts("cached"))
                 }
             }
         } catch {
-            fatalError(error.localizedDescription)
+            setCurrentError(to: error)
         }
     }
 
@@ -228,7 +229,8 @@ extension WriteFreelyModel {
         do {
             let fetchedPost = try result.get()
             guard let cachedPost = self.selectedPost else {
-                fatalError("Could not get cached post")
+                setCurrentError(to: LocalStoreError.genericError("Could not get cached post"))
+                return
             }
             importData(from: fetchedPost, into: cachedPost)
             cachedPost.hasNewerRemoteCopy = false
@@ -236,7 +238,7 @@ extension WriteFreelyModel {
                 LocalStorageManager.standard.saveContext()
             }
         } catch {
-            fatalError(error.localizedDescription)
+            setCurrentError(to: error)
         }
     }
 
@@ -251,14 +253,14 @@ extension WriteFreelyModel {
                 if let post = selectedPost {
                     updateFromServer(post: post)
                 } else {
-                    fatalError("Could not update post from server")
+                    setCurrentError(to: LocalStoreError.genericError("Could not update post from server"))
                 }
             }
         } catch {
             DispatchQueue.main.async {
                 LocalStorageManager.standard.container.viewContext.rollback()
+                self.currentError = error
             }
-            fatalError(error.localizedDescription)
         }
     }
 
@@ -273,5 +275,11 @@ extension WriteFreelyModel {
         cachedPost.status = PostStatus.published.rawValue
         cachedPost.title = fetchedPost.title ?? ""
         cachedPost.updatedDate = fetchedPost.updatedDate
+    }
+
+    private func setCurrentError(to error: Error) {
+        DispatchQueue.main.async {
+            self.currentError = error
+        }
     }
 }

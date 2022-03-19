@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1703FD8427DCE8F000EDFFBB /* ErrorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CA3FF27C3DA6B005B0515 /* ErrorConstants.swift */; };
 		170A7EC126F5186A00F1CBD4 /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */; };
 		170A7EC226F5186A00F1CBD4 /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */; };
 		170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170DFA33251BBC44001D82A0 /* PostEditorModel.swift */; };
@@ -890,6 +891,7 @@
 				172E10212735C64600061372 /* WFACollection+CoreDataProperties.swift in Sources */,
 				172E101C2735C57400061372 /* LocalStorageManager.swift in Sources */,
 				172E10192735C3DB00061372 /* ContentView.swift in Sources */,
+				1703FD8427DCE8F000EDFFBB /* ErrorConstants.swift in Sources */,
 				172E10152735C2BD00061372 /* UIHostingView.swift in Sources */,
 				172E101F2735C64600061372 /* WFAPost+CoreDataClass.swift in Sources */,
 				172E10232735C6FF00061372 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
@@ -1042,7 +1044,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 646;
+				CURRENT_PROJECT_VERSION = 649;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
@@ -1054,7 +1056,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform.ActionExtension-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1073,7 +1075,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 646;
+				CURRENT_PROJECT_VERSION = 649;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
@@ -1085,7 +1087,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform.ActionExtension-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1216,7 +1218,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 646;
+				CURRENT_PROJECT_VERSION = 649;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1225,7 +1227,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -1242,7 +1244,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 646;
+				CURRENT_PROJECT_VERSION = 649;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1251,7 +1253,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;

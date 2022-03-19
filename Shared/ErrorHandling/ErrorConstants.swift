@@ -99,24 +99,46 @@ extension AccountError: LocalizedError {
 // MARK: - Local Store Errors
 
 enum LocalStoreError: Error {
+    case couldNotSaveContext
     case couldNotFetchCollections
     case couldNotFetchPosts(String)
     case couldNotPurgePublishedPosts
+    case couldNotPurgeCollections
+    case couldNotLoadStore(String)
+    case couldNotMigrateStore(String)
+    case couldNotDeleteStoreAfterMigration(String)
+    case genericError(String)
 }
 
 extension LocalStoreError: LocalizedError {
     public var errorDescription: String? {
         switch self {
+        case .couldNotSaveContext:
+            return NSLocalizedString("Error saving context", comment: "")
         case .couldNotFetchCollections:
             return NSLocalizedString("Failed to fetch blogs from local store.", comment: "")
         case .couldNotFetchPosts(let postFilter):
             if postFilter.isEmpty {
                 return NSLocalizedString("Failed to fetch posts from local store.", comment: "")
             } else {
-            return NSLocalizedString("Failed to fetch \(postFilter) posts from local store.", comment: "")
+                return NSLocalizedString("Failed to fetch \(postFilter) posts from local store.", comment: "")
             }
         case .couldNotPurgePublishedPosts:
             return NSLocalizedString("Failed to purge published posts from local store.", comment: "")
+        case .couldNotPurgeCollections:
+            return NSLocalizedString("Failed to purge cached collections", comment: "")
+        case .couldNotLoadStore(let errorDescription):
+            return NSLocalizedString("Something went wrong loading local store: \(errorDescription)", comment: "")
+        case .couldNotMigrateStore(let errorDescription):
+            return NSLocalizedString("Something went wrong migrating local store: \(errorDescription)", comment: "")
+        case .couldNotDeleteStoreAfterMigration(let errorDescription):
+            return NSLocalizedString("Something went wrong deleting old store: \(errorDescription)", comment: "")
+        case .genericError(let customContent):
+            if customContent.isEmpty {
+                return NSLocalizedString("Something went wrong accessing device storage", comment: "")
+            } else {
+                return NSLocalizedString(customContent, comment: "")
+            }
         }
     }
 }
@@ -138,3 +160,5 @@ extension AppError: LocalizedError {
         }
     }
 }
+
+// MARK: - Fetch Errors
