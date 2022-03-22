@@ -133,7 +133,7 @@ struct PostListView: View {
                 }
             }
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .bottom)
         .onAppear {
             model.selectedCollection = selectedCollection
             model.showAllPosts = showAllPosts
