@@ -20,8 +20,6 @@
 		17120DAC24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
 		17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DAB24E1B99F002B9F6C /* AccountLoginView.swift */; };
 		17120DB224E1E19C002B9F6C /* SettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */; };
-		1714DD65260BAC14000C0DFF /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1714DD64260BAC14000C0DFF /* WriteFreely */; };
-		1714DD6B260BAC2C000C0DFF /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1714DD6A260BAC2C000C0DFF /* WriteFreely */; };
 		171BFDFA24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171DC677272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
@@ -35,7 +33,6 @@
 		172E10152735C2BD00061372 /* UIHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10142735C2BD00061372 /* UIHostingView.swift */; };
 		172E10172735C2DF00061372 /* EnvironmentValues+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10162735C2DF00061372 /* EnvironmentValues+Extensions.swift */; };
 		172E10192735C3DB00061372 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E10182735C3DB00061372 /* ContentView.swift */; };
-		172E101B2735C54400061372 /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 172E101A2735C54400061372 /* WriteFreely */; };
 		172E101C2735C57400061372 /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB924FED45500207AB8 /* LocalStorageManager.swift */; };
 		172E101D2735C5AB00061372 /* LocalStorageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1756DBB524FED3A400207AB8 /* LocalStorageModel.xcdatamodeld */; };
 		172E101E2735C62F00061372 /* PostStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E612507D8E600072984 /* PostStatus.swift */; };
@@ -77,7 +74,9 @@
 		17836C15273F0FBB0047AF61 /* Hack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */; };
 		17836C16273F0FBB0047AF61 /* LoraGX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */; };
 		17836C17273F0FBB0047AF61 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */; };
-		17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17A4FED925924AF70037E96B /* Sparkle */; };
+		1784D2ED27946D880033E72E /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1784D2EC27946D880033E72E /* WriteFreely */; };
+		1784D2EF27946D9A0033E72E /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1784D2EE27946D9A0033E72E /* WriteFreely */; };
+		1784D2F127946DA10033E72E /* WriteFreely in Frameworks */ = {isa = PBXBuildFile; productRef = 1784D2F027946DA10033E72E /* WriteFreely */; };
 		17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4FEEC25927E730037E96B /* AppDelegate.swift */; };
 		17A5388824DDA31F00DEFF9A /* MacAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388724DDA31F00DEFF9A /* MacAccountView.swift */; };
 		17A5388C24DDC83F00DEFF9A /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388B24DDC83F00DEFF9A /* AccountModel.swift */; };
@@ -107,6 +106,8 @@
 		17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */; };
 		17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
 		17D435E924E3128F0036B539 /* PreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D435E724E3128F0036B539 /* PreferencesModel.swift */; };
+		17D4926527947B4D0035BD7E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 17D4926427947B4D0035BD7E /* Sparkle */; };
+		17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4926627947D780035BD7E /* MacUpdatesViewModel.swift */; };
 		17D4F36C2514EE2F00517CE6 /* LoraGX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */; };
 		17D4F36D2514EE2F00517CE6 /* LoraGX.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */; };
 		17D4F39E2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */; };
@@ -232,6 +233,7 @@
 		17C42E642509237800072984 /* PostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListFilteredView.swift; sourceTree = "<group>"; };
 		17C42E6F250AA12200072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+ExecuteAndMergeChanges.swift"; sourceTree = "<group>"; };
 		17D435E724E3128F0036B539 /* PreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesModel.swift; sourceTree = "<group>"; };
+		17D4926627947D780035BD7E /* MacUpdatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesViewModel.swift; sourceTree = "<group>"; };
 		17D4F36B2514EE2F00517CE6 /* LoraGX.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoraGX.ttf; sourceTree = "<group>"; };
 		17D4F39D2514F0E500517CE6 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		17D4F3A42514F1E900517CE6 /* Hack-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hack-Regular.ttf"; sourceTree = "<group>"; };
@@ -267,7 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */,
-				172E101B2735C54400061372 /* WriteFreely in Frameworks */,
+				1784D2F127946DA10033E72E /* WriteFreely in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1714DD65260BAC14000C0DFF /* WriteFreely in Frameworks */,
+				1784D2ED27946D880033E72E /* WriteFreely in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,8 +285,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17A4FEDA25924AF70037E96B /* Sparkle in Frameworks */,
-				1714DD6B260BAC2C000C0DFF /* WriteFreely in Frameworks */,
+				1784D2EF27946D9A0033E72E /* WriteFreely in Frameworks */,
+				17D4926527947B4D0035BD7E /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +399,7 @@
 				17A5388724DDA31F00DEFF9A /* MacAccountView.swift */,
 				1753F6AB24E431CC00309365 /* MacPreferencesView.swift */,
 				172C492D2593981900E20ADF /* MacUpdatesView.swift */,
+				17D4926627947D780035BD7E /* MacUpdatesViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -616,7 +619,7 @@
 			);
 			name = "ActionExtension-iOS";
 			packageProductDependencies = (
-				172E101A2735C54400061372 /* WriteFreely */,
+				1784D2F027946DA10033E72E /* WriteFreely */,
 			);
 			productName = "ActionExtension-iOS";
 			productReference = 172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */;
@@ -639,7 +642,7 @@
 			);
 			name = "WriteFreely-MultiPlatform (iOS)";
 			packageProductDependencies = (
-				1714DD64260BAC14000C0DFF /* WriteFreely */,
+				1784D2EC27946D880033E72E /* WriteFreely */,
 			);
 			productName = "WriteFreely-MultiPlatform (iOS)";
 			productReference = 17DF328824C87D3500BCE2E3 /* WriteFreely-MultiPlatform.app */;
@@ -660,8 +663,8 @@
 			);
 			name = "WriteFreely-MultiPlatform (macOS)";
 			packageProductDependencies = (
-				17A4FED925924AF70037E96B /* Sparkle */,
-				1714DD6A260BAC2C000C0DFF /* WriteFreely */,
+				1784D2EE27946D9A0033E72E /* WriteFreely */,
+				17D4926427947B4D0035BD7E /* Sparkle */,
 			);
 			productName = "WriteFreely-MultiPlatform (macOS)";
 			productReference = 17DF329024C87D3500BCE2E3 /* WriteFreely for Mac.app */;
@@ -710,7 +713,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					172E0FFE2735B83E00061372 = {
 						CreatedOnToolsVersion = 13.1;
@@ -741,8 +744,8 @@
 			);
 			mainGroup = 17DF327B24C87D3300BCE2E3;
 			packageReferences = (
-				17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */,
-				1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */,
+				1784D2EB27946D880033E72E /* XCRemoteSwiftPackageReference "writefreely-swift" */,
+				17D4926327947B4D0035BD7E /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 17DF328924C87D3500BCE2E3 /* Products */;
 			projectDirPath = "";
@@ -938,6 +941,7 @@
 				17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
+				17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */,
 				17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */,
 				170A7EC226F5186A00F1CBD4 /* CollectionListModel.swift in Sources */,
 				17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */,
@@ -1239,6 +1243,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 620;
@@ -1265,6 +1270,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 620;
@@ -1434,43 +1440,43 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */ = {
+		1784D2EB27946D880033E72E /* XCRemoteSwiftPackageReference "writefreely-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:writefreely/writefreely-swift.git";
+			repositoryURL = "https://github.com/writefreely/writefreely-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.2;
+				minimumVersion = 0.3.4;
 			};
 		};
-		17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+		17D4926327947B4D0035BD7E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/writefreely/Sparkle";
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1714DD64260BAC14000C0DFF /* WriteFreely */ = {
+		1784D2EC27946D880033E72E /* WriteFreely */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			package = 1784D2EB27946D880033E72E /* XCRemoteSwiftPackageReference "writefreely-swift" */;
 			productName = WriteFreely;
 		};
-		1714DD6A260BAC2C000C0DFF /* WriteFreely */ = {
+		1784D2EE27946D9A0033E72E /* WriteFreely */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			package = 1784D2EB27946D880033E72E /* XCRemoteSwiftPackageReference "writefreely-swift" */;
 			productName = WriteFreely;
 		};
-		172E101A2735C54400061372 /* WriteFreely */ = {
+		1784D2F027946DA10033E72E /* WriteFreely */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1714DD63260BAC14000C0DFF /* XCRemoteSwiftPackageReference "writefreely-swift" */;
+			package = 1784D2EB27946D880033E72E /* XCRemoteSwiftPackageReference "writefreely-swift" */;
 			productName = WriteFreely;
 		};
-		17A4FED925924AF70037E96B /* Sparkle */ = {
+		17D4926427947B4D0035BD7E /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 17A4FED825924AF70037E96B /* XCRemoteSwiftPackageReference "Sparkle" */;
+			package = 17D4926327947B4D0035BD7E /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */

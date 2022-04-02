@@ -25,8 +25,8 @@ struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel.shared
 
     #if os(macOS)
-    // swiftlint:disable:next weak_delegate
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var updaterViewModel = MacUpdatesViewModel()
     @State private var selectedTab = 0
     #endif
 
@@ -47,13 +47,6 @@ struct WriteFreely_MultiPlatformApp: App {
                             showLastDraftOrCreateNewLocalPost()
                         }
                     }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                        if model.editor.lastDraftURL != nil {
-//                            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
-//                        } else {
-//                            createNewLocalPost()
-//                        }
-//                    }
                 })
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.standard.container.viewContext)
@@ -61,11 +54,9 @@ struct WriteFreely_MultiPlatformApp: App {
         }
         .commands {
             #if os(macOS)
-            CommandGroup(after: .appInfo, addition: {
-                Button("Check For Updates") {
-                    SUUpdater.shared()?.checkForUpdates(self)
-                }
-            })
+            CommandGroup(after: .appInfo) {
+                CheckForUpdatesView(updaterViewModel: updaterViewModel)
+            }
             #endif
             CommandGroup(replacing: .newItem, addition: {
                 Button("New Post") {
@@ -116,7 +107,7 @@ struct WriteFreely_MultiPlatformApp: App {
                         Text("Preferences")
                     }
                     .tag(1)
-                MacUpdatesView()
+                MacUpdatesView(updaterViewModel: updaterViewModel)
                     .tabItem {
                         Image(systemName: "arrow.down.circle")
                         Text("Updates")
