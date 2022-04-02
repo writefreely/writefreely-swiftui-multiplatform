@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] If the option is set, the app now silently checks for updates on launch.
 - [Mac] New drafts are created in the currently-selected blog, rather than being created in Drafts (or "Anonymous" for Write.as accounts).
 - [Mac] Updated the URL and minimum version of the WriteFreely Swift package.
+- [Mac] Upgraded the Sparkle package to v2.
 
 ### Fixed
 
@@ -32,7 +33,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a regression where text color did not adapt to dark mode correctly.
 - [Mac] Sharing a post now uses the custom domain (if any).
 - [Mac] The window is now restored when clicking on the app icon in the dock.
-- [Mac] Fixed a potential crash if the system keychain wasn't available at app launch. 
+- [Mac] Fixed a potential crash if the system keychain wasn't available at app launch.
+- [Mac] Cleaned up some straggling project warnings.
+
+## [1.0.9-ios] - 2022-04-02
+
+- [iOS] Fixed an issue when building for iOS 15 on Xcode 13 that caused the post list to underlap the navigation bar.
+- [iOS] Cleaned up some straggling project warnings.
 
 ## [1.0.8-ios] - 2021-12-03
 
@@ -261,7 +268,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.7-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.9-ios...HEAD
+[1.0.9-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.8-ios...v1.0.9-ios
 [1.0.8-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.7-ios...v1.0.8-ios
 [1.0.7-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.6-ios...v1.0.7-ios
 [1.0.6-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.5-ios...v1.0.6-ios
