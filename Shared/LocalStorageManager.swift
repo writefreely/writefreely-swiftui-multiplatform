@@ -59,7 +59,7 @@ private extension LocalStorageManager {
             container.persistentStoreDescriptions.first!.url = sharedStoreURL
         }
 
-        container.loadPersistentStores { description, error in
+        container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Core Data store failed to load with error: \(error)")
             }
