@@ -4,7 +4,7 @@ import WriteFreely
 extension WriteFreelyModel {
     func login(to server: URL, as username: String, password: String) {
         if !hasNetworkConnection {
-            isPresentingNetworkErrorAlert = true
+            self.currentError = NetworkError.noConnectionError
             return
         }
         let secureProtocolPrefix = "https://"
@@ -30,7 +30,7 @@ extension WriteFreelyModel {
 
     func logout() {
         if !hasNetworkConnection {
-            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            self.currentError = NetworkError.noConnectionError
             return
         }
         guard let loggedInClient = client else {
@@ -47,7 +47,7 @@ extension WriteFreelyModel {
 
     func fetchUserCollections() {
         if !hasNetworkConnection {
-            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            self.currentError = NetworkError.noConnectionError
             return
         }
         guard let loggedInClient = client else { return }
@@ -60,7 +60,7 @@ extension WriteFreelyModel {
 
     func fetchUserPosts() {
         if !hasNetworkConnection {
-            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            self.currentError = NetworkError.noConnectionError
             return
         }
         guard let loggedInClient = client else { return }
@@ -75,7 +75,7 @@ extension WriteFreelyModel {
         postToUpdate = nil
 
         if !hasNetworkConnection {
-            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            self.currentError = NetworkError.noConnectionError
             return
         }
         guard let loggedInClient = client else { return }
@@ -120,7 +120,7 @@ extension WriteFreelyModel {
 
     func updateFromServer(post: WFAPost) {
         if !hasNetworkConnection {
-            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            self.currentError = NetworkError.noConnectionError
             return
         }
         guard let loggedInClient = client else { return }
@@ -135,7 +135,7 @@ extension WriteFreelyModel {
 
     func move(post: WFAPost, from oldCollection: WFACollection?, to newCollection: WFACollection?) {
         if !hasNetworkConnection {
-            DispatchQueue.main.async { self.isPresentingNetworkErrorAlert = true }
+            self.currentError = NetworkError.noConnectionError
             return
         }
         guard let loggedInClient = client,

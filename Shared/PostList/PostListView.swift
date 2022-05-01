@@ -3,6 +3,7 @@ import Combine
 
 struct PostListView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @EnvironmentObject var errorHandling: ErrorHandling
     @Environment(\.managedObjectContext) var managedObjectContext
 
     @State private var postCount: Int = 0
@@ -86,17 +87,6 @@ struct PostListView: View {
                     Spacer()
                     Text(postCount == 1 ? "\(postCount) post" : "\(postCount) posts")
                         .foregroundColor(.secondary)
-                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                            Alert(
-                                title: Text("Connection Error"),
-                                message: Text("""
-                                There is no internet connection at the moment. Please reconnect or try again later.
-                                """),
-                                dismissButton: .default(Text("OK"), action: {
-                                    model.isPresentingNetworkErrorAlert = false
-                                })
-                            )
-                        })
                     Spacer()
                     if model.isProcessingRequest {
                         ProgressView()
@@ -138,6 +128,16 @@ struct PostListView: View {
             model.selectedCollection = selectedCollection
             model.showAllPosts = showAllPosts
         }
+        .onChange(of: model.hasError) { value in
+            if value {
+                if let error = model.currentError {
+                    self.errorHandling.handle(error: error)
+                } else {
+                    self.errorHandling.handle(error: AppError.genericError)
+                }
+                model.hasError = false
+            }
+        }
         #else
         PostListFilteredView(
             collection: selectedCollection,
@@ -148,18 +148,6 @@ struct PostListView: View {
             ToolbarItemGroup(placement: .primaryAction) {
                 if model.selectedPost != nil {
                     ActivePostToolbarView(activePost: model.selectedPost!)
-                        .alert(isPresented: $model.isPresentingNetworkErrorAlert, content: {
-                            Alert(
-                                title: Text("Connection Error"),
-                                message: Text("""
-                                    There is no internet connection at the moment. \
-                                    Please reconnect or try again later.
-                                    """),
-                                dismissButton: .default(Text("OK"), action: {
-                                    model.isPresentingNetworkErrorAlert = false
-                                })
-                            )
-                        })
                 }
             }
         }
@@ -171,6 +159,16 @@ struct PostListView: View {
         .onAppear {
             model.selectedCollection = selectedCollection
             model.showAllPosts = showAllPosts
+        }
+        .onChange(of: model.hasError) { value in
+            if value {
+                if let error = model.currentError {
+                    self.errorHandling.handle(error: error)
+                } else {
+                    self.errorHandling.handle(error: AppError.genericError)
+                }
+                model.hasError = false
+            }
         }
         #endif
     }

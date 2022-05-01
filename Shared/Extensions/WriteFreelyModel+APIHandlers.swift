@@ -16,33 +16,18 @@ extension WriteFreelyModel {
                     self.account.login(user)
                 }
             } catch {
-                DispatchQueue.main.async {
-                    self.loginErrorMessage = "There was a problem storing your access token to the Keychain."
-                    self.isPresentingLoginErrorAlert = true
-                }
+                self.currentError = KeychainError.couldNotStoreAccessToken
             }
         } catch WFError.notFound {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = AccountError.usernameNotFound.localizedDescription
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.usernameNotFound
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = AccountError.invalidPassword.localizedDescription
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.invalidPassword
         } catch {
             if (error as NSError).domain == NSURLErrorDomain,
                (error as NSError).code == -1003 {
-                DispatchQueue.main.async {
-                    self.loginErrorMessage = AccountError.serverNotFound.localizedDescription
-                    self.isPresentingLoginErrorAlert = true
-                }
+                self.currentError = AccountError.serverNotFound
             } else {
-                DispatchQueue.main.async {
-                    self.loginErrorMessage = error.localizedDescription
-                    self.isPresentingLoginErrorAlert = true
-                }
+                self.currentError = error
             }
         }
     }
@@ -59,7 +44,7 @@ extension WriteFreelyModel {
                     self.posts.purgePublishedPosts()
                 }
             } catch {
-                print("Something went wrong purging the token from the Keychain.")
+                print(KeychainError.couldNotPurgeAccessToken.localizedDescription)
             }
         } catch WFError.notFound {
             // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
@@ -74,7 +59,7 @@ extension WriteFreelyModel {
                     self.posts.purgePublishedPosts()
                 }
             } catch {
-                print("Something went wrong purging the token from the Keychain.")
+                print(KeychainError.couldNotPurgeAccessToken.localizedDescription)
             }
         } catch {
             // We get a 'cannot parse response' (similar to what we were seeing in the Swift package) NSURLError here,
@@ -113,10 +98,7 @@ extension WriteFreelyModel {
                 LocalStorageManager.standard.saveContext()
             }
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = "Something went wrong, please try logging in again."
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.genericAuthError
             self.logout()
         } catch {
             print(error)
@@ -161,10 +143,7 @@ extension WriteFreelyModel {
                 print(error)
             }
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = "Something went wrong, please try logging in again."
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.genericAuthError
             self.logout()
         } catch {
             print("Error: Failed to fetch cached posts")

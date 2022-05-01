@@ -41,6 +41,7 @@ struct ContentView: View {
             #if os(macOS)
             ZStack {
                 PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
+                    .withErrorHandling()
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)
@@ -50,6 +51,7 @@ struct ContentView: View {
             }
             #else
             PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
+                .withErrorHandling()
             #endif
 
             Text("Select a post, or create a new local draft.")

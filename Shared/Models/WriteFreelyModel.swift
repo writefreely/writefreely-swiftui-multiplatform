@@ -17,16 +17,31 @@ final class WriteFreelyModel: ObservableObject {
     @Published var selectedCollection: WFACollection?
     @Published var showAllPosts: Bool = true
     @Published var isPresentingDeleteAlert: Bool = false
-    @Published var isPresentingLoginErrorAlert: Bool = false
-    @Published var isPresentingNetworkErrorAlert: Bool = false
     @Published var postToDelete: WFAPost?
+    @Published var hasError: Bool = false
     #if os(iOS)
     @Published var isPresentingSettingsView: Bool = false
     #endif
 
     static var shared = WriteFreelyModel()
 
-    var loginErrorMessage: String?
+    var currentError: Error? {
+        didSet {
+            #if DEBUG
+            print("⚠️ currentError -> didSet \(currentError)")
+            print("  > hasError was: \(self.hasError)")
+            #endif
+            DispatchQueue.main.async {
+                #if DEBUG
+                print("  > self.currentError != nil: \(self.currentError != nil)")
+                #endif
+                self.hasError = self.currentError != nil
+                #if DEBUG
+                print("  > hasError is now: \(self.hasError)")
+                #endif
+            }
+        }
+    }
 
     // swiftlint:disable line_length
     let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
@@ -48,7 +63,7 @@ final class WriteFreelyModel: ObservableObject {
             self.account.restoreState()
             if self.account.isLoggedIn {
                 guard let serverURL = URL(string: self.account.server) else {
-                    print("Server URL not found")
+                    self.currentError = AccountError.invalidServerURL
                     return
                 }
                 do {
@@ -56,8 +71,7 @@ final class WriteFreelyModel: ObservableObject {
                             username: self.account.username,
                             server: self.account.server
                     ) else {
-                        self.loginErrorMessage = AccountError.couldNotFetchTokenFromKeychain.localizedDescription
-                        self.isPresentingLoginErrorAlert = true
+                        self.currentError = KeychainError.couldNotFetchAccessToken
                         return
                     }
 
@@ -67,8 +81,7 @@ final class WriteFreelyModel: ObservableObject {
                     self.fetchUserCollections()
                     self.fetchUserPosts()
                 } catch {
-                    self.loginErrorMessage = AccountError.couldNotFetchTokenFromKeychain.localizedDescription
-                    self.isPresentingLoginErrorAlert = true
+                    self.currentError = KeychainError.couldNotFetchAccessToken
                 }
             }
         }
