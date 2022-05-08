@@ -9,6 +9,7 @@ struct AccountView: View {
             HStack {
                 Spacer()
                 AccountLogoutView()
+                    .withErrorHandling()
                 Spacer()
             }
             .padding()
