@@ -28,7 +28,7 @@ final class WriteFreelyModel: ObservableObject {
     var currentError: Error? {
         didSet {
             #if DEBUG
-            print("⚠️ currentError -> didSet \(currentError)")
+            print("⚠️ currentError -> didSet \(currentError?.localizedDescription ?? "nil")")
             print("  > hasError was: \(self.hasError)")
             #endif
             DispatchQueue.main.async {
