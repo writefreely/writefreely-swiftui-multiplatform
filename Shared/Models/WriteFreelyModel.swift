@@ -6,25 +6,15 @@ import Network
 // MARK: - WriteFreelyModel
 
 final class WriteFreelyModel: ObservableObject {
+
+    // MARK: - Models
     @Published var account = AccountModel()
     @Published var preferences = PreferencesModel()
     @Published var posts = PostListModel()
     @Published var editor = PostEditorModel()
-    @Published var isLoggingIn: Bool = false
-    @Published var isProcessingRequest: Bool = false
-    @Published var hasNetworkConnection: Bool = true
-    @Published var selectedPost: WFAPost?
-    @Published var selectedCollection: WFACollection?
-    @Published var showAllPosts: Bool = true
-    @Published var isPresentingDeleteAlert: Bool = false
-    @Published var postToDelete: WFAPost?
+
+    // MARK: - Error handling
     @Published var hasError: Bool = false
-    #if os(iOS)
-    @Published var isPresentingSettingsView: Bool = false
-    #endif
-
-    static var shared = WriteFreelyModel()
-
     var currentError: Error? {
         didSet {
             #if DEBUG
@@ -42,6 +32,21 @@ final class WriteFreelyModel: ObservableObject {
             }
         }
     }
+
+    // MARK: - State
+    @Published var isLoggingIn: Bool = false
+    @Published var isProcessingRequest: Bool = false
+    @Published var hasNetworkConnection: Bool = true
+    @Published var selectedPost: WFAPost?
+    @Published var selectedCollection: WFACollection?
+    @Published var showAllPosts: Bool = true
+    @Published var isPresentingDeleteAlert: Bool = false
+    @Published var postToDelete: WFAPost?
+#if os(iOS)
+    @Published var isPresentingSettingsView: Bool = false
+#endif
+
+    static var shared = WriteFreelyModel()
 
     // swiftlint:disable line_length
     let helpURL = URL(string: "https://discuss.write.as/c/help/5")!
