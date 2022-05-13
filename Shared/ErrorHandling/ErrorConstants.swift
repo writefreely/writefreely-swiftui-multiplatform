@@ -81,6 +81,21 @@ extension AccountError: LocalizedError {
     }
 }
 
+// MARK: - User Defaults Errors
+
+enum UserDefaultsError: Error {
+    case couldNotMigrateStandardDefaults
+}
+
+extension UserDefaultsError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .couldNotMigrateStandardDefaults:
+            return NSLocalizedString("Could not migrate user defaults to group container", comment: "")
+        }
+    }
+}
+
 // MARK: - Local Store Errors
 
 enum LocalStoreError: Error {
