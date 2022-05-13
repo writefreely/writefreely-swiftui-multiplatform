@@ -133,7 +133,7 @@ struct PostListView: View {
                 if let error = model.currentError {
                     self.errorHandling.handle(error: error)
                 } else {
-                    self.errorHandling.handle(error: AppError.genericError)
+                    self.errorHandling.handle(error: AppError.genericError(""))
                 }
                 model.hasError = false
             }

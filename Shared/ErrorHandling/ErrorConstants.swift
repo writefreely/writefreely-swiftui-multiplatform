@@ -133,7 +133,7 @@ extension LocalStoreError: LocalizedError {
 enum AppError: Error {
     case couldNotGetLoggedInClient
     case couldNotGetPostId
-    case genericError
+    case genericError(String)
 }
 
 extension AppError: LocalizedError {
@@ -143,8 +143,12 @@ extension AppError: LocalizedError {
             return NSLocalizedString("Something went wrong trying to access the WriteFreely client.", comment: "")
         case .couldNotGetPostId:
             return NSLocalizedString("Something went wrong trying to get the post's unique ID.", comment: "")
-        case .genericError:
-            return NSLocalizedString("Something went wrong", comment: "")
+        case .genericError(let customContent):
+            if customContent.isEmpty {
+                return NSLocalizedString("Something went wrong", comment: "")
+            } else {
+                return NSLocalizedString(customContent, comment: "")
+            }
         }
     }
 }
