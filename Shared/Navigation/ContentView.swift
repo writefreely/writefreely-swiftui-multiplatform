@@ -2,11 +2,13 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @EnvironmentObject var errorHandling: ErrorHandling
 
     var body: some View {
         NavigationView {
             #if os(macOS)
             CollectionListView()
+                .withErrorHandling()
                 .toolbar {
                     Button(
                         action: {
@@ -36,6 +38,7 @@ struct ContentView: View {
                 }
             #else
             CollectionListView()
+                .withErrorHandling()
             #endif
 
             #if os(macOS)
@@ -56,6 +59,18 @@ struct ContentView: View {
 
             Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
+
+            EmptyView()
+                .onChange(of: model.hasError) { value in
+                    if value {
+                        if let error = model.currentError {
+                            self.errorHandling.handle(error: error)
+                        } else {
+                            self.errorHandling.handle(error: AppError.genericError)
+                        }
+                        model.hasError = false
+                    }
+                }
         }
         .environmentObject(model)
     }
