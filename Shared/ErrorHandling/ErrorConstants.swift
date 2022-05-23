@@ -101,13 +101,13 @@ extension UserDefaultsError: LocalizedError {
 enum LocalStoreError: Error {
     case couldNotSaveContext
     case couldNotFetchCollections
-    case couldNotFetchPosts(String)
+    case couldNotFetchPosts(String = "")
     case couldNotPurgePublishedPosts
     case couldNotPurgeCollections
     case couldNotLoadStore(String)
     case couldNotMigrateStore(String)
     case couldNotDeleteStoreAfterMigration(String)
-    case genericError(String)
+    case genericError(String = "")
 }
 
 extension LocalStoreError: LocalizedError {
@@ -148,7 +148,7 @@ extension LocalStoreError: LocalizedError {
 enum AppError: Error {
     case couldNotGetLoggedInClient
     case couldNotGetPostId
-    case genericError(String)
+    case genericError(String = "")
 }
 
 extension AppError: LocalizedError {

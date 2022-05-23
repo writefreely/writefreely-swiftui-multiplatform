@@ -39,7 +39,7 @@ extension WriteFreelyModel {
         var secItem: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &secItem)
         guard status != errSecItemNotFound else {
-            return nil
+            throw KeychainError.couldNotFetchAccessToken
         }
         guard status == errSecSuccess else {
             throw KeychainError.couldNotFetchAccessToken
@@ -47,7 +47,7 @@ extension WriteFreelyModel {
         guard let existingSecItem = secItem as? [String: Any],
               let tokenData = existingSecItem[kSecValueData as String] as? Data,
               let token = String(data: tokenData, encoding: .utf8) else {
-            return nil
+            throw KeychainError.couldNotFetchAccessToken
         }
         return token
     }

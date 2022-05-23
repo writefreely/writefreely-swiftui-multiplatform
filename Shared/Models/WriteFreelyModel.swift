@@ -87,6 +87,7 @@ final class WriteFreelyModel: ObservableObject {
                     self.fetchUserPosts()
                 } catch {
                     self.currentError = KeychainError.couldNotFetchAccessToken
+                    return
                 }
             }
         }
