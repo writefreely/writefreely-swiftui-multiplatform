@@ -41,7 +41,11 @@ extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     LocalStorageManager.standard.purgeUserCollections()
-                    self.posts.purgePublishedPosts()
+                    do {
+                        try self.posts.purgePublishedPosts()
+                    } catch {
+                        self.currentError = error
+                    }
                 }
             } catch {
                 self.currentError = KeychainError.couldNotPurgeAccessToken
@@ -56,7 +60,11 @@ extension WriteFreelyModel {
                 DispatchQueue.main.async {
                     self.account.logout()
                     LocalStorageManager.standard.purgeUserCollections()
-                    self.posts.purgePublishedPosts()
+                    do {
+                        try self.posts.purgePublishedPosts()
+                    } catch {
+                        self.currentError = error
+                    }
                 }
             } catch {
                 self.currentError = KeychainError.couldNotPurgeAccessToken

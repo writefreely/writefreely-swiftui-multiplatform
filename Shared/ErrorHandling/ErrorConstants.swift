@@ -102,7 +102,7 @@ enum LocalStoreError: Error {
     case couldNotSaveContext
     case couldNotFetchCollections
     case couldNotFetchPosts(String = "")
-    case couldNotPurgePublishedPosts
+    case couldNotPurgePosts(String = "")
     case couldNotPurgeCollections
     case couldNotLoadStore(String)
     case couldNotMigrateStore(String)
@@ -123,8 +123,12 @@ extension LocalStoreError: LocalizedError {
             } else {
                 return NSLocalizedString("Failed to fetch \(postFilter) posts from local store.", comment: "")
             }
-        case .couldNotPurgePublishedPosts:
-            return NSLocalizedString("Failed to purge published posts from local store.", comment: "")
+        case .couldNotPurgePosts(let postFilter):
+            if postFilter.isEmpty {
+                return NSLocalizedString("Failed to purge \(postFilter) posts from local store.", comment: "")
+            } else {
+                return NSLocalizedString("Failed to purge posts from local store.", comment: "")
+            }
         case .couldNotPurgeCollections:
             return NSLocalizedString("Failed to purge cached collections", comment: "")
         case .couldNotLoadStore(let errorDescription):
