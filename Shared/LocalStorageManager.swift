@@ -23,19 +23,19 @@ final class LocalStorageManager {
             do {
                 try container.viewContext.save()
             } catch {
-                print(LocalStoreError.couldNotSaveContext.localizedDescription)
+                fatalError(LocalStoreError.couldNotSaveContext.localizedDescription)
             }
         }
     }
 
-    func purgeUserCollections() {
+    func purgeUserCollections() throws {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFACollection")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
             try container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
-            print(LocalStoreError.couldNotPurgeCollections.localizedDescription)
+            throw LocalStoreError.couldNotPurgeCollections
         }
     }
 

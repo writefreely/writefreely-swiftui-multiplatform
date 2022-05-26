@@ -40,8 +40,8 @@ extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    LocalStorageManager.standard.purgeUserCollections()
                     do {
+                        try LocalStorageManager.standard.purgeUserCollections()
                         try self.posts.purgePublishedPosts()
                     } catch {
                         self.currentError = error
@@ -59,8 +59,8 @@ extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    LocalStorageManager.standard.purgeUserCollections()
                     do {
+                        try LocalStorageManager.standard.purgeUserCollections()
                         try self.posts.purgePublishedPosts()
                     } catch {
                         self.currentError = error
