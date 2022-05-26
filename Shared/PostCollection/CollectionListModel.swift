@@ -19,6 +19,7 @@ class CollectionListModel: NSObject, ObservableObject {
             try collectionsController.performFetch()
             list = collectionsController.fetchedObjects ?? []
         } catch {
+            // FIXME: Errors cannot be thrown out of the CollectionListView property initializer
             print("Failed to fetch collections!")
         }
     }
