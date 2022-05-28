@@ -3,9 +3,6 @@ import SwiftUI
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @EnvironmentObject var errorHandling: ErrorHandling
-//    @ObservedObject var collections = CollectionListModel(
-//        managedObjectContext: LocalStorageManager.standard.container.viewContext
-//    )
     @FetchRequest(sortDescriptors: []) var collections: FetchedResults<WFACollection>
     @State var selectedCollection: WFACollection?
 
