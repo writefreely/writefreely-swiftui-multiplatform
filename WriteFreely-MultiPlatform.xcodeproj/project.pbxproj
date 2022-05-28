@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		170A7EC126F5186A00F1CBD4 /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */; };
-		170A7EC226F5186A00F1CBD4 /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */; };
 		170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170DFA33251BBC44001D82A0 /* PostEditorModel.swift */; };
 		170DFA35251BBC44001D82A0 /* PostEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170DFA33251BBC44001D82A0 /* PostEditorModel.swift */; };
 		17120DA124E19839002B9F6C /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
@@ -179,7 +177,6 @@
 
 /* Begin PBXFileReference section */
 		1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = EditorLaunchingPolicy.md; sourceTree = "<group>"; };
-		170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListModel.swift; sourceTree = "<group>"; };
 		170DFA33251BBC44001D82A0 /* PostEditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorModel.swift; sourceTree = "<group>"; };
 		17120DA424E19CBF002B9F6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		17120DA824E1B2F5002B9F6C /* AccountLogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLogoutView.swift; sourceTree = "<group>"; };
@@ -603,7 +600,6 @@
 		17DF32D224C8B78D00BCE2E3 /* PostCollection */ = {
 			isa = PBXGroup;
 			children = (
-				170A7EC026F5186A00F1CBD4 /* CollectionListModel.swift */,
 				171BFDF924D4AF8300888236 /* CollectionListView.swift */,
 			);
 			path = PostCollection;
@@ -926,7 +922,6 @@
 				17B996DA2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */,
 				1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
-				170A7EC126F5186A00F1CBD4 /* CollectionListModel.swift in Sources */,
 				17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
@@ -966,7 +961,6 @@
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
 				17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */,
 				17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */,
-				170A7EC226F5186A00F1CBD4 /* CollectionListModel.swift in Sources */,
 				1727526B2809991A003D0A6A /* ErrorHandling.swift in Sources */,
 				17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */,
 				17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
