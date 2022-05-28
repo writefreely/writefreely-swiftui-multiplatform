@@ -1445,7 +1445,7 @@
 			repositoryURL = "https://github.com/writefreely/writefreely-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.4;
+				minimumVersion = 0.3.5;
 			};
 		};
 		17D4926327947B4D0035BD7E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
