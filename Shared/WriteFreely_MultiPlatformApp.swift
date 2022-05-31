@@ -115,7 +115,6 @@ struct WriteFreely_MultiPlatformApp: App {
                     }
                     .tag(2)
             }
-            .withErrorHandling()
             .frame(minWidth: 500, maxWidth: 500, minHeight: 200)
             .padding()
 //            .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.

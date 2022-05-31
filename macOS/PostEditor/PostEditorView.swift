@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
-    @EnvironmentObject var errorHandling: ErrorHandling
 
     @ObservedObject var post: WFAPost
     @State private var isHovering: Bool = false
@@ -39,16 +38,6 @@ struct PostEditorView: View {
                 LocalStorageManager.standard.saveContext()
             }
         })
-        .onChange(of: model.hasError) { value in
-            if value {
-                if let error = model.currentError {
-                    self.errorHandling.handle(error: error)
-                } else {
-                    self.errorHandling.handle(error: AppError.genericError())
-                }
-                model.hasError = false
-            }
-        }
         .onDisappear(perform: {
             DispatchQueue.main.async {
                 model.editor.clearLastDraft()
