@@ -17,6 +17,7 @@ final class WriteFreelyModel: ObservableObject {
     @Published var hasError: Bool = false
     var currentError: Error? {
         didSet {
+            // TODO: Remove print statements for debugging before closing #204.
             #if DEBUG
             print("⚠️ currentError -> didSet \(currentError?.localizedDescription ?? "nil")")
             print("  > hasError was: \(self.hasError)")
