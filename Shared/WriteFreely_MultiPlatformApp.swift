@@ -30,6 +30,8 @@ struct WriteFreely_MultiPlatformApp: App {
     @State private var selectedTab = 0
     #endif
 
+    @State private var didCrash = UserDefaults.shared.bool(forKey: WFDefaults.didHaveFatalError)
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -48,6 +50,22 @@ struct WriteFreely_MultiPlatformApp: App {
                         }
                     }
                 })
+                .alert(isPresented: $didCrash) {
+                    // TODO: - Confirm copy for this alert
+                    Alert(
+                        title: Text("Crash Detected"),
+                        message: Text(
+                            UserDefaults.shared.object(forKey: WFDefaults.fatalErrorDescription) as? String ??
+                            "Something went horribly wrong!"
+                        ),
+                        dismissButton: .default(
+                            Text("Dismiss"), action: {
+                                UserDefaults.shared.set(false, forKey: WFDefaults.didHaveFatalError)
+                                UserDefaults.shared.removeObject(forKey: WFDefaults.fatalErrorDescription)
+                            }
+                        )
+                    )
+                }
                 .withErrorHandling()
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.standard.container.viewContext)

@@ -1,4 +1,5 @@
 import CoreData
+import os
 
 #if os(iOS)
 import UIKit
@@ -21,9 +22,11 @@ final class LocalStorageManager {
     func saveContext() {
         if container.viewContext.hasChanges {
             do {
+                Self.logger.info("Saving context to local store started...")
                 try container.viewContext.save()
+                Self.logger.notice("Context saved to local store.")
             } catch {
-                fatalError(LocalStoreError.couldNotSaveContext.localizedDescription)
+                logCrashAndSetFlag(error: LocalStoreError.couldNotSaveContext)
             }
         }
     }
@@ -33,8 +36,11 @@ final class LocalStorageManager {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
+            Self.logger.info("Purging user collections from local store...")
             try container.viewContext.executeAndMergeChanges(using: deleteRequest)
+            Self.logger.notice("User collections purged from local store.")
         } catch {
+            Self.logger.error("\(LocalStoreError.couldNotPurgeCollections.localizedDescription)")
             throw LocalStoreError.couldNotPurgeCollections
         }
     }
@@ -60,9 +66,11 @@ private extension LocalStorageManager {
         }
 
         container.loadPersistentStores { _, error in
+            Self.logger.info("Loading local store...")
             if let error = error {
-                fatalError(LocalStoreError.couldNotLoadStore(error.localizedDescription).localizedDescription)
+                self.logCrashAndSetFlag(error: LocalStoreError.couldNotLoadStore(error.localizedDescription))
             }
+            Self.logger.notice("Loaded local store.")
         }
         migrateStore(for: container)
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -83,21 +91,23 @@ private extension LocalStorageManager {
 
         // Attempt to migrate the old store over to the shared store URL.
         do {
+            Self.logger.info("Migrating local store to shared store...")
             try coordinator.migratePersistentStore(oldStore,
                                                    to: sharedStoreURL,
                                                    options: nil,
                                                    withType: NSSQLiteStoreType)
+            Self.logger.notice("Migrated local store to shared store.")
         } catch {
-            fatalError(LocalStoreError.couldNotMigrateStore(error.localizedDescription).localizedDescription)
+            logCrashAndSetFlag(error: LocalStoreError.couldNotMigrateStore(error.localizedDescription))
         }
 
         // Attempt to delete the old store.
         do {
+            Self.logger.info("Deleting migrated local store...")
             try FileManager.default.removeItem(at: oldStoreURL)
+            Self.logger.notice("Deleted migrated local store.")
         } catch {
-            fatalError(
-                LocalStoreError.couldNotDeleteStoreAfterMigration(error.localizedDescription).localizedDescription
-            )
+            logCrashAndSetFlag(error: LocalStoreError.couldNotDeleteStoreAfterMigration(error.localizedDescription))
         }
     }
 
@@ -120,6 +130,23 @@ private extension LocalStorageManager {
 
     func saveContextOnResignActive(_ notification: Notification) {
         saveContext()
+    }
+
+}
+
+private extension LocalStorageManager {
+
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier!,
+        category: String(describing: LocalStorageManager.self)
+    )
+
+    private func logCrashAndSetFlag(error: Error) {
+        let errorDescription = error.localizedDescription
+        UserDefaults.shared.set(true, forKey: WFDefaults.didHaveFatalError)
+        UserDefaults.shared.set(errorDescription, forKey: WFDefaults.fatalErrorDescription)
+        Self.logger.critical("\(errorDescription)")
+        fatalError(errorDescription)
     }
 
 }
