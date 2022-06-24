@@ -51,18 +51,21 @@ struct WriteFreely_MultiPlatformApp: App {
                     }
                 })
                 .alert(isPresented: $didCrash) {
+                    var helpMsg = "Alert the humans by sharing what happened on the help forum."
+                    if let errorMsg = UserDefaults.shared.object(forKey: WFDefaults.fatalErrorDescription) as? String {
+                        helpMsg.append("\n\n\(errorMsg)")
+                    }
+
                     // TODO: - Confirm copy for this alert
-                    Alert(
+                    return Alert(
                         title: Text("Crash Detected"),
-                        message: Text(
-                            UserDefaults.shared.object(forKey: WFDefaults.fatalErrorDescription) as? String ??
-                            "Something went horribly wrong!"
+                        message: Text(helpMsg),
+                        primaryButton: .default(
+                            Text("Let us know"), action: didPressCrashAlertButton
                         ),
-                        dismissButton: .default(
-                            Text("Dismiss"), action: {
-                                UserDefaults.shared.set(false, forKey: WFDefaults.didHaveFatalError)
-                                UserDefaults.shared.removeObject(forKey: WFDefaults.fatalErrorDescription)
-                            }
+                        secondaryButton: .cancel(
+                            Text("Dismiss"),
+                            action: resetCrashFlags
                         )
                     )
                 }
@@ -163,4 +166,19 @@ struct WriteFreely_MultiPlatformApp: App {
             }
         }
     }
+
+    private func resetCrashFlags() {
+        UserDefaults.shared.set(false, forKey: WFDefaults.didHaveFatalError)
+        UserDefaults.shared.removeObject(forKey: WFDefaults.fatalErrorDescription)
+    }
+
+    private func didPressCrashAlertButton() {
+        resetCrashFlags()
+        #if os(macOS)
+        NSWorkspace().open(model.helpURL)
+        #else
+        UIApplication.shared.open(model.helpURL)
+        #endif
+    }
+
 }
