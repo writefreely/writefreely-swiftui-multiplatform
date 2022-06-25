@@ -1,5 +1,4 @@
 import CoreData
-import os
 
 #if os(iOS)
 import UIKit
@@ -8,6 +7,8 @@ import AppKit
 #endif
 
 final class LocalStorageManager {
+
+    private let logger = Logging(for: String(describing: LocalStorageManager.self))
 
     public static var standard = LocalStorageManager()
     public let container: NSPersistentContainer
@@ -22,11 +23,11 @@ final class LocalStorageManager {
     func saveContext() {
         if container.viewContext.hasChanges {
             do {
-                Self.logger.info("Saving context to local store started...")
+                logger.log("Saving context to local store started...")
                 try container.viewContext.save()
-                Self.logger.notice("Context saved to local store.")
+                logger.log("Context saved to local store.")
             } catch {
-                logCrashAndSetFlag(error: LocalStoreError.couldNotSaveContext)
+                logger.logCrashAndSetFlag(error: LocalStoreError.couldNotSaveContext)
             }
         }
     }
@@ -36,11 +37,11 @@ final class LocalStorageManager {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
-            Self.logger.info("Purging user collections from local store...")
+            logger.log("Purging user collections from local store...")
             try container.viewContext.executeAndMergeChanges(using: deleteRequest)
-            Self.logger.notice("User collections purged from local store.")
+            logger.log("User collections purged from local store.")
         } catch {
-            Self.logger.error("\(LocalStoreError.couldNotPurgeCollections.localizedDescription)")
+            logger.log("\(LocalStoreError.couldNotPurgeCollections.localizedDescription)", level: .error)
             throw LocalStoreError.couldNotPurgeCollections
         }
     }
@@ -66,11 +67,11 @@ private extension LocalStorageManager {
         }
 
         container.loadPersistentStores { _, error in
-            Self.logger.info("Loading local store...")
+            self.logger.log("Loading local store...")
             if let error = error {
-                self.logCrashAndSetFlag(error: LocalStoreError.couldNotLoadStore(error.localizedDescription))
+                self.logger.logCrashAndSetFlag(error: LocalStoreError.couldNotLoadStore(error.localizedDescription))
             }
-            Self.logger.notice("Loaded local store.")
+            self.logger.log("Loaded local store.")
         }
         migrateStore(for: container)
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -91,23 +92,25 @@ private extension LocalStorageManager {
 
         // Attempt to migrate the old store over to the shared store URL.
         do {
-            Self.logger.info("Migrating local store to shared store...")
+            self.logger.log("Migrating local store to shared store...")
             try coordinator.migratePersistentStore(oldStore,
                                                    to: sharedStoreURL,
                                                    options: nil,
                                                    withType: NSSQLiteStoreType)
-            Self.logger.notice("Migrated local store to shared store.")
+            self.logger.log("Migrated local store to shared store.")
         } catch {
-            logCrashAndSetFlag(error: LocalStoreError.couldNotMigrateStore(error.localizedDescription))
+            logger.logCrashAndSetFlag(error: LocalStoreError.couldNotMigrateStore(error.localizedDescription))
         }
 
         // Attempt to delete the old store.
         do {
-            Self.logger.info("Deleting migrated local store...")
+            logger.log("Deleting migrated local store...")
             try FileManager.default.removeItem(at: oldStoreURL)
-            Self.logger.notice("Deleted migrated local store.")
+            logger.log("Deleted migrated local store.")
         } catch {
-            logCrashAndSetFlag(error: LocalStoreError.couldNotDeleteStoreAfterMigration(error.localizedDescription))
+            logger.logCrashAndSetFlag(
+                error: LocalStoreError.couldNotDeleteStoreAfterMigration(error.localizedDescription)
+            )
         }
     }
 
@@ -130,23 +133,6 @@ private extension LocalStorageManager {
 
     func saveContextOnResignActive(_ notification: Notification) {
         saveContext()
-    }
-
-}
-
-private extension LocalStorageManager {
-
-    private static let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
-        category: String(describing: LocalStorageManager.self)
-    )
-
-    private func logCrashAndSetFlag(error: Error) {
-        let errorDescription = error.localizedDescription
-        UserDefaults.shared.set(true, forKey: WFDefaults.didHaveFatalError)
-        UserDefaults.shared.set(errorDescription, forKey: WFDefaults.fatalErrorDescription)
-        Self.logger.critical("\(errorDescription)")
-        fatalError(errorDescription)
     }
 
 }

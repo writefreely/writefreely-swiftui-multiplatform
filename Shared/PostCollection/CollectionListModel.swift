@@ -1,8 +1,10 @@
 import SwiftUI
 import CoreData
-import os
 
 class CollectionListModel: NSObject, ObservableObject {
+
+    private let logger = Logging(for: String(describing: CollectionListModel.self))
+
     @Published var list: [WFACollection] = []
     private let collectionsController: NSFetchedResultsController<WFACollection>
 
@@ -17,12 +19,12 @@ class CollectionListModel: NSObject, ObservableObject {
         collectionsController.delegate = self
 
         do {
-            Self.logger.info("Fetching collections from local store...")
+            logger.log("Fetching collections from local store...")
             try collectionsController.performFetch()
             list = collectionsController.fetchedObjects ?? []
-            Self.logger.notice("Fetched collections from local store.")
+            logger.log("Fetched collections from local store.")
         } catch {
-            logCrashAndSetFlag(error: LocalStoreError.couldNotFetchCollections)
+            logger.logCrashAndSetFlag(error: LocalStoreError.couldNotFetchCollections)
         }
     }
 }
@@ -31,21 +33,6 @@ extension CollectionListModel: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let collections = controller.fetchedObjects as? [WFACollection] else { return }
         self.list = collections
-    }
-}
-
-extension CollectionListModel {
-    private static let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier!,
-        category: String(describing: CollectionListModel.self)
-    )
-
-    private func logCrashAndSetFlag(error: Error) {
-        let errorDescription = error.localizedDescription
-        UserDefaults.shared.set(true, forKey: WFDefaults.didHaveFatalError)
-        UserDefaults.shared.set(errorDescription, forKey: WFDefaults.fatalErrorDescription)
-        Self.logger.critical("\(errorDescription)")
-        fatalError(errorDescription)
     }
 }
 
