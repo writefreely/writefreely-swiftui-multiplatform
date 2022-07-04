@@ -56,7 +56,6 @@ struct WriteFreely_MultiPlatformApp: App {
                         helpMsg.append("\n\n\(errorMsg)")
                     }
 
-                    // TODO: - Confirm copy for this alert
                     return Alert(
                         title: Text("Crash Detected"),
                         message: Text(helpMsg),
@@ -136,6 +135,7 @@ struct WriteFreely_MultiPlatformApp: App {
                     }
                     .tag(2)
             }
+            .environmentObject(model)
             .withErrorHandling()
             .frame(minWidth: 500, maxWidth: 500, minHeight: 200)
             .padding()
