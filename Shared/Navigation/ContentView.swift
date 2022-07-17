@@ -28,7 +28,7 @@ struct ContentView: View {
                         // Create the new-post managed object
                         let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                         withAnimation {
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            DispatchQueue.main.async {
                                 // Load the new post in the editor
                                 self.model.selectedPost = managedPost
                             }
