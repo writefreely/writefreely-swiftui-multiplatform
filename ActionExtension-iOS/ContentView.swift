@@ -160,8 +160,7 @@ struct ContentView: View {
                 }
 
                 itemProvider.loadItem(forTypeIdentifier: typeIdentifier) { (dict, error) in
-                    if let error = error {
-                        print("⚠️", error)
+                    if error != nil {
                         self.isShowingAlert = true
                     }
 
