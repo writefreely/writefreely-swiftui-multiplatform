@@ -13,6 +13,8 @@ enum WFDefaults {
     static let automaticallyChecksForUpdates = "automaticallyChecksForUpdates"
     static let subscribeToBetaUpdates = "subscribeToBetaUpdates"
     #endif
+    static let didHaveFatalError = "didHaveFatalError"
+    static let fatalErrorDescription = "fatalErrorDescription"
 }
 
 extension UserDefaults {

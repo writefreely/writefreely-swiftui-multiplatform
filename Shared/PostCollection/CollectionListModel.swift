@@ -2,6 +2,9 @@ import SwiftUI
 import CoreData
 
 class CollectionListModel: NSObject, ObservableObject {
+
+    private let logger = Logging(for: String(describing: CollectionListModel.self))
+
     @Published var list: [WFACollection] = []
     private let collectionsController: NSFetchedResultsController<WFACollection>
 
@@ -16,11 +19,12 @@ class CollectionListModel: NSObject, ObservableObject {
         collectionsController.delegate = self
 
         do {
+            logger.log("Fetching collections from local store...")
             try collectionsController.performFetch()
             list = collectionsController.fetchedObjects ?? []
+            logger.log("Fetched collections from local store.")
         } catch {
-            // FIXME: Errors cannot be thrown out of the CollectionListView property initializer
-            fatalError(LocalStoreError.couldNotFetchCollections.localizedDescription)
+            logger.logCrashAndSetFlag(error: LocalStoreError.couldNotFetchCollections)
         }
     }
 }
