@@ -3,9 +3,7 @@ import SwiftUI
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @EnvironmentObject var errorHandling: ErrorHandling
-    @ObservedObject var collections = CollectionListModel(
-        managedObjectContext: LocalStorageManager.standard.container.viewContext
-    )
+    @FetchRequest(sortDescriptors: []) var collections: FetchedResults<WFACollection>
     @State var selectedCollection: WFACollection?
 
     var body: some View {
@@ -14,7 +12,7 @@ struct CollectionListView: View {
                 NavigationLink("All Posts", destination: PostListView(selectedCollection: nil, showAllPosts: true))
                 NavigationLink("Drafts", destination: PostListView(selectedCollection: nil, showAllPosts: false))
                 Section(header: Text("Your Blogs")) {
-                    ForEach(collections.list, id: \.self) { collection in
+                    ForEach(collections, id: \.self) { collection in
                         NavigationLink(destination: PostListView(selectedCollection: collection, showAllPosts: false),
                                        tag: collection,
                                        selection: $selectedCollection,
