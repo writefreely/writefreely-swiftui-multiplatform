@@ -48,6 +48,7 @@ struct WriteFreely_MultiPlatformApp: App {
                         }
                     }
                 })
+                .withErrorHandling()
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.standard.container.viewContext)
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.

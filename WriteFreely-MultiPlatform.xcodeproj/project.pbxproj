@@ -24,6 +24,12 @@
 		171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BFDF924D4AF8300888236 /* CollectionListView.swift */; };
 		171DC677272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
 		171DC678272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */; };
+		1727526628099802003D0A6A /* ErrorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1727526528099802003D0A6A /* ErrorConstants.swift */; };
+		1727526728099802003D0A6A /* ErrorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1727526528099802003D0A6A /* ErrorConstants.swift */; };
+		1727526828099802003D0A6A /* ErrorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1727526528099802003D0A6A /* ErrorConstants.swift */; };
+		1727526A2809991A003D0A6A /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172752692809991A003D0A6A /* ErrorHandling.swift */; };
+		1727526B2809991A003D0A6A /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172752692809991A003D0A6A /* ErrorHandling.swift */; };
+		1727526C2809991A003D0A6A /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172752692809991A003D0A6A /* ErrorHandling.swift */; };
 		172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172C492D2593981900E20ADF /* MacUpdatesView.swift */; };
 		172E10012735B83E00061372 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */; platformFilter = maccatalyst; };
 		172E10042735B83E00061372 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172E10032735B83E00061372 /* Media.xcassets */; };
@@ -181,6 +187,8 @@
 		17120DB124E1E19C002B9F6C /* SettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeaderView.swift; sourceTree = "<group>"; };
 		171BFDF924D4AF8300888236 /* CollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListView.swift; sourceTree = "<group>"; };
 		171DC676272C7D0B002B9B8A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		1727526528099802003D0A6A /* ErrorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorConstants.swift; sourceTree = "<group>"; };
+		172752692809991A003D0A6A /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		172C492D2593981900E20ADF /* MacUpdatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUpdatesView.swift; sourceTree = "<group>"; };
 		172E0FFF2735B83E00061372 /* ActionExtension-iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ActionExtension-iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		172E10002735B83E00061372 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
@@ -323,6 +331,15 @@
 				17120DA424E19CBF002B9F6C /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		17275264280997BF003D0A6A /* ErrorHandling */ = {
+			isa = PBXGroup;
+			children = (
+				1727526528099802003D0A6A /* ErrorConstants.swift */,
+				172752692809991A003D0A6A /* ErrorHandling.swift */,
+			);
+			path = ErrorHandling;
 			sourceTree = "<group>";
 		};
 		172E10022735B83E00061372 /* ActionExtension-iOS */ = {
@@ -476,6 +493,7 @@
 				17DF328324C87D3500BCE2E3 /* Assets.xcassets */,
 				17DF32D024C8B75C00BCE2E3 /* Account */,
 				1756AE7F24CB841200FD7257 /* Extensions */,
+				17275264280997BF003D0A6A /* ErrorHandling */,
 				1762DCB124EB07680019C4EB /* Models */,
 				17DF32CC24C8B72300BCE2E3 /* Navigation */,
 				1739B8D324EAFAB700DA7421 /* PostEditor */,
@@ -871,8 +889,10 @@
 				172E10212735C64600061372 /* WFACollection+CoreDataProperties.swift in Sources */,
 				172E101C2735C57400061372 /* LocalStorageManager.swift in Sources */,
 				172E10192735C3DB00061372 /* ContentView.swift in Sources */,
+				1727526828099802003D0A6A /* ErrorConstants.swift in Sources */,
 				172E10152735C2BD00061372 /* UIHostingView.swift in Sources */,
 				172E101F2735C64600061372 /* WFAPost+CoreDataClass.swift in Sources */,
+				1727526C2809991A003D0A6A /* ErrorHandling.swift in Sources */,
 				172E10232735C6FF00061372 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
 				172E101E2735C62F00061372 /* PostStatus.swift in Sources */,
 			);
@@ -887,6 +907,7 @@
 				17B37C5625C8679800FE75E9 /* WriteFreelyModel+API.swift in Sources */,
 				17C42E622507D8E600072984 /* PostStatus.swift in Sources */,
 				1756DBBA24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
+				1727526A2809991A003D0A6A /* ErrorHandling.swift in Sources */,
 				1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */,
 				17C42E652509237800072984 /* PostListFilteredView.swift in Sources */,
 				170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */,
@@ -912,6 +933,7 @@
 				1756DC0124FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17120DA724E19D11002B9F6C /* SettingsView.swift in Sources */,
+				1727526628099802003D0A6A /* ErrorConstants.swift in Sources */,
 				1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
 				17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */,
 				17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */,
@@ -937,6 +959,7 @@
 				17120DAA24E1B2F5002B9F6C /* AccountLogoutView.swift in Sources */,
 				17DF32D624C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
 				172C492E2593981900E20ADF /* MacUpdatesView.swift in Sources */,
+				1727526728099802003D0A6A /* ErrorConstants.swift in Sources */,
 				17479F152583D8E40072B7FB /* PostEditorSharingPicker.swift in Sources */,
 				17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
@@ -944,6 +967,7 @@
 				17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */,
 				17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */,
 				170A7EC226F5186A00F1CBD4 /* CollectionListModel.swift in Sources */,
+				1727526B2809991A003D0A6A /* ErrorHandling.swift in Sources */,
 				17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */,
 				17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
 				1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */,

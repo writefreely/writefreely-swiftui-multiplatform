@@ -2,12 +2,6 @@ import Foundation
 
 extension WriteFreelyModel {
 
-    enum WFKeychainError: Error {
-        case saveToKeychainFailed
-        case purgeFromKeychainFailed
-        case fetchFromKeychainFailed
-    }
-
     func saveTokenToKeychain(_ token: String, username: String?, server: String) throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -17,7 +11,7 @@ extension WriteFreelyModel {
         ]
         let status = SecItemAdd(query as CFDictionary, nil)
         guard status == errSecDuplicateItem || status == errSecSuccess else {
-            throw WFKeychainError.saveToKeychainFailed
+            throw KeychainError.couldNotStoreAccessToken
         }
     }
 
@@ -29,7 +23,7 @@ extension WriteFreelyModel {
         ]
         let status = SecItemDelete(query as CFDictionary)
         guard status == errSecSuccess || status == errSecItemNotFound else {
-            throw WFKeychainError.purgeFromKeychainFailed
+            throw KeychainError.couldNotPurgeAccessToken
         }
     }
 
@@ -45,15 +39,15 @@ extension WriteFreelyModel {
         var secItem: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &secItem)
         guard status != errSecItemNotFound else {
-            return nil
+            throw KeychainError.couldNotFetchAccessToken
         }
         guard status == errSecSuccess else {
-            throw WFKeychainError.fetchFromKeychainFailed
+            throw KeychainError.couldNotFetchAccessToken
         }
         guard let existingSecItem = secItem as? [String: Any],
               let tokenData = existingSecItem[kSecValueData as String] as? Data,
               let token = String(data: tokenData, encoding: .utf8) else {
-            return nil
+            throw KeychainError.couldNotFetchAccessToken
         }
         return token
     }

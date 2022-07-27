@@ -19,7 +19,8 @@ class CollectionListModel: NSObject, ObservableObject {
             try collectionsController.performFetch()
             list = collectionsController.fetchedObjects ?? []
         } catch {
-            print("Failed to fetch collections!")
+            // FIXME: Errors cannot be thrown out of the CollectionListView property initializer
+            fatalError(LocalStoreError.couldNotFetchCollections.localizedDescription)
         }
     }
 }

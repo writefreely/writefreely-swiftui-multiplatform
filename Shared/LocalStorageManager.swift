@@ -23,19 +23,19 @@ final class LocalStorageManager {
             do {
                 try container.viewContext.save()
             } catch {
-                print("Error saving context: \(error)")
+                fatalError(LocalStoreError.couldNotSaveContext.localizedDescription)
             }
         }
     }
 
-    func purgeUserCollections() {
+    func purgeUserCollections() throws {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "WFACollection")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         do {
             try container.viewContext.executeAndMergeChanges(using: deleteRequest)
         } catch {
-            print("Error: Failed to purge cached collections.")
+            throw LocalStoreError.couldNotPurgeCollections
         }
     }
 
@@ -61,7 +61,7 @@ private extension LocalStorageManager {
 
         container.loadPersistentStores { _, error in
             if let error = error {
-                fatalError("Core Data store failed to load with error: \(error)")
+                fatalError(LocalStoreError.couldNotLoadStore(error.localizedDescription).localizedDescription)
             }
         }
         migrateStore(for: container)
@@ -88,14 +88,16 @@ private extension LocalStorageManager {
                                                    options: nil,
                                                    withType: NSSQLiteStoreType)
         } catch {
-            fatalError("Something went wrong migrating the store: \(error)")
+            fatalError(LocalStoreError.couldNotMigrateStore(error.localizedDescription).localizedDescription)
         }
 
         // Attempt to delete the old store.
         do {
             try FileManager.default.removeItem(at: oldStoreURL)
         } catch {
-            fatalError("Something went wrong while deleting the old store: \(error)")
+            fatalError(
+                LocalStoreError.couldNotDeleteStoreAfterMigration(error.localizedDescription).localizedDescription
+            )
         }
     }
 

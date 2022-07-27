@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CollectionListView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @EnvironmentObject var errorHandling: ErrorHandling
     @ObservedObject var collections = CollectionListModel(
         managedObjectContext: LocalStorageManager.standard.container.viewContext
     )
@@ -38,6 +39,16 @@ struct CollectionListView: View {
         .onChange(of: model.showAllPosts) { value in
             if value != model.editor.showAllPostsFlag {
                 self.model.editor.showAllPostsFlag = model.showAllPosts
+            }
+        }
+        .onChange(of: model.hasError) { value in
+            if value {
+                if let error = model.currentError {
+                    self.errorHandling.handle(error: error)
+                } else {
+                    self.errorHandling.handle(error: AppError.genericError())
+                }
+                model.hasError = false
             }
         }
     }

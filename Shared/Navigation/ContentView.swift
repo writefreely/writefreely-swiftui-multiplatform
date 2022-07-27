@@ -2,11 +2,13 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @EnvironmentObject var errorHandling: ErrorHandling
 
     var body: some View {
         NavigationView {
             #if os(macOS)
             CollectionListView()
+                .withErrorHandling()
                 .toolbar {
                     Button(
                         action: {
@@ -36,11 +38,13 @@ struct ContentView: View {
                 }
             #else
             CollectionListView()
+                .withErrorHandling()
             #endif
 
             #if os(macOS)
             ZStack {
                 PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
+                    .withErrorHandling()
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)
@@ -50,12 +54,23 @@ struct ContentView: View {
             }
             #else
             PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
+                .withErrorHandling()
             #endif
 
             Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
         }
         .environmentObject(model)
+        .onChange(of: model.hasError) { value in
+            if value {
+                if let error = model.currentError {
+                    self.errorHandling.handle(error: error)
+                } else {
+                    self.errorHandling.handle(error: AppError.genericError())
+                }
+                model.hasError = false
+            }
+        }
     }
 }
 
