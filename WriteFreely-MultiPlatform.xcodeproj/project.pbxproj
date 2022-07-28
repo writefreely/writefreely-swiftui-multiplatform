@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17027E25286741B90062EB29 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17027E24286741B80062EB29 /* Logging.swift */; };
+		17027E26286741B90062EB29 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17027E24286741B80062EB29 /* Logging.swift */; };
+		17027E27286757650062EB29 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17027E24286741B80062EB29 /* Logging.swift */; };
 		170DFA34251BBC44001D82A0 /* PostEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170DFA33251BBC44001D82A0 /* PostEditorModel.swift */; };
 		170DFA35251BBC44001D82A0 /* PostEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170DFA33251BBC44001D82A0 /* PostEditorModel.swift */; };
 		17120DA124E19839002B9F6C /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5388D24DDEC7400DEFF9A /* AccountView.swift */; };
@@ -176,6 +179,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17027E24286741B80062EB29 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		1709ADDF251B9A110053AF79 /* EditorLaunchingPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = EditorLaunchingPolicy.md; sourceTree = "<group>"; };
 		170DFA33251BBC44001D82A0 /* PostEditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorModel.swift; sourceTree = "<group>"; };
 		17120DA424E19CBF002B9F6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -312,6 +316,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17027E23286741910062EB29 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				17027E24286741B80062EB29 /* Logging.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 		1709ADDE251B99D40053AF79 /* Technotes */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +503,7 @@
 				17DF32D024C8B75C00BCE2E3 /* Account */,
 				1756AE7F24CB841200FD7257 /* Extensions */,
 				17275264280997BF003D0A6A /* ErrorHandling */,
+				17027E23286741910062EB29 /* Logging */,
 				1762DCB124EB07680019C4EB /* Models */,
 				17DF32CC24C8B72300BCE2E3 /* Navigation */,
 				1739B8D324EAFAB700DA7421 /* PostEditor */,
@@ -879,6 +892,7 @@
 				172E10202735C64600061372 /* WFACollection+CoreDataClass.swift in Sources */,
 				172E10222735C64600061372 /* WFAPost+CoreDataProperties.swift in Sources */,
 				172E101D2735C5AB00061372 /* LocalStorageModel.xcdatamodeld in Sources */,
+				17027E27286757650062EB29 /* Logging.swift in Sources */,
 				17836C14273EFB870047AF61 /* UserDefaults+Extensions.swift in Sources */,
 				172E10242735C72500061372 /* PreferencesModel.swift in Sources */,
 				172E10172735C2DF00061372 /* EnvironmentValues+Extensions.swift in Sources */,
@@ -928,6 +942,7 @@
 				1756DC0124FEE18400207AB8 /* WFACollection+CoreDataClass.swift in Sources */,
 				17DF32AA24C87D3500BCE2E3 /* WriteFreely_MultiPlatformApp.swift in Sources */,
 				17120DA724E19D11002B9F6C /* SettingsView.swift in Sources */,
+				17027E25286741B90062EB29 /* Logging.swift in Sources */,
 				1727526628099802003D0A6A /* ErrorConstants.swift in Sources */,
 				1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
 				17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */,
@@ -961,6 +976,7 @@
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
 				17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */,
 				17466626256C0D0600629997 /* MacEditorTextView.swift in Sources */,
+				17027E26286741B90062EB29 /* Logging.swift in Sources */,
 				1727526B2809991A003D0A6A /* ErrorHandling.swift in Sources */,
 				17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */,
 				17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
