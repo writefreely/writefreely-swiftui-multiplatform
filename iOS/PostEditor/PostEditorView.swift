@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PostEditorView: View {
     @EnvironmentObject var model: WriteFreelyModel
+    @EnvironmentObject var errorHandling: ErrorHandling
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
@@ -40,6 +41,7 @@ struct PostEditorView: View {
                 updatingTitleFromServer: $updatingTitleFromServer,
                 updatingBodyFromServer: $updatingBodyFromServer
             )
+            .withErrorHandling()
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding()
@@ -101,11 +103,6 @@ struct PostEditorView: View {
                     })
                     .accessibilityHint(Text("Open the system share sheet to share a link to this post"))
                     .disabled(post.postId == nil)
-//                    Button(action: {
-//                        print("Tapped 'Delete...' button")
-//                    }, label: {
-//                        Label("Delete…", systemImage: "trash")
-//                    })
                     if model.account.isLoggedIn && post.status != PostStatus.local.rawValue {
                         Section(header: Text("Move To Collection")) {
                             Label("Move to:", systemImage: "arrowshape.zigzag.right")
@@ -171,6 +168,16 @@ struct PostEditorView: View {
                 self.model.editor.clearLastDraft()
             }
         })
+        .onChange(of: model.hasError) { value in
+            if value {
+                if let error = model.currentError {
+                    self.errorHandling.handle(error: error)
+                } else {
+                    self.errorHandling.handle(error: AppError.genericError())
+                }
+                model.hasError = false
+            }
+        }
         .onDisappear(perform: {
             self.model.editor.clearLastDraft()
             if post.title.count == 0
