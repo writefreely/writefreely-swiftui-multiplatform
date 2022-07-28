@@ -30,6 +30,8 @@ struct WriteFreely_MultiPlatformApp: App {
     @State private var selectedTab = 0
     #endif
 
+    @State private var didCrash = UserDefaults.shared.bool(forKey: WFDefaults.didHaveFatalError)
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -48,6 +50,25 @@ struct WriteFreely_MultiPlatformApp: App {
                         }
                     }
                 })
+                .alert(isPresented: $didCrash) {
+                    var helpMsg = "Alert the humans by sharing what happened on the help forum."
+                    if let errorMsg = UserDefaults.shared.object(forKey: WFDefaults.fatalErrorDescription) as? String {
+                        helpMsg.append("\n\n\(errorMsg)")
+                    }
+
+                    return Alert(
+                        title: Text("Crash Detected"),
+                        message: Text(helpMsg),
+                        primaryButton: .default(
+                            Text("Let us know"), action: didPressCrashAlertButton
+                        ),
+                        secondaryButton: .cancel(
+                            Text("Dismiss"),
+                            action: resetCrashFlags
+                        )
+                    )
+                }
+                .withErrorHandling()
                 .environmentObject(model)
                 .environment(\.managedObjectContext, LocalStorageManager.standard.container.viewContext)
 //                .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
@@ -114,6 +135,7 @@ struct WriteFreely_MultiPlatformApp: App {
                     }
                     .tag(2)
             }
+            .withErrorHandling()
             .frame(minWidth: 500, maxWidth: 500, minHeight: 200)
             .padding()
 //            .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
@@ -143,4 +165,19 @@ struct WriteFreely_MultiPlatformApp: App {
             }
         }
     }
+
+    private func resetCrashFlags() {
+        UserDefaults.shared.set(false, forKey: WFDefaults.didHaveFatalError)
+        UserDefaults.shared.removeObject(forKey: WFDefaults.fatalErrorDescription)
+    }
+
+    private func didPressCrashAlertButton() {
+        resetCrashFlags()
+        #if os(macOS)
+        NSWorkspace().open(model.helpURL)
+        #else
+        UIApplication.shared.open(model.helpURL)
+        #endif
+    }
+
 }

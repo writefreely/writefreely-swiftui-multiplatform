@@ -13,20 +13,11 @@ enum WFDefaults {
     static let automaticallyChecksForUpdates = "automaticallyChecksForUpdates"
     static let subscribeToBetaUpdates = "subscribeToBetaUpdates"
     #endif
+    static let didHaveFatalError = "didHaveFatalError"
+    static let fatalErrorDescription = "fatalErrorDescription"
 }
 
 extension UserDefaults {
-
-    private enum DefaultsError: Error {
-        case couldNotMigrateStandardDefaults
-
-        var description: String {
-            switch self {
-            case .couldNotMigrateStandardDefaults:
-                return "Could not migrate user defaults to group container."
-            }
-        }
-    }
 
     private static let appGroupName: String = "group.com.abunchtell.writefreely"
     private static let didMigrateDefaultsToAppGroup: String = "didMigrateDefaultsToAppGroup"
@@ -61,7 +52,7 @@ extension UserDefaults {
             groupDefaults.set(true, forKey: UserDefaults.didMigrateDefaultsToAppGroup)
             return groupDefaults
         } else {
-            throw DefaultsError.couldNotMigrateStandardDefaults
+            throw UserDefaultsError.couldNotMigrateStandardDefaults
         }
     }
 

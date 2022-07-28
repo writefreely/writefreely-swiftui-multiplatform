@@ -9,6 +9,7 @@ struct SettingsView: View {
             Form {
                 Section(header: Text("Login Details")) {
                     AccountView()
+                        .withErrorHandling()
                 }
                 Section(header: Text("Appearance")) {
                     PreferencesView(preferences: model.preferences)

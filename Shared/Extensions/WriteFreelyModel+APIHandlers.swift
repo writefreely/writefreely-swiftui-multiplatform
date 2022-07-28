@@ -16,33 +16,18 @@ extension WriteFreelyModel {
                     self.account.login(user)
                 }
             } catch {
-                DispatchQueue.main.async {
-                    self.loginErrorMessage = "There was a problem storing your access token to the Keychain."
-                    self.isPresentingLoginErrorAlert = true
-                }
+                self.currentError = KeychainError.couldNotStoreAccessToken
             }
         } catch WFError.notFound {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = AccountError.usernameNotFound.localizedDescription
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.usernameNotFound
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = AccountError.invalidPassword.localizedDescription
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.invalidPassword
         } catch {
             if (error as NSError).domain == NSURLErrorDomain,
                (error as NSError).code == -1003 {
-                DispatchQueue.main.async {
-                    self.loginErrorMessage = AccountError.serverNotFound.localizedDescription
-                    self.isPresentingLoginErrorAlert = true
-                }
+                self.currentError = AccountError.serverNotFound
             } else {
-                DispatchQueue.main.async {
-                    self.loginErrorMessage = error.localizedDescription
-                    self.isPresentingLoginErrorAlert = true
-                }
+                self.currentError = error
             }
         }
     }
@@ -55,11 +40,15 @@ extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    LocalStorageManager.standard.purgeUserCollections()
-                    self.posts.purgePublishedPosts()
+                    do {
+                        try LocalStorageManager.standard.purgeUserCollections()
+                        try self.posts.purgePublishedPosts()
+                    } catch {
+                        self.currentError = error
+                    }
                 }
             } catch {
-                print("Something went wrong purging the token from the Keychain.")
+                self.currentError = KeychainError.couldNotPurgeAccessToken
             }
         } catch WFError.notFound {
             // The user token is invalid or doesn't exist, so it's been invalidated by the server. Proceed with
@@ -70,11 +59,15 @@ extension WriteFreelyModel {
                 client = nil
                 DispatchQueue.main.async {
                     self.account.logout()
-                    LocalStorageManager.standard.purgeUserCollections()
-                    self.posts.purgePublishedPosts()
+                    do {
+                        try LocalStorageManager.standard.purgeUserCollections()
+                        try self.posts.purgePublishedPosts()
+                    } catch {
+                        self.currentError = error
+                    }
                 }
             } catch {
-                print("Something went wrong purging the token from the Keychain.")
+                self.currentError = KeychainError.couldNotPurgeAccessToken
             }
         } catch {
             // We get a 'cannot parse response' (similar to what we were seeing in the Swift package) NSURLError here,
@@ -113,13 +106,10 @@ extension WriteFreelyModel {
                 LocalStorageManager.standard.saveContext()
             }
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = "Something went wrong, please try logging in again."
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.genericAuthError
             self.logout()
         } catch {
-            print(error)
+            self.currentError = AppError.genericError(error.localizedDescription)
         }
     }
 
@@ -141,7 +131,11 @@ extension WriteFreelyModel {
                             if let fetchedPostUpdatedDate = fetchedPost.updatedDate,
                                let localPostUpdatedDate = managedPost.updatedDate {
                                 managedPost.hasNewerRemoteCopy = fetchedPostUpdatedDate > localPostUpdatedDate
-                            } else { print("Error: could not determine which copy of post is newer") }
+                            } else {
+                                self.currentError = AppError.genericError(
+                                    "Error updating post: could not determine which copy of post is newer."
+                                )
+                            }
                             postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
                         }
                     } else {
@@ -158,16 +152,13 @@ extension WriteFreelyModel {
                     LocalStorageManager.standard.saveContext()
                 }
             } catch {
-                print(error)
+                self.currentError = AppError.genericError(error.localizedDescription)
             }
         } catch WFError.unauthorized {
-            DispatchQueue.main.async {
-                self.loginErrorMessage = "Something went wrong, please try logging in again."
-                self.isPresentingLoginErrorAlert = true
-            }
+            self.currentError = AccountError.genericAuthError
             self.logout()
         } catch {
-            print("Error: Failed to fetch cached posts")
+            self.currentError = LocalStoreError.couldNotFetchPosts("cached")
         }
     }
 
@@ -211,11 +202,11 @@ extension WriteFreelyModel {
                         LocalStorageManager.standard.saveContext()
                     }
                 } catch {
-                    print("Error: Failed to fetch cached posts")
+                    self.currentError = LocalStoreError.couldNotFetchPosts("cached")
                 }
             }
         } catch {
-            print(error)
+            self.currentError = AppError.genericError(error.localizedDescription)
         }
     }
 
@@ -237,7 +228,7 @@ extension WriteFreelyModel {
                 LocalStorageManager.standard.saveContext()
             }
         } catch {
-            print(error)
+            self.currentError = AppError.genericError(error.localizedDescription)
         }
     }
 
@@ -259,7 +250,7 @@ extension WriteFreelyModel {
             DispatchQueue.main.async {
                 LocalStorageManager.standard.container.viewContext.rollback()
             }
-            print(error)
+            self.currentError = AppError.genericError(error.localizedDescription)
         }
     }
 
