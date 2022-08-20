@@ -30,11 +30,13 @@ struct CollectionListView: View {
         )
         .listStyle(SidebarListStyle())
         .onChange(of: model.selectedCollection) { collection in
+            model.selectedPost = nil
             if collection != model.editor.fetchSelectedCollectionFromAppStorage() {
                 self.model.editor.selectedCollectionURL = collection?.objectID.uriRepresentation()
             }
         }
         .onChange(of: model.showAllPosts) { value in
+            model.selectedPost = nil
             if value != model.editor.showAllPostsFlag {
                 self.model.editor.showAllPostsFlag = model.showAllPosts
             }
