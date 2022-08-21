@@ -1,5 +1,4 @@
 import Cocoa
-import Sparkle
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
