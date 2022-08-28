@@ -37,10 +37,12 @@ struct PostListView: View {
                 )
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
-                        // We have to add a Spacer as a sibling view to the Button in some kind of Stack, so that any
-                        // a11y modifiers are applied as expected: bug report filed as FB8956392.
                         ZStack {
-                            Spacer()
+                            // We have to add a Spacer as a sibling view to the Button in some kind of Stack, so that any
+                            // a11y modifiers are applied as expected: bug report filed as FB8956392.
+                            if #unavailable(iOS 16) {
+                                Spacer()
+                            }
                             Button(action: {
                                 let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                                 withAnimation {
