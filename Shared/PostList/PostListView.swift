@@ -38,7 +38,7 @@ struct PostListView: View {
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         ZStack {
-                            // We have to add a Spacer as a sibling view to the Button in some kind of Stack, so that any
+                            // We have to add a Spacer as a sibling view to the Button in some kind of Stack so that any
                             // a11y modifiers are applied as expected: bug report filed as FB8956392.
                             if #unavailable(iOS 16) {
                                 Spacer()
