@@ -38,8 +38,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Cleaned up some straggling project warnings.
 - [Mac] Improved error-handling under the hood for better app stability.
 - [Mac] Selecting another collection while a blank draft is in the editor now works as expected.
-- [iOS/Mac] Fixed a bug where the new-post button doesn't appear in the iOS 16 beta.
-- [iOS/Mac] Fixed a bug where alerts weren't presented for login errors.
+- [Mac] Fixed a bug where the new-post button doesn't appear in the iOS 16 beta.
+- [Mac] Fixed a bug where the list of posts published outside of a blog didn't update its title (Drafts/Anonymous).
+- [Mac] Fixed a bug where alerts weren't presented for login errors.
+- [Mac] Fixed some build warnings in the project.
+
+## [1.0.11-ios] - 2022-09-07
+
+- [iOS] Fixed a bug where the new-post button doesn't appear in the iOS 16 beta.
+- [iOS] Fixed a bug where the list of posts published outside of a blog didn't update its title (Drafts/Anonymous).
+- [iOS] Fixed a bug where alerts weren't presented for login errors.
+- [iOS] Fixed some build warnings in the project.
 
 ## [1.0.10-ios] - 2022-07-28
 
@@ -278,7 +287,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.10-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.11-ios...HEAD
+[1.0.11-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.10-ios...v1.0.11-ios
 [1.0.10-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.9-ios...v1.0.10-ios
 [1.0.9-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.8-ios...v1.0.9-ios
 [1.0.8-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.7-ios...v1.0.8-ios
