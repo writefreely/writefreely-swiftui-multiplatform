@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a potential crash if the system keychain wasn't available at app launch.
 - [Mac] Cleaned up some straggling project warnings.
 - [Mac] Improved error-handling under the hood for better app stability.
+- [Mac] Selecting another collection while a blank draft is in the editor now works as expected.
 
 ## [1.0.10-ios] - 2022-07-28
 
