@@ -10,7 +10,10 @@ struct CollectionListView: View {
         List(selection: $selectedCollection) {
             if model.account.isLoggedIn {
                 NavigationLink("All Posts", destination: PostListView(selectedCollection: nil, showAllPosts: true))
-                NavigationLink("Drafts", destination: PostListView(selectedCollection: nil, showAllPosts: false))
+                NavigationLink(
+                    model.account.server == "https://write.as" ? "Anonymous" : "Drafts",
+                    destination: PostListView(selectedCollection: nil, showAllPosts: false)
+                )
                 Section(header: Text("Your Blogs")) {
                     ForEach(collections, id: \.self) { collection in
                         NavigationLink(destination: PostListView(selectedCollection: collection, showAllPosts: false),

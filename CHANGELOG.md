@@ -38,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Cleaned up some straggling project warnings.
 - [Mac] Improved error-handling under the hood for better app stability.
 - [Mac] Selecting another collection while a blank draft is in the editor now works as expected.
+- [iOS/Mac] Fixed a bug where the new-post button doesn't appear in the iOS 16 beta.
+- [iOS/Mac] Fixed a bug where alerts weren't presented for login errors.
 
 ## [1.0.10-ios] - 2022-07-28
 
