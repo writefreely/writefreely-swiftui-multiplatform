@@ -28,7 +28,7 @@ struct ContentView: View {
                         // Create the new-post managed object
                         let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                         withAnimation {
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                            DispatchQueue.main.async {
                                 // Load the new post in the editor
                                 self.model.selectedPost = managedPost
                             }
@@ -36,6 +36,7 @@ struct ContentView: View {
                     }, label: { Image(systemName: "square.and.pencil") })
                     .help("Create a new local draft.")
                 }
+                .frame(idealWidth: 200)
             #else
             CollectionListView()
                 .withErrorHandling()
@@ -45,6 +46,7 @@ struct ContentView: View {
             ZStack {
                 PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
                     .withErrorHandling()
+                    .frame(idealWidth: 300)
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)

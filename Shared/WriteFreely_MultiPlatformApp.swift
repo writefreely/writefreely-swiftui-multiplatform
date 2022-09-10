@@ -135,6 +135,7 @@ struct WriteFreely_MultiPlatformApp: App {
                     }
                     .tag(2)
             }
+            .environmentObject(model)
             .withErrorHandling()
             .frame(minWidth: 500, maxWidth: 500, minHeight: 200)
             .padding()

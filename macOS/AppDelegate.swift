@@ -1,5 +1,4 @@
 import Cocoa
-import Sparkle
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -15,13 +14,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    // If we're miniaturizing the window, deactivate it as well by activating Finder.app (note that
-    // this will bring any Finder windows that are behind other apps to the foreground).
+    // If we're miniaturizing the window, deactivate it as well.
+    // Credit to KHKnobl on GitHub:
+    // https://github.com/writefreely/writefreely-swiftui-multiplatform/issues/135#issuecomment-1101713817
     func applicationDidChangeOcclusionState(_ notification: Notification) {
         if let window = NSApp.windows.first, window.isMiniaturized {
-            NSWorkspace.shared.runningApplications.first(where: {
-                $0.activationPolicy == .regular
-            })?.activate(options: .activateAllWindows)
+            NSApp.hide(self)
         }
     }
 
