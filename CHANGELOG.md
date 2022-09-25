@@ -21,7 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] New drafts are created in the currently-selected blog, rather than being created in Drafts (or "Anonymous" for Write.as accounts).
 - [Mac] Updated the URL and minimum version of the WriteFreely Swift package.
 - [Mac] Upgraded the Sparkle package to v2.
-- [Mac] The app now prompts you to reach out to our user forums if it detects a crash
+- [Mac] The app now prompts you to reach out to our user forums if it detects a crash.
+- [iOS] The post editor now scrolls in its entirety, including the title field.
 
 ### Fixed
 
