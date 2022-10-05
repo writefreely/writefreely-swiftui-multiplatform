@@ -14,6 +14,7 @@ struct PostStatusBadgeView: View {
             .padding(EdgeInsets(top: 2.5, leading: 7.5, bottom: 2.5, trailing: 7.5))
             .background(badgeColor)
             .clipShape(RoundedRectangle(cornerRadius: 5.0, style: .circular))
+            .frame(width: .infinity)
     }
 
     func setupBadgeProperties(for status: PostStatus) -> (String, Color) {

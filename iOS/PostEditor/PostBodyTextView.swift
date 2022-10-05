@@ -21,6 +21,20 @@ class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate
         _text = text
         _isFirstResponder = isFirstResponder
         self.lineSpacingMultiplier = lineSpacingMultiplier
+
+        super.init()
+
+        updateSize()
+    }
+
+    func updateSize() {
+        DispatchQueue.main.async {
+            guard let view = self.textView else { return }
+            let size = view.sizeThatFits(view.bounds.size)
+            if self.postBodyTextView.height != size.height {
+                self.postBodyTextView.height = size.height
+            }
+        }
     }
 
     func textViewDidChange(_ textView: UITextView) {
@@ -32,6 +46,14 @@ class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate
     func textViewDidEndEditing(_ textView: UITextView) {
         self.isFirstResponder = false
         self.didBecomeFirstResponder = false
+    }
+
+    func layoutManager(
+        _ layoutManager: NSLayoutManager,
+        didCompleteLayoutFor textContainer: NSTextContainer?,
+        atEnd layoutFinishedFlag: Bool
+    ) {
+        updateSize()
     }
 
     func layoutManager(
@@ -59,6 +81,7 @@ class PostBodyCoordinator: NSObject, UITextViewDelegate, NSLayoutManagerDelegate
 struct PostBodyTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var textStyle: UIFont
+    @Binding var height: CGFloat
     @Binding var isFirstResponder: Bool
     @State var lineSpacing: CGFloat
 

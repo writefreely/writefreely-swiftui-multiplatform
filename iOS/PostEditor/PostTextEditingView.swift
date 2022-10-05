@@ -8,10 +8,12 @@ struct PostTextEditingView: View {
     @State private var appearance: PostAppearance = .serif
     @State private var titleTextStyle: UIFont = UIFont(name: "Lora-Regular", size: 26)!
     @State private var titleTextHeight: CGFloat = 50
+    @State private var bodyTextHeight: CGFloat = 50
     @State private var titleIsFirstResponder: Bool = true
     @State private var bodyTextStyle: UIFont = UIFont(name: "Lora-Regular", size: 17)!
     @State private var bodyIsFirstResponder: Bool = false
     private let lineSpacingMultiplier: CGFloat = 0.5
+    private let textEditorHeight: CGFloat = 50
 
     init(
         post: ObservedObject<WFAPost>,
@@ -25,15 +27,22 @@ struct PostTextEditingView: View {
     }
 
     var titleFieldHeight: CGFloat {
-        let minHeight: CGFloat = 50
+        let minHeight: CGFloat = textEditorHeight
         if titleTextHeight < minHeight {
             return minHeight
         }
         return titleTextHeight
     }
+    var bodyFieldHeight: CGFloat {
+        let minHeight: CGFloat = textEditorHeight
+        if bodyTextHeight < minHeight {
+            return minHeight
+        }
+        return bodyTextHeight
+    }
 
     var body: some View {
-        VStack {
+        ScrollView(.vertical) {
             ZStack(alignment: .topLeading) {
                 if post.title.count == 0 {
                     Text("Title (optional)")
@@ -74,9 +83,11 @@ struct PostTextEditingView: View {
                 PostBodyTextView(
                     text: $post.body,
                     textStyle: $bodyTextStyle,
+                    height: $bodyTextHeight,
                     isFirstResponder: $bodyIsFirstResponder,
                     lineSpacing: horizontalSizeClass == .compact ? lineSpacingMultiplier / 2 : lineSpacingMultiplier
                 )
+                .frame(height: bodyFieldHeight)
                 .accessibilityLabel(Text("Body"))
                 .accessibilityHint(Text("Add or edit the body of your post"))
                 .onChange(of: post.body) { _ in
