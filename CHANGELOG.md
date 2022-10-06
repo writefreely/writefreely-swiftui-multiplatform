@@ -43,8 +43,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a bug where the list of posts published outside of a blog didn't update its title (Drafts/Anonymous).
 - [Mac] Fixed a bug where alerts weren't presented for login errors.
 - [Mac] Fixed some build warnings in the project.
+- [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
+
+## [1.0.12-ios] - 2022-10-06
+
+### Changed
+
+- [iOS] The post editor now scrolls the title as well as the post body to better use all screen real estate.
+
+### Fixed
+
+- [iOS] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates. 
 
 ## [1.0.11-ios] - 2022-09-07
+
+### Fixed
 
 - [iOS] Fixed a bug where the new-post button doesn't appear in the iOS 16 beta.
 - [iOS] Fixed a bug where the list of posts published outside of a blog didn't update its title (Drafts/Anonymous).
@@ -53,8 +66,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.10-ios] - 2022-07-28
 
-- [iOS] Improved error-handling and alerting under the hood, for better app stability.
+### Added
+
 - [iOS] The app now prompts you to reach out to our user forums if it detects a crash.
+
+### Fixed
+
+- [iOS] Improved error-handling and alerting under the hood, for better app stability.
 
 ## [1.0.9-ios] - 2022-04-02
 
@@ -288,7 +306,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.11-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.12-ios...HEAD
+[1.0.12-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.11-ios...v1.0.12-ios
 [1.0.11-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.10-ios...v1.0.11-ios
 [1.0.10-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.9-ios...v1.0.10-ios
 [1.0.9-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.8-ios...v1.0.9-ios
