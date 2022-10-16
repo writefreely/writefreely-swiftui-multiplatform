@@ -86,7 +86,7 @@ struct PostTitleTextView: UIViewRepresentable {
 
         textView.isEditable = true
         textView.isUserInteractionEnabled = true
-        textView.isScrollEnabled = true
+        textView.isScrollEnabled = false
         textView.alwaysBounceVertical = false
 
         context.coordinator.textView = textView

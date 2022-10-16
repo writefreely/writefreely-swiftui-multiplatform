@@ -90,7 +90,7 @@ struct PostBodyTextView: UIViewRepresentable {
 
         textView.isEditable = true
         textView.isUserInteractionEnabled = true
-        textView.isScrollEnabled = true
+        textView.isScrollEnabled = false
         textView.alwaysBounceVertical = false
         textView.smartDashesType = .no
 
