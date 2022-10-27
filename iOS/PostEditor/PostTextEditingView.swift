@@ -26,28 +26,39 @@ struct PostTextEditingView: View {
 
     var body: some View {
         ScrollView(.vertical) {
-            MultilineTextField("Title (optional)", text: $post.title, font: titleTextStyle)
-                .accessibilityLabel(Text("Title (optional)"))
-                .accessibilityHint(Text("Add or edit the title for your post; use the Return key to skip to the body"))
-                .onChange(of: post.title) { _ in
-                    if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
-                        post.status = PostStatus.edited.rawValue
-                    }
-                    if updatingTitleFromServer {
-                        updatingTitleFromServer = false
-                    }
+            MultilineTextField(
+                "Title (optional)",
+                text: $post.title,
+                font: titleTextStyle,
+                isFirstResponder: $titleIsFirstResponder,
+                onCommit: didFinishEditingTitle
+            )
+            .accessibilityLabel(Text("Title (optional)"))
+            .accessibilityHint(Text("Add or edit the title for your post; use the Return key to skip to the body"))
+            .onChange(of: post.title) { _ in
+                if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
+                    post.status = PostStatus.edited.rawValue
                 }
-            MultilineTextField("Write...", text: $post.body, font: bodyTextStyle)
-                .accessibilityLabel(Text("Body"))
-                .accessibilityHint(Text("Add or edit the body of your post"))
-                .onChange(of: post.body) { _ in
-                    if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
-                        post.status = PostStatus.edited.rawValue
-                    }
-                    if updatingBodyFromServer {
-                        updatingBodyFromServer = false
-                    }
+                if updatingTitleFromServer {
+                    updatingTitleFromServer = false
                 }
+            }
+            MultilineTextField(
+                "Write...",
+                text: $post.body,
+                font: bodyTextStyle,
+                isFirstResponder: $bodyIsFirstResponder
+            )
+            .accessibilityLabel(Text("Body"))
+            .accessibilityHint(Text("Add or edit the body of your post"))
+            .onChange(of: post.body) { _ in
+                if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
+                    post.status = PostStatus.edited.rawValue
+                }
+                if updatingBodyFromServer {
+                    updatingBodyFromServer = false
+                }
+            }
         }
         .onChange(of: titleIsFirstResponder, perform: { _ in
             self.bodyIsFirstResponder.toggle()
@@ -64,5 +75,10 @@ struct PostTextEditingView: View {
             self.titleTextStyle = UIFont(name: appearance.rawValue, size: 26)!
             self.bodyTextStyle = UIFont(name: appearance.rawValue, size: 17)!
         })
+    }
+
+    private func didFinishEditingTitle() {
+        self.titleIsFirstResponder = false
+        self.bodyIsFirstResponder = true
     }
 }

@@ -8,6 +8,7 @@ private struct UITextViewWrapper: UIViewRepresentable {
 
     @Binding var text: String
     @Binding var calculatedHeight: CGFloat
+    @Binding var isEditing: Bool
     var textStyle: UIFont
     var onDone: (() -> Void)?
 
@@ -27,7 +28,7 @@ private struct UITextViewWrapper: UIViewRepresentable {
         textField.font = fontMetrics.scaledFont(for: font)
 
         if nil != onDone {
-            textField.returnKeyType = .done
+            textField.returnKeyType = .next
         }
 
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -38,9 +39,11 @@ private struct UITextViewWrapper: UIViewRepresentable {
         if uiView.text != self.text {
             uiView.text = self.text
         }
-        if uiView.window != nil, !uiView.isFirstResponder {
+
+        if uiView.window != nil, isEditing {
             uiView.becomeFirstResponder()
         }
+
         UITextViewWrapper.recalculateHeight(view: uiView, result: $calculatedHeight)
     }
 
@@ -54,17 +57,24 @@ private struct UITextViewWrapper: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(text: $text, height: $calculatedHeight, onDone: onDone)
+        return Coordinator(text: $text, height: $calculatedHeight, isFirstResponder: $isEditing, onDone: onDone)
     }
 
     final class Coordinator: NSObject, UITextViewDelegate {
+        @Binding var isFirstResponder: Bool
         var text: Binding<String>
         var calculatedHeight: Binding<CGFloat>
         var onDone: (() -> Void)?
 
-        init(text: Binding<String>, height: Binding<CGFloat>, onDone: (() -> Void)? = nil) {
+        init(
+            text: Binding<String>,
+            height: Binding<CGFloat>,
+            isFirstResponder: Binding<Bool>,
+            onDone: (() -> Void)? = nil
+        ) {
             self.text = text
             self.calculatedHeight = height
+            self._isFirstResponder = isFirstResponder
             self.onDone = onDone
         }
 
@@ -81,6 +91,10 @@ private struct UITextViewWrapper: UIViewRepresentable {
             }
             return true
         }
+
+        func textViewDidEndEditing(_ textView: UITextView) {
+            self.isFirstResponder = false
+        }
     }
 
 }
@@ -91,6 +105,7 @@ struct MultilineTextField: View {
     private var textStyle: UIFont
     private var onCommit: (() -> Void)?
 
+    @Binding var isFirstResponder: Bool
     @Binding private var text: String
     private var internalText: Binding<String> {
         Binding<String>(get: { self.text }) {   // swiftlint:disable:this multiple_closures_with_trailing_closure
@@ -102,10 +117,17 @@ struct MultilineTextField: View {
     @State private var dynamicHeight: CGFloat = 100
     @State private var showingPlaceholder = false
 
-    init (_ placeholder: String = "", text: Binding<String>, font: UIFont, onCommit: (() -> Void)? = nil) {
+    init (
+        _ placeholder: String = "",
+        text: Binding<String>,
+        font: UIFont,
+        isFirstResponder: Binding<Bool>,
+        onCommit: (() -> Void)? = nil
+    ) {
         self.placeholder = placeholder
         self.onCommit = onCommit
         self.textStyle = font
+        self._isFirstResponder = isFirstResponder
         self._text = text
         self._showingPlaceholder = State<Bool>(initialValue: self.text.isEmpty)
     }
@@ -114,6 +136,7 @@ struct MultilineTextField: View {
         UITextViewWrapper(
             text: self.internalText,
             calculatedHeight: $dynamicHeight,
+            isEditing: $isFirstResponder,
             textStyle: textStyle,
             onDone: onCommit
         )
