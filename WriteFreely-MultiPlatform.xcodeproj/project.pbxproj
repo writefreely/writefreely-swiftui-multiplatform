@@ -1050,7 +1050,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 686;
+				CURRENT_PROJECT_VERSION = 687;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
@@ -1081,7 +1081,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 686;
+				CURRENT_PROJECT_VERSION = 687;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
