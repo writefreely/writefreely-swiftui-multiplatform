@@ -22,6 +22,7 @@ private struct UITextViewWrapper: UIViewRepresentable {
         textField.isUserInteractionEnabled = true
         textField.isScrollEnabled = false
         textField.backgroundColor = UIColor.clear
+        textField.smartDashesType = .no
 
         let font = textStyle
         let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
