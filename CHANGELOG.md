@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed some build warnings in the project.
 - [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
 - [iOS] Fixed an issue that made it tricky to scroll in the post editor.
+- [iOS] Fixed a bug that didn't navigate to the post editor after tapping the new-post button. 
 
 ## [1.0.12-ios] - 2022-10-06
 
