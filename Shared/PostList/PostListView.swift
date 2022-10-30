@@ -47,7 +47,9 @@ struct PostListView: View {
                                 let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                                 withAnimation {
                                     self.model.showAllPosts = false
-                                    self.model.selectedPost = managedPost
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        self.model.selectedPost = managedPost
+                                    }
                                 }
                             }, label: {
                                 ZStack {
