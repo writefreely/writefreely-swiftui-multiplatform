@@ -135,6 +135,11 @@ struct PostListFilteredView: View {
 
 struct PostListFilteredView_Previews: PreviewProvider {
     static var previews: some View {
-        return PostListFilteredView(collection: nil, showAllPosts: false, postCount: .constant(999))
+        return PostListFilteredView(
+            collection: nil,
+            showAllPosts: false,
+            postCount: .constant(999)
+        )
+        .environmentObject(WriteFreelyModel())
     }
 }
