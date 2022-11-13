@@ -43,6 +43,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a bug where alerts weren't presented for login errors.
 - [Mac] Fixed some build warnings in the project.
 - [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
+
+## [1.0.13-ios] - 2022-11-13
+
 - [iOS] Fixed an issue that made it tricky to scroll in the post editor.
 - [iOS] Fixed a bug that didn't navigate to the post editor after tapping the new-post button. 
 
@@ -307,7 +310,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.12-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.13-ios...HEAD
+[1.0.13-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.12-ios...v1.0.13-ios
 [1.0.12-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.11-ios...v1.0.12-ios
 [1.0.11-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.10-ios...v1.0.11-ios
 [1.0.10-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.9-ios...v1.0.10-ios
