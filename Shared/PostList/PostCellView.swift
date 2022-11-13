@@ -41,6 +41,25 @@ struct PostCellView: View {
             PostStatusBadgeView(post: post)
         }
         .padding(5)
+        .contextMenu {
+            Button(
+                action: didTapDeleteContextMenuItem,
+                label: { Label("Delete", systemImage: "trash") }
+            )
+            .disabled(post.status != PostStatus.local.rawValue)
+        }
+    }
+
+    private func didTapDeleteContextMenuItem() {
+        guard post.status == PostStatus.local.rawValue else { return }
+        if post === model.selectedPost {
+            model.selectedPost = nil
+            model.editor.clearLastDraft()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            model.posts.remove(post)
+        }
     }
 }
 
