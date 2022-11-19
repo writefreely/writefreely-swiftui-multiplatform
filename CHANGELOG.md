@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Holding the Shift key when launching clears the app's "last draft" state and instead loads a new blank draft.
 - [Mac] Added a menu item for toggling the toolbar.
 - [Mac] In a post with unpublished changes (i.e., with "local" or "edited" status), the post is autosaved after a one-second pause in typing.
+- [iOS/Mac] Added a context-menu item to delete local posts from the post list.
 
 ### Changed
 
