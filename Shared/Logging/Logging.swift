@@ -14,6 +14,10 @@ protocol LogWriter {
     func logCrashAndSetFlag(error: Error)
 }
 
+protocol LogReader {
+    func fetchLogs() -> [String]
+}
+
 final class Logging {
 
     private let logger: Logger
@@ -45,6 +49,19 @@ extension Logging: LogWriter {
         UserDefaults.shared.set(errorDescription, forKey: WFDefaults.fatalErrorDescription)
         logger.log(level: .error, "\(errorDescription)")
         fatalError(errorDescription)
+    }
+
+}
+
+extension Logging: LogReader {
+
+    func fetchLogs() -> [String] {
+        return [
+            "This is line 1",
+            "This is line 2",
+            "This is line 3",
+            "This is line 4"
+        ]
     }
 
 }
