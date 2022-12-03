@@ -16,21 +16,20 @@ struct SettingsView: View {
                 Section(header: Text("Appearance")) {
                     PreferencesView(preferences: model.preferences)
                 }
-                Section(header: Text("External Links")) {
-                    HStack {
-                        Spacer()
-                        Link("View the Guide", destination: model.howToURL)
-                        Spacer()
-                    }
-                    HStack {
-                        Spacer()
-                        Link("Visit the Help Forum", destination: model.helpURL)
-                        Spacer()
-                    }
-                    HStack {
-                        Spacer()
-                        Link("Write a Review on the App Store", destination: model.reviewURL)
-                        Spacer()
+                Section(header: Text("Help and Support")) {
+                    Link("View the Guide", destination: model.howToURL)
+                    Link("Visit the Help Forum", destination: model.helpURL)
+                    Link("Write a Review on the App Store", destination: model.reviewURL)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Button(
+                            action: didTapGenerateLogPostButton,
+                            label: {
+                                Text("Create Log Post")
+                            }
+                        )
+                        Text("Generates a local post using recent logs. You can share this for troubleshooting.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
                     }
                 }
                 Section(header: Text("Acknowledgements")) {
