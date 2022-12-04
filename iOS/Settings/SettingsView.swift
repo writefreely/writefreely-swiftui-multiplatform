@@ -20,16 +20,18 @@ struct SettingsView: View {
                     Link("View the Guide", destination: model.howToURL)
                     Link("Visit the Help Forum", destination: model.helpURL)
                     Link("Write a Review on the App Store", destination: model.reviewURL)
-                    VStack(alignment: .leading, spacing: 8) {
-                        Button(
-                            action: didTapGenerateLogPostButton,
-                            label: {
-                                Text("Create Log Post")
-                            }
-                        )
-                        Text("Generates a local post using recent logs. You can share this for troubleshooting.")
-                            .font(.footnote)
-                            .foregroundColor(.secondary)
+                    if #available(iOS 15.0, *) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Button(
+                                action: didTapGenerateLogPostButton,
+                                label: {
+                                    Text("Create Log Post")
+                                }
+                            )
+                            Text("Generates a local post using recent logs. You can share this for troubleshooting.")
+                                .font(.footnote)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
                 Section(header: Text("Acknowledgements")) {
@@ -59,6 +61,7 @@ struct SettingsView: View {
 //        .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
     }
 
+    @available(iOS 15, *)
     private func didTapGenerateLogPostButton() {
         logger.log("Generating local log post...")
 

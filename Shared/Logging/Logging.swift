@@ -14,6 +14,7 @@ protocol LogWriter {
     func logCrashAndSetFlag(error: Error)
 }
 
+@available(iOS 15, *)
 protocol LogReader {
     func fetchLogs() -> [String]
 }
@@ -55,6 +56,7 @@ extension Logging: LogWriter {
 
 extension Logging: LogReader {
 
+    @available(iOS 15, *)
     func fetchLogs() -> [String] {
         return [
             "This is line 1",
