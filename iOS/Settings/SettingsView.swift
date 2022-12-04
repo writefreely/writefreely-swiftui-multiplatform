@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct SettingsView: View {
+
     @EnvironmentObject var model: WriteFreelyModel
+    @State private var isShowingAlert = false
 
     private let logger = Logging(for: String(describing: SettingsView.self))
 
@@ -58,6 +60,12 @@ struct SettingsView: View {
                 }
             }
         }
+        .alert(isPresented: $isShowingAlert) {
+            Alert(
+                title: Text("Log Post Created"),
+                message: Text("Check your local drafts for app logs from the past 24 hours.")
+            )
+        }
 //        .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
     }
 
@@ -81,6 +89,8 @@ struct SettingsView: View {
             ]
             postBody.append(contentsOf: logger.fetchLogs())
             newLogPost.body = postBody.joined(separator: "\n")
+
+            self.isShowingAlert = true
         }
 
         logger.log("Generated local log post.")
