@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Added a menu item for toggling the toolbar.
 - [Mac] In a post with unpublished changes (i.e., with "local" or "edited" status), the post is autosaved after a one-second pause in typing.
 - [iOS/Mac] Added a context-menu item to delete local posts from the post list.
+- [iOS/Mac] Added methods to fetch device logs.
+- [iOS] Added a settings option to generate a log file as a new local draft (iOS 15+).
 
 ### Changed
 
