@@ -24,6 +24,8 @@ struct CheckForDebugModifier {
 struct WriteFreely_MultiPlatformApp: App {
     @StateObject private var model = WriteFreelyModel.shared
 
+    private let logger = Logging(for: String(describing: WriteFreely_MultiPlatformApp.self))
+
     #if os(macOS)
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var updaterViewModel = MacUpdatesViewModel()
@@ -67,6 +69,11 @@ struct WriteFreely_MultiPlatformApp: App {
                             action: resetCrashFlags
                         )
                     )
+                }
+                .onAppear {
+                    if #available(iOS 15, *) {
+                        if didCrash { generateCrashLogPost() }
+                    }
                 }
                 .withErrorHandling()
                 .environmentObject(model)
@@ -165,6 +172,33 @@ struct WriteFreely_MultiPlatformApp: App {
                 self.model.selectedPost = managedPost
             }
         }
+    }
+
+    @available(iOS 15, *)
+    private func generateCrashLogPost() {
+        logger.log("Generating local log post...")
+
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            // Unset selected post and collection and navigate to local drafts.
+            self.model.selectedPost = nil
+            self.model.selectedCollection = nil
+            self.model.showAllPosts = false
+
+            // Create the new log post.
+            let newLogPost = model.editor.generateNewLocalPost(withFont: 2)
+            newLogPost.title = "Logs For Support"
+            var postBody: [String] = [
+                "WriteFreely-Multiplatform v\(Bundle.main.appMarketingVersion) (\(Bundle.main.appBuildVersion))",
+                "Generated \(Date())",
+                ""
+            ]
+            postBody.append(contentsOf: logger.fetchLogs())
+            newLogPost.body = postBody.joined(separator: "\n")
+
+            self.model.selectedPost = newLogPost
+        }
+
+        logger.log("Generated local log post.")
     }
 
     private func resetCrashFlags() {
