@@ -41,8 +41,10 @@ private struct UITextViewWrapper: UIViewRepresentable {
             uiView.text = self.text
         }
 
-        if uiView.window != nil, isEditing {
-            uiView.becomeFirstResponder()
+        if uiView.window != nil && isEditing {
+            DispatchQueue.main.async {
+                uiView.becomeFirstResponder()
+            }
         }
 
         UITextViewWrapper.recalculateHeight(view: uiView, result: $calculatedHeight)
