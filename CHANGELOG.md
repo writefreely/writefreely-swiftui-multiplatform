@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a bug where alerts weren't presented for login errors.
 - [Mac] Fixed some build warnings in the project.
 - [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
+- [iOS] Fixed a bug where posts were always shown in serif, even if the post was published with another font.
 
 ## [1.0.13-ios] - 2022-11-13
 
