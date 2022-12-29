@@ -17,16 +17,11 @@ private struct UITextViewWrapper: UIViewRepresentable {
         textField.delegate = context.coordinator
 
         textField.isEditable = true
-        textField.font = UIFont.preferredFont(forTextStyle: .body)
         textField.isSelectable = true
         textField.isUserInteractionEnabled = true
         textField.isScrollEnabled = false
         textField.backgroundColor = UIColor.clear
         textField.smartDashesType = .no
-
-        let font = textStyle
-        let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
-        textField.font = fontMetrics.scaledFont(for: font)
 
         if nil != onDone {
             textField.returnKeyType = .next
@@ -41,8 +36,14 @@ private struct UITextViewWrapper: UIViewRepresentable {
             uiView.text = self.text
         }
 
-        if uiView.window != nil, isEditing {
-            uiView.becomeFirstResponder()
+        let font = textStyle
+        let fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
+        uiView.font = fontMetrics.scaledFont(for: font)
+
+        if uiView.window != nil && isEditing {
+            DispatchQueue.main.async {
+                uiView.becomeFirstResponder()
+            }
         }
 
         UITextViewWrapper.recalculateHeight(view: uiView, result: $calculatedHeight)
