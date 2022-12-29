@@ -53,10 +53,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [iOS] Added methods to fetch device logs.
 - [iOS] Added a settings option to generate a log file as a new local draft (iOS 15+).
 
-## [1.0.14-ios] - 2022-12-18
-
-- [iOS] Temporarily removed the new-draft-on-launch feature while investigating a crashing bug.
-
 ## [1.0.13-ios] - 2022-11-13
 
 - [iOS] Fixed an issue that made it tricky to scroll in the post editor.
