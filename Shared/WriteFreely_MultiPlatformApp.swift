@@ -152,13 +152,11 @@ struct WriteFreely_MultiPlatformApp: App {
     }
 
     private func showLastDraftOrCreateNewLocalPost() {
-        #if os(macOS)
         if model.editor.lastDraftURL != nil {
             self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
         } else {
             createNewLocalPost()
         }
-        #endif
     }
 
     private func createNewLocalPost() {
@@ -170,7 +168,7 @@ struct WriteFreely_MultiPlatformApp: App {
         let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
         withAnimation {
             // Set it as the selectedPost
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 self.model.selectedPost = managedPost
             }
         }
