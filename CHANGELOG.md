@@ -25,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Updated the URL and minimum version of the WriteFreely Swift package.
 - [Mac] Upgraded the Sparkle package to v2.
 - [Mac] The app now prompts you to reach out to our user forums if it detects a crash.
-- [iOS] Temporarily removed the new-draft-on-launch feature while investigating a crashing bug.
 
 ### Fixed
 
@@ -47,6 +46,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed a bug where alerts weren't presented for login errors.
 - [Mac] Fixed some build warnings in the project.
 - [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
+
+## [1.0.14-ios] - 2022-12-18
+
+- [iOS] Temporarily removed the new-draft-on-launch feature while investigating a crashing bug.
 
 ## [1.0.13-ios] - 2022-11-13
 
@@ -314,7 +317,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.13-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.14-ios...HEAD
+[1.0.14-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.13-ios...v1.0.14-ios
 [1.0.13-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.12-ios...v1.0.13-ios
 [1.0.12-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.11-ios...v1.0.12-ios
 [1.0.11-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.10-ios...v1.0.11-ios
