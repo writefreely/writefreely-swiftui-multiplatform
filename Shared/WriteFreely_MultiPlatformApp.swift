@@ -153,7 +153,9 @@ struct WriteFreely_MultiPlatformApp: App {
 
     private func showLastDraftOrCreateNewLocalPost() {
         if model.editor.lastDraftURL != nil {
-            self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
+            }
         } else {
             createNewLocalPost()
         }
