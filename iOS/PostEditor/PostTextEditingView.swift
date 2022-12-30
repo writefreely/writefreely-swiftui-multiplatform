@@ -60,8 +60,8 @@ struct PostTextEditingView: View {
                 }
             }
         }
-        .onChange(of: titleIsFirstResponder, perform: { _ in
-            self.bodyIsFirstResponder.toggle()
+        .onChange(of: titleIsFirstResponder, perform: { value in
+            self.bodyIsFirstResponder = !value
         })
         .onAppear(perform: {
             switch post.appearance {
@@ -75,6 +75,9 @@ struct PostTextEditingView: View {
             self.titleTextStyle = UIFont(name: appearance.rawValue, size: 26)!
             self.bodyTextStyle = UIFont(name: appearance.rawValue, size: 17)!
         })
+        .onDisappear {
+            hideKeyboard()
+        }
     }
 
     private func didFinishEditingTitle() {
