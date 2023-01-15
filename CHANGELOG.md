@@ -46,6 +46,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed some build warnings in the project.
 - [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
 - [iOS] Fixed a bug where posts were always shown in serif, even if the post was published with another font.
+- [iOS] Restored the new-draft-on-launch feature and resolves crashing bug.
+- [iOS] Fixed a bug that would navigate to a post on launch, then immediately navigate back to the post list.
+- [iOS] Fixed some animation glitches when presenting and dismissing the keyboard.
 
 ## [1.0.14-ios] - 2022-12-18
 

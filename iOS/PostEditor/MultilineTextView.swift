@@ -41,7 +41,7 @@ private struct UITextViewWrapper: UIViewRepresentable {
         uiView.font = fontMetrics.scaledFont(for: font)
 
         if uiView.window != nil && isEditing {
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
                 uiView.becomeFirstResponder()
             }
         }
