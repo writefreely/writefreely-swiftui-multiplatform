@@ -144,7 +144,7 @@ struct WriteFreely_MultiPlatformApp: App {
             }
             .environmentObject(model)
             .withErrorHandling()
-            .frame(minWidth: 500, maxWidth: 500, minHeight: 200)
+            .frame(width: 800, height: 1800)
             .padding()
 //            .preferredColorScheme(preferences.selectedColorScheme)    // See PreferencesModel for info.
         }

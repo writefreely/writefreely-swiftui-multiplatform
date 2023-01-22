@@ -36,7 +36,7 @@ struct ContentView: View {
                     }, label: { Image(systemName: "square.and.pencil") })
                     .help("Create a new local draft.")
                 }
-                .frame(idealWidth: 200)
+                .frame(width: 200)
             #else
             CollectionListView()
                 .withErrorHandling()
@@ -46,7 +46,7 @@ struct ContentView: View {
             ZStack {
                 PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
                     .withErrorHandling()
-                    .frame(idealWidth: 300)
+                    .frame(width: 300)
                 if model.isProcessingRequest {
                     ZStack {
                         Color(NSColor.controlBackgroundColor).opacity(0.75)
