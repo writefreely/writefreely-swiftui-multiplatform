@@ -103,7 +103,7 @@ struct ActivePostToolbarView: View {
         })
     }
 
-    private func createPostUrl() -> [Any] {
+    private func createPostUrl() -> [NSURL] {
         guard let postId = model.selectedPost?.postId else { return [] }
 
         var urlString: String
