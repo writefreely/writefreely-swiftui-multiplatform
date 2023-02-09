@@ -59,8 +59,14 @@ struct ContentView: View {
                 .withErrorHandling()
             #endif
 
+            #if os(macOS)
             Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
+                .frame(width: 500, height: 500)
+            #else
+            Text("Select a post, or create a new local draft.")
+                .foregroundColor(.secondary)
+            #endif
         }
         .environmentObject(model)
         .onChange(of: model.hasError) { value in
