@@ -76,13 +76,12 @@ struct ActivePostToolbarView: View {
                     )
                     .disabled(activePost.status == PostStatus.local.rawValue)
                     .help("Copy the post's URL to your Mac's pasteboard.")
-                    .popover(isPresented: $isPresentingSharingServicePicker) {
+                    .background(
                         PostEditorSharingPicker(
                             isPresented: $isPresentingSharingServicePicker,
                             sharingItems: createPostUrl()
                         )
-                        .frame(width: .zero, height: .zero)
-                    }
+                    )
                     Button(action: { publishPost(activePost) }, label: { Image(systemName: "paperplane") })
                         .disabled(activePost.body.isEmpty || activePost.status == PostStatus.published.rawValue)
                         .help("Publish the post to the web.\(model.account.isLoggedIn ? "" : " You must be logged in to do this.")") // swiftlint:disable:this line_length
@@ -104,7 +103,7 @@ struct ActivePostToolbarView: View {
         })
     }
 
-    private func createPostUrl() -> [Any] {
+    private func createPostUrl() -> [NSURL] {
         guard let postId = model.selectedPost?.postId else { return [] }
 
         var urlString: String
@@ -116,7 +115,7 @@ struct ActivePostToolbarView: View {
             let baseURL = urls.first?.url ?? "\(model.account.server)/\(postCollectionAlias)/"
             urlString = "\(baseURL)\(postSlug)"
         } else {
-            // This is a draft post, sho share the URL as server/postID
+            // This is a draft post, so share the URL as server/postID
             urlString = "\(model.account.server)/\(postId)"
         }
 
