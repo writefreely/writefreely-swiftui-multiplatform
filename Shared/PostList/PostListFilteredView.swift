@@ -4,7 +4,13 @@ struct PostListFilteredView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Binding var postCount: Int
     @FetchRequest(entity: WFACollection.entity(), sortDescriptors: []) var collections: FetchedResults<WFACollection>
+
     var fetchRequest: FetchRequest<WFAPost>
+
+    #if os(macOS)
+    // For searching posts in the Mac app
+    @State private var searchString = ""
+    #endif
 
     init(collection: WFACollection?, showAllPosts: Bool, postCount: Binding<Int>) {
         if showAllPosts {
@@ -68,23 +74,28 @@ struct PostListFilteredView: View {
         #else
         List(selection: $model.selectedPost) {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
-                NavigationLink(
-                    destination: PostEditorView(post: post),
-                    tag: post,
-                    selection: $model.selectedPost,
-                    label: {
-                        if model.showAllPosts {
-                            if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
-                                PostCellView(post: post, collectionName: collection.title)
+                if !searchString.isEmpty && !post.title.lowercased().contains(searchString.lowercased()) {
+                    EmptyView()
+                } else {
+                    NavigationLink(
+                        destination: PostEditorView(post: post),
+                        tag: post,
+                        selection: $model.selectedPost,
+                        label: {
+                            if model.showAllPosts {
+                                if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                                    PostCellView(post: post, collectionName: collection.title)
+                                } else {
+                                    // swiftlint:disable:next line_length
+                                    let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                                    PostCellView(post: post, collectionName: collectionName)
+                                }
                             } else {
-                                let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
-                                PostCellView(post: post, collectionName: collectionName)
+                                PostCellView(post: post)
                             }
-                        } else {
-                            PostCellView(post: post)
-                        }
-                    })
+                        })
                     .deleteDisabled(post.status != PostStatus.local.rawValue)
+                }
             }
             .onDelete(perform: { indexSet in
                 for index in indexSet {
@@ -93,6 +104,7 @@ struct PostListFilteredView: View {
                 }
             })
         }
+        .searchable(text: $searchString, placement: .toolbar, prompt: "Search posts by title")
         .alert(isPresented: $model.isPresentingDeleteAlert) {
             Alert(
                 title: Text("Delete Post?"),
