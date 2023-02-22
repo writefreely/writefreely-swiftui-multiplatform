@@ -74,8 +74,10 @@ struct PostListFilteredView: View {
         #else
         List(selection: $model.selectedPost) {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
-                if !searchString.isEmpty && !post.title.lowercased().contains(searchString.lowercased()) {
-                    EmptyView()
+                if !searchString.isEmpty &&
+                    !post.title.localizedCaseInsensitiveContains(searchString) &&
+                    !post.body.localizedCaseInsensitiveContains(searchString) {
+                        EmptyView()
                 } else {
                     NavigationLink(
                         destination: PostEditorView(post: post),
