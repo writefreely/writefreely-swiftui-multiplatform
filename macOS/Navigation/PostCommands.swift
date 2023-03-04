@@ -5,6 +5,16 @@ struct PostCommands: Commands {
 
     var body: some Commands {
         CommandMenu("Post") {
+            Button("Find In Posts") {
+                if let toolbar = NSApp.keyWindow?.toolbar,
+                   let search = toolbar.items.first(where: {
+                       $0.itemIdentifier.rawValue == "com.apple.SwiftUI.search"
+                   }) as? NSSearchToolbarItem {
+                    search.beginSearchInteraction()
+                }
+            }
+            .keyboardShortcut("f", modifiers: [.command, .shift])
+
             Group {
                 Button(action: sendPostUrlToPasteboard, label: { Text("Copy Link To Published Post") })
                     .disabled(model.selectedPost?.status == PostStatus.local.rawValue)
