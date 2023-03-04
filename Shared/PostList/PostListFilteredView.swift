@@ -106,7 +106,7 @@ struct PostListFilteredView: View {
                 }
             })
         }
-        .searchable(text: $searchString, placement: .toolbar, prompt: "Search posts by title")
+        .searchable(text: $searchString, placement: .toolbar, prompt: "Search across posts")
         .alert(isPresented: $model.isPresentingDeleteAlert) {
             Alert(
                 title: Text("Delete Post?"),
