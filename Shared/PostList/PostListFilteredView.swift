@@ -7,11 +7,6 @@ struct PostListFilteredView: View {
 
     var fetchRequest: FetchRequest<WFAPost>
 
-    #if os(macOS)
-    // For searching posts in the Mac app
-    @State private var searchString = ""
-    #endif
-
     init(collection: WFACollection?, showAllPosts: Bool, postCount: Binding<Int>) {
         if showAllPosts {
             fetchRequest = FetchRequest<WFAPost>(
@@ -38,47 +33,23 @@ struct PostListFilteredView: View {
 
     var body: some View {
         #if os(iOS)
-        List(selection: $model.selectedPost) {
-            ForEach(fetchRequest.wrappedValue, id: \.self) { post in
-                NavigationLink(
-                    destination: PostEditorView(post: post),
-                    tag: post,
-                    selection: $model.selectedPost,
-                    label: {
-                        if model.showAllPosts {
-                            if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
-                                PostCellView(post: post, collectionName: collection.title)
-                            } else {
-                                let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
-                                PostCellView(post: post, collectionName: collectionName)
-                            }
-                        } else {
-                            PostCellView(post: post)
-                        }
-                    })
-                    .deleteDisabled(post.status != PostStatus.local.rawValue)
-            }
-            .onDelete(perform: { indexSet in
-                for index in indexSet {
-                    let post = fetchRequest.wrappedValue[index]
-                    delete(post)
-                }
+        if #available(iOS 15, *) {
+            SearchablePostListFilteredView(
+                postCount: $postCount,
+                collections: collections,
+                fetchRequest: fetchRequest,
+                onDelete: delete(_:)
+            )
+            .environmentObject(model)
+            .onAppear(perform: {
+                self.postCount = fetchRequest.wrappedValue.count
             })
-        }
-        .onAppear(perform: {
-            self.postCount = fetchRequest.wrappedValue.count
-        })
-        .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
-            self.postCount = value
-        })
-        #else
-        List(selection: $model.selectedPost) {
-            ForEach(fetchRequest.wrappedValue, id: \.self) { post in
-                if !searchString.isEmpty &&
-                    !post.title.localizedCaseInsensitiveContains(searchString) &&
-                    !post.body.localizedCaseInsensitiveContains(searchString) {
-                        EmptyView()
-                } else {
+            .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
+                self.postCount = value
+            })
+        } else {
+            List(selection: $model.selectedPost) {
+                ForEach(fetchRequest.wrappedValue, id: \.self) { post in
                     NavigationLink(
                         destination: PostEditorView(post: post),
                         tag: post,
@@ -98,15 +69,28 @@ struct PostListFilteredView: View {
                         })
                     .deleteDisabled(post.status != PostStatus.local.rawValue)
                 }
+                .onDelete(perform: { indexSet in
+                    for index in indexSet {
+                        let post = fetchRequest.wrappedValue[index]
+                        delete(post)
+                    }
+                })
             }
-            .onDelete(perform: { indexSet in
-                for index in indexSet {
-                    let post = fetchRequest.wrappedValue[index]
-                    delete(post)
-                }
+            .onAppear(perform: {
+                self.postCount = fetchRequest.wrappedValue.count
+            })
+            .onChange(of: fetchRequest.wrappedValue.count, perform: { value in
+                self.postCount = value
             })
         }
-        .searchable(text: $searchString, placement: .toolbar, prompt: "Search across posts")
+        #else
+        SearchablePostListFilteredView(
+            postCount: $postCount,
+            collections: collections,
+            fetchRequest: fetchRequest,
+            onDelete: delete(_:)
+        )
+        .environmentObject(model)
         .alert(isPresented: $model.isPresentingDeleteAlert) {
             Alert(
                 title: Text("Delete Post?"),
