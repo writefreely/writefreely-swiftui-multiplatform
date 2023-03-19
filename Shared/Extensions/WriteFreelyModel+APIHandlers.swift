@@ -221,7 +221,9 @@ extension WriteFreelyModel {
         // See: https://github.com/writeas/writefreely-swift/issues/20
         do {
             let fetchedPost = try result.get()
+            #if os(iOS)
             guard let cachedPost = self.selectedPost else { return }
+            #endif
             importData(from: fetchedPost, into: cachedPost)
             cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
