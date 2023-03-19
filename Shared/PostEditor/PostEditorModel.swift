@@ -12,6 +12,10 @@ struct PostEditorModel {
     @AppStorage(WFDefaults.selectedCollectionURL, store: UserDefaults.shared) var selectedCollectionURL: URL?
     @AppStorage(WFDefaults.lastDraftURL, store: UserDefaults.shared) var lastDraftURL: URL?
 
+    #if os(macOS)
+    var postToUpdate: WFAPost?
+    #endif
+
     func saveLastDraft(_ post: WFAPost) {
         self.lastDraftURL = post.status != PostStatus.published.rawValue ? post.objectID.uriRepresentation() : nil
     }
