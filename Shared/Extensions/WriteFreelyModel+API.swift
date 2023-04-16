@@ -142,7 +142,9 @@ extension WriteFreelyModel {
         }
         // We're starting the network request.
         DispatchQueue.main.async {
+            #if os(iOS)
             self.selectedPost = post
+            #endif
             self.isProcessingRequest = true
         }
         loggedInClient.getPost(byId: postId, completion: updateFromServerHandler)
