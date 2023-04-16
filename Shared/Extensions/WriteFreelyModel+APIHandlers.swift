@@ -221,11 +221,18 @@ extension WriteFreelyModel {
         // See: https://github.com/writeas/writefreely-swift/issues/20
         do {
             let fetchedPost = try result.get()
+            #if os(iOS)
             guard let cachedPost = self.selectedPost else { return }
+            #else
+            guard let cachedPost = self.editor.postToUpdate else { return }
+            #endif
             importData(from: fetchedPost, into: cachedPost)
             cachedPost.hasNewerRemoteCopy = false
             DispatchQueue.main.async {
                 LocalStorageManager.standard.saveContext()
+                #if os(macOS)
+                self.selectedPost = cachedPost
+                #endif
             }
         } catch {
             self.currentError = AppError.genericError(error.localizedDescription)

@@ -16,7 +16,11 @@ struct PostEditorStatusToolbarView: View {
                         .font(.callout)
                         .foregroundColor(.secondary)
                     Button(action: {
+                        model.editor.postToUpdate = post
                         model.updateFromServer(post: post)
+                        DispatchQueue.main.async {
+                            model.selectedPost = nil
+                        }
                     }, label: {
                         Image(systemName: "square.and.arrow.down")
                     })
