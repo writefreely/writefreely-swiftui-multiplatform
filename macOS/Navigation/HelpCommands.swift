@@ -17,6 +17,9 @@ struct HelpCommands: Commands {
     private func createLogsPost() {
        logger.log("Generating local log post...")
 
+        // Show the spinner going in the post list
+        model.isProcessingRequest = true
+
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // Unset selected post and collection and navigate to local drafts.
             self.model.selectedPost = nil
@@ -33,8 +36,12 @@ struct HelpCommands: Commands {
             ]
             postBody.append(contentsOf: logger.fetchLogs())
             newLogPost.body = postBody.joined(separator: "\n")
-        }
 
-        logger.log("Generated local log post.")
+            // Hide the spinner in the post list and set the log post as active
+            self.model.isProcessingRequest = false
+            self.model.selectedPost = newLogPost
+
+            logger.log("Generated local log post.")
+        }
     }
 }
