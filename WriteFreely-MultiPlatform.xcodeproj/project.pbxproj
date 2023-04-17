@@ -137,6 +137,7 @@
 		17DFDE8C251D309400A25F31 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE86251D309400A25F31 /* OpenSans-License.txt */; };
 		17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E5DF892543610700DCDC9B /* PostTextEditingView.swift */; };
 		375A67E828FC555C007A1AC0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A67E728FC555C007A1AC0 /* MultilineTextView.swift */; };
+		3779389729EC0C880032D6C1 /* HelpCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779389629EC0C880032D6C1 /* HelpCommands.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +269,7 @@
 		17DFDE86251D309400A25F31 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 		17E5DF892543610700DCDC9B /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		375A67E728FC555C007A1AC0 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
+		3779389629EC0C880032D6C1 /* HelpCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +457,7 @@
 			children = (
 				17BC617825715068003363CA /* ActivePostToolbarView.swift */,
 				1780F6EE25895EDB00FE45FF /* PostCommands.swift */,
+				3779389629EC0C880032D6C1 /* HelpCommands.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				1727526728099802003D0A6A /* ErrorConstants.swift in Sources */,
 				17479F152583D8E40072B7FB /* PostEditorSharingPicker.swift in Sources */,
 				17480CA6251272EE00EB7765 /* Bundle+AppVersion.swift in Sources */,
+				3779389729EC0C880032D6C1 /* HelpCommands.swift in Sources */,
 				17C42E662509237800072984 /* PostListFilteredView.swift in Sources */,
 				17120DAD24E1B99F002B9F6C /* AccountLoginView.swift in Sources */,
 				17D4926727947D780035BD7E /* MacUpdatesViewModel.swift in Sources */,
@@ -1278,7 +1282,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 707;
+				CURRENT_PROJECT_VERSION = 708;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1305,7 +1309,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 707;
+				CURRENT_PROJECT_VERSION = 708;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
