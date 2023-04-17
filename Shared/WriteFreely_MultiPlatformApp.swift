@@ -105,16 +105,8 @@ struct WriteFreely_MultiPlatformApp: App {
             SidebarCommands()
             #if os(macOS)
             PostCommands(model: model)
+            HelpCommands(model: model)
             #endif
-            CommandGroup(after: .help) {
-                Button("Visit Support Forum") {
-                    #if os(macOS)
-                    NSWorkspace().open(model.helpURL)
-                    #else
-                    UIApplication.shared.open(model.helpURL)
-                    #endif
-                }
-            }
             ToolbarCommands()
             TextEditingCommands()
         }
