@@ -24,7 +24,7 @@ struct SearchablePostListFilteredView: View {
                         selection: $model.selectedPost,
                         label: {
                             if model.showAllPosts {
-                                if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                                if let collection = collections.filter({ $0.alias == post.collectionAlias }).first {
                                     PostCellView(post: post, collectionName: collection.title)
                                 } else {
                                     // swiftlint:disable:next line_length
