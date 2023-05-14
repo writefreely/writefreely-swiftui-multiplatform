@@ -136,6 +136,15 @@ extension WriteFreelyModel {
                                     "Error updating post: could not determine which copy of post is newer."
                                 )
                             }
+                            if managedPost.collectionAlias != fetchedPost.collectionAlias {
+                                // The post has been moved so we update the managed post's collectionAlias property.
+                                DispatchQueue.main.async {
+                                    if self.selectedPost == managedPost {
+                                        self.selectedPost = nil
+                                    }
+                                    managedPost.collectionAlias = fetchedPost.collectionAlias
+                                }
+                            }
                             postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
                         }
                     } else {
