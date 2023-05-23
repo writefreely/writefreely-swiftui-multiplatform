@@ -40,7 +40,7 @@ struct PostListFilteredView: View {
                     selection: $model.selectedPost,
                     label: {
                         if model.showAllPosts {
-                            if let collection = collections.filter { $0.alias == post.collectionAlias }.first {
+                            if let collection = collections.filter({ $0.alias == post.collectionAlias }).first {
                                 PostCellView(post: post, collectionName: collection.title)
                             } else {
                                 let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"

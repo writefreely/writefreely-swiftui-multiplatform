@@ -113,6 +113,7 @@ extension WriteFreelyModel {
         }
     }
 
+    // swiftlint:disable function_body_length
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         // We're done with the network request.
         DispatchQueue.main.async {
@@ -170,6 +171,7 @@ extension WriteFreelyModel {
             self.currentError = LocalStoreError.couldNotFetchPosts("cached")
         }
     }
+    // swiftlint:enable function_body_length
 
     func publishHandler(result: Result<WFPost, Error>) {
         // We're done with the network request.
