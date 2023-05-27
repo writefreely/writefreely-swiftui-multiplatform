@@ -160,6 +160,7 @@ struct PostEditorView: View {
         })
         .onAppear(perform: {
             self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
+            model.editor.setInitialValues(for: post)
             if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
                     self.model.editor.saveLastDraft(post)
@@ -201,6 +202,7 @@ struct PostEditorView: View {
             LocalStorageManager.standard.saveContext()
             model.publish(post: post)
         }
+        model.editor.setInitialValues(for: post)
         #if os(iOS)
         self.hideKeyboard()
         #endif
