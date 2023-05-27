@@ -203,9 +203,7 @@ struct PostEditorView: View {
             model.publish(post: post)
         }
         model.editor.setInitialValues(for: post)
-        #if os(iOS)
         self.hideKeyboard()
-        #endif
     }
 
     private func sharePost() {
