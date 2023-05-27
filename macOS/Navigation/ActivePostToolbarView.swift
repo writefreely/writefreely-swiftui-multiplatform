@@ -131,6 +131,7 @@ struct ActivePostToolbarView: View {
             LocalStorageManager.standard.saveContext()
             model.publish(post: post)
         }
+        model.editor.setInitialValues(for: post)
     }
 
     private func openSettingsWindow() {
