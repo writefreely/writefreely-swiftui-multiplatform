@@ -31,6 +31,19 @@ struct ActivePostToolbarView: View {
                 .frame(minWidth: 50, alignment: .center)
                 .layoutPriority(1)
                 .padding(.horizontal)
+            if activePost.status == PostStatus.edited.rawValue {
+                Button(action: {
+                    model.editor.postToUpdate = activePost
+                    model.updateFromServer(post: activePost)
+                    DispatchQueue.main.async {
+                        model.selectedPost = nil
+                    }
+                }, label: {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .accessibilityLabel(Text("Revert post"))
+                        .accessibilityHint(Text("Replace the edited post with the published version from the server"))
+                })
+            }
             if activePost.status == PostStatus.local.rawValue {
                 Menu(content: {
                     Label("Publish To:", systemImage: "paperplane")
