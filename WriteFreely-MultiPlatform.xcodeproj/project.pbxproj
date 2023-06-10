@@ -137,7 +137,11 @@
 		17DFDE8C251D309400A25F31 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE86251D309400A25F31 /* OpenSans-License.txt */; };
 		17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E5DF892543610700DCDC9B /* PostTextEditingView.swift */; };
 		375A67E828FC555C007A1AC0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A67E728FC555C007A1AC0 /* MultilineTextView.swift */; };
+		37F749D129B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
+		37F749D229B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
 		3779389729EC0C880032D6C1 /* HelpCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779389629EC0C880032D6C1 /* HelpCommands.swift */; };
+		37F749D129B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
+		37F749D229B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,7 +273,9 @@
 		17DFDE86251D309400A25F31 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 		17E5DF892543610700DCDC9B /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		375A67E728FC555C007A1AC0 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
+		37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePostListFilteredView.swift; sourceTree = "<group>"; };
 		3779389629EC0C880032D6C1 /* HelpCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
+		37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePostListFilteredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -606,6 +612,7 @@
 				1756AE7924CB65DF00FD7257 /* PostListView.swift */,
 				17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */,
 				17C42E642509237800072984 /* PostListFilteredView.swift */,
+				37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */,
 			);
 			path = PostList;
 			sourceTree = "<group>";
@@ -937,6 +944,7 @@
 				17B996DA2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */,
 				1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
+				37F749D129B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */,
 				17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
@@ -981,6 +989,7 @@
 				17027E26286741B90062EB29 /* Logging.swift in Sources */,
 				1727526B2809991A003D0A6A /* ErrorHandling.swift in Sources */,
 				17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */,
+				37F749D229B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */,
 				17C42E71250AAFD500072984 /* NSManagedObjectContext+ExecuteAndMergeChanges.swift in Sources */,
 				1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				1753F6AC24E431CC00309365 /* MacPreferencesView.swift in Sources */,
@@ -1483,7 +1492,7 @@
 			repositoryURL = "https://github.com/writefreely/writefreely-swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.6;
+				minimumVersion = 0.3.7;
 			};
 		};
 		17D4926327947B4D0035BD7E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
