@@ -113,6 +113,7 @@ extension WriteFreelyModel {
         }
     }
 
+    // swiftlint:disable function_body_length
     func fetchUserPostsHandler(result: Result<[WFPost], Error>) {
         // We're done with the network request.
         DispatchQueue.main.async {
@@ -135,6 +136,15 @@ extension WriteFreelyModel {
                                 self.currentError = AppError.genericError(
                                     "Error updating post: could not determine which copy of post is newer."
                                 )
+                            }
+                            if managedPost.collectionAlias != fetchedPost.collectionAlias {
+                                // The post has been moved so we update the managed post's collectionAlias property.
+                                DispatchQueue.main.async {
+                                    if self.selectedPost == managedPost {
+                                        self.selectedPost = nil
+                                    }
+                                    managedPost.collectionAlias = fetchedPost.collectionAlias
+                                }
                             }
                             postsToDelete.removeAll(where: { $0.postId == fetchedPost.postId })
                         }
@@ -161,6 +171,7 @@ extension WriteFreelyModel {
             self.currentError = LocalStoreError.couldNotFetchPosts("cached")
         }
     }
+    // swiftlint:enable function_body_length
 
     func publishHandler(result: Result<WFPost, Error>) {
         // We're done with the network request.
