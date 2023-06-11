@@ -84,6 +84,14 @@ struct PostEditorView: View {
                         })
                         .accessibilityHint(Text("Choose the blog you want to publish this post to"))
                         .disabled(post.body.count == 0)
+                    } else if post.status == PostStatus.edited.rawValue {
+                        Button(action: {
+                            model.updateFromServer(post: post)
+                        }, label: {
+                            Label("Revert", systemImage: "clock.arrow.circlepath")
+                        })
+                        .accessibilityHint(Text("Replace the edited post with the published version from the server"))
+                        .disabled(post.status != PostStatus.edited.rawValue)
                     } else {
                         Button(action: {
                             if model.account.isLoggedIn {
