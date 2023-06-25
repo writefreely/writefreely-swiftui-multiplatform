@@ -86,14 +86,6 @@ struct PostEditorView: View {
                         .disabled(post.body.count == 0)
                     } else if post.status == PostStatus.edited.rawValue {
                         Button(action: {
-                            model.updateFromServer(post: post)
-                        }, label: {
-                            Label("Revert", systemImage: "clock.arrow.circlepath")
-                        })
-                        .accessibilityHint(Text("Replace the edited post with the published version from the server"))
-                        .disabled(post.status != PostStatus.edited.rawValue)
-                    } else {
-                        Button(action: {
                             if model.account.isLoggedIn {
                                 publishPost()
                             } else {
@@ -103,6 +95,14 @@ struct PostEditorView: View {
                             Label("Publish", systemImage: "paperplane")
                         })
                         .disabled(post.status == PostStatus.published.rawValue || post.body.count == 0)
+
+                        Button(action: {
+                            model.updateFromServer(post: post)
+                        }, label: {
+                            Label("Revert", systemImage: "clock.arrow.circlepath")
+                        })
+                        .accessibilityHint(Text("Replace the edited post with the published version from the server"))
+                        .disabled(post.status != PostStatus.edited.rawValue)
                     }
                     Button(action: {
                         sharePost()
