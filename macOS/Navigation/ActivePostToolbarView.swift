@@ -33,11 +33,10 @@ struct ActivePostToolbarView: View {
                 .padding(.horizontal)
             if activePost.status == PostStatus.edited.rawValue {
                 Button(action: {
+                    activePost.hasNewerRemoteCopy = true
                     model.editor.postToUpdate = activePost
                     model.updateFromServer(post: activePost)
-                    DispatchQueue.main.async {
-                        model.selectedPost = nil
-                    }
+                    model.selectedPost = nil
                 }, label: {
                     Image(systemName: "clock.arrow.circlepath")
                         .accessibilityLabel(Text("Revert post"))
