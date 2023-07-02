@@ -33,7 +33,6 @@ struct ActivePostToolbarView: View {
                 .padding(.horizontal)
             if activePost.status == PostStatus.edited.rawValue {
                 Button(action: {
-                    activePost.hasNewerRemoteCopy = true
                     model.editor.postToUpdate = activePost
                     model.updateFromServer(post: activePost)
                     model.selectedPost = nil

@@ -97,7 +97,6 @@ struct PostEditorView: View {
                         .disabled(post.status == PostStatus.published.rawValue || post.body.count == 0)
 
                         Button(action: {
-                            post.hasNewerRemoteCopy = true
                             model.updateFromServer(post: post)
                         }, label: {
                             Label("Revert", systemImage: "clock.arrow.circlepath")
