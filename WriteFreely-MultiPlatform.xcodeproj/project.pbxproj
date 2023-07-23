@@ -137,8 +137,6 @@
 		17DFDE8C251D309400A25F31 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE86251D309400A25F31 /* OpenSans-License.txt */; };
 		17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E5DF892543610700DCDC9B /* PostTextEditingView.swift */; };
 		375A67E828FC555C007A1AC0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A67E728FC555C007A1AC0 /* MultilineTextView.swift */; };
-		37F749D129B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
-		37F749D229B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
 		3779389729EC0C880032D6C1 /* HelpCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779389629EC0C880032D6C1 /* HelpCommands.swift */; };
 		37F749D129B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
 		37F749D229B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
@@ -273,7 +271,6 @@
 		17DFDE86251D309400A25F31 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 		17E5DF892543610700DCDC9B /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		375A67E728FC555C007A1AC0 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
-		37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePostListFilteredView.swift; sourceTree = "<group>"; };
 		3779389629EC0C880032D6C1 /* HelpCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
 		37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePostListFilteredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1063,7 +1060,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 702;
+				CURRENT_PROJECT_VERSION = 703;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
@@ -1094,7 +1091,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "ActionExtension-iOS/ActionExtension-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 702;
+				CURRENT_PROJECT_VERSION = 703;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ActionExtension-iOS/Info.plist";
@@ -1237,7 +1234,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 702;
+				CURRENT_PROJECT_VERSION = 703;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1263,7 +1260,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 702;
+				CURRENT_PROJECT_VERSION = 703;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
