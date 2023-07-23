@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Added a context-menu item to delete local posts from the post list.
 - [Mac] Added methods to fetch device logs.
 - [iOS, Mac] Added a way to search for text across all posts.
+- [iOS, Mac] Added a way to refresh an edited post from the server copy.
 
 ### Changed
 
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Updated the URL and minimum version of the WriteFreely Swift package.
 - [Mac] Upgraded the Sparkle package to v2.
 - [Mac] The app now prompts you to reach out to our user forums if it detects a crash.
+- [iOS, Mac] The app now reverts a post from edited to published status if you undo your changes. 
 
 ### Fixed
 

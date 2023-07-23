@@ -16,6 +16,7 @@ struct PostEditorView: View {
         .padding()
         .background(Color(NSColor.controlBackgroundColor))
         .onAppear(perform: {
+            model.editor.setInitialValues(for: post)
             if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
                     self.model.editor.saveLastDraft(post)

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PostTextEditingView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @EnvironmentObject var model: WriteFreelyModel
     @ObservedObject var post: WFAPost
     @Binding var updatingTitleFromServer: Bool
     @Binding var updatingBodyFromServer: Bool
@@ -35,12 +36,15 @@ struct PostTextEditingView: View {
             )
             .accessibilityLabel(Text("Title (optional)"))
             .accessibilityHint(Text("Add or edit the title for your post; use the Return key to skip to the body"))
-            .onChange(of: post.title) { _ in
+            .onChange(of: post.title) { value in
                 if post.status == PostStatus.published.rawValue && !updatingTitleFromServer {
                     post.status = PostStatus.edited.rawValue
                 }
                 if updatingTitleFromServer {
                     updatingTitleFromServer = false
+                }
+                if post.status == PostStatus.edited.rawValue && value == model.editor.initialPostTitle {
+                    post.status = PostStatus.published.rawValue
                 }
             }
             MultilineTextField(
@@ -51,12 +55,15 @@ struct PostTextEditingView: View {
             )
             .accessibilityLabel(Text("Body"))
             .accessibilityHint(Text("Add or edit the body of your post"))
-            .onChange(of: post.body) { _ in
+            .onChange(of: post.body) { value in
                 if post.status == PostStatus.published.rawValue && !updatingBodyFromServer {
                     post.status = PostStatus.edited.rawValue
                 }
                 if updatingBodyFromServer {
                     updatingBodyFromServer = false
+                }
+                if post.status == PostStatus.edited.rawValue && value == model.editor.initialPostBody {
+                    post.status = PostStatus.published.rawValue
                 }
             }
         }

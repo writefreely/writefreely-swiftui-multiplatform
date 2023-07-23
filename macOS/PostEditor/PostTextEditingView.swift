@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PostTextEditingView: View {
+    @EnvironmentObject var model: WriteFreelyModel
     @ObservedObject var post: WFAPost
     @Binding var updatingFromServer: Bool
     @State private var appearance: PostAppearance = .serif
@@ -74,8 +75,15 @@ struct PostTextEditingView: View {
     private func onTextChange(_ text: String) {
         extractTitle(text)
 
-        if post.status == PostStatus.published.rawValue && !updatingFromServer {
-            post.status = PostStatus.edited.rawValue
+        if !updatingFromServer {
+            if post.status == PostStatus.published.rawValue {
+                post.status = PostStatus.edited.rawValue
+            }
+            if post.status == PostStatus.edited.rawValue,
+               post.title == model.editor.initialPostTitle,
+               post.body == model.editor.initialPostBody {
+                post.status = PostStatus.published.rawValue
+            }
         }
 
         if updatingFromServer {

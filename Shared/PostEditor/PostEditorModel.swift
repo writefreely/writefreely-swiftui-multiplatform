@@ -12,6 +12,9 @@ struct PostEditorModel {
     @AppStorage(WFDefaults.selectedCollectionURL, store: UserDefaults.shared) var selectedCollectionURL: URL?
     @AppStorage(WFDefaults.lastDraftURL, store: UserDefaults.shared) var lastDraftURL: URL?
 
+    private(set) var initialPostTitle: String?
+    private(set) var initialPostBody: String?
+
     #if os(macOS)
     var postToUpdate: WFAPost?
     #endif
@@ -56,6 +59,21 @@ struct PostEditorModel {
         guard let collectionURL = selectedCollectionURL else { return nil }
         guard let collection = fetchManagedObject(from: collectionURL) as? WFACollection else { return nil }
         return collection
+    }
+
+    /// Sets the initial values for title and body on a published post.
+    ///
+    /// Used to detect if the title and body have changed back to their initial values. If the passed `WFAPost` isn't
+    /// published, any title and post values already stored are reset to `nil`.
+    /// - Parameter post: The `WFAPost` for which we're setting initial title/body values.
+    mutating func setInitialValues(for post: WFAPost) {
+        if post.status != PostStatus.published.rawValue {
+            initialPostTitle = nil
+            initialPostBody = nil
+            return
+        }
+        initialPostTitle = post.title
+        initialPostBody = post.body
     }
 
     private func fetchManagedObject(from objectURL: URL) -> NSManagedObject? {

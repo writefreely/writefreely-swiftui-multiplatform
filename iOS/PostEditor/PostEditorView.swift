@@ -84,7 +84,7 @@ struct PostEditorView: View {
                         })
                         .accessibilityHint(Text("Choose the blog you want to publish this post to"))
                         .disabled(post.body.count == 0)
-                    } else {
+                    } else if post.status == PostStatus.edited.rawValue {
                         Button(action: {
                             if model.account.isLoggedIn {
                                 publishPost()
@@ -95,6 +95,14 @@ struct PostEditorView: View {
                             Label("Publish", systemImage: "paperplane")
                         })
                         .disabled(post.status == PostStatus.published.rawValue || post.body.count == 0)
+
+                        Button(action: {
+                            model.updateFromServer(post: post)
+                        }, label: {
+                            Label("Revert", systemImage: "clock.arrow.circlepath")
+                        })
+                        .accessibilityHint(Text("Replace the edited post with the published version from the server"))
+                        .disabled(post.status != PostStatus.edited.rawValue)
                     }
                     Button(action: {
                         sharePost()
@@ -160,6 +168,7 @@ struct PostEditorView: View {
         })
         .onAppear(perform: {
             self.selectedCollection = collections.first { $0.alias == post.collectionAlias }
+            model.editor.setInitialValues(for: post)
             if post.status != PostStatus.published.rawValue {
                 DispatchQueue.main.async {
                     self.model.editor.saveLastDraft(post)
@@ -201,9 +210,8 @@ struct PostEditorView: View {
             LocalStorageManager.standard.saveContext()
             model.publish(post: post)
         }
-        #if os(iOS)
+        model.editor.setInitialValues(for: post)
         self.hideKeyboard()
-        #endif
     }
 
     private func sharePost() {
