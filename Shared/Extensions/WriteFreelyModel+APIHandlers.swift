@@ -281,6 +281,7 @@ extension WriteFreelyModel {
         cachedPost.postId = fetchedPost.postId
         cachedPost.rtl = fetchedPost.rtl ?? false
         cachedPost.slug = fetchedPost.slug
+        cachedPost.status = PostStatus.published.rawValue
         cachedPost.title = fetchedPost.title ?? ""
         cachedPost.updatedDate = fetchedPost.updatedDate
     }
