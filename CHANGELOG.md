@@ -15,8 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] In a post with unpublished changes (i.e., with "local" or "edited" status), the post is autosaved after a one-second pause in typing.
 - [Mac] Added a context-menu item to delete local posts from the post list.
 - [Mac] Added methods to fetch device logs.
-- [iOS, Mac] Added a way to search for text across all posts.
-- [iOS, Mac] Added a way to refresh an edited post from the server copy.
+- [Mac] Added a way to search for text across all posts.
+- [Mac] Added a way to refresh an edited post from the server copy.
 
 ### Changed
 
@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Updated the URL and minimum version of the WriteFreely Swift package.
 - [Mac] Upgraded the Sparkle package to v2.
 - [Mac] The app now prompts you to reach out to our user forums if it detects a crash.
-- [iOS, Mac] The app now reverts a post from edited to published status if you undo your changes. 
+- [Mac] The app now reverts a post from edited to published status if you undo your changes. 
 
 ### Fixed
 
@@ -49,9 +49,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Fixed some build warnings in the project.
 - [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
 - [Mac] Fixed a bug that prevented a remotely-edited post from updating until you navigated away and back.
-- [iOS, Mac] Fixed a bug where posts moved from one blog to another on a different client didn't update in the app.
+- [Mac] Fixed a bug where posts moved from one blog to another on a different client didn't update in the app.
 
-## [1.0.15-ios] - 2022-01-15
+## [1.0.16-ios] - 2023-07-23
+
+### Added
+
+- [iOS] Added a way to search for text across all posts.
+- [iOS] Added a way to refresh an edited post from the server copy.
+
+### Changed
+
+- [iOS] The app now reverts a post from edited to published status if you undo your changes. 
+
+### Fixed
+
+- [iOS] Fixed a bug where posts moved from one blog to another on a different client didn't update in the app.
+
+## [1.0.15-ios] - 2023-01-15
 
 ### Fixed
 
@@ -346,7 +361,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.15-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.16-ios...HEAD
+[1.0.16-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.15-ios...v1.0.16-ios
 [1.0.15-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.14-ios...v1.0.15-ios
 [1.0.14-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.13-ios...v1.0.14-ios
 [1.0.13-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.12-ios...v1.0.13-ios
