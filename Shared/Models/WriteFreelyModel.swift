@@ -66,6 +66,10 @@ final class WriteFreelyModel: ObservableObject {
             self.preferences.appearance = self.defaults.integer(forKey: WFDefaults.colorSchemeIntegerKey)
             self.preferences.font = self.defaults.integer(forKey: WFDefaults.defaultFontIntegerKey)
             self.account.restoreState()
+
+            // Set the appearance
+            self.preferences.updateAppearance(to: Appearance(rawValue: self.preferences.appearance) ?? .system)
+
             if self.account.isLoggedIn {
                 guard let serverURL = URL(string: self.account.server) else {
                     self.currentError = AccountError.invalidServerURL

@@ -69,27 +69,7 @@ struct PreferencesView: View {
             .padding(.bottom)
         }
         .onChange(of: preferences.appearance) { value in
-            switch value {
-            case 1:
-                #if os(macOS)
-                NSApp.appearance = NSAppearance(named: .aqua)
-                #else
-                window?.overrideUserInterfaceStyle = .light
-                #endif
-            case 2:
-                #if os(macOS)
-                NSApp.appearance = NSAppearance(named: .darkAqua)
-                #else
-                window?.overrideUserInterfaceStyle = .dark
-                #endif
-            default:
-                #if os(macOS)
-                NSApp.appearance = nil
-                #else
-                window?.overrideUserInterfaceStyle = .unspecified
-                #endif
-            }
-
+            preferences.updateAppearance(to: Appearance(rawValue: value) ?? .system)
             UserDefaults.shared.set(value, forKey: WFDefaults.colorSchemeIntegerKey)
         }
     }
