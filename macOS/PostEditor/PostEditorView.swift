@@ -13,7 +13,6 @@ struct PostEditorView: View {
             post: post,
             updatingFromServer: $updatingFromServer
         )
-        .padding()
         .background(Color(NSColor.controlBackgroundColor))
         .onAppear(perform: {
             model.editor.setInitialValues(for: post)

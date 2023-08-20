@@ -115,6 +115,7 @@ final class CustomTextView: NSView {
         let scrollView = NSScrollView()
         scrollView.drawsBackground = false
         scrollView.borderType = .noBorder
+        scrollView.autohidesScrollers = true
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalRuler = false
         scrollView.autoresizingMask = [.width, .height]
@@ -167,6 +168,8 @@ final class CustomTextView: NSView {
             .font: font ?? NSFont.systemFont(ofSize: 17),   // Fall back to system font if we can't unwrap font argument
             .foregroundColor: NSColor.labelColor
         ]
+        textView.textContainer?.lineFragmentPadding = 16
+        textView.textContainerInset = NSSize(width: 0, height: 16)
 
         return textView
     }()

@@ -15,7 +15,8 @@ struct PostTextEditingView: View {
             if combinedText.count == 0 {
                 Text("Write…")
                     .foregroundColor(Color(NSColor.placeholderTextColor))
-                    .padding(.horizontal, 5)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 16)
                     .font(.custom(appearance.rawValue, size: 17, relativeTo: .body))
             }
             if post.appearance == "sans" {
