@@ -60,9 +60,7 @@ struct ContentView: View {
             #endif
 
             #if os(macOS)
-            Text("Select a post, or create a new local draft.")
-                .foregroundColor(.secondary)
-                .frame(width: 500, height: 500)
+            NoSelectedPostView(isConnected: $model.hasNetworkConnection)
             #else
             Text("Select a post, or create a new local draft.")
                 .foregroundColor(.secondary)
