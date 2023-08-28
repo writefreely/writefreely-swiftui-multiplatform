@@ -9,66 +9,74 @@ struct PostEditorView: View {
     @State private var updatingFromServer: Bool = false
 
     var body: some View {
-        PostTextEditingView(
-            post: post,
-            updatingFromServer: $updatingFromServer
-        )
-        .background(Color(NSColor.controlBackgroundColor))
-        .onAppear(perform: {
-            model.editor.setInitialValues(for: post)
-            if post.status != PostStatus.published.rawValue {
-                DispatchQueue.main.async {
-                    self.model.editor.saveLastDraft(post)
-                }
-            } else {
-                self.model.editor.clearLastDraft()
+        VStack {
+            if !model.hasNetworkConnection {
+                Label("You are not connected to the internet", systemImage: "wifi.exclamationmark")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.top, 8)
             }
-        })
-        .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
-            if !post.hasNewerRemoteCopy {
-                self.updatingFromServer = true
-            }
-        })
-        .onChange(of: post.status, perform: { value in
-            if value != PostStatus.published.rawValue {
-                self.model.editor.saveLastDraft(post)
-            } else {
-                self.model.editor.clearLastDraft()
-            }
-            DispatchQueue.main.async {
-                LocalStorageManager.standard.saveContext()
-            }
-        })
-        .onChange(of: model.hasError) { value in
-            if value {
-                if model.hasNetworkConnection {
-                    if let error = model.currentError {
-                        self.errorHandling.handle(error: error)
-                    } else {
-                        self.errorHandling.handle(error: AppError.genericError())
+            PostTextEditingView(
+                post: post,
+                updatingFromServer: $updatingFromServer
+            )
+            .background(Color(NSColor.controlBackgroundColor))
+            .onAppear(perform: {
+                model.editor.setInitialValues(for: post)
+                if post.status != PostStatus.published.rawValue {
+                    DispatchQueue.main.async {
+                        self.model.editor.saveLastDraft(post)
                     }
+                } else {
+                    self.model.editor.clearLastDraft()
                 }
-                model.hasError = false
-            }
-        }
-        .onDisappear(perform: {
-            DispatchQueue.main.async {
-                model.editor.clearLastDraft()
-            }
-            if post.title.count == 0
-                && post.body.count == 0
-                && post.status == PostStatus.local.rawValue
-                && post.updatedDate == nil
-                && post.postId == nil {
-                DispatchQueue.main.async {
-                    model.posts.remove(post)
+            })
+            .onChange(of: post.hasNewerRemoteCopy, perform: { _ in
+                if !post.hasNewerRemoteCopy {
+                    self.updatingFromServer = true
                 }
-            } else if post.status != PostStatus.published.rawValue {
+            })
+            .onChange(of: post.status, perform: { value in
+                if value != PostStatus.published.rawValue {
+                    self.model.editor.saveLastDraft(post)
+                } else {
+                    self.model.editor.clearLastDraft()
+                }
                 DispatchQueue.main.async {
                     LocalStorageManager.standard.saveContext()
                 }
+            })
+            .onChange(of: model.hasError) { value in
+                if value {
+                    if model.hasNetworkConnection {
+                        if let error = model.currentError {
+                            self.errorHandling.handle(error: error)
+                        } else {
+                            self.errorHandling.handle(error: AppError.genericError())
+                        }
+                    }
+                    model.hasError = false
+                }
             }
-        })
+            .onDisappear(perform: {
+                DispatchQueue.main.async {
+                    model.editor.clearLastDraft()
+                }
+                if post.title.count == 0
+                    && post.body.count == 0
+                    && post.status == PostStatus.local.rawValue
+                    && post.updatedDate == nil
+                    && post.postId == nil {
+                    DispatchQueue.main.async {
+                        model.posts.remove(post)
+                    }
+                } else if post.status != PostStatus.published.rawValue {
+                    DispatchQueue.main.async {
+                        LocalStorageManager.standard.saveContext()
+                    }
+                }
+            })
+        }
     }
 }
 
