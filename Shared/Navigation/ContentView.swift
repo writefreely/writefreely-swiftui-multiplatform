@@ -59,12 +59,7 @@ struct ContentView: View {
                 .withErrorHandling()
             #endif
 
-            #if os(macOS)
             NoSelectedPostView(isConnected: $model.hasNetworkConnection)
-            #else
-            Text("Select a post, or create a new local draft.")
-                .foregroundColor(.secondary)
-            #endif
         }
         .environmentObject(model)
         .onChange(of: model.hasError) { value in

@@ -136,6 +136,7 @@
 		17DFDE8B251D309400A25F31 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE86251D309400A25F31 /* OpenSans-License.txt */; };
 		17DFDE8C251D309400A25F31 /* OpenSans-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17DFDE86251D309400A25F31 /* OpenSans-License.txt */; };
 		17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E5DF892543610700DCDC9B /* PostTextEditingView.swift */; };
+		37095AE02AA4A0E700C9C5F8 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
 		37113EF92A98C10A00B36B98 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
 		375A67E828FC555C007A1AC0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A67E728FC555C007A1AC0 /* MultilineTextView.swift */; };
 		3779389729EC0C880032D6C1 /* HelpCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779389629EC0C880032D6C1 /* HelpCommands.swift */; };
@@ -453,7 +454,6 @@
 				17A67CAE251A5DD7002F163D /* PostEditorView.swift */,
 				17E5DF892543610700DCDC9B /* PostTextEditingView.swift */,
 				17466625256C0D0600629997 /* MacEditorTextView.swift */,
-				37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */,
 			);
 			path = PostEditor;
 			sourceTree = "<group>";
@@ -589,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				17DF328224C87D3300BCE2E3 /* ContentView.swift */,
+				37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -925,6 +926,7 @@
 				173E19D1254318F600440F0F /* RemoteChangePromptView.swift in Sources */,
 				17B37C5625C8679800FE75E9 /* WriteFreelyModel+API.swift in Sources */,
 				17C42E622507D8E600072984 /* PostStatus.swift in Sources */,
+				37095AE02AA4A0E700C9C5F8 /* NoSelectedPostView.swift in Sources */,
 				1756DBBA24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
 				1727526A2809991A003D0A6A /* ErrorHandling.swift in Sources */,
 				1756AE8124CB844500FD7257 /* View+Keyboard.swift in Sources */,
