@@ -17,6 +17,14 @@ final class WriteFreelyModel: ObservableObject {
     @Published var hasError: Bool = false
     var currentError: Error? {
         didSet {
+            if let localizedErrorDescription = currentError?.localizedDescription,
+               localizedErrorDescription == "The operation couldn’t be completed. (WriteFreely.WFError error -2.)",
+               !hasNetworkConnection {
+                #if DEBUG
+                print("⚠️ currentError is WriteFreely.WFError -2 and there is no network connection.")
+                #endif
+                currentError = NetworkError.noConnectionError
+            }
             #if DEBUG
             print("⚠️ currentError -> didSet \(currentError?.localizedDescription ?? "nil")")
             print("  > hasError was: \(self.hasError)")
