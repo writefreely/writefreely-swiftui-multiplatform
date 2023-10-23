@@ -97,19 +97,26 @@ struct PostListView: View {
                             .padding(.vertical, 4)
                             .padding(.horizontal, 8)
                     } else {
-                        Button(action: {
-                            DispatchQueue.main.async {
-                                model.fetchUserCollections()
-                                model.fetchUserPosts()
-                            }
-                        }, label: {
-                            Image(systemName: "arrow.clockwise")
+                        if model.hasNetworkConnection {
+                            Button(action: {
+                                DispatchQueue.main.async {
+                                    model.fetchUserCollections()
+                                    model.fetchUserPosts()
+                                }
+                            }, label: {
+                                Image(systemName: "arrow.clockwise")
+                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 8)
+                            })
+                            .accessibilityLabel(Text("Refresh Posts"))
+                            .accessibilityHint(Text("Fetch changes from the server"))
+                            .disabled(!model.account.isLoggedIn)
+                        } else {
+                            Image(systemName: "wifi.exclamationmark")
                                 .padding(.vertical, 4)
                                 .padding(.horizontal, 8)
-                        })
-                        .accessibilityLabel(Text("Refresh Posts"))
-                        .accessibilityHint(Text("Fetch changes from the server"))
-                        .disabled(!model.account.isLoggedIn)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
                 .padding(.top, 8)

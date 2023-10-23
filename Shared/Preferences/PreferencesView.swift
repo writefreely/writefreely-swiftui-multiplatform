@@ -3,6 +3,28 @@ import SwiftUI
 struct PreferencesView: View {
     @ObservedObject var preferences: PreferencesModel
 
+    /* We're stuck dropping into AppKit/UIKit to set light/dark schemes for now,
+     * because setting the .preferredColorScheme modifier on views in SwiftUI is
+     * currently unreliable.
+     *
+     * Feedback submitted to Apple:
+     *
+     * FB8382883: "On macOS 11β4, preferredColorScheme modifier does not respect .light ColorScheme"
+     * FB8383053: "On iOS 14β4/macOS 11β4, it is not possible to unset preferredColorScheme after setting
+     *              it to either .light or .dark"
+     */
+
+    #if os(iOS)
+    var window: UIWindow? {
+        guard let scene = UIApplication.shared.connectedScenes.first,
+              let windowSceneDelegate = scene.delegate as? UIWindowSceneDelegate,
+              let window = windowSceneDelegate.window else {
+            return nil
+        }
+        return window
+    }
+    #endif
+
     var body: some View {
         VStack {
             VStack {
@@ -45,6 +67,10 @@ struct PreferencesView: View {
                 }
             }
             .padding(.bottom)
+        }
+        .onChange(of: preferences.appearance) { value in
+            preferences.updateAppearance(to: Appearance(rawValue: value) ?? .system)
+            UserDefaults.shared.set(value, forKey: WFDefaults.colorSchemeIntegerKey)
         }
     }
 }

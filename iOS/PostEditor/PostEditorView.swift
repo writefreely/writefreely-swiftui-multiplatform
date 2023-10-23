@@ -50,7 +50,10 @@ struct PostEditorView: View {
                 PostEditorStatusToolbarView(post: post)
             }
             ToolbarItem(placement: .primaryAction) {
-                if model.isProcessingRequest {
+                if !model.hasNetworkConnection {
+                    Image(systemName: "wifi.exclamationmark")
+                        .foregroundColor(.secondary)
+                } else if model.isProcessingRequest {
                     ProgressView()
                 } else {
                     Menu(content: {

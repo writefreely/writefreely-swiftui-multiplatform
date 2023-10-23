@@ -17,6 +17,14 @@ final class WriteFreelyModel: ObservableObject {
     @Published var hasError: Bool = false
     var currentError: Error? {
         didSet {
+            if let localizedErrorDescription = currentError?.localizedDescription,
+               localizedErrorDescription == "The operation couldn’t be completed. (WriteFreely.WFError error -2.)",
+               !hasNetworkConnection {
+                #if DEBUG
+                print("⚠️ currentError is WriteFreely.WFError -2 and there is no network connection.")
+                #endif
+                currentError = NetworkError.noConnectionError
+            }
             #if DEBUG
             print("⚠️ currentError -> didSet \(currentError?.localizedDescription ?? "nil")")
             print("  > hasError was: \(self.hasError)")
@@ -66,6 +74,10 @@ final class WriteFreelyModel: ObservableObject {
             self.preferences.appearance = self.defaults.integer(forKey: WFDefaults.colorSchemeIntegerKey)
             self.preferences.font = self.defaults.integer(forKey: WFDefaults.defaultFontIntegerKey)
             self.account.restoreState()
+
+            // Set the appearance
+            self.preferences.updateAppearance(to: Appearance(rawValue: self.preferences.appearance) ?? .system)
+
             if self.account.isLoggedIn {
                 guard let serverURL = URL(string: self.account.server) else {
                     self.currentError = AccountError.invalidServerURL
