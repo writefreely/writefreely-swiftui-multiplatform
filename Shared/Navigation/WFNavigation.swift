@@ -2,24 +2,35 @@ import SwiftUI
 
 struct WFNavigation<CollectionList, PostList, PostDetail>: View
     where CollectionList: View, PostList: View, PostDetail: View {
-    @ViewBuilder var collectionList: () -> CollectionList
-    @ViewBuilder var postList: () -> PostList
-    @ViewBuilder var postDetail: () -> PostDetail
+
+    private var collectionList: CollectionList
+    private var postList: PostList
+    private var postDetail: PostDetail
+
+    init(
+        @ViewBuilder collectionList: () -> CollectionList,
+        @ViewBuilder postList: () -> PostList,
+        @ViewBuilder postDetail: () -> PostDetail
+    ) {
+        self.collectionList = collectionList()
+        self.postList = postList()
+        self.postDetail = postDetail()
+    }
 
     var body: some View {
         if #available(iOS 16, macOS 13, *) {
             NavigationSplitView {
-                collectionList()
+                collectionList
             } content: {
-                postList()
+                postList
             } detail: {
-                postDetail()
+                postDetail
             }
         } else {
             NavigationView {
-                collectionList()
-                postList()
-                postDetail()
+                collectionList
+                postList
+                postDetail
             }
         }
     }
