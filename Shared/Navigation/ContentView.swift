@@ -11,15 +11,19 @@ struct ContentView: View {
                 CollectionListView()
                     .withErrorHandling()
                     .toolbar {
-                        Button(
-                            action: {
-                                NSApp.keyWindow?.contentViewController?.tryToPerform(
-                                    #selector(NSSplitViewController.toggleSidebar(_:)), with: nil
-                                )
-                            },
-                            label: { Image(systemName: "sidebar.left") }
-                        )
-                        .help("Toggle the sidebar's visibility.")
+                        if #available(macOS 13, *) {
+                            EmptyView()
+                        } else {
+                            Button(
+                                action: {
+                                    NSApp.keyWindow?.contentViewController?.tryToPerform(
+                                        #selector(NSSplitViewController.toggleSidebar(_:)), with: nil
+                                    )
+                                },
+                                label: { Image(systemName: "sidebar.left") }
+                            )
+                            .help("Toggle the sidebar's visibility.")
+                        }
                         Spacer()
                         Button(action: {
                             withAnimation {
