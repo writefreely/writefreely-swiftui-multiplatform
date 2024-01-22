@@ -94,9 +94,16 @@ extension WriteFreelyModel {
         }
 
         if post.language == nil {
-            if let languageCode = Locale.current.languageCode {
-                post.language = languageCode
-                post.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+            if #available(iOS 16, macOS 13, *) {
+                if let languageCode = Locale.current.language.languageCode?.identifier {
+                    post.language = languageCode
+                    post.rtl = Locale.Language(identifier: languageCode).characterDirection == .rightToLeft
+                }
+            } else {
+                if let languageCode = Locale.current.languageCode {
+                    post.language = languageCode
+                    post.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+                }
             }
         }
 
