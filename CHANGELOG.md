@@ -50,8 +50,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Mac] Bumped WriteFreely package to v0.3.6 to handle decoding of fractional seconds in dates.
 - [Mac] Fixed a bug that prevented a remotely-edited post from updating until you navigated away and back.
 - [Mac] Fixed a bug where posts moved from one blog to another on a different client didn't update in the app.
-- [iOS, Mac] Improved offline experience with 'not connected' messaging.
+- [Mac] Improved offline experience with 'not connected' messaging.
+
+## [1.0.17-ios] - 2024-01-21
+
+### Fixed
+
+- [iOS] Improved offline experience with 'not connected' messaging.
 - [iOS] Improved compatibility with iOS 17.
+
 
 ## [1.0.16-ios] - 2023-07-23
 
@@ -363,7 +370,8 @@ suffixes to differentiate between platforms, until both are at feature parity.
     - Contributing guide
     - This changelog
 
-[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.16-ios...HEAD
+[Unreleased]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.17-ios...HEAD
+[1.0.17-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.16-ios...v1.0.17-ios
 [1.0.16-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.15-ios...v1.0.16-ios
 [1.0.15-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.14-ios...v1.0.15-ios
 [1.0.14-ios]: https://github.com/writeas/writefreely-swiftui-multiplatform/compare/v1.0.13-ios...v1.0.14-ios
