@@ -130,11 +130,9 @@ struct PostListView: View {
         .ignoresSafeArea(.all, edges: .bottom)
         .onAppear {
             // Set the selected collection and whether or not we want to show all posts
-            print("Setting selected collection")
             model.selectedCollection = selectedCollection
             model.showAllPosts = showAllPosts
 
-            print("Invalidating/refreshing PostListView")
             // We use this to invalidate and refresh the view, so that new posts created outside of the app (e.g.,
             // in the action extension) show up.
             withAnimation {
