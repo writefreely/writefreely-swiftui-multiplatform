@@ -273,6 +273,7 @@
 		17DFDE86251D309400A25F31 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 		17E5DF892543610700DCDC9B /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSelectedPostView.swift; sourceTree = "<group>"; };
+		374451442BFA80EA0000BCDD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		375A67E728FC555C007A1AC0 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		3779389629EC0C880032D6C1 /* HelpCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
 		37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePostListFilteredView.swift; sourceTree = "<group>"; };
@@ -541,6 +542,7 @@
 				17681E3F251940F200D394AE /* Extensions */,
 				17A67CAB251A5D7E002F163D /* PostEditor */,
 				17120DA624E19CE2002B9F6C /* Settings */,
+				374451442BFA80EA0000BCDD /* PrivacyInfo.xcprivacy */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
