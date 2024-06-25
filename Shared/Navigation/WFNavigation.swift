@@ -18,20 +18,22 @@ struct WFNavigation<CollectionList, PostList, PostDetail>: View
     }
 
     var body: some View {
-        #if os(macOS)
-        NavigationSplitView {
-            collectionList
-        } content: {
-            postList
-        } detail: {
-            postDetail
+        if #available(iOS 16, macOS 13, *) {
+            /// This works better in iOS 17.5 but still has some issues:
+            /// - Does not respect the editor-launching policy, going right to the NoSelectedPostView
+            NavigationSplitView {
+                collectionList
+            } content: {
+                postList
+            } detail: {
+                postDetail
+            }
+        } else {
+            NavigationView {
+                collectionList
+                postList
+                postDetail
+            }
         }
-        #else
-        NavigationView {
-            collectionList
-            postList
-            postDetail
-        }
-        #endif
     }
 }
