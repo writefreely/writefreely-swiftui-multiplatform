@@ -138,6 +138,8 @@
 		17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E5DF892543610700DCDC9B /* PostTextEditingView.swift */; };
 		37095AE02AA4A0E700C9C5F8 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
 		37113EF92A98C10A00B36B98 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
+		374451452BFA845E0000BCDD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 374451442BFA80EA0000BCDD /* PrivacyInfo.xcprivacy */; };
+		374451462BFA845F0000BCDD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 374451442BFA80EA0000BCDD /* PrivacyInfo.xcprivacy */; };
 		375A67E828FC555C007A1AC0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A67E728FC555C007A1AC0 /* MultilineTextView.swift */; };
 		376A350D2B5D5C8E00255D61 /* WFNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A350C2B5D5C8E00255D61 /* WFNavigation.swift */; };
 		376A350E2B5D5C8E00255D61 /* WFNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A350C2B5D5C8E00255D61 /* WFNavigation.swift */; };
@@ -275,6 +277,7 @@
 		17DFDE86251D309400A25F31 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 		17E5DF892543610700DCDC9B /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSelectedPostView.swift; sourceTree = "<group>"; };
+		374451442BFA80EA0000BCDD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		375A67E728FC555C007A1AC0 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		376A350C2B5D5C8E00255D61 /* WFNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFNavigation.swift; sourceTree = "<group>"; };
 		3779389629EC0C880032D6C1 /* HelpCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
@@ -544,6 +547,7 @@
 				17681E3F251940F200D394AE /* Extensions */,
 				17A67CAB251A5D7E002F163D /* PostEditor */,
 				17120DA624E19CE2002B9F6C /* Settings */,
+				374451442BFA80EA0000BCDD /* PrivacyInfo.xcprivacy */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -804,6 +808,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374451462BFA845F0000BCDD /* PrivacyInfo.xcprivacy in Resources */,
 				17836C17273F0FBB0047AF61 /* OpenSans-Regular.ttf in Resources */,
 				172E10132735BB6200061372 /* Action.js in Resources */,
 				172E10042735B83E00061372 /* Media.xcassets in Resources */,
@@ -819,6 +824,7 @@
 				17B3E965250FAA9000EE9748 /* LaunchScreen.storyboard in Resources */,
 				17DFDE8B251D309400A25F31 /* OpenSans-License.txt in Resources */,
 				17DF32AE24C87D3500BCE2E3 /* Assets.xcassets in Resources */,
+				374451452BFA845E0000BCDD /* PrivacyInfo.xcprivacy in Resources */,
 				17D4F39E2514F0E500517CE6 /* OpenSans-Regular.ttf in Resources */,
 				17D4F36C2514EE2F00517CE6 /* LoraGX.ttf in Resources */,
 				17D4F3A52514F1E900517CE6 /* Hack-Regular.ttf in Resources */,
