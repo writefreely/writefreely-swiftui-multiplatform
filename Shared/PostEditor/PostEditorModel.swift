@@ -48,9 +48,16 @@ struct PostEditorModel {
         default:
             managedPost.appearance = "serif"
         }
-        if let languageCode = Locale.current.languageCode {
-            managedPost.language = languageCode
-            managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+        if #available(iOS 16, macOS 13, *) {
+            if let languageCode = Locale.current.language.languageCode?.identifier {
+                managedPost.language = languageCode
+                managedPost.rtl = Locale.Language(identifier: languageCode).characterDirection == .rightToLeft
+            }
+        } else {
+            if let languageCode = Locale.current.languageCode {
+                managedPost.language = languageCode
+                managedPost.rtl = Locale.characterDirection(forLanguage: languageCode) == .rightToLeft
+            }
         }
         return managedPost
     }

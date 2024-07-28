@@ -139,6 +139,8 @@
 		37095AE02AA4A0E700C9C5F8 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
 		37113EF92A98C10A00B36B98 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
 		375A67E828FC555C007A1AC0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A67E728FC555C007A1AC0 /* MultilineTextView.swift */; };
+		376A350D2B5D5C8E00255D61 /* WFNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A350C2B5D5C8E00255D61 /* WFNavigation.swift */; };
+		376A350E2B5D5C8E00255D61 /* WFNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A350C2B5D5C8E00255D61 /* WFNavigation.swift */; };
 		3779389729EC0C880032D6C1 /* HelpCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779389629EC0C880032D6C1 /* HelpCommands.swift */; };
 		37F749D129B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
 		37F749D229B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */; };
@@ -274,6 +276,7 @@
 		17E5DF892543610700DCDC9B /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSelectedPostView.swift; sourceTree = "<group>"; };
 		375A67E728FC555C007A1AC0 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
+		376A350C2B5D5C8E00255D61 /* WFNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFNavigation.swift; sourceTree = "<group>"; };
 		3779389629EC0C880032D6C1 /* HelpCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
 		37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchablePostListFilteredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -590,6 +593,7 @@
 			children = (
 				17DF328224C87D3300BCE2E3 /* ContentView.swift */,
 				37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */,
+				376A350C2B5D5C8E00255D61 /* WFNavigation.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -947,6 +951,7 @@
 				1756AE7724CB2EDD00FD7257 /* PostEditorView.swift in Sources */,
 				17DF32D524C8CA3400BCE2E3 /* PostStatusBadgeView.swift in Sources */,
 				37F749D129B4D3090087F0BF /* SearchablePostListFilteredView.swift in Sources */,
+				376A350D2B5D5C8E00255D61 /* WFNavigation.swift in Sources */,
 				17D435E824E3128F0036B539 /* PreferencesModel.swift in Sources */,
 				1756AE7A24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				17B996D82502D23E0017B536 /* WFAPost+CoreDataClass.swift in Sources */,
@@ -997,6 +1002,7 @@
 				1756AE7B24CB65DF00FD7257 /* PostListView.swift in Sources */,
 				1753F6AC24E431CC00309365 /* MacPreferencesView.swift in Sources */,
 				1756DC0424FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
+				376A350E2B5D5C8E00255D61 /* WFNavigation.swift in Sources */,
 				17B996DB2502D23E0017B536 /* WFAPost+CoreDataProperties.swift in Sources */,
 				17BC618A25715318003363CA /* ActivePostToolbarView.swift in Sources */,
 				171BFDFB24D4AF8300888236 /* CollectionListView.swift in Sources */,
@@ -1240,7 +1246,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 708;
+				CURRENT_PROJECT_VERSION = 710;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1249,7 +1255,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.17;
+				MARKETING_VERSION = 1.0.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -1266,7 +1272,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WriteFreely-MultiPlatform (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 708;
+				CURRENT_PROJECT_VERSION = 710;
 				DEVELOPMENT_TEAM = TPPAB4YBA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1275,7 +1281,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.17;
+				MARKETING_VERSION = 1.0.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely-MultiPlatform";
 				SDKROOT = iphoneos;
@@ -1303,7 +1309,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely for Mac";
@@ -1330,7 +1336,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abunchtell.WriteFreely-MultiPlatform";
 				PRODUCT_NAME = "WriteFreely for Mac";
@@ -1503,7 +1509,7 @@
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 2.3.0;
+				minimumVersion = 2.6.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
