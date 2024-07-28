@@ -138,6 +138,8 @@
 		17E5DF8A2543610700DCDC9B /* PostTextEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E5DF892543610700DCDC9B /* PostTextEditingView.swift */; };
 		37095AE02AA4A0E700C9C5F8 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
 		37113EF92A98C10A00B36B98 /* NoSelectedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */; };
+		371937842C5677FD005FC0A8 /* DeprecatedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371937832C5677FD005FC0A8 /* DeprecatedListView.swift */; };
+		371937852C5677FD005FC0A8 /* DeprecatedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371937832C5677FD005FC0A8 /* DeprecatedListView.swift */; };
 		375A67E828FC555C007A1AC0 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A67E728FC555C007A1AC0 /* MultilineTextView.swift */; };
 		376A350D2B5D5C8E00255D61 /* WFNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A350C2B5D5C8E00255D61 /* WFNavigation.swift */; };
 		376A350E2B5D5C8E00255D61 /* WFNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A350C2B5D5C8E00255D61 /* WFNavigation.swift */; };
@@ -275,6 +277,7 @@
 		17DFDE86251D309400A25F31 /* OpenSans-License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "OpenSans-License.txt"; sourceTree = "<group>"; };
 		17E5DF892543610700DCDC9B /* PostTextEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTextEditingView.swift; sourceTree = "<group>"; };
 		37113EF82A98C10A00B36B98 /* NoSelectedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSelectedPostView.swift; sourceTree = "<group>"; };
+		371937832C5677FD005FC0A8 /* DeprecatedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedListView.swift; sourceTree = "<group>"; };
 		375A67E728FC555C007A1AC0 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		376A350C2B5D5C8E00255D61 /* WFNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WFNavigation.swift; sourceTree = "<group>"; };
 		3779389629EC0C880032D6C1 /* HelpCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
@@ -618,6 +621,7 @@
 				17DF32D424C8CA3400BCE2E3 /* PostStatusBadgeView.swift */,
 				17C42E642509237800072984 /* PostListFilteredView.swift */,
 				37F749D029B4D3090087F0BF /* SearchablePostListFilteredView.swift */,
+				371937832C5677FD005FC0A8 /* DeprecatedListView.swift */,
 			);
 			path = PostList;
 			sourceTree = "<group>";
@@ -961,6 +965,7 @@
 				17027E25286741B90062EB29 /* Logging.swift in Sources */,
 				1727526628099802003D0A6A /* ErrorConstants.swift in Sources */,
 				1756DC0324FEE18400207AB8 /* WFACollection+CoreDataProperties.swift in Sources */,
+				371937842C5677FD005FC0A8 /* DeprecatedListView.swift in Sources */,
 				17120DA224E1985C002B9F6C /* AccountModel.swift in Sources */,
 				17120DA324E19A42002B9F6C /* PreferencesView.swift in Sources */,
 				1756AE6E24CB255B00FD7257 /* PostListModel.swift in Sources */,
@@ -978,6 +983,7 @@
 			files = (
 				171DC678272C7D0B002B9B8A /* UserDefaults+Extensions.swift in Sources */,
 				17DF32AD24C87D3500BCE2E3 /* ContentView.swift in Sources */,
+				371937852C5677FD005FC0A8 /* DeprecatedListView.swift in Sources */,
 				1756DBBB24FED45500207AB8 /* LocalStorageManager.swift in Sources */,
 				17A4FEED25927E730037E96B /* AppDelegate.swift in Sources */,
 				174D313324EC2831006CA9EE /* WriteFreelyModel.swift in Sources */,

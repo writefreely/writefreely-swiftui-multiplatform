@@ -6,50 +6,26 @@ struct SearchablePostListFilteredView: View {
     @Binding var postCount: Int
     @State private var searchString = ""
 
+    // Only used for NavigationStack in iOS 16/macOS 13 or later
+    @State private var path: [WFAPost] = []
+
     var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
     var onDelete: (WFAPost) -> Void
 
     var body: some View {
-        List(selection: $model.selectedPost) {
-            ForEach(fetchRequest.wrappedValue, id: \.self) { post in
-                if !searchString.isEmpty &&
-                    !post.title.localizedCaseInsensitiveContains(searchString) &&
-                    !post.body.localizedCaseInsensitiveContains(searchString) {
-                        EmptyView()
-                } else {
-                    NavigationLink(
-                        destination: PostEditorView(post: post),
-                        tag: post,
-                        selection: $model.selectedPost,
-                        label: {
-                            if model.showAllPosts {
-                                if let collection = collections.filter({ $0.alias == post.collectionAlias }).first {
-                                    PostCellView(post: post, collectionName: collection.title)
-                                } else {
-                                    // swiftlint:disable:next line_length
-                                    let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
-                                    PostCellView(post: post, collectionName: collectionName)
-                                }
-                            } else {
-                                PostCellView(post: post)
-                            }
-                        })
-                    .deleteDisabled(post.status != PostStatus.local.rawValue)
-                }
-            }
-            .onDelete(perform: { indexSet in
-                for index in indexSet {
-                    let post = fetchRequest.wrappedValue[index]
-                    delete(post)
-                }
-            })
-        }
-        #if os(iOS)
-        .searchable(text: $searchString, prompt: "Search across posts")
-        #else
-        .searchable(text: $searchString, placement: .toolbar, prompt: "Search across posts")
-        #endif
+//        if #available(iOS 16, macOS 13, *) {
+//            NavigationStack(path: $path) {
+//                Text("Hello, modern stack navigator!")
+//            }
+//        } else {
+        DeprecatedListView(
+            searchString: $searchString,
+            collections: collections,
+            fetchRequest: fetchRequest,
+            onDelete: onDelete
+        )
+//        }
     }
 
     func delete(_ post: WFAPost) {
