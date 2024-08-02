@@ -7,25 +7,30 @@ struct SearchablePostListFilteredView: View {
     @State private var searchString = ""
 
     // Only used for NavigationStack in iOS 16/macOS 13 or later
-    @State private var path: [WFAPost] = []
+//    @State private var path: [WFAPost] = []
 
     var collections: FetchedResults<WFACollection>
     var fetchRequest: FetchRequest<WFAPost>
     var onDelete: (WFAPost) -> Void
 
     var body: some View {
-//        if #available(iOS 16, macOS 13, *) {
-//            NavigationStack(path: $path) {
-//                Text("Hello, modern stack navigator!")
-//            }
-//        } else {
-        DeprecatedListView(
-            searchString: $searchString,
-            collections: collections,
-            fetchRequest: fetchRequest,
-            onDelete: onDelete
-        )
-//        }
+        if #available(iOS 16, macOS 13, *) {
+            NavigationStack {
+                List(fetchRequest.wrappedValue, id: \.self, selection: $model.selectedPost) { post in
+                    NavigationLink(
+                        "\(post.title.isEmpty ? "UNTITLED" : post.title)",
+                        destination: PostEditorView(post: post)
+                    )
+                }
+            }
+        } else {
+            DeprecatedListView(
+                searchString: $searchString,
+                collections: collections,
+                fetchRequest: fetchRequest,
+                onDelete: onDelete
+            )
+        }
     }
 
     func delete(_ post: WFAPost) {
