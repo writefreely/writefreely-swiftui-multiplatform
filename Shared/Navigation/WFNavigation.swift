@@ -18,15 +18,23 @@ struct WFNavigation<CollectionList, PostList, PostDetail>: View
     }
 
     var body: some View {
-        if #available(iOS 16, macOS 13, *) {
-            /// This works better in iOS 17.5 but still has some issues:
-            /// - Does not respect the editor-launching policy, going right to the NoSelectedPostView
+        #if os(macOS)
+        NavigationSplitView {
+            collectionList
+        } content: {
+            postList
+        } detail: {
+            postDetail
+        }
+        #else
+        if #available(iOS 16, *) {
+            /// Consider converting this into a NavigationStack instead, and using `$model.selectedCollection` to set
+            /// the detail view that should be shown. Try moving navigation state out of **WriteFreelyModel** and into
+            /// **WFNavigation** instead, so that it eventually encapsulates _all_ things related to app navigation.
             NavigationSplitView {
                 collectionList
-            } content: {
-                postList
             } detail: {
-                postDetail
+                postList
             }
         } else {
             NavigationView {
@@ -35,5 +43,6 @@ struct WFNavigation<CollectionList, PostList, PostDetail>: View
                 postDetail
             }
         }
+        #endif
     }
 }
