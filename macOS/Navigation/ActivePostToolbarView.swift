@@ -35,7 +35,7 @@ struct ActivePostToolbarView: View {
                 Button(action: {
                     model.editor.postToUpdate = activePost
                     model.updateFromServer(post: activePost)
-                    model.selectedPost = nil
+                    model.navState.selectedPost = nil
                 }, label: {
                     Image(systemName: "clock.arrow.circlepath")
                         .accessibilityLabel(Text("Revert post"))
@@ -75,7 +75,7 @@ struct ActivePostToolbarView: View {
                 }, label: {
                     Label("Publish…", systemImage: "paperplane")
                 })
-                .disabled(model.selectedPost?.body.isEmpty ?? true)
+                .disabled(model.navState.selectedPost?.body.isEmpty ?? true)
                 .help("Publish the post to the web.\(model.account.isLoggedIn ? "" : " You must be logged in to do this.")") // swiftlint:disable:this line_length
             } else {
                 HStack(spacing: 4) {
@@ -115,12 +115,12 @@ struct ActivePostToolbarView: View {
     }
 
     private func createPostUrl() -> [NSURL] {
-        guard let postId = model.selectedPost?.postId else { return [] }
+        guard let postId = model.navState.selectedPost?.postId else { return [] }
 
         var urlString: String
 
-        if let postSlug = model.selectedPost?.slug,
-           let postCollectionAlias = model.selectedPost?.collectionAlias {
+        if let postSlug = model.navState.selectedPost?.slug,
+           let postCollectionAlias = model.navState.selectedPost?.collectionAlias {
             // This post is in a collection, so share the URL as baseURL/postSlug
             let urls = collections.filter { $0.alias == postCollectionAlias }
             let baseURL = urls.first?.url ?? "\(model.account.server)/\(postCollectionAlias)/"
@@ -135,7 +135,7 @@ struct ActivePostToolbarView: View {
     }
 
     private func publishPost(_ post: WFAPost) {
-        if post != model.selectedPost {
+        if post != model.navState.selectedPost {
             return
         }
         DispatchQueue.main.async {

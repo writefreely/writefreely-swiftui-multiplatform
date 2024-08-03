@@ -19,7 +19,7 @@ struct PostEditorStatusToolbarView: View {
                         model.editor.postToUpdate = post
                         model.updateFromServer(post: post)
                         DispatchQueue.main.async {
-                            model.selectedPost = nil
+                            model.navState.selectedPost = nil
                         }
                     }, label: {
                         Image(systemName: "square.and.arrow.down")
@@ -44,7 +44,7 @@ struct PostEditorStatusToolbarView: View {
                         .font(.callout)
                         .foregroundColor(.secondary)
                     Button(action: {
-                        model.selectedPost = nil
+                        model.navState.selectedPost = nil
                         DispatchQueue.main.async {
                             model.posts.remove(post)
                         }

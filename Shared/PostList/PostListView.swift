@@ -157,8 +157,8 @@ struct PostListView: View {
         )
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
-                if model.selectedPost != nil {
-                    ActivePostToolbarView(activePost: model.selectedPost!)
+                if model.navState.selectedPost != nil {
+                    ActivePostToolbarView(activePost: model.navState.selectedPost!)
                 }
             }
         }
@@ -168,8 +168,8 @@ struct PostListView: View {
             )
         )
         .onAppear {
-            model.selectedCollection = selectedCollection
-            model.showAllPosts = showAllPosts
+            model.navState.selectedCollection = selectedCollection
+            model.navState.showAllPosts = showAllPosts
         }
         .onChange(of: model.hasError) { value in
             if value {

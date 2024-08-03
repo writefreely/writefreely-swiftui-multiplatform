@@ -242,7 +242,7 @@ extension WriteFreelyModel {
             DispatchQueue.main.async {
                 LocalStorageManager.standard.saveContext()
                 #if os(macOS)
-                self.selectedPost = cachedPost
+                self.navState.selectedPost = cachedPost
                 #endif
                 cachedPost.status = PostStatus.published.rawValue
             }
