@@ -12,6 +12,7 @@ final class WriteFreelyModel: ObservableObject {
     @Published var preferences = PreferencesModel()
     @Published var posts = PostListModel()
     @Published var editor = PostEditorModel()
+    @Published var navState = WFNavigationState()
 
     // MARK: - Error handling
     @Published var hasError: Bool = false
@@ -45,9 +46,6 @@ final class WriteFreelyModel: ObservableObject {
     @Published var isLoggingIn: Bool = false
     @Published var isProcessingRequest: Bool = false
     @Published var hasNetworkConnection: Bool = true
-    @Published var selectedPost: WFAPost?
-    @Published var selectedCollection: WFACollection?
-    @Published var showAllPosts: Bool = true
     @Published var isPresentingDeleteAlert: Bool = false
     @Published var postToDelete: WFAPost?
 #if os(iOS)
