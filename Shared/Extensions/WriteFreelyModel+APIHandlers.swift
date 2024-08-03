@@ -140,8 +140,8 @@ extension WriteFreelyModel {
                             if managedPost.collectionAlias != fetchedPost.collectionAlias {
                                 // The post has been moved so we update the managed post's collectionAlias property.
                                 DispatchQueue.main.async {
-                                    if self.selectedPost == managedPost {
-                                        self.selectedPost = nil
+                                    if self.navState.selectedPost == managedPost {
+                                        self.navState.selectedPost = nil
                                     }
                                     managedPost.collectionAlias = fetchedPost.collectionAlias
                                 }
@@ -233,7 +233,7 @@ extension WriteFreelyModel {
         do {
             let fetchedPost = try result.get()
             #if os(iOS)
-            guard let cachedPost = self.selectedPost else { return }
+            guard let cachedPost = self.navState.selectedPost else { return }
             #else
             guard let cachedPost = self.editor.postToUpdate else { return }
             #endif
@@ -259,7 +259,7 @@ extension WriteFreelyModel {
         do {
             let succeeded = try result.get()
             if succeeded {
-                if let post = selectedPost {
+                if let post = navState.selectedPost {
                     updateFromServer(post: post)
                 } else {
                     return

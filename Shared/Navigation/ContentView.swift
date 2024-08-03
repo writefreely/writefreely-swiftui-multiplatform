@@ -78,8 +78,11 @@ struct ContentView: View {
                     .withErrorHandling()
             },
             postList: {
-                PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
-                    .withErrorHandling()
+                PostListView(
+                    selectedCollection: model.navState.selectedCollection,
+                    showAllPosts: model.navState.showAllPosts
+                )
+                .withErrorHandling()
             },
             postDetail: {
                 NoSelectedPostView(isConnected: $model.hasNetworkConnection)

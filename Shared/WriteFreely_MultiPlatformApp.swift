@@ -40,14 +40,15 @@ struct WriteFreely_MultiPlatformApp: App {
                 .onAppear(perform: {
                     if model.editor.showAllPostsFlag {
                         DispatchQueue.main.async {
-                            self.model.selectedCollection = nil
-                            self.model.showAllPosts = true
+                            self.model.navState.selectedCollection = nil
+                            self.model.navState.showAllPosts = true
                             showLastDraftOrCreateNewLocalPost()
                         }
                     } else {
                         DispatchQueue.main.async {
-                            self.model.selectedCollection = model.editor.fetchSelectedCollectionFromAppStorage()
-                            self.model.showAllPosts = false
+                            self.model.navState.selectedCollection =
+                                model.editor.fetchSelectedCollectionFromAppStorage()
+                            self.model.navState.showAllPosts = false
                             showLastDraftOrCreateNewLocalPost()
                         }
                     }
@@ -146,7 +147,7 @@ struct WriteFreely_MultiPlatformApp: App {
     private func showLastDraftOrCreateNewLocalPost() {
         if model.editor.lastDraftURL != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                self.model.selectedPost = model.editor.fetchLastDraftFromAppStorage()
+                self.model.navState.selectedPost = model.editor.fetchLastDraftFromAppStorage()
             }
         } else {
             createNewLocalPost()
@@ -156,14 +157,14 @@ struct WriteFreely_MultiPlatformApp: App {
     private func createNewLocalPost() {
         withAnimation {
             // Un-set the currently selected post
-            self.model.selectedPost = nil
+            self.model.navState.selectedPost = nil
         }
         // Create the new-post managed object
         let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
         withAnimation {
             // Set it as the selectedPost
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                self.model.selectedPost = managedPost
+                self.model.navState.selectedPost = managedPost
             }
         }
     }
@@ -174,9 +175,9 @@ struct WriteFreely_MultiPlatformApp: App {
 
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // Unset selected post and collection and navigate to local drafts.
-            self.model.selectedPost = nil
-            self.model.selectedCollection = nil
-            self.model.showAllPosts = false
+            self.model.navState.selectedPost = nil
+            self.model.navState.selectedCollection = nil
+            self.model.navState.showAllPosts = false
 
             // Create the new log post.
             let newLogPost = model.editor.generateNewLocalPost(withFont: 2)
@@ -189,7 +190,7 @@ struct WriteFreely_MultiPlatformApp: App {
             postBody.append(contentsOf: logger.fetchLogs())
             newLogPost.body = postBody.joined(separator: "\n")
 
-            self.model.selectedPost = newLogPost
+            self.model.navState.selectedPost = newLogPost
         }
 
         logger.log("Generated local log post.")

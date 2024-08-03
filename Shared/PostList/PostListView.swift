@@ -46,9 +46,9 @@ struct PostListView: View {
                             Button(action: {
                                 let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                                 withAnimation {
-                                    self.model.showAllPosts = false
+                                    self.model.navState.showAllPosts = false
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                        self.model.selectedPost = managedPost
+                                        self.model.navState.selectedPost = managedPost
                                     }
                                 }
                             }, label: {
@@ -130,8 +130,8 @@ struct PostListView: View {
         .ignoresSafeArea(.all, edges: .bottom)
         .onAppear {
             // Set the selected collection and whether or not we want to show all posts
-            model.selectedCollection = selectedCollection
-            model.showAllPosts = showAllPosts
+            model.navState.selectedCollection = selectedCollection
+            model.navState.showAllPosts = showAllPosts
 
             // We use this to invalidate and refresh the view, so that new posts created outside of the app (e.g.,
             // in the action extension) show up.

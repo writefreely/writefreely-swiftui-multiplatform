@@ -10,7 +10,7 @@ struct DeprecatedListView: View {
     var onDelete: (WFAPost) -> Void
 
     var body: some View {
-        List(selection: $model.selectedPost) {
+        List(selection: $model.navState.selectedPost) {
             ForEach(fetchRequest.wrappedValue, id: \.self) { post in
                 if !searchString.isEmpty &&
                     !post.title.localizedCaseInsensitiveContains(searchString) &&
@@ -20,9 +20,9 @@ struct DeprecatedListView: View {
                     NavigationLink(
                         destination: PostEditorView(post: post),
                         tag: post,
-                        selection: $model.selectedPost,
+                        selection: $model.navState.selectedPost,
                         label: {
-                            if model.showAllPosts {
+                            if model.navState.showAllPosts {
                                 if let collection = collections.filter({ $0.alias == post.collectionAlias }).first {
                                     PostCellView(post: post, collectionName: collection.title)
                                 } else {

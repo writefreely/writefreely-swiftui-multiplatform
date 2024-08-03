@@ -75,9 +75,9 @@ struct SettingsView: View {
 
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // Unset selected post and collection and navigate to local drafts.
-            self.model.selectedPost = nil
-            self.model.selectedCollection = nil
-            self.model.showAllPosts = false
+            self.model.navState.selectedPost = nil
+            self.model.navState.selectedCollection = nil
+            self.model.navState.showAllPosts = false
 
             // Create the new log post.
             let newLogPost = model.editor.generateNewLocalPost(withFont: 2)

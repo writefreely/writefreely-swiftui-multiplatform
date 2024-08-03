@@ -52,8 +52,8 @@ struct PostCellView: View {
 
     private func didTapDeleteContextMenuItem() {
         guard post.status == PostStatus.local.rawValue else { return }
-        if post === model.selectedPost {
-            model.selectedPost = nil
+        if post === model.navState.selectedPost {
+            model.navState.selectedPost = nil
             model.editor.clearLastDraft()
         }
 
