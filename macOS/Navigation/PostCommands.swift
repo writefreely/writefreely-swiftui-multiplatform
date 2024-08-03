@@ -17,14 +17,14 @@ struct PostCommands: Commands {
 
             Group {
                 Button(action: sendPostUrlToPasteboard, label: { Text("Copy Link To Published Post") })
-                    .disabled(model.selectedPost?.status == PostStatus.local.rawValue)
+                    .disabled(model.navState.selectedPost?.status == PostStatus.local.rawValue)
             }
-            .disabled(model.selectedPost == nil || !model.account.isLoggedIn)
+            .disabled(model.navState.selectedPost == nil || !model.account.isLoggedIn)
         }
     }
 
     private func sendPostUrlToPasteboard() {
-        guard let activePost = model.selectedPost else { return }
+        guard let activePost = model.navState.selectedPost else { return }
         guard let postId = activePost.postId else { return }
         guard let urlString = activePost.slug != nil ?
                 "\(model.account.server)/\((activePost.collectionAlias)!)/\((activePost.slug)!)" :

@@ -100,7 +100,7 @@ struct PostListFilteredView: View {
                 },
                 secondaryButton: .destructive(Text("Delete"), action: {
                     if let postToDelete = model.postToDelete {
-                        model.selectedPost = nil
+                        model.navState.selectedPost = nil
                         DispatchQueue.main.async {
                             model.editor.clearLastDraft()
                             model.posts.remove(postToDelete)
@@ -111,7 +111,7 @@ struct PostListFilteredView: View {
             )
         }
         .onDeleteCommand(perform: {
-            guard let selectedPost = model.selectedPost else { return }
+            guard let selectedPost = model.navState.selectedPost else { return }
             if selectedPost.status == PostStatus.local.rawValue {
                 model.postToDelete = selectedPost
                 model.isPresentingDeleteAlert = true

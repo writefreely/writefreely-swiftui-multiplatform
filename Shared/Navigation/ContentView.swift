@@ -28,14 +28,14 @@ struct ContentView: View {
                         Button(action: {
                             withAnimation {
                                 // Un-set the currently selected post
-                                self.model.selectedPost = nil
+                                self.model.navState.selectedPost = nil
                             }
                             // Create the new-post managed object
                             let managedPost = model.editor.generateNewLocalPost(withFont: model.preferences.font)
                             withAnimation {
                                 DispatchQueue.main.async {
                                     // Load the new post in the editor
-                                    self.model.selectedPost = managedPost
+                                    self.model.navState.selectedPost = managedPost
                                 }
                             }
                         }, label: { Image(systemName: "square.and.pencil") })
@@ -45,9 +45,12 @@ struct ContentView: View {
             },
             postList: {
                 ZStack {
-                    PostListView(selectedCollection: model.selectedCollection, showAllPosts: model.showAllPosts)
-                        .withErrorHandling()
-                        .frame(width: 300)
+                    PostListView(
+                        selectedCollection: model.navState.selectedCollection,
+                        showAllPosts: model.navState.showAllPosts
+                    )
+                    .withErrorHandling()
+                    .frame(width: 300)
                     if model.isProcessingRequest {
                         ZStack {
                             Color(NSColor.controlBackgroundColor).opacity(0.75)
