@@ -1,5 +1,17 @@
 import SwiftUI
 
+// MARK: - Navigation State
+
+final class WFNavigationState: ObservableObject {
+
+    @Published var selectedCollection: WFACollection?
+    @Published var selectedPost: WFAPost?
+    @Published var showAllPosts: Bool = true
+
+}
+
+// MARK: - Navigation Implementation
+
 struct WFNavigation<CollectionList, PostList, PostDetail>: View
     where CollectionList: View, PostList: View, PostDetail: View {
 
