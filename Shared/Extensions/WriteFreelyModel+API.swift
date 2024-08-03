@@ -150,7 +150,7 @@ extension WriteFreelyModel {
         // We're starting the network request.
         DispatchQueue.main.async {
             #if os(iOS)
-            self.selectedPost = post
+            self.navState.selectedPost = post
             #endif
             self.isProcessingRequest = true
         }
@@ -175,7 +175,7 @@ extension WriteFreelyModel {
             self.isProcessingRequest = true
         }
 
-        selectedPost = post
+        navState.selectedPost = post
         post.collectionAlias = newCollection?.alias
         loggedInClient.movePost(postId: postId, to: newCollection?.alias, completion: movePostHandler)
     }

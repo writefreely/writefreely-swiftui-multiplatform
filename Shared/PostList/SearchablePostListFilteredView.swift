@@ -16,7 +16,7 @@ struct SearchablePostListFilteredView: View {
     var body: some View {
         if #available(iOS 16, macOS 13, *) {
             NavigationStack {
-                List(fetchRequest.wrappedValue, id: \.self, selection: $model.selectedPost) { post in
+                List(fetchRequest.wrappedValue, id: \.self, selection: $model.navState.selectedPost) { post in
                     NavigationLink(
                         "\(post.title.isEmpty ? "UNTITLED" : post.title)",
                         destination: PostEditorView(post: post)

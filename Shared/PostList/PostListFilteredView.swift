@@ -48,14 +48,14 @@ struct PostListFilteredView: View {
                 self.postCount = value
             })
         } else {
-            List(selection: $model.selectedPost) {
+            List(selection: $model.navState.selectedPost) {
                 ForEach(fetchRequest.wrappedValue, id: \.self) { post in
                     NavigationLink(
                         destination: PostEditorView(post: post),
                         tag: post,
-                        selection: $model.selectedPost,
+                        selection: $model.navState.selectedPost,
                         label: {
-                            if model.showAllPosts {
+                            if model.navState.showAllPosts {
                                 if let collection = collections.filter({ $0.alias == post.collectionAlias }).first {
                                     PostCellView(post: post, collectionName: collection.title)
                                 } else {
@@ -122,8 +122,8 @@ struct PostListFilteredView: View {
 
     func delete(_ post: WFAPost) {
         DispatchQueue.main.async {
-            if post == model.selectedPost {
-                model.selectedPost = nil
+            if post == model.navState.selectedPost {
+                model.navState.selectedPost = nil
                 model.editor.clearLastDraft()
             }
             model.posts.remove(post)

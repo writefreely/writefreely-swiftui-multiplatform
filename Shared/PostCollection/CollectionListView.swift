@@ -32,16 +32,16 @@ struct CollectionListView: View {
             model.account.isLoggedIn ? "\(URL(string: model.account.server)?.host ?? "WriteFreely")" : "WriteFreely"
         )
         .listStyle(SidebarListStyle())
-        .onChange(of: model.selectedCollection) { collection in
-            model.selectedPost = nil
+        .onChange(of: model.navState.selectedCollection) { collection in
+            model.navState.selectedPost = nil
             if collection != model.editor.fetchSelectedCollectionFromAppStorage() {
                 self.model.editor.selectedCollectionURL = collection?.objectID.uriRepresentation()
             }
         }
-        .onChange(of: model.showAllPosts) { value in
-            model.selectedPost = nil
+        .onChange(of: model.navState.showAllPosts) { value in
+            model.navState.selectedPost = nil
             if value != model.editor.showAllPostsFlag {
-                self.model.editor.showAllPostsFlag = model.showAllPosts
+                self.model.editor.showAllPostsFlag = model.navState.showAllPosts
             }
         }
         .onChange(of: model.hasError) { value in
