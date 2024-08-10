@@ -1,6 +1,6 @@
 import SwiftUI
 
-@available(iOS 15, macOS 12.0, *)
+@available(iOS 15, macOS 13.0, *)
 struct DeprecatedListView: View {
     @EnvironmentObject var model: WriteFreelyModel
     @Binding var searchString: String

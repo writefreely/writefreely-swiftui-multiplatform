@@ -35,7 +35,6 @@ struct PostListFilteredView: View {
         #if os(iOS)
         if #available(iOS 15, *) {
             SearchablePostListFilteredView(
-                postCount: $postCount,
                 collections: collections,
                 fetchRequest: fetchRequest,
                 onDelete: delete(_:)
@@ -85,7 +84,6 @@ struct PostListFilteredView: View {
         }
         #else
         SearchablePostListFilteredView(
-            postCount: $postCount,
             collections: collections,
             fetchRequest: fetchRequest,
             onDelete: delete(_:)
