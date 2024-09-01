@@ -11,11 +11,23 @@ struct SearchablePostListFilteredView: View {
 
     var body: some View {
         if #available(iOS 16, macOS 13, *) {
+            /// TODO: Add back post search
             NavigationStack {
                 List(fetchRequest.wrappedValue, id: \.self, selection: $model.navState.selectedPost) { post in
                     NavigationLink(
-                        "\(post.title.isEmpty ? "UNTITLED" : post.title)",
-                        destination: PostEditorView(post: post)
+                        destination: PostEditorView(post: post),
+                        label: {
+                            if model.navState.showAllPosts {
+                                if let collection = collections.filter({ $0.alias == post.collectionAlias }).first {
+                                    PostCellView(post: post, collectionName: collection.title)
+                                } else {
+                                    let collectionName = model.account.server == "https://write.as" ? "Anonymous" : "Drafts"
+                                    PostCellView(post: post, collectionName: collectionName)
+                                }
+                            } else {
+                                PostCellView(post: post)
+                            }
+                        }
                     )
                 }
             }
