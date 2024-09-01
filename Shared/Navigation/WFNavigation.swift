@@ -45,25 +45,39 @@ struct WFNavigation<CollectionList, PostList, PostDetail>: View
         }
         #else
         if #available(iOS 16, *) {
-            /// Consider converting this into a NavigationStack instead, and using `$model.selectedCollection` to set
-            /// the detail view that should be shown. Try moving navigation state out of **WriteFreelyModel** and into
-            /// **WFNavigation** instead, so that it eventually encapsulates _all_ things related to app navigation.
-//            NavigationSplitView {
-//                collectionList
-//            } detail: {
-//                postList
-//            }
-
             NavigationStack {
-                List(collections, id: \.self, selection: $model.navState.selectedPost) { collection in
-                    NavigationLink("\(collection.title)", destination: PostListView(selectedCollection: model.navState.selectedCollection, showAllPosts: model.navState.showAllPosts))
+                if model.account.isLoggedIn {
+                    List(selection: $model.navState.selectedCollection) {
+                        NavigationLink(
+                            "All Posts",
+                            destination: PostListView(selectedCollection: nil, showAllPosts: true)
+                        )
+                        NavigationLink(
+                            model.account.server == "https://write.as" ? "Anonymous" : "Drafts",
+                            destination: PostListView(selectedCollection: nil, showAllPosts: false)
+                        )
+                        Section("Your Blogs") {
+                            ForEach(collections, id: \.self) { collection in
+                                NavigationLink(
+                                    "\(collection.title)",
+                                    destination: PostListView(
+                                        selectedCollection: model.navState.selectedCollection,
+                                        showAllPosts: model.navState.showAllPosts
+                                    )
+                                )
+                            }
+                        }
+                    }
+                    .navigationTitle("\(URL(string: model.account.server)?.host ?? "WriteFreely")")
+                } else {
+                    List {
+                        NavigationLink(
+                            "Drafts",
+                            destination: PostListView(selectedCollection: nil, showAllPosts: false)
+                        )
+                    }
+                    .navigationTitle("WriteFreely")
                 }
-//                List(fetchRequest.wrappedValue, id: \.self, selection: $model.navState.selectedPost) { post in
-//                    NavigationLink(
-//                        "\(post.title.isEmpty ? "UNTITLED" : post.title)",
-//                        destination: PostEditorView(post: post)
-//                    )
-//                }
             }
         } else {
             NavigationView {
